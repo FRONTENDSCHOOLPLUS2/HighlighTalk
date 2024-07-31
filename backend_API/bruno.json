@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "강사님API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
