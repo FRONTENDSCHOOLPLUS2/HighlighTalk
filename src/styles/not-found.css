@@ -1,0 +1,27 @@
+.error-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  height: 100vh;
+
+  .error-cover {
+    max-width: 300px;
+  }
+
+  .error-image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.error-message {
+  line-height: 3rem;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+  .error-wrapper {
+    flex-direction: column;
+  }
+}

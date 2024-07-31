@@ -1,0 +1,29 @@
+:root {
+  --color-primary: #;
+  --color-secondary: #;
+
+  --color-warning: #;
+  --color-error: #ff0000;
+
+  --color-black: #2e2e2e;
+  --color-gray-10: #e1e1e1;
+  --color-gray-20: #d9d9d9;
+  --color-gray-30: #a9a9a9;
+  --color-gray-50: #a6a6a6;
+  --color-gray-70: #666666;
+  --color-white: #ffffff;
+
+  --layout-pc: 1440px;
+  --layout-padding: 2rem;
+
+  --header-height-mo: 8rem;
+
+  --title-extra: 2rem;
+  --title-big: 1.8rem;
+  --title-large: 1.6rem;
+  --title-medium: 1.4rem;
+  --title-small: 1.2rem;
+
+  --transition-duration: 0.3s;
+  --box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.2);
+}

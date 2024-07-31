@@ -1,0 +1,69 @@
+/* 
+- 349 : 작은 모바일
+- 350 - 375 : 기본 css
+- 500 - 767 : 모바일
+- 768 - 1023 : 태블릿
+- 1024 - 1439 : 노트북 (여기부터 PC버전)
+- 1440 - : pc
+*/
+
+@media (max-width: 349px) {
+  :root {
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 767px) {
+  :root {
+    font-size: 11px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    font-size: 12px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    font-size: 9px;
+
+    --layout-padding: 3rem;
+
+    --title-big: #;
+    --title-medium: #;
+    --title-small: #;
+  }
+
+  .mo {
+    display: none;
+  }
+
+  .pc {
+    display: block;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+}
+
+/* PC 환경 */
+@media (min-width: 768px) {
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+}
