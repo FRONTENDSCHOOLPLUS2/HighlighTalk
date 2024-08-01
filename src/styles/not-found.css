@@ -1,5 +1,6 @@
 .error-wrapper {
   display: flex;
+  background-color: red;
   justify-content: center;
   align-items: center;
   gap: 5rem;
