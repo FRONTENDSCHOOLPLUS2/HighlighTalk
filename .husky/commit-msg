@@ -1,0 +1,37 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+
+commitMsgFile=$1
+commitRegex=".*#\d+"
+
+branchName=$(git rev-parse --abbrev-ref HEAD)
+
+branchIssueNumber=$(echo "$branchName" | awk -F'#' '{print $2}')
+commitIssueNumber=$(grep -o '#[0-9]\+' "$commitMsgFile" | tr -d '#')
+
+if ! grep -qE "$commitRegex" "$commitMsgFile"; then
+  echo "🥸 커밋 메시지에 이슈 번호가 포함되어 있지 않습니다."
+  echo "이슈 번호를 포함해주세요 (예: #123)."
+  exit 1
+fi
+
+
+if [ "$branchIssueNumber" != "$commitIssueNumber" ]; then
+  echo "👽 브랜치 이름의 이슈 번호 ($branchIssueNumber)와 커밋 메시지의 이슈 번호 ($commitIssueNumber)가 일치하지 않습니다."
+  exit 1
+fi
+
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+valid_prefixes="Feat|Fix|Design|Refactor|Style|Docs|Test|Chore|Dir|Rename|Remove|HotFix|WIP"
+
+if ! echo "$commit_msg" | grep -qE "^($valid_prefixes): .+"; then
+    echo "Error: 올바르지 않은 커밋 메시지 형식입니다."
+    echo "커밋 메시지는 'Prefix: 작업 내용 #이슈넘버' 형태여야 합니다."
+    echo "허용된 Prefix: $valid_prefixes"
+    exit 1
+fi
+
+echo "🔆 오늘도 컨벤션을 지켜주셔서 감사합니다 🔆"
