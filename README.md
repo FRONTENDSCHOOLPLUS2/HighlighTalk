@@ -1,8 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 하이라이톡 HIGHLIGHTALK
 
-## Getting Started
+## 프로젝트 소개
 
-First, run the development server:
+> 카카오톡 기반 대화방 AI 분석 서비스, 하이라이톡
+
+- Browser Support:
+
+### 팀원 소개
+
+<table>
+<thead>
+<th>프론트엔드, 팀장</th>
+<th>프론트엔드</th>
+<th>프론트엔드</th>
+</thead>
+<tr>
+<td>
+
+[김설하](https://github.com/zldnlto)
+
+</td>
+<td>
+
+[윤우중](https://github.com/woojoung1217)
+
+</td>
+<td>
+
+[여다희](https://github.com/yeodahui)
+
+</td>
+</tr>
+</table>
+
+### 개발 환경 & 기술 스택
+
+- 개발 환경
+  - 개발 언어: `TypeScript`
+  - 패키지 매니저: `pnpm`
+  - 린팅 & 포맷팅: `ESLint`, `Prettier`
+  - 부트스트랩: [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+  - API Client: `Bruno`
+- 클라이언트
+  - 프레임워크: `Next.js v.14`(Client/Server)
+  - 상태관리: `Zustand`
+  - 서버 상태관리: `TanStack Query v.5`
+  - 스타일링: `SCSS Module`
+- 백엔드
+  - API 서버: `Node.js + Express`
+- 인프라
+  - 데이터베이스: `MongoDB Atlas`
+  - 배포: `AWS EC2`
+
+### 디렉토리 구조
+
+```txt
+
+```
+
+## 실행 or 기여하기
+
+> 원활한 실행을 위해서는 환경변수 파일(.env)이 필요합니다. 개발자에게 .env 파일을 요청하세요.
+
+### Repository 로컬에 복제하기
+
+먼저 Repository를 Clone하고 패키지를 다운로드합니다.
+패키지매니저 pnpm이 필요합니다.([Link: pnpm Installation](https://pnpm.io/installation)]
+
+```bash
+git clone https://github.com/FRONTENDSCHOOLPLUS2/HighlighTalk.git
+pnpm install
+```
+
+패키지 설치가 완료되면 다음 명령어로 서버를 실행합니다:
 
 ```bash
 npm run dev
@@ -14,23 +84,16 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+이후 브라우저에서 [http://localhost:3000](http://localhost:3000)를 엽니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 기여하기
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Wiki를 참고하여 컨벤션을 준수합니다.
 
-## Learn More
+## 프로젝트 결과물
 
-To learn more about Next.js, take a look at the following resources:
+### DEMO
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 후기
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 라이선스
