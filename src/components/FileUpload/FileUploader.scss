@@ -1,0 +1,117 @@
+.file-uploader-container {
+  padding: 1.25rem; /* 20px */
+  max-width: 75rem; /* 1200px */
+  margin: 0 auto; /* 중앙 정렬 */
+  font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+}
+
+.upload-area,
+.csv-data-display,
+.result-display {
+  margin-bottom: 1.25rem; /* 20px */
+  padding: 1.25rem; /* 20px */
+  border-radius: 0.5rem; /* 8px */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  background: #ffffff; /* 배경색 설정 */
+}
+
+.upload-area {
+  border: 0.125rem solid #007bff; /* 2px */
+  transition: border-color 0.3s ease; /* 테두리 색상 변화 애니메이션 */
+}
+
+.upload-area.dragging {
+  border-color: #0056b3; /* 드래그 시 테두리 색상 변경 */
+  background: #e6f0ff; /* 배경색 변경 */
+}
+
+.upload-area.default {
+  background: #f0f9ff; /* 기본 배경색 설정 */
+}
+
+.csv-data-display,
+.result-display {
+  border: 0.0625rem solid #ddd; /* 1px */
+}
+
+.csv-data-display h3,
+.result-display h3 {
+  margin-top: 0;
+  color: #333; /* 제목 색상 설정 */
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* 모달을 최상위로 표시 */
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 1.875rem; /* 30px */
+  border-radius: 0.5rem; /* 8px */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  width: 90%; /* 너비 설정 */
+  max-width: 37.5rem; /* 600px */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 1.25rem; /* 20px */
+  color: #007bff; /* 제목 색상 변경 */
+}
+
+.modal-content button {
+  padding: 0.625rem 1.25rem; /* 10px 20px */
+  border: none;
+  border-radius: 0.3125rem; /* 5px */
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem; /* 16px */
+  transition: background-color 0.3s ease; /* 버튼 배경색 변화 애니메이션 */
+}
+
+.modal-content button:hover {
+  background-color: #0056b3; /* 버튼 호버 시 색상 변경 */
+}
+
+.result-display pre {
+  white-space: pre-wrap;
+  background: #f5f5f5;
+  padding: 0.9375rem; /* 15px */
+  border-radius: 0.5rem; /* 8px */
+  overflow-x: auto;
+  max-height: 25rem; /* 400px */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  border: 0.0625rem solid #ddd; /* 1px */
+}
+
+button {
+  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  border: none;
+  border-radius: 0.3125rem; /* 5px */
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem; /* 16px */
+  margin: 0.3125rem; /* 5px */
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
