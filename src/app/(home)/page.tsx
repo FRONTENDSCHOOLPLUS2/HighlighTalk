@@ -7,7 +7,7 @@ interface ResultType {
   result: string;
 }
 
-const MainPage = () => {
+function MainPage() {
   const [prompt, setPrompt] = useState<string>('');
   const [result, setResult] = useState<ResultType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -55,10 +55,10 @@ const MainPage = () => {
       {error && <p>Error: {error}</p>}
       <div>
         <h2>결과:</h2>
-        <textarea value={result?.result || ''} rows={40} readOnly></textarea>
+        <textarea value={result?.result || ''} rows={40} readOnly />
       </div>
     </div>
   );
-};
+}
 
 export default MainPage;
