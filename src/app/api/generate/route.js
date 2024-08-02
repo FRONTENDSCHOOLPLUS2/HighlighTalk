@@ -1,3 +1,5 @@
+
+
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
@@ -6,6 +8,10 @@ const openai = new OpenAI({
   organization: 'org-u126irXm15UJrQrMV6eRalSp',
   project: 'proj_e92wMh7LPTMMm6J0wtmVl02x',
 });
+
+
+
+const MessageForAI = "다음대화를읽고,'result'json 객체를 생성하여 반환하세요.'result'객체는다음과같은구조를가져야합니다topic:{summary:'대화내용요약'},mbti:{analysis:'인물별 MBTI분석및이유를배열로'},talkCount:{counts:'인물별말한횟수'},mostWords:{topWords:'가장많이 사용된 단어 상위 3개를반환 다만 글자는 두글자 이상 사람이름제외 없으면없다해도됨'}}.모든필드를채워주세요.줄바꿈은하지마세요입력이없을때는빈문자를주세요"
 
 export async function GET(request) {
   const url = new URL(request.url);
@@ -16,11 +22,10 @@ export async function GET(request) {
     const stream = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
-        {
-          role: 'system', content: "다음 대화를 읽고, 'result' 객체를 생성하여 반환하세요. 'result' 객체는 다음과 같은 구조를 가져야 합니다 topic: { summary: '대화 내용 요약' }, mbti: { analysis: '인물별 MBTI 분석 및 이유를 배열로 ' }, talkCount: { counts: '인물별 말한 횟수' }, mostWords: { topWords: '가장 많이 사용된 단어 상위 3개' }}. 모든 필드를 채워주세요. 줄바꿈은 하지마세요 입력이 없을 때 는 빈문자를 주세요"
-        }, { role: 'user', content: prompt }],
+        { role: 'system', content: MessageForAI }, { role: 'user', content: prompt }],
       stream: true,
       max_tokens: 1000,
+      // response_format: { type: "json_object" },
     });
 
     let resultText = '';
