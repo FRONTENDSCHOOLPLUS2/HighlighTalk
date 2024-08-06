@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useRef, ChangeEvent, DragEvent } from 'react';
 import Papa from 'papaparse';
 import './FileUploader.scss';
@@ -10,8 +11,9 @@ function FileUpLoader() {
   const [csvData, setCsvData] = useState<any[]>([]);
   const [result, setResult] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
+  // 프롬프팅
   const prompt =
     "다음대화를읽고,'result'json 객체를 생성하여 반환하세요.'result'객체는다음과같은구조를가져야합니다topic:{summary:'대화내용요약'},mbti:{analysis:'인물별 MBTI분석및이유를배열로'},talkCount:{counts:'인물별말한횟수'},mostWords:{topWords:'가장많이 사용된 단어 상위 3개를반환 다만 글자는 두글자 이상 사람이름제외 없으면없다해도됨'}}.모든필드를채워주세요.줄바꿈은하지마세요입력이없을때는빈문자를주세요";
 
@@ -59,6 +61,7 @@ function FileUpLoader() {
 
   const fetchData = async () => {
     if (csvData.length === 0) return;
+    setIsLoading(true); // 로딩 시작
     try {
       const csvDataString = JSON.stringify(csvData);
       console.log('Sending data to FetchData:', csvDataString);
@@ -69,6 +72,8 @@ function FileUpLoader() {
     } catch (error) {
       console.error('Error fetching data:', error);
       setResult('Error fetching data');
+    } finally {
+      setIsLoading(false); // 로딩 종료
     }
   };
 
@@ -105,7 +110,9 @@ function FileUpLoader() {
           ) : (
             <p>업로드된 데이터 없음</p>
           )}
-          <button onClick={fetchData}>데이터 분석</button>
+          <button onClick={fetchData} disabled={isLoading}>
+            데이터 분석
+          </button>
           <button onClick={() => setCurrentStep(1)}>이전 단계</button>
         </div>
       )}
@@ -124,6 +131,13 @@ function FileUpLoader() {
             <h2>파일이 업로드되었습니다</h2>
             <button onClick={() => setIsModalOpen(false)}>닫기</button>
           </div>
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <p>데이터를 분석 중입니다...</p>
         </div>
       )}
     </div>
