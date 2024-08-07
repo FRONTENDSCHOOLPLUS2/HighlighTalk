@@ -8,7 +8,7 @@ import '@/styles/responsible.css';
 import Header from '@/components/layout/Header/Header';
 
 const pretendard = localFont({
-  src: '../static/font/PretendardVariable.woff2',
+  src: '../../public/static/font/PretendardVariable.woff2',
   display: 'swap',
   weight: '45 920',
   variable: '--font-pretendard',
