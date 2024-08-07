@@ -1,11 +1,13 @@
-import Link from 'next/link';
+import Image from 'next/image';
 import './home.scss';
 function MainPage() {
   return (
     <main className="MainPage">
-      <Link href="/freetest">
-        <div>채팅방 내용 검사하기</div>
-      </Link>
+      <div className="main_service">
+        <div className="main_slide">
+          <Image width={520} height={400} src="/image/mainslide1.svg" alt="img"></Image>
+        </div>
+      </div>
     </main>
   );
 }

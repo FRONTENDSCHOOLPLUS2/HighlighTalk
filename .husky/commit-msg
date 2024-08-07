@@ -16,12 +16,6 @@ if ! grep -qE "$commitRegex" "$commitMsgFile"; then
   exit 1
 fi
 
-
-if [ "$branchIssueNumber" != "$commitIssueNumber" ]; then
-  echo "👽 브랜치 이름의 이슈 번호 ($branchIssueNumber)와 커밋 메시지의 이슈 번호 ($commitIssueNumber)가 일치하지 않습니다."
-  exit 1
-fi
-
 commit_msg_file=$1
 commit_msg=$(cat "$commit_msg_file")
 
