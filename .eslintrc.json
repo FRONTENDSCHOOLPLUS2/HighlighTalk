@@ -1,9 +1,6 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "airbnb",
-    "airbnb-typescript",
-    "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],

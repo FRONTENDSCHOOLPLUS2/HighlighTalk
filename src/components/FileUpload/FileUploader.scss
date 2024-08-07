@@ -1,43 +1,44 @@
+/* FileUploader.scss */
+
 .file-uploader-container {
-  padding: 1.25rem; /* 20px */
-  max-width: 75rem; /* 1200px */
-  margin: 0 auto; /* 중앙 정렬 */
-  font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+  padding: 1.25rem;
+  max-width: 70rem;
+  margin: 0 auto;
 }
 
 .upload-area,
 .csv-data-display,
 .result-display {
-  margin-bottom: 1.25rem; /* 20px */
-  padding: 1.25rem; /* 20px */
-  border-radius: 0.5rem; /* 8px */
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-  background: #ffffff; /* 배경색 설정 */
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  background: #ffffff;
 }
 
 .upload-area {
-  border: 0.125rem solid #007bff; /* 2px */
-  transition: border-color 0.3s ease; /* 테두리 색상 변화 애니메이션 */
+  border: 0.125rem solid #007bff;
+  transition: border-color 0.3s ease;
 }
 
 .upload-area.dragging {
-  border-color: #0056b3; /* 드래그 시 테두리 색상 변경 */
-  background: #e6f0ff; /* 배경색 변경 */
+  border-color: #0056b3;
+  background: #e6f0ff;
 }
 
 .upload-area.default {
-  background: #f0f9ff; /* 기본 배경색 설정 */
+  background: #f0f9ff;
 }
 
 .csv-data-display,
 .result-display {
-  border: 0.0625rem solid #ddd; /* 1px */
+  border: 0.0625rem solid #ddd;
 }
 
 .csv-data-display h3,
 .result-display h3 {
   margin-top: 0;
-  color: #333; /* 제목 색상 설정 */
+  color: #333;
 }
 
 .modal {
@@ -50,60 +51,60 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* 모달을 최상위로 표시 */
+  z-index: 1000;
 }
 
 .modal-content {
   background: #ffffff;
-  padding: 1.875rem; /* 30px */
-  border-radius: 0.5rem; /* 8px */
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* 그림자 추가 */
-  width: 90%; /* 너비 설정 */
-  max-width: 37.5rem; /* 600px */
-  text-align: center; /* 텍스트 중앙 정렬 */
+  padding: 1.875rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 37.5rem;
+  text-align: center;
 }
 
 .modal-content h2 {
   margin-top: 0;
-  margin-bottom: 1.25rem; /* 20px */
-  color: #007bff; /* 제목 색상 변경 */
+  margin-bottom: 1.25rem;
+  color: #007bff;
 }
 
 .modal-content button {
-  padding: 0.625rem 1.25rem; /* 10px 20px */
+  padding: 0.625rem 1.25rem;
   border: none;
-  border-radius: 0.3125rem; /* 5px */
+  border-radius: 0.3125rem;
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  font-size: 1rem; /* 16px */
-  transition: background-color 0.3s ease; /* 버튼 배경색 변화 애니메이션 */
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .modal-content button:hover {
-  background-color: #0056b3; /* 버튼 호버 시 색상 변경 */
+  background-color: #0056b3;
 }
 
 .result-display pre {
   white-space: pre-wrap;
   background: #f5f5f5;
-  padding: 0.9375rem; /* 15px */
-  border-radius: 0.5rem; /* 8px */
+  padding: 0.9375rem;
+  border-radius: 0.5rem;
   overflow-x: auto;
-  max-height: 25rem; /* 400px */
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-  border: 0.0625rem solid #ddd; /* 1px */
+  max-height: 25rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  border: 0.0625rem solid #ddd;
 }
 
 button {
-  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  padding: 0.625rem 0.9375rem;
   border: none;
-  border-radius: 0.3125rem; /* 5px */
+  border-radius: 0.3125rem;
   background-color: #28a745;
   color: white;
   cursor: pointer;
-  font-size: 1rem; /* 16px */
-  margin: 0.3125rem; /* 5px */
+  font-size: 1rem;
+  margin: 0.3125rem;
   transition: background-color 0.3s ease;
 }
 
@@ -114,4 +115,43 @@ button:hover {
 button:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
+}
+
+/* 로딩 오버레이 스타일 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  border: 0.5rem solid #f3f3f3;
+  border-top: 0.5rem solid #007bff;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-overlay p {
+  color: #ffffff;
+  margin-top: 1rem;
+  font-size: 1rem;
 }
