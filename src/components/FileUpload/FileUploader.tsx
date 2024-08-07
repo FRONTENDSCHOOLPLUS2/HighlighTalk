@@ -1,25 +1,28 @@
 'use client';
 
-import { useState, useRef, ChangeEvent, DragEvent } from 'react';
-import Papa from 'papaparse';
 import './FileUploader.scss';
-import FetchData from '../fetchData';
+import { useState, useRef, ChangeEvent, DragEvent, useEffect } from 'react';
+import Papa from 'papaparse';
+import FetchData from '@/hooks/fetchData';
+
+const prompt = process.env.NEXT_PUBLIC_AI_PROMPT;
+// const prompt = process.env.NEXT_PUBLIC_AI_PROMPT_COUPLE;
 
 function FileUpLoader() {
+  const a: any = 1;
   const [currentStep, setCurrentStep] = useState(1);
   const [dragging, setDragging] = useState(false);
-  const [csvData, setCsvData] = useState<any[]>([]);
+  const [csvData, setCsvData] = useState([]);
   const [result, setResult] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  // 프롬프팅
-  const prompt =
-    "다음대화를읽고,'result'json 객체를 생성하여 반환하세요.'result'객체는다음과같은구조를가져야합니다topic:{summary:'대화내용요약'},mbti:{analysis:'인물별 MBTI분석및이유를배열로'},talkCount:{counts:'인물별말한횟수'},mostWords:{topWords:'가장많이 사용된 단어 상위 3개를반환 다만 글자는 두글자 이상 사람이름제외 없으면없다해도됨'}}.모든필드를채워주세요.줄바꿈은하지마세요입력이없을때는빈문자를주세요";
+  const [final, setFinal] = useState({});
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       parseCSV(file);
     }
   };
@@ -39,6 +42,7 @@ function FileUpLoader() {
     setDragging(false);
     const file = e.dataTransfer.files[0];
     if (file) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       parseCSV(file);
     }
   };
@@ -59,6 +63,7 @@ function FileUpLoader() {
     });
   };
 
+  // 데이터 패칭
   const fetchData = async () => {
     if (csvData.length === 0) return;
     setIsLoading(true); // 로딩 시작
@@ -66,8 +71,14 @@ function FileUpLoader() {
       const csvDataString = JSON.stringify(csvData);
       console.log('Sending data to FetchData:', csvDataString);
       const data = await FetchData(prompt, csvDataString);
+
+      const fetchedContent = data.choices[0].message.content;
       console.log('Fetched Data:', data);
+
+      setFinal({ content: fetchedContent });
+
       setResult(JSON.stringify(data, null, 2));
+      console.log('result', result);
       setCurrentStep(3); // 데이터 분석 후 결과 단계로 이동
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -77,28 +88,37 @@ function FileUpLoader() {
     }
   };
 
+  useEffect(() => {
+    if (final && final.content) {
+      const finalData = JSON.parse(final.content);
+      console.log(finalData);
+    }
+  }, [final]);
+
   return (
     <div className="file-uploader-container">
       {currentStep === 1 && (
-        <div className="upload-area">
-          <label
-            htmlFor="fileInput"
-            className={dragging ? 'dragging' : 'default'}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-          >
-            {dragging ? '여기에 드롭' : '여기에 파일을 Drag & Drop(.csv, .txt)'}
-          </label>
-          <input
-            type="file"
-            id="fileInput"
-            name="fileInput"
-            accept=".csv,.txt"
-            onChange={handleFileChange}
-            ref={fileInputRef}
-            hidden
-          />
+        <div>
+          <div className="upload-area">
+            <label
+              htmlFor="fileInput"
+              className={dragging ? 'dragging' : 'default'}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              {dragging ? '여기에 드롭' : '여기에 파일을 Drag & Drop(.csv, .txt)'}
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              name="fileInput"
+              accept=".csv,.txt"
+              onChange={handleFileChange}
+              ref={fileInputRef}
+              hidden
+            />
+          </div>
         </div>
       )}
 
@@ -110,10 +130,12 @@ function FileUpLoader() {
           ) : (
             <p>업로드된 데이터 없음</p>
           )}
-          <button onClick={fetchData} disabled={isLoading}>
+          <button type="button" onClick={fetchData} disabled={isLoading}>
             데이터 분석
           </button>
-          <button onClick={() => setCurrentStep(1)}>이전 단계</button>
+          <button type="button" onClick={() => setCurrentStep(1)}>
+            이전 단계
+          </button>
         </div>
       )}
 
@@ -121,7 +143,9 @@ function FileUpLoader() {
         <div className="result-display">
           <h3>Fetch Data Result</h3>
           {result ? <pre>{result}</pre> : <p>결과 없음</p>}
-          <button onClick={() => setCurrentStep(2)}>이전 단계</button>
+          <button type="button" onClick={() => setCurrentStep(2)}>
+            이전 단계
+          </button>
         </div>
       )}
 
@@ -129,7 +153,9 @@ function FileUpLoader() {
         <div className="modal">
           <div className="modal-content">
             <h2>파일이 업로드되었습니다</h2>
-            <button onClick={() => setIsModalOpen(false)}>닫기</button>
+            <button type="button" onClick={() => setIsModalOpen(false)}>
+              닫기
+            </button>
           </div>
         </div>
       )}

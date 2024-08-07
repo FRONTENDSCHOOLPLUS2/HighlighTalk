@@ -25,10 +25,8 @@
 }
 @media (min-width: 1024px) and (max-width: 1439px) {
   :root {
-    font-size: 9px;
-
+    font-size: 10px;
     --layout-padding: 3rem;
-
     --title-big: #;
     --title-medium: #;
     --title-small: #;
