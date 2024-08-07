@@ -5,6 +5,7 @@ import '@/styles/reset.css';
 import '@/styles/variable.css';
 import '@/styles/common.css';
 import '@/styles/responsible.css';
+import Header from '@/components/layout/Header/Header';
 
 const pretendard = localFont({
   src: '../static/font/PretendardVariable.woff2',
@@ -24,7 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={pretendard.className}>{children}</body>
+      <body className={pretendard.className}>
+        <main className="containerLayout">
+          <Header />
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
