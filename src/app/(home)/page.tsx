@@ -7,14 +7,6 @@ function MainPage() {
     <main className="MainPage">
       <div className="main_service">
         <div className="main_slide">
-          {/* <Image width={520} height={400} src="/image/mainslide1.svg" alt="img" /> */}
-          {/* <Image
-            objectFit="contain"
-            priority={true}
-            layout="fill"
-            src="/image/mainslide1.svg"
-            alt="img"
-          /> */}
           <Image
             width={0}
             height={0}
