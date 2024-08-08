@@ -1,7 +1,85 @@
 .MainPage {
   .main_service {
     width: 100%;
-    box-shadow: inset 0px 0px 20px red;
-    height: 40rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    .main_slide {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      overflow: hidden;
+      border-radius: 1rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .main_items {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      &.n1 {
+        grid-row-start: 1;
+        grid-row-end: 2;
+      }
+
+      &.n2 {
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 2.2rem;
+        display: block;
+        height: 100%;
+        color: #252525;
+      }
+      p {
+        font-size: 1.6rem;
+        color: #828282;
+      }
+
+      .item {
+        border-radius: 2rem;
+        // box-shadow: inset 0px 0px 20px red;
+        border: 0.1rem solid #ddd;
+        height: 100%;
+        display: flex;
+
+        .des {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          padding: 1.6rem;
+        }
+        .free_items_img {
+          width: 50%;
+          border-radius: 2rem;
+          background-color: blue;
+        }
+      }
+    }
   }
 }
+
+// // mobile
+// @media (max-width: 768px) {
+//   .main_service {
+//     flex-direction: column;
+//     .main_items {
+//       flex-direction: column;
+//       .pay_item {
+//         width: 30rem;
+//         height: 10rem;
+//         border-radius: 2rem;
+//         box-shadow: inset 0px 0px 20px blue;
+//       }
+//     }
+//   }
+// }
