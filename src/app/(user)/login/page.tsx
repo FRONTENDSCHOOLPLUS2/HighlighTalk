@@ -16,11 +16,6 @@ function LoginPage() {
             <label htmlFor="password">비밀번호</label>
             <input type="password" id="password" placeholder="비밀번호를 입력해주세요." />
           </div>
-          <div className="input-group">
-            <label htmlFor="pw-confirm">비밀번호 확인</label>
-            <input type="password" id="pw-confirm" placeholder="비밀번호 확인" />
-          </div>
-
           <button type="button" className="login-button">
             로그인
           </button>
