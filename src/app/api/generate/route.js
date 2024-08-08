@@ -20,7 +20,7 @@ export async function GET(request) {
   try {
     // OpenAI API 호출
     const stream = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'gpt-4o-2024-05-13',
       messages: [
         { role: 'system', content: MessageForAI }, { role: 'user', content: prompt }],
       stream: true,

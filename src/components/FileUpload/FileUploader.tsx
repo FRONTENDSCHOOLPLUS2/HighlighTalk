@@ -2,27 +2,45 @@
 
 import './FileUploader.scss';
 import { useState, useRef, ChangeEvent, DragEvent, useEffect } from 'react';
-import Papa from 'papaparse';
+import Papa, { ParseResult } from 'papaparse';
 import FetchData from '@/hooks/fetchData';
 
-const prompt = process.env.NEXT_PUBLIC_AI_PROMPT;
-// const prompt = process.env.NEXT_PUBLIC_AI_PROMPT_COUPLE;
+const prompt: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
+
+interface CSVRow {
+  [key: string]: string;
+}
+
+interface FetchDataResponse {
+  choices: { message: { content: string } }[];
+}
+
+interface FinalData {
+  content?: string;
+}
 
 function FileUpLoader() {
-  const a: any = 1;
-  const [currentStep, setCurrentStep] = useState(1);
-  const [dragging, setDragging] = useState(false);
-  const [csvData, setCsvData] = useState([]);
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [dragging, setDragging] = useState<boolean>(false);
+  const [csvData, setCsvData] = useState<CSVRow[]>([]);
   const [result, setResult] = useState<string>('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [final, setFinal] = useState({});
+  const [final, setFinal] = useState<FinalData>({});
+  const [sendMessage, setSendMessage] = useState('');
+
+  const removeDateTimeAndUserKey = (text: string): string => {
+    const dateTimeRegex = /"Date":"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}",?/g;
+    const userRegex = /"User":"([^"]*)",?/g;
+    const cleanedText = text.replace(dateTimeRegex, '').replace(userRegex, '"$1",').trim();
+    // 필요에 따라 문자열을 정리 (불필요한 콤마 제거 등)
+    return cleanedText.replace(/,}/g, '}').replace(/,]/g, ']').trim();
+  };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       parseCSV(file);
     }
   };
@@ -42,18 +60,18 @@ function FileUpLoader() {
     setDragging(false);
     const file = e.dataTransfer.files[0];
     if (file) {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       parseCSV(file);
     }
   };
 
   const parseCSV = (file: File) => {
-    Papa.parse(file, {
+    Papa.parse<CSVRow>(file, {
       header: true,
       skipEmptyLines: true,
-      complete: (result) => {
+      complete: (result: ParseResult<CSVRow>) => {
         console.log('Parsed CSV data:', result.data);
         setCsvData(result.data);
+
         setIsModalOpen(true);
         setCurrentStep(2); // 파일 업로드 후 다음 단계로 이동
       },
@@ -63,22 +81,24 @@ function FileUpLoader() {
     });
   };
 
-  // 데이터 패칭
+  useEffect(() => {
+    const copyCSV = [...csvData];
+    const copyResult = JSON.stringify(copyCSV);
+    const copyData = removeDateTimeAndUserKey(copyResult);
+    setSendMessage(copyData);
+    console.log('sendMessage', sendMessage);
+  }, [csvData]);
+
   const fetchData = async () => {
     if (csvData.length === 0) return;
     setIsLoading(true); // 로딩 시작
     try {
-      const csvDataString = JSON.stringify(csvData);
-      console.log('Sending data to FetchData:', csvDataString);
-      const data = await FetchData(prompt, csvDataString);
-
+      const data: FetchDataResponse = await FetchData(prompt, sendMessage);
+      console.log('response', data);
       const fetchedContent = data.choices[0].message.content;
-      console.log('Fetched Data:', data);
-
+      console.log('Fetched Data:', fetchedContent);
       setFinal({ content: fetchedContent });
-
       setResult(JSON.stringify(data, null, 2));
-      console.log('result', result);
       setCurrentStep(3); // 데이터 분석 후 결과 단계로 이동
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -91,7 +111,7 @@ function FileUpLoader() {
   useEffect(() => {
     if (final && final.content) {
       const finalData = JSON.parse(final.content);
-      console.log(finalData);
+      console.log('xx', finalData);
     }
   }, [final]);
 
