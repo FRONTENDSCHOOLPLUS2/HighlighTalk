@@ -52,17 +52,6 @@
         outline: none;
         border: 1px solid #dfdfdf;
         border-radius: 0.6rem;
-
-        // REVIEW - 아래 두 선택자는 css 스타일 전역에 type='text'에만 indent와 height 있어 해제하기 위해 씀
-
-        &[type='text'] {
-          text-indent: 0rem;
-          height: auto;
-        }
-
-        &::placeholder {
-          color: #8b8b8b;
-        }
       }
     }
 
