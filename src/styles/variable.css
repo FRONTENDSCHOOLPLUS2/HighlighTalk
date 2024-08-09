@@ -4,6 +4,7 @@
 :root {
   /* basic */
   --color-primary: #fee500;
+  --color-white: #fff;
   --color-secondary: #d0f4ff;
   --color-success: #4cbe83;
   --color-warning: #ffa726;
@@ -17,6 +18,7 @@
   --color-magenta: #ff4cbf;
   --color-blue: #648ff7;
   --color-skyblue-1: #a9e9fe;
+  --color-blue: #a7e9fe;
   --color-skyblue-2: #00a3ff;
   --color-black: #111111;
   --color-gray-1: #dfdfdf;
@@ -24,6 +26,7 @@
   --color-gray-3: #828282;
   --color-gray-4: #4f4f4f;
   --color-gray-5: #333333;
+  --color-brown: #462d0a;
 
   /* chart */
   --color-chart-1: #ff6f41;

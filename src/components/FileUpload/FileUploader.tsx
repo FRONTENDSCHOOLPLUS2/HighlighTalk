@@ -1,11 +1,11 @@
 'use client';
-
 import './_FileUploader.scss';
 import { useState, useRef, ChangeEvent, useEffect } from 'react';
 import Papa, { ParseResult } from 'papaparse';
 import FetchData from '@/hooks/fetchData';
-import UploadArea from '../UploadArea/UploadArea';
+
 import removeDateTimeAndUserKey from '@/utils/removeDateTimeAndUserKey';
+import UploadArea from './UploadArea/UploadArea';
 
 const prompt: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 
@@ -98,6 +98,7 @@ function FileUpLoader() {
           </button>
         </div>
       )} */}
+
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
