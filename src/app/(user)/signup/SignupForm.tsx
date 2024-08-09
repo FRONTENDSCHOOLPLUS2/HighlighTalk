@@ -1,0 +1,144 @@
+'use client';
+
+import { useForm } from 'react-hook-form';
+
+const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
+
+interface FormDataType {
+  type: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
+type Props = {};
+function SignupForm({}: Props) {
+  const {
+    register,
+    watch,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const password = watch('password');
+
+  // TODO - 타입 가드 떡칠 상태, 더 나은 방법 고민하기
+  const nameErrorMessage: string | undefined =
+    errors.name?.message && typeof errors.name.message === 'string'
+      ? errors.name.message
+      : undefined;
+
+  const emailErrorMessage: string | undefined =
+    errors.email?.message && typeof errors.email.message === 'string'
+      ? errors.email.message
+      : undefined;
+
+  const passwordErrorMessage: string | undefined =
+    errors.password?.message && typeof errors.password.message === 'string'
+      ? errors.password.message
+      : undefined;
+
+  const confirmMessage: string | undefined =
+    errors.passwordConfirm?.message && typeof errors.passwordConfirm.message === 'string'
+      ? errors.passwordConfirm.message
+      : undefined;
+
+  // NOTE - 회원가입 구현
+
+  const createUser = async (formData: FormDataType) => {
+    formData.type = 'user';
+    console.log('👼 create User-> ', formData);
+
+    try {
+      const response = await fetch(`${API_SERVER}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': `${CLIENT_ID}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log(data); // 서버로부터 받은 메시지를 출력
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleEmailUniqueCheck = () => {
+    // 중복확인 구현
+  };
+
+  return (
+    <form action="submit" className="signup-form" onSubmit={handleSubmit(createUser)}>
+      <div className="input-group">
+        <label htmlFor="name">이름</label>
+        <input
+          type="text"
+          id="name"
+          placeholder="이름을 입력해주세요."
+          {...register('name', {
+            required: '이름을 입력하세요.',
+            minLength: {
+              value: 2,
+              message: '이름을 2글자 이상 입력하세요.',
+            },
+          })}
+        />
+        <span className="error-message">{nameErrorMessage}</span>
+      </div>
+      <div className="input-group">
+        <label htmlFor="email">이메일</label>
+        <input
+          type="text"
+          id="email"
+          placeholder="이메일을 입력해주세요."
+          {...register('email', {
+            required: { value: true, message: '이메일을 입력해주세요.' },
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: '이메일 형식을 입력해주세요.',
+            },
+          })}
+        />
+        <span className="error-message">{emailErrorMessage}</span>
+      </div>
+      <button onClick={handleEmailUniqueCheck}>중복확인</button>
+      <div className="input-group">
+        <label htmlFor="password">비밀번호</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="비밀번호를 입력해주세요."
+          {...register('password', {
+            required: '비밀번호를 입력하세요.',
+          })}
+        />
+        <span className="error-message">{passwordErrorMessage}</span>
+      </div>
+      <div className="input-group">
+        <label htmlFor="password-confirm">비밀번호 확인</label>
+        <input
+          type="password"
+          id="password-confirm"
+          placeholder="비밀번호 확인"
+          {...register('passwordConfirm', {
+            required: '비밀번호 확인을 입력해주세요.',
+            validate: (value) => value === password || '비밀번호가 일치하지 않습니다.',
+          })}
+        />
+        <span className="error-message">{confirmMessage}</span>
+      </div>
+      <button type="submit" className="submit-button">
+        회원가입
+      </button>
+    </form>
+  );
+}
+export default SignupForm;
