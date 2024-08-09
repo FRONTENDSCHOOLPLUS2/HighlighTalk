@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import './home.scss';
+import './_home.scss';
 import Link from 'next/link';
 
 function MainPage() {
