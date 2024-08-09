@@ -94,6 +94,11 @@ video {
   vertical-align: baseline;
   box-sizing: border-box;
 }
+
+a {
+  all: unset;
+  cursor: pointer;
+}
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -114,6 +119,7 @@ body {
   font-size: 1.4rem;
 }
 ol,
+li,
 ul {
   list-style: none;
 }
@@ -141,12 +147,6 @@ textarea {
   all: unset;
 }
 
-input[type='text'] {
-  height: 4rem;
-  text-indent: 1rem;
-}
-
-input[type='text'],
 textarea {
   width: 100%;
   border-radius: 1.2rem;
@@ -154,13 +154,7 @@ textarea {
   box-sizing: border-box;
 }
 
-input[type='text']::placeholder,
 textarea::placeholder {
   color: var(--color-gray-50);
   font-family: unset;
-}
-
-input[type='text']:focus,
-textarea:focus {
-  border-color: var(--color-gray-70);
 }
