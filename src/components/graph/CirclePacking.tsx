@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
 const chartColors = ['#FF6F41', '#BCD426', '#4CBE83', '#FECE5E', '#FF6F78', '#FF9D9D', '#FF89D4'];
@@ -23,6 +23,7 @@ const CirclePacking = () => {
   ];
 
   const drawGraph = () => {
+    let isDragging = false;
     data.sort((a, b) => b.value - a.value);
     data = data.slice(0, 4);
 
@@ -38,8 +39,37 @@ const CirclePacking = () => {
     const svg = d3.select(canvasRef.current).attr('width', width).attr('height', height);
     const scale = d3.scaleLinear().domain([0, data[0].value]).range([5, 100]);
 
+    // 툴팁 생성
+    const Tooltip = d3
+      .select('body')
+      .append('div')
+      .style('opacity', 0)
+      .attr('class', 'tooltip')
+      .style('position', 'absolute') // 절대 위치 지정
+      .style('background-color', 'white')
+      .style('border', 'solid')
+      .style('border-width', '2px')
+      .style('border-radius', '5px')
+      .style('padding', '5px');
+
+    // 툴팁 관련 함수
+    const mouseover = function (event, d) {
+      if (!isDragging) {
+        Tooltip.style('opacity', 1);
+      }
+    };
+    const mousemove = function (event, d) {
+      Tooltip.html('<u>' + d.key + '</u>' + '<br>' + d.value + ' 회')
+        .style('left', event.pageX + 20 + 'px') // pageX로 좌표 조정
+        .style('top', event.pageY - 30 + 'px');
+    };
+    const mouseleave = function (event, d) {
+      Tooltip.style('opacity', 0);
+    };
+
     // 노드 드래그 함수
     const dragstarted = (event, d) => {
+      isDragging = true;
       if (!event.active) simulation.alphaTarget(0.5).restart();
       d.fx = d.x;
       d.fy = d.y;
@@ -49,6 +79,7 @@ const CirclePacking = () => {
       d.fy = event.y;
     };
     const dragended = (event, d) => {
+      isDragging = false;
       if (!event.active) simulation.alphaTarget(0.01);
       d.fx = null;
       d.fy = null;
@@ -65,12 +96,12 @@ const CirclePacking = () => {
       .attr('cx', width / 2)
       .attr('cy', height / 2)
       .attr('fill', (d, i) => chartColors[i % chartColors.length])
-      .on('mouseover', mouseover) // What to do when hovered
+      .on('mouseover', mouseover)
       .on('mousemove', mousemove)
       .on('mouseleave', mouseleave)
       .call(
         d3
-          .drag() // call specific function when circle is dragged
+          .drag() // 드래그 기능 추가
           .on('start', dragstarted)
           .on('drag', dragged)
           .on('end', dragended)
@@ -91,12 +122,14 @@ const CirclePacking = () => {
       .attr('font-weight', '700')
       .attr('font-size', (d, i) => (i === 0 ? '4rem' : '2rem'))
       .attr('fill', '#fff')
+      .attr('style', 'user-select: none;') // 드래그로 텍스트 선택할 수 없도록 지정
       .text((d) => d.key);
 
+    // 시뮬레이션 설정
     const simulation = d3
       .forceSimulation()
-      .force('center', d3.forceCenter(width / 2, height / 2)) // Attraction to the center of the svg area
-      .force('charge', d3.forceManyBody().strength(5)) // Nodes are attracted one each other
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('charge', d3.forceManyBody().strength(5))
       .force(
         'link',
         d3
@@ -112,9 +145,6 @@ const CirclePacking = () => {
           .radius((d) => scale(d.value) + 5)
           .iterations(1)
       );
-
-    // force 강도 설정
-    simulation.alpha(0.1).alphaTarget(0.01).restart();
 
     simulation.nodes(data).on('tick', (d) => {
       nodes.attr('cx', (d) => d.x).attr('cy', (d) => d.y);
