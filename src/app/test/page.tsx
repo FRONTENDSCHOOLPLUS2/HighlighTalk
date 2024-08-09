@@ -1,3 +1,4 @@
+import CirclePacking from '@/components/graph/CirclePacking';
 import TokenTest from '@/components/test/TokenTest';
 
 function TestPage() {
@@ -8,6 +9,10 @@ function TestPage() {
       <h2>토큰수 테스트</h2>
       <p>gpt-4o 기준, o200k_base 인코딩</p>
       <TokenTest />
+      <hr />
+      <h2>그래프 테스트</h2>
+      <p></p>
+      <CirclePacking />
     </>
   );
 }
