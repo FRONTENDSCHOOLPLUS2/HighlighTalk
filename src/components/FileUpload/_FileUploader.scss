@@ -1,40 +1,5 @@
 /* FileUploader.scss */
 
-.file-uploader-container {
-  width: 100%;
-}
-
-.divide-section {
-  display: flex;
-  gap: 2rem;
-
-  .description-area {
-    width: 50%;
-    max-width: 50%;
-    padding: 5rem;
-    background-color: #fef4db;
-    border-radius: 2rem;
-  }
-  .upload-area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    max-width: 50%;
-    border: 0.3rem dashed var(--color-skyblue-1);
-    border-radius: 2rem;
-    &.success {
-      border: 0.3rem dashed var(--color-green);
-    }
-    .upload-area-section {
-      padding: 5rem;
-      height: 100%;
-      display: block;
-    }
-  }
-}
-
-.csv-data-display,
 .result-display {
   margin-bottom: 1.25rem;
   padding: 3rem;
@@ -42,7 +7,6 @@
   background: #ffffff;
 }
 
-.csv-data-display,
 .result-display {
   border: 0.0625rem solid #ddd;
 }
@@ -108,20 +72,8 @@
   border: 0.0625rem solid #ddd;
 }
 
-button {
-  padding: 0.625rem 0.9375rem;
-  border: none;
-  border-radius: 0.3125rem;
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  margin: 0.3125rem;
-  transition: background-color 0.3s ease;
-}
-
 button:hover {
-  background-color: #218838;
+  background-color: var(--color-skyblue-1);
 }
 
 button:disabled {

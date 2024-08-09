@@ -4,10 +4,8 @@
 
 // key
 const AI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
-
 // token
 const MAX_TOKEN = process.env.NEXT_PUBLIC_TOKEN_MAX;
-
 // temperature
 const TEMPERATURE_AI = process.env.NEXT_PUBLIC_TEMPERATURE_AI;
 
