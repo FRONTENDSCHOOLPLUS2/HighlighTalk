@@ -1,5 +1,5 @@
+import SignupForm from '@/components/Form/SignupForm/SignupForm';
 import './_SignupPage.scss';
-import SignupForm from './SignupForm';
 
 function SignupPage() {
   return (
