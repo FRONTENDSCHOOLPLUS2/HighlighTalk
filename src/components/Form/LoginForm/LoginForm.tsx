@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import './_LoginForm.scss';
+import { signIn } from '@/auth';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -23,40 +24,6 @@ function LoginForm() {
     setError,
   } = useForm();
 
-  // TODO - localstorage에 accessToken과 refreshToken 저장
-
-  const fetchUserData = async (userData: UserDataType) => {
-    console.log('👨🏻 Login User Info-> ', userData);
-
-    try {
-      const response = await fetch(`${API_SERVER}/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'client-id': `${CLIENT_ID}`,
-        },
-        body: JSON.stringify(userData),
-      });
-
-      const data = await response.json();
-      console.log('🗣️ 응답쓰:', data);
-      // console.log('🪪 Token', data.item.token);
-
-      localStorage.setItem('accessToken', data.item.token.accessToken);
-      localStorage.setItem('refreshToken', data.item.token.refreshToken);
-
-      data.token;
-
-      // NOTE - 아이디와 비번 불일치
-      if (!response.ok) {
-        console.log('NOT OK', data.message);
-        setError('password', { type: 'manual', message: data.message });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
   const emailErrorMessage: string | undefined =
     errors.email?.message && typeof errors.email.message === 'string'
       ? errors.email.message
@@ -68,7 +35,7 @@ function LoginForm() {
       : undefined;
 
   return (
-    <form action="submit" className="login-form" onSubmit={handleSubmit(fetchUserData)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="login-form">
       <div className="input-group">
         <label htmlFor="email">이메일</label>
         <input
@@ -108,6 +75,7 @@ function LoginForm() {
         <p>소셜로그인으로 간편하게 이용해보세요!</p>
         <span className="hr"></span>
         <div className="icons">
+          <button type="submit">로그인테스트</button>
           {/* TODO - icon으로 추후 변경 */}
           <div>구글</div>
           <div>카톡</div>
