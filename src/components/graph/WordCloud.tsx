@@ -1,15 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import d3Cloud, { Word } from 'd3-cloud';
+import d3Cloud from 'd3-cloud';
 
-// 워드 클라우드의 크기 설정
-const width = 600;
-const height = 300;
+interface WordCloudProps {
+  data: Word[];
+  width?: number;
+  height?: number;
+}
 
-// 데이터 정의
-const data = [
+interface Word extends d3Cloud.Word {
+  key: string;
+  value: number;
+}
+
+const initialData: Word[] = [
   { key: '중우', value: 10 },
   { key: '짱이다', value: 15 },
   { key: '울랄라', value: 30 },
@@ -24,82 +30,96 @@ const data = [
   { key: '덤벼', value: 60 },
 ];
 
-function WordCloud() {
-  // 데이터 정렬
-  const sortedData = data.sort((a, b) => b.value - a.value);
+// 툴팁 생성 함수
+const createTooltip = () => {
+  return d3
+    .select('body')
+    .append('div')
+    .attr('class', 'tooltip')
+    .style('opacity', 0)
+    .style('position', 'absolute')
+    .style('background-color', 'white')
+    .style('border', 'solid 2px')
+    .style('border-radius', '5px')
+    .style('padding', '5px');
+};
+
+function WordCloud({ data = initialData, width = 600, height = 300 }: WordCloudProps) {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null); // SVG 요소를 재사용하기 위한 ref
 
   useEffect(() => {
+    const sortedData = data.sort((a, b) => b.value - a.value);
+
     const fontScale = d3.scaleLinear().domain([1, sortedData[0].value]).range([12, 60]);
 
-    // 툴팁 생성
-    const Tooltip = d3
-      .select('body')
-      .append('div')
-      .style('opacity', 0)
-      .attr('class', 'tooltip')
-      .style('position', 'absolute') // 절대 위치 지정
-      .style('background-color', 'white')
-      .style('border', 'solid')
-      .style('border-width', '2px')
-      .style('border-radius', '5px')
-      .style('padding', '5px');
+    const Tooltip = createTooltip();
 
-    // 툴팁 관련 함수
-    const mouseover = function (event, d) {
-      Tooltip.style('opacity', 1);
+    const handleMouseOver = () => Tooltip.style('opacity', 1);
+    const handleMouseMove = (event: MouseEvent, d: Word) => {
+      Tooltip.html(`<u>${d.text}</u><br>${d.value} 회`)
+        .style('left', `${event.pageX + 20}px`)
+        .style('top', `${event.pageY - 30}px`);
     };
-    const mousemove = function (event, d) {
-      Tooltip.html('<u>' + d.text + '</u>' + '<br>' + d.value + ' 회')
-        .style('left', event.pageX + 20 + 'px') // pageX로 좌표 조정
-        .style('top', event.pageY - 30 + 'px');
+    const handleMouseLeave = () => Tooltip.style('opacity', 0);
 
-      event.target.style;
-    };
-    const mouseleave = function (event, d) {
-      Tooltip.style('opacity', 0);
-    };
-
-    // 워드 클라우드를 그리는 함수
-    const drawCloud = (words: Word[]) => {
-      const svg = d3
-        .select('#word-cloud')
+    if (!svgRef.current) {
+      // SVG가 없을 때만 새로 생성
+      svgRef.current = d3
+        .select(canvasRef.current)
         .append('svg')
         .attr('width', width)
-        .attr('height', height);
-      // .style('border', '1px solid black');
+        .attr('height', height)
+        .node() as SVGSVGElement;
+    }
 
-      const g = svg.append('g').attr('transform', `translate(${width / 2}, ${height / 2})`);
+    const g = d3
+      .select(svgRef.current)
+      .selectAll('g')
+      .data([null])
+      .join('g')
+      .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-      // 워드 생성
-      g.selectAll('text')
-        .data(words)
-        .enter()
-        .append('text')
-        .style('font-size', (d) => `${d.size}px`)
-        .style('font-family', 'Pretendard')
-        .style('fill', '#333333')
-        .style('font-weight', '700')
-        .attr('text-anchor', 'middle')
-        .attr('transform', (d) => `translate(${d.x}, ${d.y})`)
-        .on('mouseover', mouseover)
-        .on('mousemove', mousemove)
-        .on('mouseleave', mouseleave)
-        .text((d) => d.text);
-    };
-
-    // 워드 클라우드 생성 설정
-    const cloud = d3Cloud()
+    // 워드 클라우드 생성 및 렌더링
+    d3Cloud()
       .size([width, height])
       .words(sortedData.map((d) => ({ text: d.key, size: fontScale(d.value), value: d.value })))
       .padding(15)
       .rotate(() => 0)
       .font('Pretendard')
-      .fontSize((d) => d.size)
-      .on('end', drawCloud)
-      .start();
-  }, [sortedData]);
+      .fontSize((d) => d.size as number)
+      .on('end', (words: Word[]) => {
+        const textSelection = g
+          .selectAll<SVGTextElement, Word>('text')
+          .data(words, (d: Word) => d.text!);
 
-  return <div id="word-cloud"></div>;
+        // Enter: 새로운 요소
+        textSelection
+          .enter()
+          .append('text')
+          .merge(textSelection)
+          .style('font-size', (d) => `${d.size}px`)
+          .style('font-family', 'Pretendard')
+          .style('fill', '#333333')
+          .style('font-weight', '700')
+          .attr('text-anchor', 'middle')
+          .attr('transform', (d) => `translate(${d.x}, ${d.y})`)
+          .on('mouseover', handleMouseOver)
+          .on('mousemove', handleMouseMove)
+          .on('mouseleave', handleMouseLeave)
+          .text((d) => d.text as string);
+
+        // Exit: 사라진 요소
+        textSelection.exit().remove();
+      })
+      .start();
+
+    return () => {
+      Tooltip.remove();
+    };
+  }, [data, width, height]);
+
+  return <div ref={canvasRef}></div>;
 }
 
 export default WordCloud;
