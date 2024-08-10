@@ -18,6 +18,14 @@ function TestPage() {
     { key: '덤벼', value: 60 },
   ];
 
+  const circlePackingData = [
+    { key: '김설하', value: 15 },
+    { key: '윤우중', value: 30 },
+    { key: '여다희', value: 25 },
+    { key: '정길용', value: 10 },
+    { key: '정현주', value: 9 },
+  ];
+
   return (
     <>
       <h1>테스트 페이지</h1>
@@ -28,7 +36,7 @@ function TestPage() {
       <hr />
       <h2>그래프 테스트</h2>
       <p>가장 많이 말한 사람</p>
-      <CirclePacking />
+      <CirclePacking data={circlePackingData} />
       <p>가장 많이 나온 단어</p>
       <WordCloud data={wordCloudData} />
     </>
