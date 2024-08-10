@@ -1,11 +1,12 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import './_SignupForm.scss';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
-interface FormDataType {
+export interface FormDataType {
   type: string;
   name: string;
   email: string;
@@ -61,18 +62,15 @@ function SignupForm({}: Props) {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        // throw new Error('Network response was not ok');
+        console.log(response);
       }
 
       const data = await response.json();
-      console.log(data); // 서버로부터 받은 메시지를 출력
+      console.log(data);
     } catch (error) {
       console.error('Error:', error);
     }
-  };
-
-  const handleEmailUniqueCheck = () => {
-    // 중복확인 구현
   };
 
   return (
@@ -109,7 +107,6 @@ function SignupForm({}: Props) {
         />
         <span className="error-message">{emailErrorMessage}</span>
       </div>
-      <button onClick={handleEmailUniqueCheck}>중복확인</button>
       <div className="input-group">
         <label htmlFor="password">비밀번호</label>
         <input
