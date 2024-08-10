@@ -1,4 +1,5 @@
 import CirclePacking from '@/components/graph/CirclePacking';
+import WordCloud from '@/components/graph/WordCloud';
 import TokenTest from '@/components/test/TokenTest';
 
 function TestPage() {
@@ -11,8 +12,10 @@ function TestPage() {
       <TokenTest />
       <hr />
       <h2>그래프 테스트</h2>
-      <p></p>
+      <p>가장 많이 말한 사람</p>
       <CirclePacking />
+      <p>가장 많이 나온 단어</p>
+      <WordCloud />
     </>
   );
 }
