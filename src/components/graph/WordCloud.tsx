@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import d3Cloud from 'd3-cloud';
+import useTooltip from '@/hooks/useTooltip';
 
 interface WordCloudProps {
   data: Word[];
@@ -15,53 +16,18 @@ interface Word extends d3Cloud.Word {
   value: number;
 }
 
-const initialData: Word[] = [
-  { key: '중우', value: 10 },
-  { key: '짱이다', value: 15 },
-  { key: '울랄라', value: 30 },
-  { key: '얍', value: 100 },
-  { key: '응', value: 80 },
-  { key: '바빠', value: 41 },
-  { key: '나가라', value: 10 },
-  { key: '어떻게', value: 20 },
-  { key: '되는거지', value: 10 },
-  { key: '야', value: 40 },
-  { key: '아니야', value: 30 },
-  { key: '덤벼', value: 60 },
-];
-
-// 툴팁 생성 함수
-const createTooltip = () => {
-  return d3
-    .select('body')
-    .append('div')
-    .attr('class', 'tooltip')
-    .style('opacity', 0)
-    .style('position', 'absolute')
-    .style('background-color', 'white')
-    .style('border', 'solid 2px')
-    .style('border-radius', '5px')
-    .style('padding', '5px');
-};
-
-function WordCloud({ data = initialData, width = 600, height = 300 }: WordCloudProps) {
+function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement | null>(null); // SVG 요소를 재사용하기 위한 ref
+  const { createTooltip, showTooltip, hideTooltip, setTooltipContent, setTooltipPosition } =
+    useTooltip();
 
   useEffect(() => {
+    const Tooltip = createTooltip();
     const sortedData = data.sort((a, b) => b.value - a.value);
 
+    // 폰트 스케일 설정 함수
     const fontScale = d3.scaleLinear().domain([1, sortedData[0].value]).range([12, 60]);
-
-    const Tooltip = createTooltip();
-
-    const handleMouseOver = () => Tooltip.style('opacity', 1);
-    const handleMouseMove = (event: MouseEvent, d: Word) => {
-      Tooltip.html(`<u>${d.text}</u><br>${d.value} 회`)
-        .style('left', `${event.pageX + 20}px`)
-        .style('top', `${event.pageY - 30}px`);
-    };
-    const handleMouseLeave = () => Tooltip.style('opacity', 0);
 
     if (!svgRef.current) {
       // SVG가 없을 때만 새로 생성
@@ -104,9 +70,16 @@ function WordCloud({ data = initialData, width = 600, height = 300 }: WordCloudP
           .style('font-weight', '700')
           .attr('text-anchor', 'middle')
           .attr('transform', (d) => `translate(${d.x}, ${d.y})`)
-          .on('mouseover', handleMouseOver)
-          .on('mousemove', handleMouseMove)
-          .on('mouseleave', handleMouseLeave)
+          .on('mouseover', () => {
+            showTooltip(Tooltip);
+          })
+          .on('mousemove', (event: MouseEvent, d: Word) => {
+            setTooltipContent(Tooltip, d.text as string, d.value + '회');
+            setTooltipPosition(Tooltip, event.pageX, event.pageY);
+          })
+          .on('mouseleave', () => {
+            hideTooltip(Tooltip);
+          })
           .text((d) => d.text as string);
 
         // Exit: 사라진 요소
