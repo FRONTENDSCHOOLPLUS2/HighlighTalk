@@ -1,9 +1,11 @@
 'use server';
 
-import { auth, signIn, signOut } from '@/auth';
-import { UserDataType } from '@/components/Form/LoginForm/LoginForm';
+import { signIn } from '@/auth';
+import { LoginFormType } from '@/types';
 
-export async function signInWithCredentials(data: UserDataType) {
+import { redirect } from 'next/navigation';
+
+export async function signInWithCredentials(data: LoginFormType) {
   console.log('👼 User Login-> ', data);
   try {
     const result = await signIn('credentials', {
@@ -14,4 +16,6 @@ export async function signInWithCredentials(data: UserDataType) {
   } catch (err) {
     console.error(err);
   }
+
+  redirect('/');
 }
