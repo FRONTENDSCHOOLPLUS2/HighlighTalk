@@ -11,11 +11,11 @@ export async function signInWithCredentials(data: LoginFormType) {
     const result = await signIn('credentials', {
       email: data.email,
       password: data.password,
+      redirect: false,
     });
-    console.log(result);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    // @ts-ignore-next-line // NOTE - 아직 해당 타입이 없어 무시합니다.
+    throw new Error(error.cause.err.message);
   }
-
   redirect('/');
 }
