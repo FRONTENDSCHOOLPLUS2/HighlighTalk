@@ -1,28 +1,21 @@
-// NOTE - 서버 사이드 페이지 렌더링 이전에 middleware 실행
-// 사용자 로그인 여부에 따라 redirect 추가
-
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { auth } from './auth';
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
+// FIXME - 개발하면서 config, matchersForAuth에 접근 제어 페이지들 더 추가하기
+const matchersForAuth = ['/signup/*', '/login/*'];
 
-export const middleware = auth((req) => {
-  console.log('😬 Hi 미들웨어에요');
+export const middleware = async (request: NextRequest) => {
+  const mySession = await auth();
+  const pathname = request.nextUrl.pathname;
 
-  const headers = new Headers(req.headers);
-  headers.set('Content-Type', 'application/json');
+  const isMatchForAuth = matchersForAuth.some((element) => element.includes(pathname));
 
-  headers.set('client-id', `${CLIENT_ID}`);
-
-  // 기타 middleware 처리들...
-
-  return NextResponse.next({
-    request: {
-      headers,
-    },
-  });
-});
+  if (isMatchForAuth && mySession) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+};
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/login', '/signup'],
 };

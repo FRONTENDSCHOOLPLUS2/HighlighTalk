@@ -7,13 +7,8 @@ import { LoginFormType } from '@/types';
 import { signInWithCredentials } from '@/serverActions/authAction';
 import './_LoginForm.scss';
 
-const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-
-// TODO - 에러메세지 정교하게 수정
-
 // NOTE - login 후 session 확인용 함수 (추후 제거)
-const fetchUserData = async () => {
+const sessionCheck = async () => {
   const session = await getSession();
   if (session) {
     console.log('User Info:', session); // 사용자 정보
@@ -26,6 +21,7 @@ function LoginForm() {
   const {
     register,
     formState: { errors },
+    setError,
     handleSubmit,
   } = useForm<LoginFormType>();
 
@@ -39,14 +35,27 @@ function LoginForm() {
       ? errors.password.message
       : undefined;
 
+  const handleSubmitLogin = async (data: LoginFormType) => {
+    try {
+      await signInWithCredentials(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError('password', {
+          type: 'manual',
+          message: '이메일 혹은 비밀번호를 확인해주세요.',
+        });
+      }
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit((data) => signInWithCredentials(data))} className="login-form">
+    <form onSubmit={handleSubmit(handleSubmitLogin)} className="login-form">
       <div className="input-group">
         <label htmlFor="email">이메일</label>
         <input
           type="text"
           id="email"
-          placeholder="."
+          placeholder="highlightalk@gmail.com"
           {...register('email', {
             required: '이메일을 입력하세요.',
           })}
@@ -81,7 +90,7 @@ function LoginForm() {
         <span className="hr"></span>
         <div className="icons">
           {/* TODO - icon으로 추후 변경 */}
-          <button onClick={fetchUserData}>🥰콘솔_세션 확인</button>
+          <button onClick={sessionCheck}>🥰콘솔_세션 확인</button>
           <button type="submit">구글</button>
           <button>깃허브</button>
         </div>
