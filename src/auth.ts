@@ -11,13 +11,39 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const authOptions = {
   providers: [
     CredentialsProvider({
-      credentials: {
-        email: {},
-        password: {},
-      },
+      async authorize(credentials) {
+        const response = await fetch(`${API_SERVER}/users/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'client-id': `${CLIENT_ID}`,
+          },
+          body: JSON.stringify(credentials),
+        });
 
-      authorize: async (credentials) => {
-        //작성
+        if (!response.ok) {
+          console.error('로그인 실패', response.status, response.statusText);
+          return null;
+        }
+
+        const responseData = await response.json();
+        console.log('resJson >> 됐잔아 ', responseData);
+
+        if (responseData.ok) {
+          console.log('🪪 user정보 ->', responseData.item);
+          const user = responseData.item;
+
+          return {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            loginType: user.loginType,
+            accessToken: user.token?.accessToken!,
+            refreshToken: user.token?.refreshToken!,
+          };
+        } else {
+          return null;
+        }
       },
     }),
     NaverProvider({
@@ -33,8 +59,13 @@ const authOptions = {
       clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
     }),
   ],
+
   pages: {
     signIn: '/login',
+  },
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60 * 24,
   },
 };
 
