@@ -1,26 +1,19 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import { SignupFormType } from '@/types';
 import './_SignupForm.scss';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
-export interface FormDataType {
-  type: string;
-  name: string;
-  email: string;
-  password: string;
-}
-
-type Props = {};
-function SignupForm({}: Props) {
+function SignupForm() {
   const {
     register,
     watch,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm<SignupFormType>();
 
   const password = watch('password');
 
@@ -47,7 +40,7 @@ function SignupForm({}: Props) {
 
   // NOTE - 회원가입 구현
 
-  const createUser = async (formData: FormDataType) => {
+  const createUser = async (formData: SignupFormType) => {
     formData.type = 'user';
     console.log('👼 create User-> ', formData);
 
@@ -62,8 +55,7 @@ function SignupForm({}: Props) {
       });
 
       if (!response.ok) {
-        // throw new Error('Network response was not ok');
-        console.log(response);
+        throw new Error('😞 Network response was not ok');
       }
 
       const data = await response.json();

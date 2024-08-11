@@ -1,28 +1,33 @@
 'use client';
 
 import Link from 'next/link';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { getSession } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { LoginFormType } from '@/types';
+import { signInWithCredentials } from '@/serverActions/authAction';
 import './_LoginForm.scss';
-import { signIn } from '@/auth';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
-interface UserDataType {
-  email: string;
-  password: string;
-}
+// TODO - 에러메세지 정교하게 수정
 
-// TODO - 에러메세지 정교하게
+// NOTE - login 후 session 확인용 함수 (추후 제거)
+const fetchUserData = async () => {
+  const session = await getSession();
+  if (session) {
+    console.log('User Info:', session); // 사용자 정보
+  } else {
+    console.log('인증되지 않음');
+  }
+};
 
 function LoginForm() {
   const {
     register,
-    watch,
     formState: { errors },
     handleSubmit,
-    setError,
-  } = useForm();
+  } = useForm<LoginFormType>();
 
   const emailErrorMessage: string | undefined =
     errors.email?.message && typeof errors.email.message === 'string'
@@ -35,7 +40,7 @@ function LoginForm() {
       : undefined;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+    <form onSubmit={handleSubmit((data) => signInWithCredentials(data))} className="login-form">
       <div className="input-group">
         <label htmlFor="email">이메일</label>
         <input
@@ -75,11 +80,10 @@ function LoginForm() {
         <p>소셜로그인으로 간편하게 이용해보세요!</p>
         <span className="hr"></span>
         <div className="icons">
-          <button type="submit">로그인테스트</button>
           {/* TODO - icon으로 추후 변경 */}
-          <div>구글</div>
-          <div>카톡</div>
-          <div>깃허브</div>
+          <button onClick={fetchUserData}>🥰콘솔_세션 확인</button>
+          <button type="submit">구글</button>
+          <button>깃허브</button>
         </div>
       </div>
     </form>
