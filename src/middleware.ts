@@ -7,6 +7,8 @@ import { auth } from './auth';
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 export const middleware = auth((req) => {
+  console.log('😬 Hi 미들웨어에요');
+
   const headers = new Headers(req.headers);
   headers.set('Content-Type', 'application/json');
 
