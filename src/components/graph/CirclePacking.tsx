@@ -30,11 +30,11 @@ type SVGType = d3.Selection<SVGSVGElement, unknown, null, undefined>;
 const MAX_CIRCLE_NUM = 4;
 
 const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPropType) => {
-  const svgRef = useRef<SVGSVGElement | null>(null);
-  let isDragging = false;
-
   const { createTooltip, showTooltip, hideTooltip, setTooltipContent, setTooltipPosition } =
     useTooltip();
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null); // SVG 요소를 재사용하기 위한 ref
+  let isDragging = false;
 
   // 노드 간 Link 생성하는 함수
   const createLinks = (data: CirclePackingDataNode[]): CirclePackingLink[] => {
@@ -45,9 +45,10 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
   };
 
   // 이름 라벨 생성하는 함수
-  const createLabel = (target: SVGType) => {
+  const createLabel = (target: SVGType, data: CirclePackingDataNode[]) => {
     return target
       .append('g')
+      .attr('class', 'labels')
       .selectAll('text')
       .data(data)
       .enter()
@@ -58,7 +59,11 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
       .attr('text-anchor', 'middle')
       .attr('font-family', 'Pretendard')
       .attr('font-weight', '700')
-      .attr('font-size', (d, i) => (i === 0 ? '4rem' : '2rem'))
+      .attr('font-size', (d, i) => {
+        console.dir(d);
+        console.log(i);
+        return i === 0 ? '4rem' : '2rem';
+      })
       .attr('fill', '#fff')
       .attr('style', 'user-select: none;') // 드래그로 텍스트 선택할 수 없도록 지정
       .text((d) => d.key);
@@ -69,20 +74,19 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
     nodes: d3.Selection<SVGCircleElement, CirclePackingDataNode, SVGGElement, unknown>,
     texts: d3.Selection<SVGTextElement, CirclePackingDataNode, SVGGElement, unknown>
   ) => {
-    nodes.attr('cx', (d) => d.x!).attr('cy', (d) => d.y!);
+    nodes
+      .attr('cx', (d) => {
+        return d.x!;
+      })
+      .attr('cy', (d) => d.y!);
     texts.attr('x', (d) => d.x!).attr('y', (d) => d.y!);
   };
 
   useEffect(() => {
     const sortedData = [...data].sort((a, b) => b.value - a.value).slice(0, MAX_CIRCLE_NUM);
-
+    console.log(sortedData);
+    const circleScale = d3.scaleLinear().domain([0, sortedData[0].value]).range([5, 100]);
     const links = createLinks(sortedData);
-
-    const svg = d3
-      .select<SVGSVGElement, unknown>(svgRef.current!)
-      .attr('width', width)
-      .attr('height', height);
-    const scale = d3.scaleLinear().domain([0, data[0].value]).range([5, 100]);
 
     // 툴팁 생성 및 이벤트 핸들러 정의
     const Tooltip = createTooltip();
@@ -99,6 +103,16 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
     const mouseleave = () => {
       hideTooltip(Tooltip);
     };
+
+    if (!svgRef.current) {
+      // SVG가 없을 때만 새로 생성
+      svgRef.current = d3
+        .select(canvasRef.current)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .node();
+    }
 
     // 노드 드래그 이벤트 핸들러
     const dragstarted = (
@@ -129,14 +143,20 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
       d.fy = null;
     };
 
+    // 노드 생성 전 기존 노드 제거
+    d3.select(svgRef.current).selectAll('g.circles').remove();
+    d3.select(svgRef.current).selectAll('g.labels').remove();
+
     // 노드 생성
-    const nodes = svg
+    const nodes = d3
+      .select(svgRef.current)
       .append('g')
+      .attr('class', 'circles')
       .selectAll('circle')
-      .data(data)
+      .data(sortedData)
       .enter()
       .append('circle')
-      .attr('r', (d) => scale(d.value))
+      .attr('r', (d) => circleScale(d.value))
       .attr('cx', width / 2)
       .attr('cy', height / 2)
       .attr('fill', (d, i) => chartColors[i % chartColors.length])
@@ -152,7 +172,7 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
       );
 
     // 이름 라벨 생성
-    const texts = createLabel(svg);
+    const texts = createLabel(d3.select(svgRef.current!), sortedData);
 
     // 시뮬레이션 설정
     const simulation = d3
@@ -171,11 +191,11 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
         d3
           .forceCollide<CirclePackingDataNode>()
           .strength(1)
-          .radius((d) => scale(d.value) + 5)
+          .radius((d) => circleScale(d.value) + 5)
           .iterations(1)
       );
 
-    simulation.nodes(data).on('tick', () => {
+    simulation.nodes(sortedData).on('tick', () => {
       updateNodePositions(nodes, texts);
       if (simulation.alpha() < 0.01) {
         simulation.stop();
@@ -183,7 +203,7 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
     });
   }, [data]);
 
-  return <svg id="circle-packing" ref={svgRef}></svg>;
+  return <div ref={canvasRef}>{/* <svg id="circle-packing" ref={svgRef}></svg> */}</div>;
 };
 
 export default CirclePacking;
