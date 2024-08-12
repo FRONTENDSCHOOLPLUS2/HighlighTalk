@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const resJson = await response.json();
 
           if (resJson.ok) {
-            console.log('🪪 user정보 ->', resJson.ite);
+            console.log('🪪 user정보 ->', resJson.item);
             const user = resJson.item;
 
             // 유저 정보와 토큰 NextAuth 세션에 저장
