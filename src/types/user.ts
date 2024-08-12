@@ -1,21 +1,25 @@
+import { DefaultSession } from 'next-auth';
+
 export interface UserType {
   _id: number;
   email: string;
   name: string;
   type: 'user';
-  loginType?: 'email'; // 'email' | 'google' | 'kakao' 등으로 확장 작성
+  loginType?: 'email'; // 'email' | 'google' | '' 등으로 확장 작성
   image?: string;
   profile?: string;
-
   createdAt: string;
   updatedAt: string;
 }
-export interface UserToken {
-  accessToken: string;
-  refreshToken: string;
+
+export interface TokenType {
+  id?: string;
+  type?: string;
+  accessToken?: string;
+  refreshToken?: string;
 }
-export interface SignUpResponsType extends UserType {
-  token?: UserToken;
+export interface SignupResponsType extends UserType {
+  token?: TokenType;
 }
 
 export interface LoginFormType extends Pick<UserType, 'email'> {
@@ -24,4 +28,18 @@ export interface LoginFormType extends Pick<UserType, 'email'> {
 export interface SignupFormType extends Pick<UserType, 'type' | 'name' | 'email'> {
   password: string;
   passwordConfirm: string;
+}
+
+// FIXME - 💩 hmm..
+
+interface UserSessionType extends DefaultSession {
+  id: string;
+  name: string;
+  email: string;
+}
+export interface SessionType {
+  user: UserSessionType;
+  expires: string;
+  accessToken?: string;
+  refreshToken?: string;
 }

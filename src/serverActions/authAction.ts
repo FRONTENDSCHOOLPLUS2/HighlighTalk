@@ -19,3 +19,7 @@ export async function signInWithCredentials(data: LoginFormType) {
   }
   redirect('/');
 }
+
+export const signInWithSocial = async (provider: string) => {
+  await signIn(provider, { redirectTo: '/' });
+};
