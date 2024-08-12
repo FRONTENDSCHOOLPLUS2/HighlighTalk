@@ -1,6 +1,5 @@
-import React, { ChangeEvent, RefObject } from 'react';
+import React, { ChangeEvent, DragEvent, RefObject } from 'react';
 import './_UploadArea.scss';
-import '../Description/DescriptionArea';
 import DescriptionArea from '../Description/DescriptionArea';
 
 interface UploadAreaProps {
@@ -20,11 +19,28 @@ function UploadArea({
   setCurrentStep,
   fetchData,
 }: UploadAreaProps) {
-  // 파일 선택 창을 여는 함수
   const openFileDialog = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const fileInput = e.dataTransfer.files[0];
+      const changeEvent = {
+        target: {
+          files: e.dataTransfer.files,
+        },
+      } as ChangeEvent<HTMLInputElement>;
+      handleFileChange(changeEvent);
+      e.dataTransfer.clearData();
+    }
+  };
+
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
   };
 
   if (currentStep === 1) {
@@ -32,8 +48,13 @@ function UploadArea({
       <div className="file-uploader-container">
         <div className="divide-section">
           <DescriptionArea />
-          <div className="upload-area">
-            <label htmlFor="fileInput" className="upload-area-section" onClick={openFileDialog}>
+          <div
+            className="upload-area"
+            onClick={openFileDialog}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+          >
+            <label htmlFor="fileInput" className="upload-area-section">
               <div className="speechs">
                 <div className="speech-icon"></div>
                 <div className="speech-bubble">클릭 또는 파일을 끌어당겨 넣을 수 있어요!</div>
@@ -80,7 +101,7 @@ function UploadArea({
     );
   }
 
-  return null; // 기본 return 문 추가
+  return null;
 }
 
 export default UploadArea;

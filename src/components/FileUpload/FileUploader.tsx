@@ -2,10 +2,9 @@
 import './_FileUploader.scss';
 import { useState, useRef, ChangeEvent, useEffect } from 'react';
 import Papa, { ParseResult } from 'papaparse';
-import FetchData from '@/hooks/fetchData';
-
 import removeDateTimeAndUserKey from '@/utils/removeDateTimeAndUserKey';
 import UploadArea from './UploadArea/UploadArea';
+import validateAndTrimData from '@/utils/validateAndTrimData';
 
 const prompt: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 
@@ -53,7 +52,11 @@ function FileUpLoader() {
   useEffect(() => {
     const processCSVData = () => {
       const copyData = removeDateTimeAndUserKey(JSON.stringify(csvData));
-      setSendMessage(copyData);
+      const result = validateAndTrimData(copyData);
+      console.log('resres', result.data);
+      const Data = JSON.stringify(result.data);
+      console.log('Data', Data);
+      setSendMessage(Data);
     };
     processCSVData();
   }, [csvData]);
@@ -66,8 +69,17 @@ function FileUpLoader() {
     if (csvData.length === 0) return;
     setIsLoading(true); // 로딩 시작
     try {
-      const data: FetchDataResponse = await FetchData(prompt, sendMessage);
-      console.log('response', data);
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          message: sendMessage,
+        }),
+      });
+      const data: FetchDataResponse = await response.json();
       const fetchedContent = data.choices[0].message.content;
       console.log('Fetched Data:', fetchedContent);
       setCurrentStep(3); // 데이터 분석 후 결과 단계로 이동
