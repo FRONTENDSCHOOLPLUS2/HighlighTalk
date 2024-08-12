@@ -22,8 +22,8 @@ const validateAndTrimData = (data: string): { status: 'ok' | 'error'; data?: str
   };
 
   const trimData = (data: string): string => {
-    // 데이터 최대 토큰 수만큼 자르기
-    const trimedTokens = encode(data).slice(0, MAX);
+    // 최근 데이터 기준으로, 최대 토큰 수만큼 자르기
+    const trimedTokens = encode(data).slice(-MAX);
     return decode(trimedTokens);
   };
 
