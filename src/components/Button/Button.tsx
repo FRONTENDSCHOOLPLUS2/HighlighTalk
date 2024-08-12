@@ -3,7 +3,7 @@ import './_Button.scss';
 interface ButtonPropType {
   label: string;
   icon?: JSX.Element;
-  color?: 'primary' | 'secondary' | 'black';
+  theme?: 'primary' | 'secondary' | 'black';
   size?: 'sm' | 'md' | 'full';
   type?: 'default' | 'tonal' | 'outlined' | 'text';
   rounded?: boolean;
@@ -13,7 +13,7 @@ interface ButtonPropType {
 function Button({
   label,
   icon,
-  color = 'primary',
+  theme = 'primary',
   size = 'md',
   type = 'default',
   rounded = false,
@@ -23,7 +23,7 @@ function Button({
   const classList = [
     `size-${size}`,
     `type-${type}`,
-    `color-${color}`,
+    `theme-${theme}`,
     rounded ? 'rounded' : '',
     disabled ? 'disabled' : '',
   ];

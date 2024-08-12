@@ -42,73 +42,73 @@ function TestPage() {
       <WordCloud data={wordCloudData} />
       <hr />
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <p>color="primary"</p>
+        <p>theme="primary"</p>
         <div style={{ display: 'flex', gap: '10px' }}>
           <div>
-            <Button label="버튼" color="primary"></Button>
-            <Button label="버튼" color="primary" type="tonal"></Button>
-            <Button label="버튼" color="primary" type="outlined"></Button>
-            <Button label="버튼" color="primary" type="text"></Button>
+            <Button label="버튼" theme="primary"></Button>
+            <Button label="버튼" theme="primary" type="tonal"></Button>
+            <Button label="버튼" theme="primary" type="outlined"></Button>
+            <Button label="버튼" theme="primary" type="text"></Button>
           </div>
           <div>
-            <Button label="버튼" color="primary" rounded></Button>
-            <Button label="버튼" color="primary" type="tonal" rounded></Button>
-            <Button label="버튼" color="primary" type="outlined" rounded></Button>
-            <Button label="버튼" color="primary" type="text" rounded></Button>
+            <Button label="버튼" theme="primary" rounded></Button>
+            <Button label="버튼" theme="primary" type="tonal" rounded></Button>
+            <Button label="버튼" theme="primary" type="outlined" rounded></Button>
+            <Button label="버튼" theme="primary" type="text" rounded></Button>
           </div>
           <div>
-            <Button label="버튼" color="primary" size="sm" rounded></Button>
-            <Button label="버튼" color="primary" size="sm" type="tonal" rounded></Button>
-            <Button label="버튼" color="primary" size="sm" type="outlined" rounded></Button>
-            <Button label="버튼" color="primary" size="sm" type="text" rounded></Button>
+            <Button label="버튼" theme="primary" size="sm" rounded></Button>
+            <Button label="버튼" theme="primary" size="sm" type="tonal" rounded></Button>
+            <Button label="버튼" theme="primary" size="sm" type="outlined" rounded></Button>
+            <Button label="버튼" theme="primary" size="sm" type="text" rounded></Button>
           </div>
         </div>
-        <p>color="secondary"</p>
+        <p>theme="secondary"</p>
         <div style={{ display: 'flex', gap: '10px' }}>
           <div>
-            <Button label="버튼" color="secondary"></Button>
-            <Button label="버튼" color="secondary" type="tonal"></Button>
-            <Button label="버튼" color="secondary" type="outlined"></Button>
-            <Button label="버튼" color="secondary" type="text"></Button>
+            <Button label="버튼" theme="secondary"></Button>
+            <Button label="버튼" theme="secondary" type="tonal"></Button>
+            <Button label="버튼" theme="secondary" type="outlined"></Button>
+            <Button label="버튼" theme="secondary" type="text"></Button>
           </div>
           <div>
-            <Button label="버튼" color="secondary" rounded></Button>
-            <Button label="버튼" color="secondary" type="tonal" rounded></Button>
-            <Button label="버튼" color="secondary" type="outlined" rounded></Button>
-            <Button label="버튼" color="secondary" type="text" rounded></Button>
+            <Button label="버튼" theme="secondary" rounded></Button>
+            <Button label="버튼" theme="secondary" type="tonal" rounded></Button>
+            <Button label="버튼" theme="secondary" type="outlined" rounded></Button>
+            <Button label="버튼" theme="secondary" type="text" rounded></Button>
           </div>
           <div>
-            <Button label="버튼" color="secondary" size="sm" rounded></Button>
-            <Button label="버튼" color="secondary" size="sm" type="tonal" rounded></Button>
-            <Button label="버튼" color="secondary" size="sm" type="outlined" rounded></Button>
-            <Button label="버튼" color="secondary" size="sm" type="text" rounded></Button>
+            <Button label="버튼" theme="secondary" size="sm" rounded></Button>
+            <Button label="버튼" theme="secondary" size="sm" type="tonal" rounded></Button>
+            <Button label="버튼" theme="secondary" size="sm" type="outlined" rounded></Button>
+            <Button label="버튼" theme="secondary" size="sm" type="text" rounded></Button>
           </div>
         </div>
-        <p>color="black"</p>
+        <p>theme="black"</p>
         <div style={{ display: 'flex', gap: '10px' }}>
           <div>
-            <Button label="버튼" color="black"></Button>
-            <Button label="버튼" color="black" type="tonal"></Button>
-            <Button label="버튼" color="black" type="outlined"></Button>
-            <Button label="버튼" color="black" type="text"></Button>
+            <Button label="버튼" theme="black"></Button>
+            <Button label="버튼" theme="black" type="tonal"></Button>
+            <Button label="버튼" theme="black" type="outlined"></Button>
+            <Button label="버튼" theme="black" type="text"></Button>
           </div>
           <div>
-            <Button label="버튼" color="black" rounded></Button>
-            <Button label="버튼" color="black" type="tonal" rounded></Button>
-            <Button label="버튼" color="black" type="outlined" rounded></Button>
-            <Button label="버튼" color="black" type="text" rounded></Button>
+            <Button label="버튼" theme="black" rounded></Button>
+            <Button label="버튼" theme="black" type="tonal" rounded></Button>
+            <Button label="버튼" theme="black" type="outlined" rounded></Button>
+            <Button label="버튼" theme="black" type="text" rounded></Button>
           </div>
           <div>
-            <Button label="버튼" color="black" size="sm" rounded></Button>
-            <Button label="버튼" color="black" size="sm" type="tonal" rounded></Button>
-            <Button label="버튼" color="black" size="sm" type="outlined" rounded></Button>
-            <Button label="버튼" color="black" size="sm" type="text" rounded></Button>
+            <Button label="버튼" theme="black" size="sm" rounded></Button>
+            <Button label="버튼" theme="black" size="sm" type="tonal" rounded></Button>
+            <Button label="버튼" theme="black" size="sm" type="outlined" rounded></Button>
+            <Button label="버튼" theme="black" size="sm" type="text" rounded></Button>
           </div>
         </div>
         <p>disabled=true</p>
         <div>
-          <Button label="버튼" color="black" disabled></Button>
-          <Button label="버튼" color="black" type="text" disabled></Button>
+          <Button label="버튼" theme="black" disabled></Button>
+          <Button label="버튼" theme="black" type="text" disabled></Button>
         </div>
       </div>
     </>
