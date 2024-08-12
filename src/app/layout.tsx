@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 
 import '@/styles/reset.css';
 import '@/styles/variable.css';
+import '@/styles/_variable.scss';
 import '@/styles/common.css';
 import '@/styles/responsible.css';
 import Header from '@/components/layout/Header/Header';
