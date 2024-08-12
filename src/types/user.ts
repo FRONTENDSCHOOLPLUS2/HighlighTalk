@@ -29,17 +29,3 @@ export interface SignupFormType extends Pick<UserType, 'type' | 'name' | 'email'
   password: string;
   passwordConfirm: string;
 }
-
-// FIXME - 💩 hmm..
-
-interface UserSessionType extends DefaultSession {
-  id: string;
-  name: string;
-  email: string;
-}
-export interface SessionType {
-  user: UserSessionType;
-  expires: string;
-  accessToken?: string;
-  refreshToken?: string;
-}
