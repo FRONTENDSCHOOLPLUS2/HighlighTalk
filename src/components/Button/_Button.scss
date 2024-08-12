@@ -71,7 +71,7 @@
     font-weight: 700;
   }
 
-  &.color-primary {
+  &.theme-primary {
     @include button-color(var(--color-yellow-3), var(--color-black));
     &.type-default {
       @include button-color(var(--color-yellow-3), var(--color-black));
@@ -93,7 +93,7 @@
     }
   }
 
-  &.color-secondary {
+  &.theme-secondary {
     @include button-color(var(--color-skyblue-2), var(--color-white));
     &.type-default {
       @include button-color(var(--color-skyblue-2), var(--color-white));
@@ -115,7 +115,7 @@
     }
   }
 
-  &.color-black {
+  &.theme-black {
     @include button-color(var(--color-black), var(--color-white));
     &.type-default {
       @include button-color(var(--color-black), var(--color-white));
