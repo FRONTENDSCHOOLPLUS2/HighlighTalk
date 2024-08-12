@@ -1,5 +1,6 @@
 import CirclePacking from '@/components/graph/CirclePacking';
 import WordCloud from '@/components/graph/WordCloud';
+import Button from '@/components/Button/Button';
 import TokenTest from '@/components/test/TokenTest';
 
 function TestPage() {
@@ -39,6 +40,77 @@ function TestPage() {
       <CirclePacking data={circlePackingData} />
       <p>가장 많이 나온 단어</p>
       <WordCloud data={wordCloudData} />
+      <hr />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <p>color="primary"</p>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <div>
+            <Button label="버튼" color="primary"></Button>
+            <Button label="버튼" color="primary" type="tonal"></Button>
+            <Button label="버튼" color="primary" type="outlined"></Button>
+            <Button label="버튼" color="primary" type="text"></Button>
+          </div>
+          <div>
+            <Button label="버튼" color="primary" rounded></Button>
+            <Button label="버튼" color="primary" type="tonal" rounded></Button>
+            <Button label="버튼" color="primary" type="outlined" rounded></Button>
+            <Button label="버튼" color="primary" type="text" rounded></Button>
+          </div>
+          <div>
+            <Button label="버튼" color="primary" size="sm" rounded></Button>
+            <Button label="버튼" color="primary" size="sm" type="tonal" rounded></Button>
+            <Button label="버튼" color="primary" size="sm" type="outlined" rounded></Button>
+            <Button label="버튼" color="primary" size="sm" type="text" rounded></Button>
+          </div>
+        </div>
+        <p>color="secondary"</p>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <div>
+            <Button label="버튼" color="secondary"></Button>
+            <Button label="버튼" color="secondary" type="tonal"></Button>
+            <Button label="버튼" color="secondary" type="outlined"></Button>
+            <Button label="버튼" color="secondary" type="text"></Button>
+          </div>
+          <div>
+            <Button label="버튼" color="secondary" rounded></Button>
+            <Button label="버튼" color="secondary" type="tonal" rounded></Button>
+            <Button label="버튼" color="secondary" type="outlined" rounded></Button>
+            <Button label="버튼" color="secondary" type="text" rounded></Button>
+          </div>
+          <div>
+            <Button label="버튼" color="secondary" size="sm" rounded></Button>
+            <Button label="버튼" color="secondary" size="sm" type="tonal" rounded></Button>
+            <Button label="버튼" color="secondary" size="sm" type="outlined" rounded></Button>
+            <Button label="버튼" color="secondary" size="sm" type="text" rounded></Button>
+          </div>
+        </div>
+        <p>color="black"</p>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <div>
+            <Button label="버튼" color="black"></Button>
+            <Button label="버튼" color="black" type="tonal"></Button>
+            <Button label="버튼" color="black" type="outlined"></Button>
+            <Button label="버튼" color="black" type="text"></Button>
+          </div>
+          <div>
+            <Button label="버튼" color="black" rounded></Button>
+            <Button label="버튼" color="black" type="tonal" rounded></Button>
+            <Button label="버튼" color="black" type="outlined" rounded></Button>
+            <Button label="버튼" color="black" type="text" rounded></Button>
+          </div>
+          <div>
+            <Button label="버튼" color="black" size="sm" rounded></Button>
+            <Button label="버튼" color="black" size="sm" type="tonal" rounded></Button>
+            <Button label="버튼" color="black" size="sm" type="outlined" rounded></Button>
+            <Button label="버튼" color="black" size="sm" type="text" rounded></Button>
+          </div>
+        </div>
+        <p>disabled=true</p>
+        <div>
+          <Button label="버튼" color="black" disabled></Button>
+          <Button label="버튼" color="black" type="text" disabled></Button>
+        </div>
+      </div>
     </>
   );
 }
