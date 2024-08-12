@@ -1,5 +1,3 @@
-import { DefaultSession } from 'next-auth';
-
 export interface UserType {
   _id: number;
   email: string;
