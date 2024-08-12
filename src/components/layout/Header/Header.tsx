@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import './Header.scss';
+import { auth } from '@/auth';
 
-function Header() {
+async function Header() {
+  const session = await auth();
+
+  console.log('유저 데이터 조회 ->', session);
   return (
     <header>
       <div className="HeaderLayout">
@@ -26,9 +30,9 @@ function Header() {
             </li>
           </ul>
         </nav>
-
         <div className="profile">
-          <p>p</p>
+          <Link href="/login">로그인</Link>
+          {session?.user && <div>{session.user.name} </div>}
         </div>
       </div>
     </header>

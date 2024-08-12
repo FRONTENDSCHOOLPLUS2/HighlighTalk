@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
 import NaverProvider from 'next-auth/providers/naver';
@@ -23,11 +23,10 @@ const authOptions = {
 
           if (!response.ok) {
             console.error('☠️ 로그인 실패', response.status, response.statusText);
-            return null; // 로그인 실패 시 null 반환
+            return null;
           }
 
           const responseData = await response.json();
-          console.log('resJson >> 됐잔아 ', responseData);
 
           if (responseData.ok) {
             console.log('🪪 user정보 ->', responseData.item);
@@ -35,7 +34,7 @@ const authOptions = {
 
             // 유저 정보와 토큰 NextAuth 세션에 저장
             return {
-              id: user._id,
+              _id: user._id,
               name: user.name,
               email: user.email,
               loginType: user.loginType,
@@ -62,10 +61,12 @@ const authOptions = {
       clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
     }),
     GoogleProvider({
-      clientId: process.env.KAKAO_CLIENT_ID ?? '',
-      clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
+      clientId: process.env.AUTH_GOOGLE_ID ?? '',
+      clientSecret: process.env.AUTH_GOOGLE_SECRET ?? '',
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+
   // NOTE - 세션 전략으로 JWT, 최대 수명 24시간
   session: {
     strategy: 'jwt',
@@ -76,13 +77,13 @@ const authOptions = {
     signIn: '/login',
   },
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user }: { user: SessionType }) {
       console.log('signIn.user', user);
       return true;
     },
 
-    //JWT 토큰에 사용자 정보를 저장 user 객체가 있을 경우 토큰에 정보를 추가한다
-
+    // FIXME - 타입.....살려주세요 ^^ 💩💩💩
+    //JWT 토큰에 사용자 정보를 저장 user 객체가 있을 경우 토큰에 정보를 추가
     async jwt({ token, user }) {
       console.log('🪪JWT.user', user);
 
@@ -95,9 +96,8 @@ const authOptions = {
       return token;
     },
 
-    // 세션을 설정합니다 JWT에서 정보를 가져와 세션에 추가합니다.
-    async session({ session, token }) {
-      console.log('session.user', session.user);
+    // JWT에서 정보를 가져와 세션에 추가
+    async session({ session, token }: { session: SessionType; token: JWTToken }) {
       session.user.id = token.id as string;
       session.user.type = token.type as string;
       session.accessToken = token.accessToken;

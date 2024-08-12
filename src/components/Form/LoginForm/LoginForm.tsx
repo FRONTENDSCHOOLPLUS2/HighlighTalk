@@ -1,21 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { getSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { LoginFormType } from '@/types';
-import { signInWithCredentials } from '@/serverActions/authAction';
+import { signInWithCredentials, signInWithSocial } from '@/serverActions/authAction';
 import './_LoginForm.scss';
-
-// NOTE - login 후 session 확인용 함수 (추후 제거)
-const sessionCheck = async () => {
-  const session = await getSession();
-  if (session) {
-    console.log('User Info:', session); // 사용자 정보
-  } else {
-    console.log('인증되지 않음');
-  }
-};
 
 function LoginForm() {
   const {
@@ -47,6 +36,16 @@ function LoginForm() {
       }
     }
   };
+
+  const handleSocialLogin = async (provider: string) => {
+    try {
+      await signInWithSocial(provider);
+    } catch (error) {
+      console.error('Error ->', error);
+    }
+  };
+
+  // FIXME - 소셜 로그인 눌렀을 때 페이지 이동 전 폼의 에러 메세지 출력되는 오류 해결하기
 
   return (
     <form onSubmit={handleSubmit(handleSubmitLogin)} className="login-form">
@@ -90,9 +89,9 @@ function LoginForm() {
         <span className="hr"></span>
         <div className="icons">
           {/* TODO - icon으로 추후 변경 */}
-          <button onClick={sessionCheck}>🥰콘솔_세션 확인</button>
-          <button type="submit">구글</button>
-          <button>깃허브</button>
+          <button onClick={() => handleSocialLogin('google')}>구글</button>
+          <button type="button">네이버</button>
+          <button type="button">카카오</button>
         </div>
       </div>
     </form>
