@@ -1,6 +1,6 @@
 // REVIEW - 은근 자주 쓰이는 정렬 추상화 mixin
 
-@mixin center {
+@mixin flexCenter {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,15 +9,4 @@
 @mixin flexColumn {
   display: flex;
   flex-direction: column;
-}
-
-@mixin columnCenter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-@mixin rowCenter {
-  display: flex;
-  justify-content: center;
 }

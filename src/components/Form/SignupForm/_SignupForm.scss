@@ -1,5 +1,7 @@
+@use '@/styles/mixins/flex' as mixins;
+
 .signup-form {
-  @include flexColumn;
+  @include mixins.flexColumn;
   gap: 2rem;
   min-width: 55rem;
   padding: 6rem;
@@ -7,7 +9,7 @@
   border-radius: 2rem;
 
   .input-group {
-    @include flexColumn;
+    @include mixins.flexColumn;
     position: relative;
 
     label {
