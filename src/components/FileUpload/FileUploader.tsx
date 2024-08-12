@@ -2,10 +2,11 @@
 import './_FileUploader.scss';
 import { useState, useRef, ChangeEvent, useEffect } from 'react';
 import Papa, { ParseResult } from 'papaparse';
-import FetchData from '@/hooks/fetchData';
-
 import removeDateTimeAndUserKey from '@/utils/removeDateTimeAndUserKey';
 import UploadArea from './UploadArea/UploadArea';
+import validateAndTrimData from '@/utils/validateAndTrimData';
+import TestPage from '@/app/test/page';
+import { usePathname } from 'next/navigation';
 
 const prompt: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 
@@ -25,6 +26,9 @@ function FileUpLoader() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const [sendMessage, setSendMessage] = useState('');
+  const pathname = usePathname();
+
+  console.log('pathname', pathname);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -53,7 +57,11 @@ function FileUpLoader() {
   useEffect(() => {
     const processCSVData = () => {
       const copyData = removeDateTimeAndUserKey(JSON.stringify(csvData));
-      setSendMessage(copyData);
+      const result = validateAndTrimData(copyData);
+      console.log('resres', result.data);
+      const data = JSON.stringify(result.data);
+      console.log('Data', data);
+      setSendMessage(data);
     };
     processCSVData();
   }, [csvData]);
@@ -66,8 +74,17 @@ function FileUpLoader() {
     if (csvData.length === 0) return;
     setIsLoading(true); // 로딩 시작
     try {
-      const data: FetchDataResponse = await FetchData(prompt, sendMessage);
-      console.log('response', data);
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          message: sendMessage,
+        }),
+      });
+      const data: FetchDataResponse = await response.json();
       const fetchedContent = data.choices[0].message.content;
       console.log('Fetched Data:', fetchedContent);
       setCurrentStep(3); // 데이터 분석 후 결과 단계로 이동
@@ -90,14 +107,14 @@ function FileUpLoader() {
       />
 
       {/* 결과가 들어가면 됨 */}
-      {/* {currentStep === 3 && (
+      {currentStep === 3 && (
         <div className="result-display">
-          <h3>Fetch Data Result</h3>
+          <TestPage />
           <button type="button" onClick={() => setCurrentStep(2)}>
             이전 단계
           </button>
         </div>
-      )} */}
+      )}
 
       {isModalOpen && (
         <div className="modal">

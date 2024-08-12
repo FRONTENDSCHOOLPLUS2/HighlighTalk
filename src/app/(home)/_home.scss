@@ -39,6 +39,9 @@
         height: 100%;
         color: #252525;
       }
+      h1 {
+        font-size: 1.8rem;
+      }
       p {
         font-size: 1.6rem;
         color: #828282;
@@ -57,11 +60,13 @@
           justify-content: flex-start;
           align-items: center;
           padding: 1.6rem;
+          gap: 1.2rem;
+          width: 50%;
         }
         .free_items_img {
           width: 50%;
           border-radius: 2rem;
-          background-color: blue;
+          box-shadow: inset 0px 0px 20px brown;
         }
       }
     }

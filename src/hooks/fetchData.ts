@@ -1,7 +1,6 @@
 // gpt => 데이터 요청
 // temperature 수정금지
 // max_token 수정금지
-
 // key
 const AI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 // token
@@ -34,6 +33,7 @@ const FetchData = async (prompt: string, Question: string) => {
     }
 
     const data = await response.json();
+    console.log('data', data);
     return data; // 데이터 반환
   } catch (error) {
     console.error('Error fetching data:', error);
