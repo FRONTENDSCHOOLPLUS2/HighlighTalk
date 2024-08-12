@@ -5,11 +5,11 @@
   color: $text-color;
 
   &:hover {
-    background: $bg-color; // hover 상태에서는 var()를 사용
+    background: $bg-color;
   }
 
   &:active {
-    background: $bg-color; // active 상태에서는 var()를 사용
+    background: $bg-color;
   }
 
   &.disabled {
