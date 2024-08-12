@@ -1,7 +1,4 @@
-@mixin flexColumn {
-  display: flex;
-  flex-direction: column;
-}
+@use '@/styles/mixins/flex' as mixins;
 
 // TODO - background z-index와 background 추가, ::after 속성으로 톡톡이 이미지 넣기
 
@@ -11,7 +8,7 @@
 }
 
 .login-page-container {
-  @include flexColumn;
+  @include mixins.flexColumn;
   align-items: center;
 
   .title {
