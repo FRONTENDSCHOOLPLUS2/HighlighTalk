@@ -2,16 +2,18 @@
 
 // TODO - background z-index와 background 추가, ::after 속성으로 톡톡이 이미지 넣기
 
-.background {
-  width: 100%;
-  height: 50vh;
-}
+.signup-page {
+  .background {
+    width: 100%;
+    height: 50vh;
+  }
 
-.signup-page-container {
-  @include mixins.flexColumn;
-  align-items: center;
+  .signup-page-container {
+    @include mixins.flexColumn;
+    align-items: center;
 
-  .title {
-    font-size: 2.4rem;
+    .title {
+      font-size: 2.4rem;
+    }
   }
 }
