@@ -5,6 +5,8 @@ import Papa, { ParseResult } from 'papaparse';
 import removeDateTimeAndUserKey from '@/utils/removeDateTimeAndUserKey';
 import UploadArea from './UploadArea/UploadArea';
 import validateAndTrimData from '@/utils/validateAndTrimData';
+import TestPage from '@/app/test/page';
+import { usePathname } from 'next/navigation';
 
 const prompt: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 
@@ -24,6 +26,9 @@ function FileUpLoader() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const [sendMessage, setSendMessage] = useState('');
+  const pathname = usePathname();
+
+  console.log('pathname', pathname);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -54,9 +59,9 @@ function FileUpLoader() {
       const copyData = removeDateTimeAndUserKey(JSON.stringify(csvData));
       const result = validateAndTrimData(copyData);
       console.log('resres', result.data);
-      const Data = JSON.stringify(result.data);
-      console.log('Data', Data);
-      setSendMessage(Data);
+      const data = JSON.stringify(result.data);
+      console.log('Data', data);
+      setSendMessage(data);
     };
     processCSVData();
   }, [csvData]);
@@ -102,14 +107,14 @@ function FileUpLoader() {
       />
 
       {/* 결과가 들어가면 됨 */}
-      {/* {currentStep === 3 && (
+      {currentStep === 3 && (
         <div className="result-display">
-          <h3>Fetch Data Result</h3>
+          <TestPage />
           <button type="button" onClick={() => setCurrentStep(2)}>
             이전 단계
           </button>
         </div>
-      )} */}
+      )}
 
       {isModalOpen && (
         <div className="modal">

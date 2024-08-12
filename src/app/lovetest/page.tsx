@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import './_TestPage.scss';
+import './_loveTestPage.scss';
 import FileUpLoader from '@/components/FileUpload/FileUploader';
 
 function TestPage() {
@@ -11,13 +11,9 @@ function TestPage() {
       {currentStep === 1 && (
         <>
           <div className="test-page-container">
-            <h1>카톡방 분석 서비스 시작하기</h1>
+            <h1>썸남,썸녀,연애 이대로 괜찮을까?</h1>
             <section className="test-page-content">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nobis porro inventore
-                reprehenderit! Sint, praesentium cumque quis quam voluptatibus voluptatem porro
-                beatae nesciunt repellat earum mollitia! Voluptas rem tenetur sed!
-              </p>
+              <p>내 썸남,남친 처럼 이뤄지고 싶은 사람의 톡을 ~</p>
             </section>
             <div className="test-page-action">
               <button
