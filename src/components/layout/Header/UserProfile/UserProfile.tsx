@@ -1,10 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { IconProfile } from '../../../../../public/image';
+
 import Image from 'next/image';
 import { Session } from 'next-auth';
 import './_UserProfile.scss';
+import { IconProfile } from '../../../../../public/image';
+import { signOutWithForm } from '@/serverActions/authAction';
 
 interface UserProfilePropType {
   userSession: Session | null;
@@ -19,11 +21,21 @@ function UserProfile({ userSession }: UserProfilePropType) {
   return (
     <>
       <div className="user-profile-container">
-        {/* <p className="content">로그인 후 이용해주세요</p> */}
-        <p>{userSession?.user?.name}</p>
-        <button onClick={handleGoLogin}>
-          <Image src={IconProfile} alt="leftBtn" width={35} />
-        </button>
+        {userSession?.user && <p>{userSession?.user?.name}</p>}
+
+        {userSession?.user ? (
+          <>
+            <form action={signOutWithForm}>
+              <button type="submit">로그아웃하기^^</button>
+            </form>
+          </>
+        ) : (
+          <>
+            <button onClick={handleGoLogin}>로그인 후 이용해주세요 </button>
+          </>
+        )}
+
+        <Image src={IconProfile} alt="leftBtn" width={35} />
       </div>
     </>
   );

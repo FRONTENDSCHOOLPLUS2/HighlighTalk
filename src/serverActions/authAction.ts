@@ -1,6 +1,6 @@
 'use server';
 
-import { signIn } from '@/auth';
+import { signIn, signOut } from '@/auth';
 import { LoginFormType } from '@/types';
 
 import { redirect } from 'next/navigation';
@@ -22,4 +22,8 @@ export const signInWithCredentials = async (data: LoginFormType) => {
 
 export const signInWithSocial = async (provider: string) => {
   await signIn(provider, { redirectTo: '/' });
+};
+
+export const signOutWithForm = async (formData: FormData) => {
+  await signOut();
 };
