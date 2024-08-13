@@ -50,17 +50,17 @@ function UploadArea({
           <DescriptionArea />
           <div
             className="upload-area"
-            onClick={openFileDialog}
+            onClick={openFileDialog} // 여기에만 onClick 핸들러를 설정
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <label htmlFor="fileInput" className="upload-area-section">
+            <div className="upload-area-section">
               <div className="speechs">
                 <div className="speech-icon"></div>
                 <div className="speech-bubble">클릭 또는 파일을 끌어당겨 넣을 수 있어요!</div>
                 <button type="button">파일 올리기</button>
               </div>
-            </label>
+            </div>
             <input
               type="file"
               id="fileInput"
@@ -80,7 +80,7 @@ function UploadArea({
         <div className="divide-section">
           <DescriptionArea />
           <div className="upload-area">
-            <label htmlFor="fileInput" className="upload-area-section">
+            <div className="upload-area-section">
               <div className="speechs">
                 <div className="speech-icon"></div>
                 <div className="speech-bubble">{fileName} 업로드 완료!</div>
@@ -94,7 +94,7 @@ function UploadArea({
               >
                 다시 업로드
               </button>
-            </label>
+            </div>
           </div>
         </div>
       </div>
