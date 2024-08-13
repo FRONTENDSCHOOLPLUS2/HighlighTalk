@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import './_loveTestPage.scss';
 import FileUpLoader from '@/components/FileUpload/FileUploader';
+import Button from '@/components/Button/Button';
 
 function TestPage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -16,14 +17,9 @@ function TestPage() {
               <p>내 썸남,남친 처럼 이뤄지고 싶은 사람의 톡을 ~</p>
             </section>
             <div className="test-page-action">
-              <button
-                className="start-test-button"
-                onClick={() => {
-                  setCurrentStep(2);
-                }}
-              >
+              <Button type="button" onClick={() => setCurrentStep(2)}>
                 테스트 시작하기
-              </button>
+              </Button>
             </div>
           </div>
         </>
