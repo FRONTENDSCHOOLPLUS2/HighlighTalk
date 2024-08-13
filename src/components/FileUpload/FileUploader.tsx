@@ -7,8 +7,10 @@ import UploadArea from './UploadArea/UploadArea';
 import validateAndTrimData from '@/utils/validateAndTrimData';
 import TestPage from '@/app/test/page';
 import { usePathname } from 'next/navigation';
+import Modal from '../Modal/Modal';
 
-const prompt: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
+const promptForFree: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
+const promptForLovers: string = process.env.NEXT_PUBLIC_AI_PROMPT_COUPLE || '';
 
 interface CSVRow {
   [key: string]: string;
@@ -21,12 +23,34 @@ interface FetchDataResponse {
 function FileUpLoader() {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [csvData, setCsvData] = useState<CSVRow[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const [sendMessage, setSendMessage] = useState('');
+  const [prompt, setPrompt] = useState<string>(process.env.NEXT_PUBLIC_AI_PROMPT || '');
   const pathname = usePathname();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 모달을 여는 함수
+  const openModal = () => setIsModalOpen(true);
+
+  // 모달을 닫는 함수
+  const closeModal = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    // 패스네임에 따른 프롬프트 설정
+    switch (pathname) {
+      case '/freetest':
+        setPrompt(promptForFree);
+        break;
+      case '/lovetest':
+        setPrompt(promptForLovers);
+        break;
+      default:
+        setPrompt(process.env.NEXT_PUBLIC_AI_PROMPT || '');
+    }
+  }, [pathname]);
 
   console.log('pathname', pathname);
 
@@ -97,6 +121,7 @@ function FileUpLoader() {
 
   return (
     <div className="file-uploader-container">
+      {/* currentStep 1과 2는 안에서 처리함 */}
       <UploadArea
         handleFileChange={handleFileChange}
         setCurrentStep={setCurrentStep}
@@ -109,7 +134,8 @@ function FileUpLoader() {
       {/* 결과가 들어가면 됨 */}
       {currentStep === 3 && (
         <div className="result-display">
-          <TestPage />
+          {pathname === '/freetest' && <TestPage />}
+          {pathname === '/lovetest' && <div>준비중</div>}
           <button type="button" onClick={() => setCurrentStep(2)}>
             이전 단계
           </button>
@@ -117,14 +143,16 @@ function FileUpLoader() {
       )}
 
       {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>파일이 업로드되었습니다</h2>
-            <button type="button" onClick={() => setIsModalOpen(false)}>
-              닫기
-            </button>
-          </div>
-        </div>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content="확인을 누른 후 분석을 시작해요"
+          title="파일 업로드 성공"
+          buttons={[
+            { label: '닫기', onClick: closeModal, theme: 'primary' },
+            // { label: '확인', onClick: openModal, theme: 'primary' },
+          ]}
+        />
       )}
       {isLoading && (
         <div className="loading-overlay">
