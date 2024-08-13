@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import FetchData from '@/hooks/fetchData';
+import FetchData from '@/hooks/useGpt';
 
 export async function POST(req: NextRequest) {
   console.log('post test');

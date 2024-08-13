@@ -13,6 +13,7 @@ interface ButtonPropType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   styleType?: ButtonType;
   rounded?: boolean;
   disabled?: boolean;
+  onClick?: () => void; // 클릭 핸들러 추가
 }
 
 function Button({
