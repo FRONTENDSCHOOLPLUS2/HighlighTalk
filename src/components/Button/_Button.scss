@@ -45,18 +45,25 @@
 .button {
   padding: 0.8rem 1.6rem;
   display: flex;
-  gap: 0.3rem;
   justify-content: center;
   align-items: center;
   font-size: 1.6rem;
   border-radius: 1rem;
   cursor: pointer;
 
+  .icon-img {
+    margin-right: 0.7rem;
+  }
+
   &.size-sm {
     padding: 0.6rem 1rem;
     width: fit-content;
     font-size: 1.2rem;
     font-weight: 500;
+
+    .icon-img {
+      margin-right: 0.6rem;
+    }
   }
 
   &.size-md {
