@@ -8,6 +8,8 @@ import '@/styles/common.css';
 import '@/styles/responsible.css';
 import Header from '@/components/layout/Header/Header';
 import Providers from './providers';
+import ClientUserUpdater from '@/components/ClientUserUpdater/ClientUserUpdater';
+import { auth } from '@/auth';
 
 const pretendard = localFont({
   src: '../../public/static/font/PretendardVariable.woff2',
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
   title: '하이라이톡',
   description: '하이라이톡 | 메인페이지',
 };
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -33,6 +35,7 @@ export default async function RootLayout({
             <Header />
             {children}
           </main>
+          <ClientUserUpdater />
         </Providers>
       </body>
     </html>
