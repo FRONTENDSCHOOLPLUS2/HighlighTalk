@@ -1,0 +1,4 @@
+
+<!-- FIXME 피그마 기준 svg 추출인데 개발하면서 수정해야 할 가능성 있음-->
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none"><circle cx="15" cy="15" r="15" fill="#1D1D1D"/><g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#a)"><path d="M14.334 9.667H9.667A1.333 1.333 0 0 0 8.334 11v9.334a1.333 1.333 0 0 0 1.333 1.333h9.334a1.334 1.334 0 0 0 1.333-1.333v-4.667"/><path d="M19.334 8.667a1.414 1.414 0 1 1 2 2L15.001 17l-2.667.667.667-2.667 6.333-6.333Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M7 7h16v16H7z"/></clipPath></defs></svg>
+

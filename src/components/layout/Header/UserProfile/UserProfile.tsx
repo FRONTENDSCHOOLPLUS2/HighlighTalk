@@ -22,11 +22,10 @@ function UserProfile({ userSession }: UserProfilePropType) {
     <>
       <div className="user-profile-container">
         {userSession?.user && <p>{userSession?.user?.name}</p>}
-
         {userSession?.user ? (
           <>
             <form action={signOutWithForm}>
-              <button type="submit">로그아웃하기^^</button>
+              <button type="submit">👀로그아웃하기</button>
             </form>
           </>
         ) : (
@@ -34,8 +33,7 @@ function UserProfile({ userSession }: UserProfilePropType) {
             <button onClick={handleGoLogin}>로그인 후 이용해주세요 </button>
           </>
         )}
-
-        <Image src={IconProfile} alt="leftBtn" width={35} />
+        <IconProfile />
       </div>
     </>
   );
