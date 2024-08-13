@@ -7,6 +7,7 @@ import '@/styles/_variable.scss';
 import '@/styles/common.css';
 import '@/styles/responsible.css';
 import Header from '@/components/layout/Header/Header';
+import Providers from './providers';
 
 const pretendard = localFont({
   src: '../../public/static/font/PretendardVariable.woff2',
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   title: '하이라이톡',
   description: '하이라이톡 | 메인페이지',
 };
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -27,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <main className="containerLayout">
-          <Header />
-          {children}
-        </main>
+        <Providers>
+          <main className="containerLayout">
+            <Header />
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
