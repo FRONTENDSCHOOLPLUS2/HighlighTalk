@@ -13,19 +13,6 @@ interface UserProfilePropType {
 function UserProfile({ userSession }: UserProfilePropType) {
   const router = useRouter();
 
-  const navigateToPage = (to: string) => {
-    router.push(to);
-  };
-
-  const handleProfileClick = () => {
-    console.log(userSession);
-    if (userSession === null) {
-      navigateToPage('/login');
-    } else {
-      navigateToPage(`/${userSession?.user?.id}/mypage`);
-    }
-  };
-
   return (
     <>
       <div className="user-profile-container">
@@ -34,17 +21,17 @@ function UserProfile({ userSession }: UserProfilePropType) {
             <form action={signOutWithForm}>
               <button type="submit">👀로그아웃(임시)</button>
             </form>
-            <div onClick={handleProfileClick}>
+            <button type="button" onClick={() => router.push(`/${userSession?.user?.id}/mypage`)}>
               <p>{userSession?.user?.name}</p>
               <IconProfile />
-            </div>
+            </button>
           </>
         ) : (
           <>
-            <div onClick={handleProfileClick}>
+            <button type="button" onClick={() => router.push('/login')}>
               <p>로그인 후 이용해주세요</p>
               <IconProfile />
-            </div>
+            </button>
           </>
         )}
       </div>
