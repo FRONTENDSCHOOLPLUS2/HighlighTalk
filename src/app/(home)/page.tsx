@@ -25,13 +25,9 @@ function MainPage() {
                 <h1>우리 톡방 분석 서비스</h1>
                 <p>AI가 우리 톡방 내용을 읽고</p>
                 <p>분석결과를 보여줘요!</p>
-                <Button
-                  type="tonal"
-                  label="FREE"
-                  theme="secondary"
-                  rounded={true}
-                  size="md"
-                ></Button>
+                <Button theme="secondary" rounded={true} size="md">
+                  FREE
+                </Button>
               </div>
               <div className="free_items_img"></div>
             </div>
@@ -44,14 +40,9 @@ function MainPage() {
                 <h1>우리 연애 이대로 괜찮을까?</h1>
                 <p>AI가 우리 톡방 내용을 읽고</p>
                 <p>분석결과를 보여줘요!</p>
-                <Button
-                  label="100"
-                  theme="primary"
-                  type="tonal"
-                  size="md"
-                  rounded={true}
-                  iconSrc={'/image/coin.svg'}
-                ></Button>
+                <Button theme="primary" size="md" rounded={true} iconSrc={'/image/coin.svg'}>
+                  100
+                </Button>
               </div>
               <div className="free_items_img"></div>
             </div>

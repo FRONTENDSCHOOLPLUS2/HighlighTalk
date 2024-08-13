@@ -37,12 +37,9 @@ function Modal({
         <div className="modal-body">{content}</div>
         <div className="modal-buttons">
           {buttons.map((button, index) => (
-            <Button
-              key={index}
-              theme={'secondary' || 'primary'}
-              label={button.label}
-              onClick={button.onClick}
-            />
+            <Button key={index} theme={'secondary' || 'primary'} onClick={button.onClick}>
+              {button.label}
+            </Button>
           ))}
         </div>
         {footer && <div className="modal-footer">{footer}</div>}

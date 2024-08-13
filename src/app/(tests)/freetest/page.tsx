@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import './_TestPage.scss';
 import FileUpLoader from '@/components/FileUpload/FileUploader';
+import Button from '@/components/Button/Button';
 
 function TestPage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -20,14 +21,9 @@ function TestPage() {
               </p>
             </section>
             <div className="test-page-action">
-              <button
-                className="start-test-button"
-                onClick={() => {
-                  setCurrentStep(2);
-                }}
-              >
+              <Button type="button" onClick={() => setCurrentStep(2)}>
                 테스트 시작하기
-              </button>
+              </Button>
             </div>
           </div>
         </>

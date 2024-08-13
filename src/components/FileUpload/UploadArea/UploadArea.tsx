@@ -1,6 +1,7 @@
 import React, { ChangeEvent, DragEvent, RefObject } from 'react';
 import './_UploadArea.scss';
 import DescriptionArea from '../Description/DescriptionArea';
+import Button from '@/components/Button/Button';
 
 interface UploadAreaProps {
   handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;

@@ -8,6 +8,7 @@ import validateAndTrimData from '@/utils/validateAndTrimData';
 import TestPage from '@/app/test/page';
 import { usePathname } from 'next/navigation';
 import Modal from '../Modal/Modal';
+import Button from '../Button/Button';
 
 const promptForFree: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 const promptForLovers: string = process.env.NEXT_PUBLIC_AI_PROMPT_COUPLE || '';
@@ -34,7 +35,6 @@ function FileUpLoader() {
 
   // 모달을 여는 함수
   const openModal = () => setIsModalOpen(true);
-
   // 모달을 닫는 함수
   const closeModal = () => setIsModalOpen(false);
 
@@ -51,8 +51,6 @@ function FileUpLoader() {
         setPrompt(process.env.NEXT_PUBLIC_AI_PROMPT || '');
     }
   }, [pathname]);
-
-  console.log('pathname', pathname);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -136,9 +134,9 @@ function FileUpLoader() {
         <div className="result-display">
           {pathname === '/freetest' && <TestPage />}
           {pathname === '/lovetest' && <div>준비중</div>}
-          <button type="button" onClick={() => setCurrentStep(2)}>
+          <Button type="button" onClick={() => setCurrentStep(2)}>
             이전 단계
-          </button>
+          </Button>
         </div>
       )}
 
