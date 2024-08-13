@@ -1,24 +1,28 @@
+import React from 'react';
 import './_Button.scss';
 
 interface ButtonPropType {
   label: string;
+  iconSrc?: string;
   icon?: JSX.Element;
   theme?: 'primary' | 'secondary' | 'black';
   size?: 'sm' | 'md' | 'full';
   type?: 'default' | 'tonal' | 'outlined' | 'text';
   rounded?: boolean;
   disabled?: boolean;
+  onClick?: () => void; // 클릭 핸들러 추가
 }
 
 function Button({
   label,
-  icon,
+  iconSrc,
   theme = 'primary',
   size = 'md',
   type = 'default',
   rounded = false,
   disabled = false,
-  ...rest // event handler 전달 가능
+  onClick,
+  ...rest
 }: ButtonPropType) {
   const classList = [
     `size-${size}`,
@@ -29,8 +33,8 @@ function Button({
   ];
 
   return (
-    <button className={`button ${classList.join(' ')}`} {...rest}>
-      {icon && <span className="icon">{icon}</span>}
+    <button className={`button ${classList.join(' ')}`} onClick={onClick} disabled={disabled}>
+      {iconSrc && <img src={iconSrc} alt="icon" className="icon" />}
       <span className="label">{label}</span>
     </button>
   );
