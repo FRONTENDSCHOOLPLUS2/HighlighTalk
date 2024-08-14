@@ -2,7 +2,6 @@ import Image from 'next/image';
 import './_home.scss';
 import Link from 'next/link';
 import Button from '@/components/Button/Button';
-import Modal from '@/components/Modal/Modal';
 
 function MainPage() {
   return (
