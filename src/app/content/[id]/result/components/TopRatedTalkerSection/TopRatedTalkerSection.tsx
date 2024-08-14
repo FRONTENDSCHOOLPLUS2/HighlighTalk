@@ -21,7 +21,7 @@ function TopRatedTalkerSection({ data }: TopRatedTalkerSectionPropType) {
   return (
     <section className="top-rated-talker">
       <h3 className="heading-3">가장 많이 말한 사람</h3>
-      <p className="heading-desc">우리 대화방 참여자들의 MBTI 예측</p>
+      <p className="heading-desc">채팅방 대화 지분 1위</p>
       <div className="graph">
         <CirclePacking width={400} height={500} data={data} />
         <ul className="rank-list">

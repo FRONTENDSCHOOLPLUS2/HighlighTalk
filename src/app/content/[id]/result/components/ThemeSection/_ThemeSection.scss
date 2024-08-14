@@ -27,11 +27,11 @@
 
     &:nth-of-type(even) {
       margin-left: auto;
-      border-radius: 70px 70px 70px 0px;
+      border-radius: 70px 70px 0px 70px;
     }
     &:nth-of-type(odd) {
       margin-right: auto;
-      border-radius: 70px 70px 0px 70px;
+      border-radius: 70px 70px 70px 0px;
     }
 
     &::after {
