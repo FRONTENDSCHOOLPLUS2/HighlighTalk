@@ -1,0 +1,12 @@
+@import '../../../../../../styles/variable';
+@import '../../../../../../styles/mixins/flex.scss';
+
+.most-popular-word {
+  @include flexColumn;
+
+  .graph {
+    flex: 1;
+    height: auto;
+    @include flexCenter;
+  }
+}

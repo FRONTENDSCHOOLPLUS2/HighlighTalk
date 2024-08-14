@@ -1,0 +1,58 @@
+@import '../../../../../../styles/variable';
+@import '../../../../../../styles/mixins/flex.scss';
+
+.theme {
+  @include flexColumn;
+  background-color: $color-yellow-1;
+  .bubble-list {
+    @include flexColumn;
+    flex: 1;
+    gap: 0.5rem;
+    justify-content: center;
+    padding-bottom: 4rem;
+  }
+  .bubble-item {
+    @include flexColumn;
+    gap: 0.5rem;
+    padding: 3rem 5.2rem;
+    width: 80%;
+    max-width: 72rem;
+    min-width: 30rem;
+    position: relative;
+
+    backdrop-filter: blur(10px);
+    background-color: rgba($color-white, 0.6);
+    box-shadow: 0px 7px 15px 5px rgba($color-yellow-2, 0.6);
+    color: $color-gray-5;
+
+    &:nth-of-type(even) {
+      margin-left: auto;
+      border-radius: 70px 70px 70px 0px;
+    }
+    &:nth-of-type(odd) {
+      margin-right: auto;
+      border-radius: 70px 70px 0px 70px;
+    }
+
+    &:nth-of-type(2) {
+      margin-top: -2.4rem;
+    }
+    &:nth-of-type(3) {
+      width: 90%;
+      margin-top: -2rem;
+      margin-left: auto;
+      margin-right: auto;
+
+      padding-left: 12rem;
+    }
+  }
+  .bubble-title {
+    margin-bottom: 0.8rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .bubble-text {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+  }
+}
