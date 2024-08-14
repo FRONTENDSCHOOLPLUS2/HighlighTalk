@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { SignupFormType } from '@/types';
 import './_SignupForm.scss';
+import { signup } from '@/serverActions/userActions';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -42,24 +43,10 @@ function SignupForm() {
 
   const createUser = async (formData: SignupFormType) => {
     formData.type = 'user';
-    console.log('👼 create User-> ', formData);
-
+    // console.log('👼 create User-> ', formData);
     try {
-      const response = await fetch(`${API_SERVER}/users`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'client-id': `${CLIENT_ID}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('😞 Network response was not ok');
-      }
-
-      const data = await response.json();
-      console.log(data);
+      const resData = await signup(formData);
+      console.log(resData);
     } catch (error) {
       console.error('Error:', error);
     }
