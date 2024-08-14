@@ -33,9 +33,21 @@ function ContentResultPage() {
     <article className="result">
       <ThemeSection
         data={[
-          { title: '바부', content: 'ㄴㅇㄴㅁㅇㅁㅇ' },
-          { title: '바부', content: 'ㄴㅇㄴㅁㅇㅁㅇ' },
-          { title: '바부', content: 'ㄴㅇㄴㅁㅇㅁㅇ' },
+          {
+            title: '대화내역 분석을 주제로 한 대화',
+            content:
+              '하이라이톡을 어떻게 개발할 것인가에 대해 의논했어요. 여다희님이 스타일링이 어렵다고 말하며 UI 개선을 제안하고, 김설하님과 윤우중님이 거부했어요.',
+          },
+          {
+            title: '대화내역 분석을 주제로 한 대화',
+            content:
+              '하이라이톡을 어떻게 개발할 것인가에 대해 의논했어요. 여다희님이 스타일링이 어렵다고 말하며 UI 개선을 제안하고, 김설하님과 윤우중님이 거부했어요.',
+          },
+          {
+            title: '대화내역 분석을 주제로 한 대화',
+            content:
+              '하이라이톡을 어떻게 개발할 것인가에 대해 의논했어요. 여다희님이 스타일링이 어렵다고 말하며 UI 개선을 제안하고, 김설하님과 윤우중님이 거부했어요.',
+          },
         ]}
       />
       <TopRatedTalkerSection data={circlePackingData} />
