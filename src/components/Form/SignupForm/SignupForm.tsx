@@ -5,9 +5,6 @@ import { SignupFormType } from '@/types';
 import './_SignupForm.scss';
 import { signup } from '@/serverActions/userActions';
 
-const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-
 function SignupForm() {
   const {
     register,
@@ -39,14 +36,10 @@ function SignupForm() {
       ? errors.passwordConfirm.message
       : undefined;
 
-  // NOTE - 회원가입 구현
-
   const createUser = async (formData: SignupFormType) => {
     formData.type = 'user';
-    // console.log('👼 create User-> ', formData);
     try {
       const resData = await signup(formData);
-      console.log(resData);
     } catch (error) {
       console.error('Error:', error);
     }

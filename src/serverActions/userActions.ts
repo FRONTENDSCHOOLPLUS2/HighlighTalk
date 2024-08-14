@@ -11,6 +11,7 @@ export async function signup(data: SignupFormType) {
     name: data.name,
     email: data.email,
     password: data.password,
+    coin: '0',
   };
 
   const res = await fetch(`${SERVER}/users`, {

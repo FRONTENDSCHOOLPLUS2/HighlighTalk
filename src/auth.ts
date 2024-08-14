@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const resJson = await response.json();
 
           if (resJson.ok) {
-            console.log('🪪 user정보 ->', resJson.item);
+            console.log('🪪 user정보->', resJson.item);
             const user = resJson.item;
 
             // 유저 정보와 토큰 NextAuth 세션에 저장
@@ -38,6 +38,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               name: user.name,
               email: user.email,
               type: user.type,
+              coin: user.extra.coin,
               loginType: user.loginType,
               accessToken: user.token?.accessToken,
               refreshToken: user.token?.refreshToken,
@@ -79,7 +80,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     async signIn({ user }) {
-      console.log('signIn.user', user);
+      console.log('⭐️로그인 callback user', user);
       return true;
     },
 
@@ -90,6 +91,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.id = user.id;
         token.type = user.type;
+        token.coin = user.coin; //코인 정보 추가
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
       }
@@ -100,6 +102,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       session.user.id = token.id as string;
       session.user.type = token.type as string;
+      session.user.coin = token.coin; // 코인 정보 추가
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
       return session;
