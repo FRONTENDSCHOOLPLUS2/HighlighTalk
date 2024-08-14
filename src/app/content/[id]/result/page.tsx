@@ -3,6 +3,7 @@ import ThemeSection from './components/ThemeSection/ThemeSection';
 import TopRatedTalkerSection from './components/TopRatedTalkerSection/TopRatedTalkerSection';
 import MbtiSection from './components/MbtiSection/MbtiSection';
 import PopularWordSection from './components/PopularWordSection/PopularWordSection';
+import ShareSection from './components/ShareSection/ShareSection';
 
 // TODO 데이터 fetching
 function ContentResultPage() {
@@ -53,6 +54,7 @@ function ContentResultPage() {
       <TopRatedTalkerSection data={circlePackingData} />
       <MbtiSection data={[]} />
       <PopularWordSection data={wordCloudData} />
+      <ShareSection />
     </article>
   );
 }
