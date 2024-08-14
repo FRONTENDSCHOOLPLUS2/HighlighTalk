@@ -4,12 +4,12 @@ import Papa, { ParseResult } from 'papaparse';
 import removeDateTimeAndUserKey from '@/utils/removeDateTimeAndUserKey';
 import UploadArea from './UploadArea/UploadArea';
 import validateAndTrimData from '@/utils/validateAndTrimData';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Modal from '../Modal/Modal';
-import Button from '../Button/Button';
 
 const promptForFree: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 const promptForLovers: string = process.env.NEXT_PUBLIC_AI_PROMPT_COUPLE || '';
+const fullURL = process.env.NEXT_PUBLIC_APP_SERVER;
 
 interface CSVRow {
   [key: string]: string;
@@ -28,7 +28,10 @@ function FileUpLoader() {
   const [sendMessage, setSendMessage] = useState('');
   const [prompt, setPrompt] = useState<string>(process.env.NEXT_PUBLIC_AI_PROMPT || '');
   const pathname = usePathname();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const router = useRouter();
 
   // accessToken을 세션에서 가져오기
 
@@ -107,11 +110,9 @@ function FileUpLoader() {
         }),
       });
 
-      const data: FetchDataResponse = await response.json();
-      const fetchedContent = data.choices[0].message.content;
-      console.log('Fetched Data:', fetchedContent);
-
-      setCurrentStep(3); // 데이터 분석 후 결과 단계로 이동
+      const data = await response.json();
+      console.log('xxxxx', data);
+      router.push(`${fullURL}/${pathname}/${data?.secondData?.item._id}`);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -132,15 +133,15 @@ function FileUpLoader() {
       />
 
       {/* 결과가 들어가면 됨 */}
-      {currentStep === 3 && (
+      {/* {currentStep === 3 && pathId && (
         <div className="result-display">
-          {/* {pathname === '/freetest' && <TestPage />} */}
+          {pathname === '/freetest' && <div>hello</div>}
           {pathname === '/lovetest' && <div>준비중</div>}
           <Button type="button" onClick={() => setCurrentStep(2)}>
             이전 단계
           </Button>
         </div>
-      )}
+      )} */}
 
       {isModalOpen && (
         <Modal
