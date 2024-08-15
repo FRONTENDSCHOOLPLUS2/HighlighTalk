@@ -1,5 +1,5 @@
 'use server';
-
+// NOTE - 회원가입 Action
 import { SignupFormType } from '@/types';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
@@ -11,7 +11,7 @@ export async function signup(data: SignupFormType) {
     name: data.name,
     email: data.email,
     password: data.password,
-    coin: '0',
+    extra: { coin: 0 },
   };
 
   const res = await fetch(`${SERVER}/users`, {
@@ -24,6 +24,6 @@ export async function signup(data: SignupFormType) {
   });
 
   const resJson = await res.json();
-  console.log('💽 userActions/resJson', resJson);
+  console.log('💽 userActions 회원가입 /resJson', resJson);
   return resJson;
 }
