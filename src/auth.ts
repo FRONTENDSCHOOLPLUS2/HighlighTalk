@@ -1,7 +1,7 @@
 import NextAuth, { User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+
 import KakaoProvider from 'next-auth/providers/kakao';
-import NaverProvider from 'next-auth/providers/naver';
 import GoogleProvider from 'next-auth/providers/google';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
@@ -54,13 +54,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
 
-    NaverProvider({
-      clientId: process.env.KAKAO_CLIENT_ID ?? '',
-      clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
-    }),
+    // GitHubProvider({
+    //   clientId: process.env.KAKAO_CLIENT_ID ?? '',
+    //   clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
+    // }),
     KakaoProvider({
-      clientId: process.env.KAKAO_CLIENT_ID ?? '',
-      clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
+      clientId: process.env.AUTH_KAKAO_ID ?? '',
+      clientSecret: process.env.AUTH_KAKAO_SECRET ?? '',
     }),
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID ?? '',

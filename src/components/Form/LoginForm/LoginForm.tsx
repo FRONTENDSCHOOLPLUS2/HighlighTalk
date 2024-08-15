@@ -90,8 +90,12 @@ function LoginForm() {
         <div className="icons">
           {/* TODO - icon으로 추후 변경 */}
           <button onClick={() => handleSocialLogin('google')}>구글</button>
-          <button type="button">네이버</button>
-          <button type="button">카카오</button>
+          <button type="button" onClick={() => handleSocialLogin('github')}>
+            깃헙
+          </button>
+          <button type="button" onClick={() => handleSocialLogin('kakao')}>
+            카카오
+          </button>
         </div>
       </div>
     </form>
