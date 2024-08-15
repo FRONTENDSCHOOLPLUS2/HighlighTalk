@@ -6,6 +6,7 @@ import UploadArea from './UploadArea/UploadArea';
 import validateAndTrimData from '@/utils/validateAndTrimData';
 import { usePathname, useRouter } from 'next/navigation';
 import Modal from '../Modal/Modal';
+import { LoadingSpinner } from '../Spinner/Spinner';
 
 const promptForFree: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 const promptForLovers: string = process.env.NEXT_PUBLIC_AI_PROMPT_COUPLE || '';
@@ -155,12 +156,7 @@ function FileUpLoader() {
           ]}
         />
       )}
-      {isLoading && (
-        <div className="loading-overlay">
-          <div className="loading-spinner"></div>
-          <p>데이터를 분석 중입니다...</p>
-        </div>
-      )}
+      {isLoading && <LoadingSpinner />}
     </div>
   );
 }

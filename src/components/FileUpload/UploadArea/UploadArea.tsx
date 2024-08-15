@@ -1,7 +1,6 @@
-import React, { ChangeEvent, DragEvent, RefObject } from 'react';
+import React, { ChangeEvent, DragEvent, RefObject, useState } from 'react';
 import './_UploadArea.scss';
 import DescriptionArea from '../Description/DescriptionArea';
-import Button from '@/components/Button/Button';
 
 interface UploadAreaProps {
   handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -20,22 +19,48 @@ function UploadArea({
   setCurrentStep,
   fetchData,
 }: UploadAreaProps) {
+  const [error, setError] = useState<string | null>(null); // 에러 메시지 상태 추가
   const openFileDialog = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
+    }
+  };
+  const validateFileType = (file: File) => {
+    const allowedExtensions = ['csv'];
+    const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    return allowedExtensions.includes(fileExtension || '');
+  };
+
+  const handleFileChangeWrapper = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (validateFileType(file)) {
+        setError(null); // 파일 형식이 올바르면 에러 초기화
+        handleFileChange(e); // 실제 파일 처리 로직 호출
+      } else {
+        setError('CSV 파일만 업로드 가능합니다.'); // 파일 형식이 올바르지 않으면 에러 메시지 설정
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ''; // 파일 입력 초기화
+        }
+      }
     }
   };
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const fileInput = e.dataTransfer.files[0];
-      const changeEvent = {
-        target: {
-          files: e.dataTransfer.files,
-        },
-      } as ChangeEvent<HTMLInputElement>;
-      handleFileChange(changeEvent);
+      const file = e.dataTransfer.files[0];
+      if (validateFileType(file)) {
+        setError(null); // 파일 형식이 올바르면 에러 초기화
+        const changeEvent = {
+          target: {
+            files: e.dataTransfer.files,
+          },
+        } as ChangeEvent<HTMLInputElement>;
+        handleFileChange(changeEvent); // 실제 파일 처리 로직 호출
+      } else {
+        setError('CSV 파일만 업로드 가능합니다.'); // 파일 형식이 올바르지 않으면 에러 메시지 설정
+      }
       e.dataTransfer.clearData();
     }
   };
@@ -43,7 +68,6 @@ function UploadArea({
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-
   if (currentStep === 1) {
     return (
       <div className="file-uploader-container">
@@ -58,7 +82,9 @@ function UploadArea({
             <div className="upload-area-section">
               <div className="speechs">
                 <div className="speech-icon"></div>
-                <div className="speech-bubble">클릭 또는 파일을 끌어당겨 넣을 수 있어요!</div>
+                <div className="speech-bubble">
+                  {error ? error : '클릭 또는 파일을 끌어당겨 넣을 수 있어요!'}
+                </div>
                 <button type="button">파일 올리기</button>
               </div>
             </div>
@@ -67,7 +93,7 @@ function UploadArea({
               id="fileInput"
               name="fileInput"
               accept=".csv,.txt"
-              onChange={handleFileChange}
+              onChange={handleFileChangeWrapper} // 파일 형식 검사 로직을 포함한 핸들러
               ref={fileInputRef}
               hidden
             />

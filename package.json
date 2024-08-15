@@ -27,7 +27,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
+    "react-spinners": "^0.14.1",
     "sass": "^1.77.8",
+    "swiper": "^11.1.9",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
