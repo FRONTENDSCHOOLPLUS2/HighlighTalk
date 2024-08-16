@@ -3,8 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { Session } from 'next-auth';
 import './_UserProfile.scss';
-import { IconProfile } from '../../../../../public/image';
+
 import { signOutWithForm } from '@/serverActions/authAction';
+import { IconProfile } from '@public/image';
 
 interface UserProfilePropType {
   userSession: Session | null;
