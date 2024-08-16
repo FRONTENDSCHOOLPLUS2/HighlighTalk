@@ -34,5 +34,5 @@ export interface LoginFormType extends Pick<UserType, 'email'> {
 export interface SignupFormType extends Pick<UserType, 'type' | 'name' | 'email'> {
   password: string;
   passwordConfirm: string;
-  extra: { coin: string };
+  extra: { coin: number };
 }

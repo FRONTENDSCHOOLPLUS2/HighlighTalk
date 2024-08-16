@@ -104,7 +104,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               name: user.name || '',
               email: user.email || '',
               image: user.image || '',
-              extra: { ...profile, providerAccountId: account.providerAccountId, coin: '0' },
+              extra: { ...profile, providerAccountId: account.providerAccountId, coin: 0 },
             };
 
             // 이미 가입된 회원이면 회원가입이 되지 않고 에러를 응답하므로 무시하면 됨
