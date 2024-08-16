@@ -4,6 +4,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import KakaoProvider from 'next-auth/providers/kakao';
 import GoogleProvider from 'next-auth/providers/google';
+import { OAuthUser, SignupResponsType, UserType } from './types';
+import { loginOAuth, signupWithOAuth } from './serverActions/userActions';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -80,28 +82,68 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: '/login',
   },
   callbacks: {
-    // TODO - 소셜 로그인 후 서버에 사용자 정보 저장 구현
     async signIn({ user, account, profile }) {
-      console.log('⭐️로그인 callback user', user);
-      console.log('⭐️Account:', account); // 로그인한 계정 정보
+      console.log('callbacks.signIn', user, account, profile);
+      switch (account?.provider) {
+        case 'credentials':
+          console.log('id/pwd 로그인', user);
+          break;
+        case 'google':
+        case 'github':
+          // FIXME - kakao는 비즈앱 전환해야 이메일 받을 수 있어서 DB 저장 이슈 있음
+          // case 'kakao'
+          console.log('OAuth 로그인', user);
 
-      // 소셜 로그인 - callback을 통해 token 정보 추가
-      if (account?.type !== 'credentials') {
-        user.accessToken = account?.access_token || '';
-        user.refreshToken = account?.refresh_token || '';
+          // DB에서 id를 조회해서 있으면 로그인 처리를 없으면 자동 회원 가입 후 로그인 처리
+          let userInfo: SignupResponsType | null = null;
+          try {
+            // 자동 회원 가입 + 코인 0 init
+            const newUser: OAuthUser = {
+              type: 'user',
+              loginType: account.provider,
+              name: user.name || '',
+              email: user.email || '',
+              image: user.image || '',
+              extra: { ...profile, providerAccountId: account.providerAccountId, coin: '0' },
+            };
+
+            // 이미 가입된 회원이면 회원가입이 되지 않고 에러를 응답하므로 무시하면 됨
+            const result = await signupWithOAuth(newUser);
+            console.log('회원 가입', result);
+
+            // 자동 로그인
+            const resData = await loginOAuth(account.providerAccountId);
+            if (resData.ok) {
+              userInfo = resData.item;
+              console.log(userInfo);
+            } else {
+              // API 서버의 에러 메시지 처리
+              throw new Error(resData.message);
+            }
+          } catch (err) {
+            console.error(err);
+            throw err;
+          }
+
+          user.id = String(userInfo?._id);
+          user.type = userInfo?.type || '';
+          user.accessToken = userInfo?.token!.accessToken as string;
+          user.refreshToken = userInfo?.token!.refreshToken as string;
+          user.coin = userInfo?.extra!.coin;
+
+          break;
       }
-
       return true;
     },
 
     //JWT 토큰에 사용자 정보를 저장 user 객체가 있을 경우 토큰에 정보를 추가
     async jwt({ token, user }) {
-      console.log('🪪 JWT.user', user);
+      // console.log('🪪 JWT.user', user);
 
       if (user) {
         token.id = user.id;
         token.type = user.type;
-        token.coin = user.coin; //코인 정보 추가
+        token.coin = user.coin;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
       }
@@ -112,7 +154,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       session.user.id = token.id as string;
       session.user.type = token.type as string;
-      session.user.coin = token.coin; // 코인 정보 추가
+      session.user.coin = token.coin;
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
       return session;
