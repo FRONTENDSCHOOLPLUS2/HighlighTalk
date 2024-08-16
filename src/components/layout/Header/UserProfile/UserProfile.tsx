@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { Session } from 'next-auth';
 import './_UserProfile.scss';
 
-import { signOutWithForm } from '@/serverActions/authAction';
 import { IconProfile } from '@public/image';
 
 interface UserProfilePropType {
@@ -16,25 +15,31 @@ function UserProfile({ userSession }: UserProfilePropType) {
   // NOTE - 세션 정보 브라우저 조회용으로 작성
   console.log('UserProfile_🪪 session', userSession);
 
+  console.log('UserProfile / session', userSession);
+
+  const userName = userSession?.user?.name;
+
   return (
     <>
       <div className="user-profile-container">
         {userSession?.user ? (
           <>
-            <form action={signOutWithForm}>
-              <button type="submit">👀로그아웃(임시)</button>
-            </form>
-            <button type="button" onClick={() => router.push(`/${userSession?.user?.id}/mypage`)}>
-              <p>{userSession?.user?.name}</p>
+            <div
+              onClick={() => router.push(`/${userSession?.user?.id}/mypage`)}
+              className="profile-button"
+            >
+              <p>
+                안녕하세요, <strong className="user-name">{userName}</strong> 님!
+              </p>
               <IconProfile />
-            </button>
+            </div>
           </>
         ) : (
           <>
-            <button type="button" onClick={() => router.push('/login')}>
+            <div onClick={() => router.push('/login')} className="profile-button">
               <p>로그인 후 이용해주세요</p>
               <IconProfile />
-            </button>
+            </div>
           </>
         )}
       </div>
