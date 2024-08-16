@@ -3,13 +3,18 @@ export interface UserType {
   email: string;
   name: string;
   type: 'user';
-  loginType?: 'email'; // 'email' | 'google' | '' 등으로 확장 작성
+  loginType?: 'email' | 'google' | 'kakao' | 'github'; // 'email' | 'google' | '' 등으로 확장 작성
   image?: string;
   profile?: string;
   createdAt: string;
   updatedAt: string;
-  coin?: string;
+  extra?: {
+    [key: string]: any;
+  };
 }
+
+export type OAuthUser = Required<Pick<UserType, 'type' | 'loginType'>> &
+  Partial<Pick<UserType, 'name' | 'email' | 'image' | 'extra'>>;
 
 export interface TokenType {
   id?: string;
