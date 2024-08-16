@@ -1,0 +1,13 @@
+// NOTE - 화면에는 보이지 않지만 스크린 리더가 읽어야 하는 요소들을 위한 mixin입니다
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;
+}
