@@ -1,0 +1,26 @@
+@use '@/styles/mixins/flex' as flex;
+@use '@/styles/mixins/util' as util;
+
+.mypage-container {
+  max-width: calc(100% - 20rem);
+  margin: 0 auto;
+
+  // @include mixins.flexCenter;
+  flex-wrap: wrap;
+  gap: 3rem;
+  background-color: tomato;
+
+  .mypage-section {
+    width: 35rem;
+    height: 31rem;
+
+    padding: 1.4rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 2rem;
+    background-color: yellowgreen;
+
+    .profile-title {
+      @include util.sr-only;
+    }
+  }
+}
