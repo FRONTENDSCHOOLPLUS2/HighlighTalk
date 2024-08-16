@@ -1,6 +1,7 @@
 import NextAuth, { User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+import GithubProvider from 'next-auth/providers/github';
 import KakaoProvider from 'next-auth/providers/kakao';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -54,10 +55,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
 
-    // GitHubProvider({
-    //   clientId: process.env.KAKAO_CLIENT_ID ?? '',
-    //   clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
-    // }),
+    GithubProvider({
+      clientId: process.env.AUTH_GITHUB_ID ?? '',
+      clientSecret: process.env.AUTH_GITHUB_SECRET ?? '',
+    }),
     KakaoProvider({
       clientId: process.env.AUTH_KAKAO_ID ?? '',
       clientSecret: process.env.AUTH_KAKAO_SECRET ?? '',
