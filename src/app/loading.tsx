@@ -1,4 +1,6 @@
+import { LoadingSpinner } from '@/components/Spinner/Spinner';
+
 function Loading() {
-  return <div>...로딩중</div>;
+  return <LoadingSpinner />;
 }
 export default Loading;

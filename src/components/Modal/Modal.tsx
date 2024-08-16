@@ -28,7 +28,6 @@ function Modal({
   buttons = [{ label: '닫기', onClick: onClose, theme: 'secondary' }],
 }: ModalProps) {
   if (!isOpen) return null;
-
   return (
     <div className={`modal ${className}`}>
       <div className="modal-content">

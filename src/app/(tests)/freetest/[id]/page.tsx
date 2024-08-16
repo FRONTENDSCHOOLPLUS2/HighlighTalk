@@ -1,5 +1,7 @@
 'use server';
 
+import Mbti from '@/components/Mbti/Mbti';
+
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
 export async function getData(id: string) {
@@ -25,11 +27,15 @@ export async function getData(id: string) {
 
 export default async function Page({ params }: { params: { id: string } }) {
   const item = await getData(params.id);
-  console.log('item', item);
+  const extraItem = item?.item?.extra;
+
+  if (!extraItem) {
+    return <div>페이지를 찾을 수 없습니다.</div>;
+  }
 
   return (
     <div>
-      프리테스트 결과화면 {params.id} {JSON.stringify(item)}
+      <Mbti extraItem={extraItem} />
     </div>
   );
 }

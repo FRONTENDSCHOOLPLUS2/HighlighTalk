@@ -27,6 +27,10 @@ export default async function Page({ params }: { params: { id: string } }) {
   const item = await getData(params.id);
   console.log('item', item);
 
+  if (!item) {
+    return <div>page를 찾을 수 없습니다.</div>;
+  }
+
   return (
     <div>
       러브테스트 결과 화면 {params.id} {JSON.stringify(item)}
