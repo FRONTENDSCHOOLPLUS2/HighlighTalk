@@ -11,7 +11,7 @@ async function Header() {
     <header className={poppinsFont.className}>
       <div className="HeaderLayout">
         {/* 사이트 로고 및 제목 */}
-        <div>
+        <div className="logo">
           <Link href="/" className="logo-link">
             highlightalk
           </Link>

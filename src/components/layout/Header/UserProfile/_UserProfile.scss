@@ -1,6 +1,17 @@
 // TODO - Header 스타일 작업시 함께 작업
-
 .user-profile-container {
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+
+  .profile-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+  }
+
+  .user-name {
+    color: #648ff7;
+  }
 }
