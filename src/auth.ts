@@ -80,8 +80,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: '/login',
   },
   callbacks: {
-    async signIn({ user }) {
+    // TODO - 소셜 로그인 후 서버에 사용자 정보 저장 구현
+    async signIn({ user, account, profile }) {
       console.log('⭐️로그인 callback user', user);
+      console.log('⭐️Account:', account); // 로그인한 계정 정보
+
+      // 소셜 로그인 - callback을 통해 token 정보 추가
+      if (account?.type !== 'credentials') {
+        user.accessToken = account?.access_token || '';
+        user.refreshToken = account?.refresh_token || '';
+      }
+
       return true;
     },
 
