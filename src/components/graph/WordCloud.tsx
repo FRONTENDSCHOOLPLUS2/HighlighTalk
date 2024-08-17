@@ -27,7 +27,10 @@ function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
     const sortedData = data.sort((a, b) => b.value - a.value);
 
     // 폰트 스케일 설정 함수
-    const fontScale = d3.scaleLinear().domain([1, sortedData[0].value]).range([12, 60]);
+    const fontScale = d3
+      .scaleLinear()
+      .domain([1, sortedData[0]?.value || 10])
+      .range([12, 60]);
 
     if (!svgRef.current) {
       // SVG가 없을 때만 새로 생성
