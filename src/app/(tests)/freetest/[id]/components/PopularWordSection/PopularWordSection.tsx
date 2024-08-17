@@ -8,7 +8,7 @@ interface PopularWordSectionPropType {
   }[];
 }
 
-function PopularWordSection({ data }: PopularWordSectionPropType) {
+function PopularWordSection({ data = [] }: PopularWordSectionPropType) {
   return (
     <section className="most-popular-word">
       <h3 className="heading-3">가장 많이 나온 단어</h3>
