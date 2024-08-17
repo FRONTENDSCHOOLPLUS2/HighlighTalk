@@ -93,9 +93,9 @@ function LoginForm() {
           <button type="button" onClick={() => handleSocialLogin('github')}>
             깃헙
           </button>
-          {/* <button type="button" onClick={() => handleSocialLogin('kakao')}>
+          <button type="button" onClick={() => handleSocialLogin('kakao')}>
             카카오
-          </button> */}
+          </button>
         </div>
       </div>
     </form>
