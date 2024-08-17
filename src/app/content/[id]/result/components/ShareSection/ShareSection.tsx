@@ -4,6 +4,13 @@ import './_ShareSection.scss';
 import Button from '@/components/Button/Button';
 import Modal from '@/components/Modal/Modal';
 import { useState } from 'react';
+import KakaoShareButton from '../KakaoShareButton/KakaoShareButton';
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 function ShareSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +22,11 @@ function ShareSection() {
 
   const handleButtonPress = () => {
     openModal();
+
+    const { Kakao } = window;
+    if (!Kakao.isInitialized()) {
+      Kakao.init(process.env.NEXT_PUBLIC_AUTH_KAKAO_ID);
+    }
   };
 
   return (
@@ -25,14 +37,11 @@ function ShareSection() {
         공유하기
       </Button>
       {isModalOpen && (
-        <Modal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          content="친구들에게 공유해보세요!"
-          title="결과 공유하기"
-          buttons={[{ label: '닫기', onClick: closeModal, theme: 'primary' }]}
-        ></Modal>
+        <Modal isOpen={isModalOpen} onClose={closeModal} content="친구들에게 결과를 공유해보세요!">
+          <KakaoShareButton />
+        </Modal>
       )}
+      <div id="kakaotalk-sharing-btn"></div>
     </section>
   );
 }
