@@ -38,6 +38,9 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
 
   // 노드 간 Link 생성하는 함수
   const createLinks = (data: CirclePackingDataNode[]): CirclePackingLink[] => {
+    if (data.length === 0) {
+      return [];
+    }
     return data.map((d, index) => ({
       source: data[index],
       target: index !== data.length - 1 ? data[index + 1] : data[0],
@@ -46,6 +49,9 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
 
   // 이름 라벨 생성하는 함수
   const createLabel = (target: SVGType, data: CirclePackingDataNode[]) => {
+    if (data.length === 0) {
+      return;
+    }
     return target
       .append('g')
       .attr('class', 'labels')
@@ -84,8 +90,11 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
 
   useEffect(() => {
     const sortedData = [...data].sort((a, b) => b.value - a.value).slice(0, MAX_CIRCLE_NUM);
-    console.log(sortedData);
-    const circleScale = d3.scaleLinear().domain([0, sortedData[0].value]).range([5, 100]);
+
+    const circleScale = d3
+      .scaleLinear()
+      .domain([0, sortedData[0]?.value || 10])
+      .range([5, 100]);
     const links = createLinks(sortedData);
 
     // 툴팁 생성 및 이벤트 핸들러 정의
@@ -196,6 +205,9 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
       );
 
     simulation.nodes(sortedData).on('tick', () => {
+      if (sortedData.length === 0) {
+        return;
+      }
       updateNodePositions(nodes, texts);
       if (simulation.alpha() < 0.01) {
         simulation.stop();
