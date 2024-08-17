@@ -86,13 +86,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       console.log('callbacks.signIn', user, account, profile);
       switch (account?.provider) {
         case 'credentials':
-          console.log('id/pwd 로그인', user);
+          console.log('🪪 id/pwd 로그인', user);
           break;
         case 'google':
         case 'github':
-          // FIXME - kakao는 비즈앱 전환해야 이메일 받을 수 있어서 DB 저장 이슈 있음
-          // case 'kakao'
-          console.log('OAuth 로그인', user);
+        case 'kakao':
+          console.log('🪪 OAuth 로그인', user);
 
           // DB에서 id를 조회해서 있으면 로그인 처리를 없으면 자동 회원 가입 후 로그인 처리
           let userInfo: SignupResponsType | null = null;
