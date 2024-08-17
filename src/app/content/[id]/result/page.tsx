@@ -4,6 +4,7 @@ import TopRatedTalkerSection from './components/TopRatedTalkerSection/TopRatedTa
 import MbtiSection from './components/MbtiSection/MbtiSection';
 import PopularWordSection from './components/PopularWordSection/PopularWordSection';
 import ShareSection from './components/ShareSection/ShareSection';
+import Script from 'next/script';
 
 // TODO 데이터 fetching
 function ContentResultPage() {
@@ -32,6 +33,13 @@ function ContentResultPage() {
 
   return (
     <article className="result">
+      <Script
+        id="kakao-script"
+        src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+        integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      ></Script>
       <ThemeSection
         data={[
           {
