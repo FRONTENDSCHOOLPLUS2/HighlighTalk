@@ -8,7 +8,7 @@ interface TopRatedTalkerSectionPropType {
   }[];
 }
 
-function TopRatedTalkerSection({ data }: TopRatedTalkerSectionPropType) {
+function TopRatedTalkerSection({ data = [] }: TopRatedTalkerSectionPropType) {
   const getPercentage = (data: { key: string; value: number }[], value: number) => {
     let sumValue = 0;
     data.forEach((d) => {
