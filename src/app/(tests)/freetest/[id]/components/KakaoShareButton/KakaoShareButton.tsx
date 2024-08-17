@@ -1,5 +1,6 @@
 'use client';
 
+import { useUserStore } from '@/store/useUserStore';
 import './_KakaoShareButton.scss';
 
 declare global {
@@ -9,6 +10,8 @@ declare global {
 }
 
 function KakaoShareButton() {
+  const user = useUserStore((state) => state.user);
+
   const handleKakaoShare = () => {
     const { Kakao } = window;
     const path = location.pathname + location.search;
@@ -17,8 +20,7 @@ function KakaoShareButton() {
       Kakao.Share.sendCustom({
         templateId: Number(process.env.NEXT_PUBLIC_KAKAO_SHARE_TEMPLATE_ID),
         templateArgs: {
-          // TODO: 추후 로그인한 유저 이름가져오게 변경
-          user_name: '다희',
+          user_name: user.name || '나',
           path: path,
         },
       });
