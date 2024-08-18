@@ -95,10 +95,10 @@ export default async function Page({ params }: { params: { id: string } }) {
         strategy="afterInteractive"
       ></Script>
       <ThemeSection data={chatThemeData} />
-      <TopRatedTalkerSection data={wordCloudData} />
+      <TopRatedTalkerSection data={circlePackingData} />
       {/* <MbtiSection data={[]} /> */}
       <Mbti extraItem={extraItem} />
-      <PopularWordSection data={circlePackingData} />
+      <PopularWordSection data={wordCloudData} />
       <ShareSection />
     </article>
   );
