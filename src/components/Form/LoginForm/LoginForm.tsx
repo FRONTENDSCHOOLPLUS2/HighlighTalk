@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { LoginFormType } from '@/types';
 import { signInWithCredentials, signInWithSocial } from '@/serverActions/authAction';
 import './_LoginForm.scss';
+import Button from '@/components/Button/Button';
 
 function LoginForm() {
   const {
@@ -45,6 +46,25 @@ function LoginForm() {
     }
   };
 
+  const TEST_PASSWORD = process.env.NEXT_PUBLIC_TEST_ACCOUNT_PASSWORD;
+
+  const handleTestAccountLogin = async () => {
+    // TODO - 모달 열어서 '테스트계정으로 로그인하시겠습니까?' 한번 걸기
+    const testAccountData: LoginFormType = {
+      email: 'tmuchtalker@gmail.com',
+      password: `${TEST_PASSWORD}`,
+    };
+    try {
+      await signInWithCredentials(testAccountData);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError('password', {
+          type: 'manual',
+          message: '테스트 계정 로그인에 실패했습니다.',
+        });
+      }
+    }
+  };
   // FIXME - 소셜 로그인 눌렀을 때 페이지 이동 전 폼의 에러 메세지 출력되는 오류 해결하기
 
   return (
@@ -78,6 +98,9 @@ function LoginForm() {
         />
         <span className="error-message">{passwordErrorMessage}</span>
       </div>
+      <Button theme="black" size="full" onClick={handleTestAccountLogin}>
+        테스트 계정으로 로그인하기
+      </Button>
       <button type="submit" className="login-button">
         로그인
       </button>
