@@ -6,11 +6,12 @@ import { auth } from './auth';
 // 모달 띄워서 안내하도록 추가해야함
 
 const matchersForSignIn = ['/signup/*', '/login/*'];
-const matchersForAuth = ['/mypage/*', '/charge/*', '/freetest/*', '/lovetest/*', '/charge'];
+const matchersForAuth = ['/mypage/*', '/charge/*', '/freetest/*', '/lovetest/*'];
 
 export const middleware = async (request: NextRequest) => {
   const mySession = await auth();
   const pathname = request.nextUrl.pathname;
+  // const step = request.nextUrl.searchParams.get('step');
 
   // NOTE - 로그인 후 회원가입 및 로그인 페이지 접근 제어
   const isMatchForSignIn = matchersForSignIn.some((element) => element.includes(pathname));
@@ -19,12 +20,25 @@ export const middleware = async (request: NextRequest) => {
   }
 
   // NOTE - 인증이 필요한 페이지 접근 제어
-  const isMatchForAuth = matchersForAuth.some((element) => element.includes(pathname));
+  // FIXME - 결과페이지 로그인 유무만 제어 중, 본인의 결과인지에 대해 추가 보호 필요함
+  const isMatchForAuth = matchersForAuth.some((element) =>
+    pathname.startsWith(element.replace('*', ''))
+  );
   if (isMatchForAuth) {
     return mySession ? NextResponse.next() : NextResponse.redirect(new URL('/login', request.url));
   }
+
+  return NextResponse.next();
 };
 
 export const config = {
-  matcher: ['/login', '/signup', '/mypage', '/freetest', '/lovetest/', '/charge'],
+  matcher: [
+    '/login',
+    '/signup',
+    '/mypage',
+    '/freetest',
+    '/lovetest',
+    '/charge',
+    '/freetest/:path*',
+  ],
 };
