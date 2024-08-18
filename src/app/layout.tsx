@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Sans } from 'next/font/google'; // Import the Noto Sans font
+import Script from 'next/script';
 
 import '@/styles/reset.css';
 import '@/styles/variable.css';
@@ -39,6 +40,7 @@ export default function RootLayout({
           </main>
           <ClientUserUpdater />
         </Providers>
+        <Script src="https://cdn.iamport.kr/v1/iamport.js"></Script>
       </body>
     </html>
   );
