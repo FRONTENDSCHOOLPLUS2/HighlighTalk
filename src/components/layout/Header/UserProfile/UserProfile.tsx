@@ -24,21 +24,12 @@ function UserProfile({ userSession }: UserProfilePropType) {
       <div className="user-profile-container">
         {userSession?.user ? (
           <>
-            <div
-              onClick={() => router.push(`/${userSession?.user?.id}/mypage`)}
-              className="profile-button"
-            >
+            <div onClick={() => router.push(`/mypage`)} className="profile-button">
               <p>
                 <span>안녕하세요,&nbsp;</span>
                 <strong className="user-name">{userName}</strong>
                 <span>님!</span>
               </p>
-              {/* <p>
-                <span>안녕하세요,&nbsp;</span>
-                <strong className="user-name">유저이름이길어</strong>
-                <span>님!</span>
-              </p> */}
-
               <IconProfile />
             </div>
           </>
