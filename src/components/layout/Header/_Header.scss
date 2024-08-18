@@ -6,13 +6,13 @@
   margin-bottom: 10rem;
   position: relative;
 
-  .logo-link {
-    text-decoration: none; // 밑줄 제거
-    color: inherit; // 상위 요소의 색상 상속
-  }
-
   .logo {
     flex-shrink: 0;
     font-weight: bold;
+
+    .logo-link {
+      text-decoration: none; // 밑줄 제거
+      color: inherit; // 상위 요소의 색상 상속
+    }
   }
 }
