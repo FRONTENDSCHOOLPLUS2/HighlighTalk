@@ -4,8 +4,6 @@
 .result {
   position: relative;
   overflow: hidden auto;
-  height: 90svh;
-  scroll-snap-type: y proximity;
 
   & > section {
     scroll-margin: 6rem;
