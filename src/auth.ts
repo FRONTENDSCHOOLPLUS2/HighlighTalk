@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import KakaoProvider from 'next-auth/providers/kakao';
 import GoogleProvider from 'next-auth/providers/google';
-import { OAuthUser, SignupResponsType, UserType } from './types';
+import { OAuthUser, SignupResponsType } from './types';
 import { loginOAuth, signupWithOAuth } from './serverActions/userActions';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
@@ -100,9 +100,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             const newUser: OAuthUser = {
               type: 'user',
               loginType: account.provider,
-              name: user.name || '',
-              email: user.email || '',
-              image: user.image || '',
+              name: user.name!,
+              email: user.email!,
+              image: user.image!,
               extra: { ...profile, providerAccountId: account.providerAccountId, coin: 0 },
             };
 
@@ -125,7 +125,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
 
           user.id = String(userInfo?._id);
-          user.type = userInfo?.type || '';
+          user.type = userInfo?.type!;
           user.accessToken = userInfo?.token!.accessToken as string;
           user.refreshToken = userInfo?.token!.refreshToken as string;
           user.coin = userInfo?.extra!.coin;
