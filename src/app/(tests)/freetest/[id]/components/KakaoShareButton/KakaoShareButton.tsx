@@ -28,7 +28,7 @@ function KakaoShareButton() {
   };
 
   return (
-    <button className="button-share-kakao" type="button" onClick={handleKakaoShare}>
+    <button className="button-share kakao" type="button" onClick={handleKakaoShare}>
       카카오톡으로 공유하기
     </button>
   );

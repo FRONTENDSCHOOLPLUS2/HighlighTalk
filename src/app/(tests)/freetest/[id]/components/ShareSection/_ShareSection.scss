@@ -10,11 +10,33 @@ section.share {
 
   width: 100%;
   min-height: fit-content;
-
-  button {
-    margin: 3rem 0;
-  }
 }
 
-.button-share-kakao {
+.list-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.button-share {
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  padding-left: 4.6rem;
+  cursor: pointer;
+  overflow: hidden;
+
+  background: url('/image/link.svg');
+  background-position: 1.5rem;
+  background-size: 1.6rem;
+  background-repeat: no-repeat;
+  background-color: $color-skyblue-1;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: darken($color-skyblue-1, 5%);
+  }
+  &:active {
+    background-color: darken($color-skyblue-1, 10%);
+  }
 }
