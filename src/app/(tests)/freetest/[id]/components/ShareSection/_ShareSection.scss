@@ -2,10 +2,8 @@
 @import '@/styles/mixins/flex.scss';
 
 section.share {
-  display: flex;
+  @include flexCenter;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 1rem;
 
   width: 100%;
