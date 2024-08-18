@@ -18,7 +18,7 @@ function NavBar() {
   const [activeIndex, setActiveIndex] = useState(indexInit);
 
   useEffect(() => {
-    activeIndex === -1 ? setActiveIndex(navItems.length + 1) : setActiveIndex(indexInit);
+    setActiveIndex(navItems.findIndex((item) => item.path === pathname));
   }, [pathname]);
 
   return (
