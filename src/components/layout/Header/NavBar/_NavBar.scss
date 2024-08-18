@@ -1,3 +1,5 @@
+@import '@/styles/variable.scss';
+
 .header-nav {
   position: absolute;
   left: 50%;
@@ -24,7 +26,6 @@
     color: #000;
   }
 
-  // 이동하는 active 박스 설정
   .active-box {
     position: absolute;
     top: 0;
@@ -32,15 +33,15 @@
     left: 0;
     width: 0;
     height: 100%;
-    background-color: #f6f6f6;
+    background-color: lighten($color-gray-2, 20%);
     border-radius: 10rem;
-    z-index: 10; // active 박스는 li 요소 뒤에 배치
+    z-index: 10;
     transition: all 0.3s ease;
   }
 
   li.active ~ .active-box {
-    width: calc(100% + 4rem); // padding을 고려하여 너비 조정
-    transform: translateX(calc(var(--index) * 100%)); // 각 li의 위치에 맞게 이동
+    width: calc(100% + 4rem);
+    transform: translateX(calc(var(--index) * 100%));
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {

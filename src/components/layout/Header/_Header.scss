@@ -1,13 +1,10 @@
-// Header.scss
-
 .HeaderLayout {
   display: flex;
   font-size: 1.8rem;
   justify-content: space-between;
   align-items: center;
-  // box-shadow: inset 0px 0px 20px blue;
   margin-bottom: 10rem;
-  // box-shadow: inset 0px 0px 20px blue;
+  position: relative;
 
   .logo-link {
     text-decoration: none; // 밑줄 제거
@@ -15,6 +12,7 @@
   }
 
   .logo {
+    flex-shrink: 0;
     font-weight: bold;
   }
 }

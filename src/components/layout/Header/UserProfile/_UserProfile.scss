@@ -1,17 +1,37 @@
-// TODO - Header 스타일 작업시 함께 작업
+@use '@/styles/mixins/flex' as mixins;
+@import '@/styles/variable.scss';
+
 .user-profile-container {
   display: flex;
   font-size: 1.4rem;
+  flex-shrink: 1;
 
   .profile-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include mixins.flexCenter;
+
     gap: 1rem;
     cursor: pointer;
+
+    p {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .user-name {
-    color: #648ff7;
+    display: inline-block;
+    text-align: center;
+    vertical-align: bottom;
+    color: $color-blue-2;
+    max-width: 10rem; // NOTE - 이름 영역 고정값, 한글 기준 8자 수용
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    // FIXME - 태블릿 화면 - Nav + Profile 햄버거 메뉴 처리하기
+    background-color: tomato;
+    font-size: 1.2rem;
   }
 }

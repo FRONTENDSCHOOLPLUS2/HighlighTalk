@@ -29,8 +29,16 @@ function UserProfile({ userSession }: UserProfilePropType) {
               className="profile-button"
             >
               <p>
-                안녕하세요, <strong className="user-name">{userName}</strong> 님!
+                <span>안녕하세요,&nbsp;</span>
+                <strong className="user-name">{userName}</strong>
+                <span>님!</span>
               </p>
+              {/* <p>
+                <span>안녕하세요,&nbsp;</span>
+                <strong className="user-name">유저이름이길어</strong>
+                <span>님!</span>
+              </p> */}
+
               <IconProfile />
             </div>
           </>
