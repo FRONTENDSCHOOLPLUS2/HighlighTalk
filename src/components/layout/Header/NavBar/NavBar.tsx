@@ -21,8 +21,6 @@ function NavBar() {
     activeIndex === -1 ? setActiveIndex(navItems.length + 1) : setActiveIndex(indexInit);
   }, [pathname]);
 
-  console.log(indexInit);
-
   return (
     <nav className="header-nav">
       <ul>
