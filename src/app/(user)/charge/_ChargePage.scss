@@ -1,0 +1,7 @@
+@use '@/styles/mixins/flex' as mixins;
+
+.charge-page-container {
+  background-color: tomato;
+  max-width: 75rem;
+  display: flex;
+}
