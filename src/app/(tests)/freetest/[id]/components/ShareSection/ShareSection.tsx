@@ -20,6 +20,13 @@ function ShareSection() {
   // 모달을 닫는 함수
   const closeModal = () => setIsModalOpen(false);
 
+  const handleCopyURL = () => {
+    const text = `[ 하이라이톡 - 우리는 어떻게 대화하고 있을까? ]\n🤖AI 분석 결과가 도착했어요!\n\nURL - ${location.href}`;
+
+    navigator.clipboard.writeText(text).then(() => {
+      alert('클립보드에 URL이 복사되었어요!');
+    });
+  };
   const handleButtonPress = () => {
     openModal();
 
@@ -38,7 +45,12 @@ function ShareSection() {
       </Button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal} content="친구들에게 결과를 공유해보세요!">
-          <KakaoShareButton />
+          <div className="list-btn">
+            <button className="button-share" onClick={handleCopyURL}>
+              URL로 공유하기
+            </button>
+            <KakaoShareButton />
+          </div>
         </Modal>
       )}
       <div id="kakaotalk-sharing-btn"></div>

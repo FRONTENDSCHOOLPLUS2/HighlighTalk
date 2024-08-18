@@ -43,6 +43,7 @@
 }
 
 .button {
+  box-sizing: border-box;
   padding: 0.8rem 1.6rem;
   display: flex;
   justify-content: center;

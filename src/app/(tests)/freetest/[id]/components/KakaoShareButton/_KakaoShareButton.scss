@@ -1,16 +1,10 @@
 @import '../../../../../../styles/variable';
 @import '../../../../../../styles/mixins/flex.scss';
 
-.button-share-kakao {
-  border-radius: 1rem;
-  padding: 1rem 1.5rem;
-  padding-left: 4.6rem;
-  cursor: pointer;
-  overflow: hidden;
+.button-share.kakao {
   background: url('/image/kakao_logo.svg') 1.5rem no-repeat;
   background-size: 1.6rem;
   background-color: #fee500;
-  transition: all 0.3s;
 
   &:hover {
     background-color: darken(#fee500, 5%);
