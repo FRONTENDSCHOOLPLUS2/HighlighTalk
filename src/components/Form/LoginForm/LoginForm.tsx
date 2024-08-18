@@ -6,6 +6,8 @@ import { LoginFormType } from '@/types';
 import { signInWithCredentials, signInWithSocial } from '@/serverActions/authAction';
 import './_LoginForm.scss';
 import Button from '@/components/Button/Button';
+import { useState } from 'react';
+import Modal from '@/components/Modal/Modal';
 
 function LoginForm() {
   const {
@@ -46,10 +48,15 @@ function LoginForm() {
     }
   };
 
+  // FIXME - 전역 상태로 리팩터링 이전의 모달 사용
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const TEST_PASSWORD = process.env.NEXT_PUBLIC_TEST_ACCOUNT_PASSWORD;
 
-  const handleTestAccountLogin = async () => {
-    // TODO - 모달 열어서 '테스트계정으로 로그인하시겠습니까?' 한번 걸기
+  const testAccountLogin = async () => {
     const testAccountData: LoginFormType = {
       email: 'tmuchtalker@gmail.com',
       password: `${TEST_PASSWORD}`,
@@ -64,6 +71,11 @@ function LoginForm() {
         });
       }
     }
+  };
+
+  // TODO - 모달 열어서 '테스트계정으로 로그인하시겠습니까?' 한번 걸기
+  const handleTestAccountLogin = async () => {
+    openModal();
   };
   // FIXME - 소셜 로그인 눌렀을 때 페이지 이동 전 폼의 에러 메세지 출력되는 오류 해결하기
 
@@ -121,6 +133,32 @@ function LoginForm() {
           </button>
         </div>
       </div>
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content="테스트 계정으로 로그인하시겠습니까?"
+        >
+          <span className="modal-contents">
+            <strong>⚠️ 테스트 계정은 다음과 같은 제한사항이 있습니다.</strong>
+            <ul>
+              <li>
+                <b>더미 데이터</b>를 사용해, 채팅 분석이 <b>제한</b>됩니다.
+              </li>
+              <li>
+                일부 기능은 테스트 계정에서 <b>비활성화</b>될 수 있습니다.
+              </li>
+              <li>
+                <b>개인 데이터 저장이 불가능</b>하며, 세션 종료 시 데이터가 삭제됩니다.
+              </li>
+            </ul>
+            <p>이용 중 발생할 수 있는 불편에 대해 양해 부탁드립니다.</p>
+          </span>
+          <Button theme="black" onClick={testAccountLogin}>
+            로그인할게요
+          </Button>
+        </Modal>
+      )}
     </form>
   );
 }
