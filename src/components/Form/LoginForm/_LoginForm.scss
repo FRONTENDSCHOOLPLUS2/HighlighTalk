@@ -1,7 +1,8 @@
-@use '@/styles/mixins/flex' as mixins;
+@use '@/styles/mixins/flex' as flex;
+@import '@/styles/variable.scss';
 
 .login-form {
-  @include mixins.flexColumn;
+  @include flex.flexColumn;
   gap: 2rem;
   min-width: 55rem;
   padding: 6rem;
@@ -9,7 +10,7 @@
   border-radius: 2rem;
 
   .input-group {
-    @include mixins.flexColumn;
+    @include flex.flexColumn;
     position: relative;
 
     label {
@@ -55,7 +56,7 @@
   }
 
   .social-login {
-    @include mixins.flexColumn;
+    @include flex.flexColumn;
     justify-content: center;
     gap: 2rem;
     margin-top: 1rem;
@@ -77,6 +78,26 @@
       display: flex;
       justify-content: center;
       gap: 4rem;
+    }
+  }
+
+  .modal-contents {
+    font-size: 1.2rem;
+    color: $color-gray-4;
+
+    strong {
+      font-weight: 700;
+      color: $color-error;
+      margin-bottom: 1rem;
+    }
+
+    b {
+      font-weight: 700;
+    }
+
+    ul {
+      @include flex.flexColumn;
+      gap: 0.5rem;
     }
   }
 }
