@@ -1,20 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import './_NavBar.scss';
+
+const navItems = [
+  { path: '/', label: 'home' },
+  { path: '/about', label: 'about' },
+  { path: '/contact', label: 'contact' },
+  { path: '/posts', label: 'posts' },
+];
 
 function NavBar() {
   const pathname = usePathname();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const indexInit = navItems.findIndex((item) => item.path === pathname);
+  const [activeIndex, setActiveIndex] = useState(indexInit);
 
-  const navItems = [
-    { path: '/', label: 'home' },
-    { path: '/about', label: 'about' },
-    { path: '/contact', label: 'contact' },
-    { path: '/posts', label: 'Posts' },
-  ];
+  useEffect(() => {
+    activeIndex === -1 ? setActiveIndex(navItems.length + 1) : setActiveIndex(indexInit);
+  }, [pathname]);
+
+  console.log(indexInit);
 
   return (
     <nav className="header-nav">
@@ -31,8 +38,10 @@ function NavBar() {
         <div
           className="active-box"
           style={{
-            left: `${activeIndex * (100 / navItems.length)}%`,
-            width: `${100 / navItems.length}%`,
+            opacity: activeIndex === -1 ? '0' : '1',
+            left: activeIndex !== -1 ? `${activeIndex * (100 / navItems.length)}%` : 'auto',
+            width: activeIndex !== -1 ? `${100 / navItems.length}%` : '0',
+            transition: 'left 0.3s ease, width 0.3s ease',
           }}
         />
       </ul>

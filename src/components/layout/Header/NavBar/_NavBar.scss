@@ -1,4 +1,9 @@
 .header-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+
   ul {
     position: relative;
     display: flex;
@@ -36,5 +41,8 @@
   li.active ~ .active-box {
     width: calc(100% + 4rem); // padding을 고려하여 너비 조정
     transform: translateX(calc(var(--index) * 100%)); // 각 li의 위치에 맞게 이동
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
   }
 }
