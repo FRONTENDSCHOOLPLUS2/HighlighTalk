@@ -18,9 +18,6 @@ function MainThemeItems() {
 
   return (
     <div>
-      <div>
-        <h1>테마 별 상품</h1>
-      </div>
       <div className="MainThemeItems">
         {data.map((item, index) => {
           return <MainThemes key={index} data={item} />;

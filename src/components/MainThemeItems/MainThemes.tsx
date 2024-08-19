@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 interface TestData {
@@ -13,12 +14,14 @@ interface MainThemesProps {
 function MainThemes({ data }: MainThemesProps) {
   return (
     <div className="card">
-      <h1>{data.title}</h1>
-      <p>{data.content}</p>
-      <div className="coin">
-        <div className="coin-img"></div>
-        {data.coin}
-      </div>
+      <Link href="/">
+        <h1>{data.title}</h1>
+        <p>{data.content}</p>
+        <div className="coin">
+          <div className="coin-img"></div>
+          {data.coin}
+        </div>
+      </Link>
     </div>
   );
 }

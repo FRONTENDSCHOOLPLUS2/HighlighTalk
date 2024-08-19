@@ -9,9 +9,8 @@ function MainItems() {
           <div className="item free_item">
             <div className="free_item_des des">
               <h1>우리 톡방 분석 서비스</h1>
-              <div>
-                <p>AI가 우리 톡방 내용을 읽고</p>
-                <p>분석결과를 보여줘요!</p>
+              <div className="des-p">
+                <p>AI가 우리 톡방 내용을 읽고 분석결과를 보여줍니다</p>
               </div>
               <div className="free_tag">FREE</div>
             </div>
@@ -24,16 +23,15 @@ function MainItems() {
           <div className="item pay_item">
             <div className="pay_item_des des">
               <h1>우리 연애 이대로 괜찮을까?</h1>
-              <div>
-                <p>AI가 우리 톡방 내용을 읽고</p>
-                <p>분석결과를 보여줘요!</p>
+              <div className="des-p">
+                <p>AI가 우리 톡방 내용을 읽고 분석결과를 보여줍니다.</p>
               </div>
               <div className="payed_tag">
                 <div className="payed_tagImage"></div>
                 100
               </div>
             </div>
-            <div className="free_items_img"></div>
+            <div className="free_items_img second"></div>
           </div>
         </Link>
       </div>
