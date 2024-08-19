@@ -23,16 +23,11 @@ interface MbtiAnalysisItem {
 }
 
 interface MbtiSectionPropType {
-  data: {
-    mbti: {
-      analysis: MbtiAnalysisItem[];
-    };
-  };
+  data: MbtiAnalysisItem[];
 }
 
-function MbtiSection({ data }: MbtiSectionPropType) {
-  const { analysis = [] } = data.mbti || [];
-  console.log(analysis);
+function MbtiSection({ data = [] }: MbtiSectionPropType) {
+  console.log(data);
 
   return (
     <section className="mbti">
@@ -63,7 +58,7 @@ function MbtiSection({ data }: MbtiSectionPropType) {
             },
           }}
         >
-          {analysis.map((item, index) => (
+          {data.map((item, index) => (
             <SwiperSlide key={index}>
               <div>
                 <div className="card-header">
