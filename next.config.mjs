@@ -23,6 +23,7 @@ const nextConfig = {
         pathname: '**',
       },
     ],
+    domains: ['k.kakaocdn.net'],
   },
   webpack: (config) => {
     config.module.rules.push({
