@@ -2,7 +2,8 @@
 
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 
@@ -13,20 +14,29 @@ interface ProtectedRoutePropType {
 
 function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
   // FIXME - 전역 상태로 리팩터링 이전의 모달 사용
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sessionChecked, setSessionChecked] = useState(false);
+  const [currentSession, setCurrentSession] = useState<Session | null>(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'loading') return;
-    if (!session) {
-      openModal(); // 인증되지 않은 경우 모달 표시
-    }
-  }, [session, status]);
+    const checkSession = async () => {
+      const session = await getSession();
+
+      if (session === null) {
+        openModal();
+      } else {
+        setCurrentSession(session);
+        setSessionChecked(true);
+      }
+    };
+    checkSession();
+  }, []);
 
   const handleGoLoginButton = () => {
     router.push('/login');
@@ -37,8 +47,6 @@ function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
     setCurrentStep(1);
   };
 
-  if (status === 'loading') return null; // 로딩 중일 때는 아무것도 렌더링하지 않음
-
   return (
     <>
       {isModalOpen && (
@@ -48,7 +56,7 @@ function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
           </Button>
         </Modal>
       )}
-      {session && children} {/* 인증된 경우에만 자식 컴포넌트 렌더링 */}
+      {sessionChecked && children} {/* 인증된 경우에만 자식 컴포넌트 렌더링 */}
     </>
   );
 }
