@@ -11,7 +11,7 @@ interface ProtectedRoutePropType {
   children: React.ReactNode;
 }
 
-function ProtectedRoute({ setCurrentStep, children }: { setCurrentStep: any; children: any }) {
+function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
   // FIXME - 전역 상태로 리팩터링 이전의 모달 사용
   const [isModalOpen, setIsModalOpen] = useState(false);
 
