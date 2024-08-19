@@ -53,18 +53,24 @@
       .item {
         border-radius: 2rem;
 
-        border: 0.1rem solid $color-gray-1;
+        // border: 0.1rem solid $color-gray-1;
         height: 100%;
         display: flex;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
         .des {
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
           align-items: flex-start;
-          padding: 2.4rem;
-          gap: 1.2rem;
+          padding: 2rem;
+          gap: 2.2rem;
           width: 50%;
+
+          p {
+            // background-color: red;
+            margin-bottom: 1rem;
+          }
 
           .free_tag {
             background: #d0f4ff;
@@ -116,18 +122,23 @@
             background-repeat: no-repeat;
             background-size: contain;
           }
+        }
+        .second {
+          width: 50%;
+          border-radius: 2rem;
+          position: relative;
 
-          &::after {
+          &::before {
             content: '';
             position: absolute;
-            top: 50%; // 두 번째 이미지의 수직 위치
-            left: 0; // 두 번째 이미지의 왼쪽 끝에 위치
-            transform: translateY(-50%); // 수직 중앙 정렬
-            width: 140px; // 두 번째 이미지의 너비
-            height: 80px; // 두 번째 이미지의 높이
-            // background-image: url('/image/icon_yellow_s.svg');
+            top: 85%; // 첫 번째 이미지의 수직 위치
+            right: -4.7rem; // 첫 번째 이미지의 오른쪽 끝에 위치
+            transform: translateY(-60%); // 수직 중앙 정렬
+            width: 140px; // 첫 번째 이미지의 너비
+            height: 100px; // 첫 번째 이미지의 높이
+            background-image: url('/image/character_3_left.svg');
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: contain;
           }
         }
       }
@@ -140,7 +151,8 @@
     gap: 2rem;
 
     .card {
-      border: 1px solid #b9b9b9;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 3rem;
       border-radius: 2rem;
       padding: 2rem;
       width: 33%;
@@ -183,6 +195,7 @@
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    margin-bottom: 12rem;
 
     .main-notice-bg {
       width: 100%;
@@ -190,11 +203,11 @@
       background-repeat: no-repeat;
       background-size: contain;
       background-image: url('/image/main-slide-bg.svg');
-      gap: 2rem;
+      backdrop-filter: blur(10px);
     }
 
     .glass-effect-card {
-      margin-top: 3rem;
+      margin-top: 4rem;
       width: 44rem;
       padding: 2rem;
       background: rgba(255, 255, 255, 0.1);
@@ -222,12 +235,13 @@
       // 말풍선 스타일
       .bubble {
         position: absolute;
-        top: -20px;
+        top: -30px;
         width: 4rem;
         height: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;
+
         font-size: 1.2rem;
         color: #333;
       }
@@ -240,6 +254,9 @@
     .main_service {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10rem;
 
       .main_slide {
         grid-row-start: unset;
@@ -262,7 +279,7 @@
 
         &.n1,
         &.n2 {
-          width: 100%;
+          width: 80%;
         }
 
         .item {
@@ -271,7 +288,7 @@
 
           .des {
             width: 100%;
-            padding: 1.2rem; /* 패딩을 줄여서 좁은 화면에서 공간 확보 */
+            padding: 3rem;
           }
 
           .free_items_img {
@@ -298,11 +315,56 @@
       margin-top: 5rem;
       width: 100%;
       padding: 0 1rem; /* 양쪽 패딩 추가 */
+      display: none;
 
       .glass-effect-card {
         width: 100%;
         padding: 1.5rem;
         border-radius: 1.5rem; /* 작은 화면에서는 더 작은 라운드 */
+      }
+    }
+
+    .MainThemeItems {
+      width: 100%;
+      display: flex;
+      gap: 2rem;
+
+      .card {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 3rem;
+        border-radius: 2rem;
+        padding: 2rem;
+        width: 33%;
+        height: 21rem;
+        position: relative;
+
+        h1 {
+          font-size: 1.8rem;
+          margin-bottom: 1.2rem;
+        }
+
+        .coin {
+          display: none;
+          position: absolute;
+          bottom: 2rem;
+          left: 2rem;
+          width: 9rem;
+          height: 4rem;
+          gap: 1rem;
+          justify-content: center;
+          align-items: center;
+          background-color: #fe8f96;
+          border-radius: 2rem;
+          color: #fff;
+          font-weight: 600;
+
+          .coin-img {
+            width: 2.7rem;
+            height: 2.5rem;
+            background-repeat: no-repeat;
+            background-image: url('/image/coin.svg');
+          }
+        }
       }
     }
   }
