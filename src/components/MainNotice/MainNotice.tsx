@@ -23,40 +23,40 @@ function MainNotice() {
           loop={true}
         >
           <SwiperSlide className="glass-effect-card">
-            <h1>Q.분석은 정확한가요?</h1>
-            <p>A.다소 정확하지 않을 수 있어요</p>
+            <h1>분석은 정확한가요?</h1>
+            <p>다소 정확하지 않을 수 있어요</p>
             <p> 그래도 최선을 다하고 있습니다.</p>
             <div className="bubble">
               <Image src="/image/notice-icon/notice1.svg" width={50} height={50} alt="not" />
             </div>
           </SwiperSlide>
           <SwiperSlide className="glass-effect-card">
-            <h1>Q.분석은 정확한가요?</h1>
-            <p>A.다소 정확하지 않을 수 있어요</p>
+            <h1>분석은 정확한가요?</h1>
+            <p>다소 정확하지 않을 수 있어요</p>
             <p> 그래도 최선을 다하고 있습니다.</p>
             <div className="bubble">
               <Image src="/image/notice-icon/notice2.svg" width={50} height={50} alt="not" />
             </div>
           </SwiperSlide>
           <SwiperSlide className="glass-effect-card">
-            <h1>Q.분석은 정확한가요?</h1>
-            <p>A.다소 정확하지 않을 수 있어요</p>
+            <h1>분석은 정확한가요?</h1>
+            <p>다소 정확하지 않을 수 있어요</p>
             <p> 그래도 최선을 다하고 있습니다.</p>
             <div className="bubble">
               <Image src="/image/notice-icon/notice3.svg" width={50} height={50} alt="not" />
             </div>
           </SwiperSlide>
           <SwiperSlide className="glass-effect-card">
-            <h1>Q.분석은 정확한가요?</h1>
-            <p>A.다소 정확하지 않을 수 있어요</p>
+            <h1>분석은 정확한가요?</h1>
+            <p>다소 정확하지 않을 수 있어요</p>
             <p> 그래도 최선을 다하고 있습니다.</p>
             <div className="bubble">
               <Image src="/image/notice-icon/notice4.svg" width={50} height={50} alt="not" />
             </div>
           </SwiperSlide>
           <SwiperSlide className="glass-effect-card">
-            <h1>Q.분석은 정확한가요?</h1>
-            <p>A.다소 정확하지 않을 수 있어요</p>
+            <h1>분석은 정확한가요?</h1>
+            <p>다소 정확하지 않을 수 있어요</p>
             <p> 그래도 최선을 다하고 있습니다.</p>
             <div className="bubble">
               <Image src="/image/coin.svg" width={50} height={50} alt="not" />
