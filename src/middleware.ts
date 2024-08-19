@@ -2,16 +2,16 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { auth } from './auth';
 
-// TODO - 현재 테스트 클릭시 게스트 상태이면 Login 안내 모달 없이 /login 페이지로 리다이렉트
-// 모달 띄워서 안내하도록 추가해야함
+// TODO - 현재 lovetest 로그인만 되면 접근 가능함 유료 결제에 대한 접근 수정필요
 
 const matchersForSignIn = ['/signup/*', '/login/*'];
-const matchersForAuth = ['/mypage/*', '/charge/*', '/freetest/*', '/lovetest/*'];
+const matchersForAuth = ['/mypage/*', '/charge/*', '/charge'];
+
+const matchersForTest = ['/freetest', '/lovetest'];
 
 export const middleware = async (request: NextRequest) => {
   const mySession = await auth();
   const pathname = request.nextUrl.pathname;
-  // const step = request.nextUrl.searchParams.get('step');
 
   // NOTE - 로그인 후 회원가입 및 로그인 페이지 접근 제어
   const isMatchForSignIn = matchersForSignIn.some((element) => element.includes(pathname));
@@ -20,15 +20,27 @@ export const middleware = async (request: NextRequest) => {
   }
 
   // NOTE - 인증이 필요한 페이지 접근 제어
-  // FIXME - 결과페이지 로그인 유무만 제어 중, 본인의 결과인지에 대해 추가 보호 필요함
-  const isMatchForAuth = matchersForAuth.some((element) =>
-    pathname.startsWith(element.replace('*', ''))
-  );
+  const isMatchForAuth = matchersForAuth.some((element) => element.includes(pathname));
   if (isMatchForAuth) {
     return mySession ? NextResponse.next() : NextResponse.redirect(new URL('/login', request.url));
   }
 
-  return NextResponse.next();
+  // NOTE - TEST 페이지들 선택적 접근 제어
+  for (const matcher of matchersForTest) {
+    if (request.nextUrl.pathname.startsWith(matcher)) {
+      // 접근 허용 경로
+      if (pathname === matcher) {
+        return NextResponse.next();
+      }
+
+      // /matcher/ 다음에 어떤 값이 붙으면 접근 제한
+      const regex = new RegExp(`^${matcher}/\\d+$`);
+      if (regex.test(pathname)) {
+        console.log('test,', regex.test(pathname));
+        return NextResponse.rewrite(new URL('/login', request.url));
+      }
+    }
+  }
 };
 
 export const config = {
@@ -37,8 +49,9 @@ export const config = {
     '/signup',
     '/mypage',
     '/freetest',
-    '/lovetest',
-    '/charge',
     '/freetest/:path*',
+    '/lovetest/',
+    '/lovetest/:path*',
+    '/charge',
   ],
 };
