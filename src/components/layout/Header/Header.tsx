@@ -8,7 +8,7 @@ import NavBar from './NavBar/NavBar';
 async function Header() {
   const session = await auth();
   return (
-    <header className={poppinsFont.className}>
+    <header className={`${poppinsFont.className} header`}>
       <div className="HeaderLayout">
         {/* 사이트 로고 및 제목 */}
         <h1 className="logo">
