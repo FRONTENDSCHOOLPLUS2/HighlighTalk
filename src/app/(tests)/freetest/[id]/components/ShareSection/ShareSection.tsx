@@ -40,9 +40,11 @@ function ShareSection() {
     <section className="share">
       <h2 className="heading-2">결과 공유하기</h2>
       <p className="heading-desc">대화방 참여자들에게 분석 내용을 공유해 보세요!</p>
-      <Button styleType="tonal" size="md" rounded onClick={handleButtonPress}>
-        공유하기
-      </Button>
+      <div className="cont-btn">
+        <Button styleType="tonal" size="md" rounded onClick={handleButtonPress}>
+          공유하기
+        </Button>
+      </div>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal} content="친구들에게 결과를 공유해보세요!">
           <div className="list-btn">

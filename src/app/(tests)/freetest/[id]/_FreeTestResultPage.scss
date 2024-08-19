@@ -2,10 +2,20 @@
 @import '@/styles/mixins/flex.scss';
 
 .result {
-  position: relative;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   overflow: hidden auto;
 
+  & > :first-child {
+    padding-top: 11rem;
+  }
+
   & > section {
+    position: relative;
+    padding: 3rem 12rem;
     scroll-margin: 6rem;
     scroll-snap-align: start;
     min-height: 90svh;

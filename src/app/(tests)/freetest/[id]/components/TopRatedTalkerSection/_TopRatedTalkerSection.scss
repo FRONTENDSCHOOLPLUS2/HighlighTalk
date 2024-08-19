@@ -6,11 +6,18 @@
   justify-content: center;
 
   background-color: #fffaed;
+  h3.heading-3 {
+    margin-top: 8rem;
+  }
 
   &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     content: '';
     margin-bottom: -7rem;
-    height: 16rem;
+    height: 8rem;
     width: 100%;
     display: block;
     background-image: url('/image/wave.svg');
