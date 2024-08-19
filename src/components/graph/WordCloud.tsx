@@ -17,6 +17,9 @@ interface Word extends d3Cloud.Word {
 }
 
 function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
+  const MIN_FONT_SCALE_PX = 16;
+  const MAX_FONT_SCALE_PX = 100;
+
   const canvasRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement | null>(null); // SVG 요소를 재사용하기 위한 ref
   const { createTooltip, showTooltip, hideTooltip, setTooltipContent, setTooltipPosition } =
@@ -30,7 +33,10 @@ function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
     const fontScale = d3
       .scaleLinear()
       .domain([1, sortedData[0]?.value || 10])
-      .range([12, 60]);
+      .range([MIN_FONT_SCALE_PX, MAX_FONT_SCALE_PX]);
+
+    // 글씨 색상 설정 함수
+    const colorScale = d3.scaleLinear().domain([1, sortedData.length]).range(['#ddd', '#333']);
 
     if (!svgRef.current) {
       // SVG가 없을 때만 새로 생성
@@ -53,7 +59,7 @@ function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
     d3Cloud()
       .size([width, height])
       .words(sortedData.map((d) => ({ text: d.key, size: fontScale(d.value), value: d.value })))
-      .padding(15)
+      .padding(20)
       .rotate(() => 0)
       .font('Pretendard')
       .fontSize((d) => d.size as number)
@@ -69,7 +75,7 @@ function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
           .merge(textSelection)
           .style('font-size', (d) => `${d.size}px`)
           .style('font-family', 'Pretendard')
-          .style('fill', '#333333')
+          .style('fill', (d) => colorScale(d.value))
           .style('font-weight', '700')
           .attr('text-anchor', 'middle')
           .attr('transform', (d) => `translate(${d.x}, ${d.y})`)
