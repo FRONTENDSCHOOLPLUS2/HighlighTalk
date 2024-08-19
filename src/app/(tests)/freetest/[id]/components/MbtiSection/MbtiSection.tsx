@@ -15,11 +15,10 @@ interface Ability {
 
 interface MbtiAnalysisItem {
   names: string;
-  reason: string;
-  item: string;
   value: string;
+  reason: string;
+  ability: { energy: number; social: number; intelligence: number }[];
   etc: string[];
-  ability: Ability[];
 }
 
 interface MbtiSectionPropType {
@@ -110,14 +109,6 @@ function MbtiSection({ data = [] }: MbtiSectionPropType) {
           ))}
         </Swiper>
       </div>
-      {/* <ol className="mbti-list">
-        <li className="mbti-item">
-          <span>여다희</span>
-        </li>
-        <li>
-          <span>INTP</span>
-        </li>
-      </ol> */}
     </section>
   );
 }
