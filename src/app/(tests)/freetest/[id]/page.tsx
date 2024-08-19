@@ -2,8 +2,7 @@
 
 import PopularWordSection from './components/PopularWordSection/PopularWordSection';
 import ThemeSection from './components/ThemeSection/ThemeSection';
-import Mbti from '@/components/Mbti/Mbti';
-// import MbtiSection from './components/MbtiSection/MbtiSection';
+import MbtiSection from './components/MbtiSection/MbtiSection';
 import TopRatedTalkerSection from './components/TopRatedTalkerSection/TopRatedTalkerSection';
 import ShareSection from './components/ShareSection/ShareSection';
 import Script from 'next/script';
@@ -96,8 +95,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       ></Script>
       <ThemeSection data={chatThemeData} />
       <TopRatedTalkerSection data={circlePackingData} />
-      {/* <MbtiSection data={[]} /> */}
-      <Mbti extraItem={extraItem} />
+      <MbtiSection data={extraItem.result} />
       <PopularWordSection data={wordCloudData} />
       <ShareSection />
     </article>
