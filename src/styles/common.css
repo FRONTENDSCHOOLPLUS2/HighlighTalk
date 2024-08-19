@@ -41,6 +41,6 @@
 /* PC */
 @media (min-width: 768px) {
   .containerLayout {
-    padding: 2rem var(--layout-padding) 0 var(--layout-padding);
+    padding: 17rem var(--layout-padding) 0 var(--layout-padding);
   }
 }

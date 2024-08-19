@@ -1,18 +1,41 @@
-.HeaderLayout {
-  display: flex;
-  font-size: 1.8rem;
-  justify-content: space-between;
-  align-items: center;
+@import '@/styles/_variable.scss';
+
+.header {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
   margin-bottom: 10rem;
-  position: relative;
+  background-color: white;
 
-  .logo {
-    flex-shrink: 0;
-    font-weight: bold;
+  // background-color: aquamarine;
 
-    .logo-link {
-      text-decoration: none; // 밑줄 제거
-      color: inherit; // 상위 요소의 색상 상속
+  padding: 1rem 1rem;
+  box-shadow: 5px 0 7px $color-gray-1;
+
+  .HeaderLayout {
+    display: flex;
+    font-size: 1.8rem;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    padding: 0 3rem;
+
+    .logo {
+      flex-shrink: 0;
+      font-weight: bold;
+
+      .logo-link {
+        text-decoration: none; // 밑줄 제거
+        color: inherit; // 상위 요소의 색상 상속
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 1.4rem;
+      max-height: 2rem;
     }
   }
 }
