@@ -1,53 +1,24 @@
-import Image from 'next/image';
 import './_home.scss';
-import Link from 'next/link';
-import Button from '@/components/Button/Button';
+import MainNotice from '@/components/MainNotice/MainNotice';
+import MainSlide from '@/components/MainSlide/MainSlide';
+import MainItems from '@/components/MainItems/MainItems';
+import MainThemeItems from '@/components/MainThemeItems/MainThemeItems';
+
+export const metadata = {
+  title: '하이라이톡 | 메인페이지', // 페이지 타이틀
+  description: '하이라이톡 에서 AI기반 톡방 분석 서비스를 받아 보세요', // 페이지 설명
+  keywords: 'highlightalk',
+};
 
 function MainPage() {
   return (
     <main className="MainPage">
       <div className="main_service">
-        <div className="main_slide">
-          <Image
-            width={0}
-            height={0}
-            sizes="100vw"
-            src="/image/mainslide1.svg"
-            alt="img"
-            priority
-          />
-        </div>
-        <div className="main_items n1">
-          <Link href="/freetest">
-            <div className="item free_item">
-              <div className="free_item_des des">
-                <h1>우리 톡방 분석 서비스</h1>
-                <p>AI가 우리 톡방 내용을 읽고</p>
-                <p>분석결과를 보여줘요!</p>
-                <Button theme="secondary" rounded={true} size="md">
-                  FREE
-                </Button>
-              </div>
-              <div className="free_items_img"></div>
-            </div>
-          </Link>
-        </div>
-        <div className="main_items n2">
-          <Link href="/lovetest">
-            <div className="item pay_item">
-              <div className="pay_item_des des">
-                <h1>우리 연애 이대로 괜찮을까?</h1>
-                <p>AI가 우리 톡방 내용을 읽고</p>
-                <p>분석결과를 보여줘요!</p>
-                <Button theme="primary" size="md" rounded={true} iconSrc={'/image/coin.svg'}>
-                  100
-                </Button>
-              </div>
-              <div className="free_items_img"></div>
-            </div>
-          </Link>
-        </div>
+        <MainSlide />
+        <MainItems />
       </div>
+      <MainNotice />
+      <MainThemeItems />
     </main>
   );
 }
