@@ -1,3 +1,5 @@
+@import '@/styles/variable';
+
 .MainPage {
   .main_service {
     width: 100%;
@@ -41,6 +43,7 @@
       }
       h1 {
         font-size: 1.8rem;
+        font-weight: 600;
       }
       p {
         font-size: 1.6rem;
@@ -49,8 +52,8 @@
 
       .item {
         border-radius: 2rem;
-        // box-shadow: inset 0px 0px 20px red;
-        border: 0.1rem solid #ddd;
+
+        border: 0.1rem solid $color-gray-1;
         height: 100%;
         display: flex;
 
@@ -62,6 +65,39 @@
           padding: 2.4rem;
           gap: 1.2rem;
           width: 50%;
+
+          .free_tag {
+            background: #d0f4ff;
+            color: #4997f2;
+            padding: 0.8rem 1.6rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.6rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            width: fit-content;
+            font-weight: 600;
+          }
+          .payed_tag {
+            background: #ffefcb;
+            color: #ffb200;
+            padding: 0.8rem 1.6rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.6rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            gap: 0.5rem;
+            cursor: pointer;
+            .payed_tagImage {
+              width: 2.7rem;
+              height: 2.5rem;
+              background-repeat: no-repeat;
+              background-image: url('/image/coin.svg');
+            }
+          }
         }
         .free_items_img {
           width: 50%;
@@ -71,14 +107,14 @@
           &::before {
             content: '';
             position: absolute;
-            top: 78%; // 첫 번째 이미지의 수직 위치
-            right: -1rem; // 첫 번째 이미지의 오른쪽 끝에 위치
+            top: 85%; // 첫 번째 이미지의 수직 위치
+            right: -4.7rem; // 첫 번째 이미지의 오른쪽 끝에 위치
             transform: translateY(-60%); // 수직 중앙 정렬
             width: 140px; // 첫 번째 이미지의 너비
             height: 100px; // 첫 번째 이미지의 높이
             background-image: url('/image/icon_blue.svg');
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: contain;
           }
 
           &::after {
@@ -97,31 +133,228 @@
       }
     }
   }
+
+  .MainThemeItems {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+
+    .card {
+      border: 1px solid #b9b9b9;
+      border-radius: 2rem;
+      padding: 2rem;
+      width: 33%;
+      height: 21rem;
+      position: relative;
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .coin {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        width: 9rem;
+        height: 4rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        background-color: #fe8f96;
+        border-radius: 2rem;
+        color: #fff;
+        font-weight: 600;
+
+        .coin-img {
+          width: 2.7rem;
+          height: 2.5rem;
+          background-repeat: no-repeat;
+          background-image: url('/image/coin.svg');
+        }
+      }
+    }
+  }
+
+  .main-notice {
+    margin-top: 17rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .main-notice-bg {
+      width: 100%;
+      height: 26rem;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url('/image/main-slide-bg.svg');
+      gap: 2rem;
+    }
+
+    .glass-effect-card {
+      margin-top: 3rem;
+      width: 44rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      h1 {
+        font-size: 1.8rem;
+        color: #252525;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1.6rem;
+        color: #828282;
+        margin: 0;
+      }
+
+      // 말풍선 스타일
+      .bubble {
+        position: absolute;
+        top: -20px;
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #333;
+      }
+    }
+  }
 }
 
-// // mobile
-// @media (max-width: 768px) {
-//   .main_slide {
-//     display: none;
-//   }
-//   .main_service {
-//     .free_items_img {
-//       border-radius: 2rem;
-//       position: relative;
+@media (max-width: 1024px) {
+  .MainPage {
+    .main_service {
+      display: flex;
+      flex-direction: column;
 
-//       &::after {
-//         display: none;
-//         content: '';
-//         position: absolute;
-//         top: 70%; // 수직 중앙 정렬 (필요에 따라 조정)
-//         right: 0; // 오른쪽 끝에 위치
-//         transform: translateY(-60%); // 수직 중앙 정렬을 위해 변환
-//         width: 140px; // 이미지의 너비 (필요에 따라 조정)
-//         height: 100px; // 이미지의 높이 (필요에 따라 조정)
-//         background-image: url('/image/icon_blue.svg');
-//         background-repeat: no-repeat;
-//         background-size: cover;
-//       }
-//     }
-//   }
-// }
+      .main_slide {
+        grid-row-start: unset;
+        grid-row-end: unset;
+        width: 100%;
+        height: auto;
+        order: 1; /* 순서를 첫 번째로 변경 */
+
+        img {
+          width: 100%;
+          height: auto; /* 이미지가 화면 크기에 맞게 조정되도록 */
+        }
+      }
+
+      .main_items {
+        order: 2; /* 순서를 두 번째로 변경 */
+        grid-row-start: unset;
+        grid-row-end: unset;
+        gap: 1.5rem;
+
+        &.n1,
+        &.n2 {
+          width: 100%;
+        }
+
+        .item {
+          flex-direction: column;
+          height: auto;
+
+          .des {
+            width: 100%;
+            padding: 1.2rem; /* 패딩을 줄여서 좁은 화면에서 공간 확보 */
+          }
+
+          .free_items_img {
+            width: 100%;
+            margin-top: 1rem;
+            position: relative; /* 부모 요소를 기준으로 절대 위치 조정 */
+            &::before,
+            &::after {
+              display: none;
+              top: unset;
+              right: unset;
+              transform: unset;
+              left: 50%; /* 가운데로 위치 */
+              transform: translateX(-50%);
+              width: 100px;
+              height: 80px;
+            }
+          }
+        }
+      }
+    }
+
+    .main-notice {
+      margin-top: 5rem;
+      width: 100%;
+      padding: 0 1rem; /* 양쪽 패딩 추가 */
+
+      .glass-effect-card {
+        width: 100%;
+        padding: 1.5rem;
+        border-radius: 1.5rem; /* 작은 화면에서는 더 작은 라운드 */
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .MainPage {
+    .main_service {
+      .main_items {
+        gap: 1rem;
+
+        .item {
+          .des {
+            padding: 1rem; /* 더 작은 화면에서 패딩 줄이기 */
+          }
+
+          .free_items_img {
+            margin-top: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .main-notice {
+      margin-top: 3rem;
+
+      .glass-effect-card {
+        padding: 1rem;
+      }
+    }
+  }
+}
+@media (max-width: 480px) {
+  .MainPage {
+    display: none;
+    .main_service {
+      .main_items {
+        .item {
+          .des {
+            padding: 0.8rem; /* 아주 작은 화면에서는 패딩을 최소화 */
+          }
+        }
+      }
+    }
+
+    .main-notice {
+      margin-top: 2rem;
+
+      .glass-effect-card {
+        display: none;
+        padding: 0.8rem;
+        border-radius: 1rem; /* 아주 작은 화면에서는 더 작은 라운드 */
+      }
+    }
+  }
+}

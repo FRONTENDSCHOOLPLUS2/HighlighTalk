@@ -18,7 +18,10 @@ const notoSans = Noto_Sans({
 
 export const metadata: Metadata = {
   title: '하이라이톡',
-  description: '하이라이톡 | 메인페이지',
+  description: '하이라이톡 | AI 기반 톡방 분석 서비스',
+  icons: {
+    icon: '/image/icon_blue_s.svg',
+  },
 };
 
 export default function RootLayout({
