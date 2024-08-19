@@ -6,7 +6,6 @@ import { auth } from './auth';
 
 const matchersForSignIn = ['/signup/*', '/login/*'];
 const matchersForAuth = ['/mypage/*', '/charge/*', '/charge'];
-
 const matchersForTest = ['/freetest', '/lovetest'];
 
 export const middleware = async (request: NextRequest) => {
@@ -26,16 +25,16 @@ export const middleware = async (request: NextRequest) => {
   }
 
   // NOTE - TEST 페이지들 선택적 접근 제어
+
   for (const matcher of matchersForTest) {
     if (request.nextUrl.pathname.startsWith(matcher)) {
       // 접근 허용 경로
       if (pathname === matcher) {
         return NextResponse.next();
       }
-
-      // /matcher/ 다음에 어떤 값이 붙으면 접근 제한
+      // /matcher/ 다음에 어떤 값이 붙었음 (결과 페이지) + 로그인되어있지 않으면 접근 못하도록
       const regex = new RegExp(`^${matcher}/\\d+$`);
-      if (regex.test(pathname)) {
+      if (regex.test(pathname) && !mySession) {
         console.log('test,', regex.test(pathname));
         return NextResponse.rewrite(new URL('/login', request.url));
       }
