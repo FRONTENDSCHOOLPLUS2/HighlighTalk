@@ -57,6 +57,7 @@ function LoginForm() {
       email: 'tmuchtalker@gmail.com',
       password: `${TEST_PASSWORD}`,
     };
+
     try {
       await signInWithCredentials(testAccountData);
     } catch (error) {
@@ -67,13 +68,12 @@ function LoginForm() {
         });
       }
     }
+    window.location.href = '/'; // 홈 페이지로 이동, 전체 페이지 새로 고침 (테스트계정 로그인에만 적용)
   };
 
-  // TODO - 모달 열어서 '테스트계정으로 로그인하시겠습니까?' 한번 걸기
   const handleTestAccountLogin = async () => {
     openModal();
   };
-  // FIXME - 소셜 로그인 눌렀을 때 페이지 이동 전 폼의 에러 메세지 출력되는 오류 해결하기
 
   return (
     <div className="login-container">
