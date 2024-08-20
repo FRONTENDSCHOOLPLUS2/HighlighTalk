@@ -1,0 +1,50 @@
+@use '@/styles/mixins/flex' as flex;
+@import '@/styles/variable.scss';
+
+.coin-notice-container {
+  margin-top: 10rem;
+
+  background-color: #fafafa;
+
+  .contents {
+    max-width: 75rem;
+    padding: 2rem 1.8rem;
+
+    ul {
+      display: flex;
+      gap: 2rem;
+
+      .notice-info {
+        flex-basis: 45rem;
+      }
+    }
+    dl {
+      .notice-title {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+
+      dd {
+        position: relative;
+        font-size: 1.2rem;
+        word-break: keep-all;
+        padding-left: 1.2rem;
+
+        &::before {
+          position: absolute;
+          left: 5px;
+          top: 0.7rem;
+          content: '';
+          display: block;
+          width: 2px;
+          height: 2px;
+          background-color: black;
+        }
+
+        + dd {
+          margin-top: 0.4rem;
+        }
+      }
+    }
+  }
+}

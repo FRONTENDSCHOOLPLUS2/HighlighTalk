@@ -1,0 +1,77 @@
+@use '@/styles/mixins/flex' as flex;
+@use '@/styles/mixins/util' as util;
+@import '@/styles/variable.scss';
+
+.user-coin-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid $color-gray-1;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  color: $color-gray-4;
+
+  .left-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    b {
+      color: $color-yellow-3;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+  }
+
+  .right-content {
+    .description {
+      font-size: 1.4rem;
+    }
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+}
+
+.coin-tabs-container {
+  width: 100%;
+  background-color: white;
+  border: 1px solid $color-gray-1;
+  border-radius: 2rem;
+  overflow: hidden;
+
+  .tab-header {
+    display: flex;
+
+    justify-content: center;
+
+    button {
+      width: 50%;
+      flex-basis: 1;
+      text-align: center;
+      padding: 2.4rem;
+      border-bottom: 1px solid $color-gray-1;
+      color: $color-gray-2;
+
+      font-weight: 700;
+      + button {
+        border-left: 1px solid $color-gray-1;
+      }
+
+      &.active {
+        border-bottom: 1px solid transparent;
+        color: $color-black;
+      }
+
+      &.hover {
+        color: red;
+      }
+    }
+  }
+
+  .tab-contents {
+    padding: 4.8rem;
+  }
+}
