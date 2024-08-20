@@ -1,14 +1,13 @@
 import SignupForm from '@/components/Form/SignupForm/SignupForm';
 import './_SignupPage.scss';
+import { poppinsFont } from '@/utils/font';
 
 function SignupPage() {
   return (
-    <div className="signup-page">
+    <div className="signup-page-container">
       <span className="background"></span>
-      <div className="signup-page-container">
-        <h1 className="title">회원가입</h1>
-        <SignupForm />
-      </div>
+      <h1 className={`${poppinsFont.className} title`}>회원가입</h1>
+      <SignupForm />
     </div>
   );
 }
