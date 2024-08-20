@@ -74,7 +74,6 @@ function LoginForm() {
   const handleTestAccountLogin = async () => {
     openModal();
   };
-
   return (
     <div className="login-container">
       <div className="login-form-container">
