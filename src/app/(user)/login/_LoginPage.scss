@@ -11,7 +11,7 @@
     background-image: url('/image/character_6.svg');
     background-size: 330px;
     // background-position: right bottom;
-    background-position: 100% 300%;
+    background-position: 100% 150%;
     background-repeat: no-repeat;
 
     position: fixed;
@@ -27,6 +27,8 @@
     left: 50%;
     top: -10%;
     font-size: 2.4rem;
+    // REVIEW - 로그인 black으로 하면 너무 진한 것 같은데 적절한 색 필요할듯
+    // color: $color-gray-4;
     transform: translateX(-50%);
     white-space: nowrap;
   }
