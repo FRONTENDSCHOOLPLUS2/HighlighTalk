@@ -48,9 +48,12 @@
 }
 
 @media (max-width: 767px) {
+  /* NOTE -모바일 환경 - 하단 NavBar로 들어감,
+  현재는 임시 설정 */
   .header {
     position: fixed;
-    bottom: 0;
+    padding: 0;
+    font-size: 1.2rem;
     width: 100%;
     z-index: 1000;
   }

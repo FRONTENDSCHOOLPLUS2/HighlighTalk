@@ -2,6 +2,8 @@
 
 .signup-form {
   @include mixins.flexColumn;
+  z-index: 20;
+  background-color: white;
   gap: 2rem;
   min-width: 55rem;
   padding: 6rem;

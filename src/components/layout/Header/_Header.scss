@@ -35,5 +35,10 @@
       font-size: 1.4rem;
       max-height: 2rem;
     }
+
+    /* 모바일 */
+    @media (max-width: 767px) {
+      font-size: 1.4rem;
+    }
   }
 }
