@@ -1,20 +1,20 @@
-/* Button.scss */
+@import '@/styles/variable';
 
 @mixin button-color($bg-color, $text-color) {
   background: $bg-color;
   color: $text-color;
 
   &:hover {
-    background: $bg-color;
+    background: lighten($bg-color, 10%);
   }
 
   &:active {
-    background: $bg-color;
+    background: darken($bg-color, 10%);
   }
 
   &.disabled {
-    color: var(--color-gray-3);
-    background-color: var(--color-gray-1);
+    color: $color-gray-3;
+    background-color: $color-gray-1;
     font-weight: 500;
     cursor: not-allowed;
   }
@@ -23,11 +23,11 @@
 @mixin button-type($bg-color, $text-color, $border-color: transparent) {
   background-color: $bg-color;
   color: $text-color;
-  box-shadow: 0 0 0 2px transparent inset;
+  box-shadow: 0 0 0 1px transparent inset;
 
   &.type-outlined {
-    background-color: var(--color-white);
-    box-shadow: 0 0 0 2px $border-color inset;
+    background-color: $color-white;
+    box-shadow: 0 0 0 1px $border-color inset;
     color: $text-color;
   }
 
@@ -36,7 +36,7 @@
     color: $text-color;
 
     &.disabled {
-      color: var(--color-gray-2);
+      color: $color-gray-2;
       background-color: transparent;
     }
   }
@@ -76,72 +76,72 @@
   &.size-full {
     width: 100%;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   &.theme-primary {
-    @include button-color(var(--color-yellow-3), var(--color-black));
+    @include button-color($color-yellow-3, $color-black);
     &.type-default {
-      @include button-color(var(--color-yellow-3), var(--color-black));
+      @include button-color($color-yellow-3, $color-black);
     }
     &.type-tonal {
-      @include button-color(var(--color-yellow-2), var(--color-black));
+      @include button-color($color-yellow-2, $color-black);
     }
-    @include button-type(var(--color-yellow-3), var(--color-black), var(--color-yellow-3));
+    @include button-type($color-yellow-3, $color-black, $color-yellow-3);
 
     &.type-outlined {
-      background-color: var(--color-white);
-      box-shadow: 0 0 0 2px var(--color-yellow-2) inset;
-      color: var(--color-yellow-3); // outlined 상태에서 텍스트 색상 수정
+      background-color: $color-white;
+      box-shadow: 0 0 0 1px $color-yellow-2 inset;
+      color: $color-yellow-3; // outlined 상태에서 텍스트 색상 수정
     }
 
     &.type-text {
       background-color: transparent;
-      color: var(--color-yellow-3); // type-text 상태에서 텍스트 색상 수정
+      color: $color-yellow-3; // type-text 상태에서 텍스트 색상 수정
     }
   }
 
   &.theme-secondary {
-    @include button-color(var(--color-skyblue-2), var(--color-white));
+    @include button-color($color-skyblue-2, $color-white);
     &.type-default {
-      @include button-color(var(--color-skyblue-2), var(--color-white));
+      @include button-color($color-skyblue-2, $color-white);
     }
     &.type-tonal {
-      @include button-color(var(--color-skyblue-1), var(--color-skyblue-2));
+      @include button-color($color-skyblue-1, $color-skyblue-2);
     }
-    @include button-type(var(--color-skyblue-2), var(--color-white), var(--color-skyblue-2));
+    @include button-type($color-skyblue-2, $color-white, $color-skyblue-2);
 
     &.type-outlined {
-      background-color: var(--color-white);
-      box-shadow: 0 0 0 2px var(--color-skyblue-2) inset;
-      color: var(--color-skyblue-2); // outlined 상태에서 텍스트 색상 수정
+      background-color: $color-white;
+      box-shadow: 0 0 0 1px $color-skyblue-2 inset;
+      color: $color-skyblue-2; // outlined 상태에서 텍스트 색상 수정
     }
 
     &.type-text {
       background-color: transparent;
-      color: var(--color-skyblue-2); // type-text 상태에서 텍스트 색상 수정
+      color: $color-skyblue-2; // type-text 상태에서 텍스트 색상 수정
     }
   }
 
   &.theme-black {
-    @include button-color(var(--color-black), var(--color-white));
+    @include button-color($color-black, $color-white);
     &.type-default {
-      @include button-color(var(--color-black), var(--color-white));
+      @include button-color($color-black, $color-white);
     }
     &.type-tonal {
-      @include button-color(var(--color-gray-1), var(--color-black));
+      @include button-color($color-gray-1, $color-black);
     }
-    @include button-type(var(--color-black), var(--color-white), var(--color-black));
+    @include button-type($color-black, $color-white, $color-black);
 
     &.type-outlined {
-      background-color: var(--color-white);
-      box-shadow: 0 0 0 2px var(--color-black) inset;
-      color: var(--color-black); // outlined 상태에서 텍스트 색상 수정
+      background-color: $color-white;
+      box-shadow: 0 0 0 1px $color-black inset;
+      color: $color-black; // outlined 상태에서 텍스트 색상 수정
     }
 
     &.type-text {
       background-color: transparent;
-      color: var(--color-black); // type-text 상태에서 텍스트 색상 수정
+      color: $color-black; // type-text 상태에서 텍스트 색상 수정
     }
   }
 
