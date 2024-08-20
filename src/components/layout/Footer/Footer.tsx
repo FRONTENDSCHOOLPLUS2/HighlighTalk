@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import './_Footer.scss';
-import { IconGitHub, IconInsta, IconMail } from '@/public/image';
+import { IconGithub, IconInsta, IconMail } from '@public/image';
 
 export default function Footer() {
   return (
@@ -31,7 +31,7 @@ export default function Footer() {
           <IconMail />
         </Link>
         <Link href="https://github.com/FRONTENDSCHOOLPLUS2/HighlighTalk" target="_blank">
-          <IconGitHub />
+          <IconGithub />
         </Link>
       </nav>
     </footer>
