@@ -238,6 +238,7 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
    * ### confirm_process 사용 시 가맹점 endpoint url 설정
    * - 기술지원 메일로 별도 요청이 필요합니다. (support@portone.io)
    */
+  bypass?: any;
   confirm_url?: string;
   /**
    * ### 웹훅(Webhook) 수신 주소
@@ -252,6 +253,10 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
   customer_uid?: string;
   display?: Display;
   card?: Card;
+
+  locale?: string;
+  appCard?: boolean;
+  useCardPoint?: boolean;
 }
 
 export interface RequestPayAdditionalResponse {
