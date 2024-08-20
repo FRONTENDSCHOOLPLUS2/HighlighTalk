@@ -12,8 +12,6 @@ function CoinUsageHistory() {
   const session = useSession();
   const [orders, setOrders] = useState([]);
 
-  // FIXME -  결제 목록 내역을 불러오는 함수 (500 Error)
-
   useEffect(() => {
     const getOrderList = async () => {
       try {
