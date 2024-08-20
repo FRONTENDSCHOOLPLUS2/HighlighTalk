@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { SignupFormType } from '@/types';
 import './_SignupForm.scss';
 import { signup } from '@/serverActions/userActions';
+import Button from '@/components/Button/Button';
 
 function SignupForm() {
   const {
@@ -104,9 +105,9 @@ function SignupForm() {
         />
         <span className="error-message">{confirmMessage}</span>
       </div>
-      <button type="submit" className="submit-button">
-        회원가입
-      </button>
+      <Button theme="primary" type="submit" size="full" styleType="tonal">
+        가입하기
+      </Button>
     </form>
   );
 }
