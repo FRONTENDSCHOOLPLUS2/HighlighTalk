@@ -77,45 +77,51 @@ function LoginForm() {
 
   return (
     <div className="login-container">
-      <form onSubmit={handleSubmit(handleSubmitLogin)} className="login-form">
-        <div className="input-group">
-          <label htmlFor="email">이메일</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="highlightalk@gmail.com"
-            {...register('email', {
-              required: '이메일을 입력하세요.',
-            })}
-          />
-          <span className="error-message">{emailErrorMessage}</span>
-        </div>
+      <div className="login-form-container">
+        <form onSubmit={handleSubmit(handleSubmitLogin)}>
+          <div className="input-group">
+            <label htmlFor="email">이메일</label>
+            <input
+              type="text"
+              id="email"
+              placeholder="highlightalk@gmail.com"
+              {...register('email', {
+                required: '이메일을 입력하세요.',
+              })}
+            />
+            <span className="error-message">{emailErrorMessage}</span>
+          </div>
 
-        <div className="input-group">
-          <label htmlFor="password">비밀번호</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="비밀번호를 입력해주세요."
-            {...register('password', {
-              required: '비밀번호를 입력해주세요.',
-              minLength: {
-                value: 8,
-                message: '8자리 이상 비밀번호를 입력하세요.',
-              },
-            })}
-          />
-          <span className="error-message">{passwordErrorMessage}</span>
-        </div>
-        <Button theme="black" size="full" onClick={handleTestAccountLogin}>
-          테스트 계정으로 로그인하기
-        </Button>
-        <button type="submit" className="login-button">
-          로그인
-        </button>
-        <button type="button" className="signup-button">
-          <Link href="/signup">회원가입</Link>
-        </button>
+          <div className="input-group">
+            <label htmlFor="password">비밀번호</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="비밀번호를 입력해주세요."
+              {...register('password', {
+                required: '비밀번호를 입력해주세요.',
+                minLength: {
+                  value: 8,
+                  message: '8자리 이상 비밀번호를 입력하세요.',
+                },
+              })}
+            />
+            <span className="error-message">{passwordErrorMessage}</span>
+          </div>
+          <div className="login-buttons">
+            <Button type="submit" theme="black" size="full" styleType="default">
+              로그인
+            </Button>
+            <Link href="/signup">
+              <Button type="submit" theme="black" size="full" styleType="outlined">
+                회원가입
+              </Button>
+            </Link>
+            <Button theme="black" size="full" onClick={handleTestAccountLogin} styleType="tonal">
+              테스트 계정으로 로그인하기
+            </Button>
+          </div>
+        </form>
         <div className="social-login">
           <p>소셜로그인으로 간편하게 이용해보세요!</p>
           <span className="hr"></span>
@@ -130,7 +136,7 @@ function LoginForm() {
             </button>
           </div>
         </div>
-      </form>
+      </div>
       {isOpen && (
         <Modal
           isOpen={isOpen}
