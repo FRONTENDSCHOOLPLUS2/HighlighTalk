@@ -25,5 +25,5 @@ export const signInWithSocial = async (provider: string) => {
 };
 
 export const signOutWithForm = async (formData: FormData) => {
-  await signOut();
+  await signOut({ redirectTo: '/' });
 };
