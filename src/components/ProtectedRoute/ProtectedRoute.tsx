@@ -2,10 +2,10 @@
 
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { useRouter } from 'next/navigation';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import { Session } from 'next-auth';
 import Modal from '../Modal/Modal';
-import Button from '../Button/Button';
+import { useModalStore } from '@/store/ModalStore';
 
 interface ProtectedRoutePropType {
   setCurrentStep: Dispatch<SetStateAction<number>>;
@@ -13,14 +13,9 @@ interface ProtectedRoutePropType {
 }
 
 function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
-  // FIXME - 전역 상태로 리팩터링 이전의 모달 사용
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModalStore();
   const [sessionChecked, setSessionChecked] = useState(false);
   const [currentSession, setCurrentSession] = useState<Session | null>(null);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   const router = useRouter();
 
@@ -49,12 +44,17 @@ function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
 
   return (
     <>
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal} content="로그인 후 이용해보세요!">
-          <Button theme="black" onClick={handleGoLoginButton}>
-            로그인 하러 가기
-          </Button>
-        </Modal>
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          onClose={handleCloseModal}
+          title="회원 전용 콘텐츠입니다."
+          content="로그인 후 이용해주세요!"
+          buttons={[
+            { label: '로그인하기', onClick: () => handleGoLoginButton(), theme: 'secondary' },
+            { label: `닫기`, onClick: () => handleCloseModal(), theme: 'black' },
+          ]}
+        ></Modal>
       )}
       {sessionChecked && children} {/* 인증된 경우에만 자식 컴포넌트 렌더링 */}
     </>
