@@ -1,7 +1,12 @@
-@use '@/styles/mixins/flex' as mixins;
+@use '@/styles/mixins/flex' as flex;
+@use '@/styles/mixins/util' as util;
+@import '@/styles/variable.scss';
 
 .charge-page-container {
-  background-color: tomato;
+  h2 {
+    @include util.sr-only;
+  }
+  background-color: white;
   max-width: 75rem;
-  display: flex;
+  margin: 0 auto;
 }
