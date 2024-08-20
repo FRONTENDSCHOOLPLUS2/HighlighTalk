@@ -1,5 +1,7 @@
 'use client';
 
+import Button from '@/components/Button/Button';
+import './_CoinCharge.scss';
 import { RequestPayParams, RequestPayResponse } from '@/types/portone';
 
 const MID = process.env.NEXT_PUBLIC_PORTONE_MERCHANT_ID;
@@ -35,15 +37,21 @@ const callback = (response: RequestPayResponse) => {
 
 function CoinCharge() {
   return (
-    <div>
-      <div className="description">
-        <span>코인이란?</span>
-        <span>유료 테마 분석을 위해 필요한 전용 결제수단입니다.</span>
-      </div>
-      <div className="coin-package">
-        <span>코인 패키지</span>
-        <button>충전하기</button>
-      </div>
+    <div className="coin-charge-container">
+      <section className="description">
+        <h3>코인이란?</h3>
+        <div className="">
+          <p>유료 테마 분석을 위해 필요한 전용 결제수단입니다.</p>
+        </div>
+      </section>
+      <section className="coin-package">
+        <h3>코인 패키지</h3>
+        <div className="package-list">
+          <div className="contents">
+            <Button>충전하기</Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
