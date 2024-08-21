@@ -1,5 +1,6 @@
 'use server';
 
+import { Reply } from '@/types/posts';
 import { revalidateTag } from 'next/cache';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;

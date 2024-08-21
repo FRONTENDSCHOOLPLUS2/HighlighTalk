@@ -1,12 +1,13 @@
 import { auth } from '@/auth';
-import { PostItem } from '@/types/posts';
+import { PostItem, Reply } from '@/types/posts';
 import Link from 'next/link';
-import PostInfo from './PostInfo';
+import DeleteReply from './DeleteReply';
 
-async function CommentItem({ item }: { item: PostItem }) {
+async function CommentItem({ item }: { item: Reply }) {
   const session = await auth();
 
-  const isAuthor = session?.user?.id === item?.user._id + '';
+  const isAuthor = session?.user?.id === item?.user._id + ''; // 내 댓글, 게시물 확인
+
   return (
     <div className="comment-item">
       <div className="comment-header">
@@ -18,10 +19,8 @@ async function CommentItem({ item }: { item: PostItem }) {
         </time>
       </div>
       <div className="comment-body">
-        <form action="#">
-          <pre className="comment-content">{item.content}</pre>
-          {isAuthor ? <PostInfo item={item} /> : ''}
-        </form>
+        <pre className="comment-content">{item.content}</pre>
+        {isAuthor ? <DeleteReply item={item} /> : ''}
       </div>
     </div>
   );

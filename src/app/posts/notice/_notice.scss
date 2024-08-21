@@ -19,6 +19,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: 8px;
 
         .search-input {
           flex: 1;
@@ -170,6 +171,8 @@
     text-decoration: none;
     color: inherit;
   }
+
+  // 검색 창
 }
 
 .pagination {
