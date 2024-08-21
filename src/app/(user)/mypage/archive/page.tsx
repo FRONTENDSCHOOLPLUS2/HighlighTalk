@@ -53,7 +53,7 @@ const getData = async (accessToken: string) => {
 
 async function ArchivePage() {
   const userAuth = await auth();
-  const fetchedData = await getData(userAuth.accessToken);
+  const fetchedData = userAuth ? await getData(userAuth.accessToken) : [];
 
   return (
     <>
@@ -67,7 +67,9 @@ async function ArchivePage() {
                 {...item}
                 username={item?.user?.name}
                 peoples={item?.extra?.result?.peoples}
-                isMine={Number(userAuth.user.id) === Number(item?.user._id)}
+                isMine={
+                  userAuth?.user ? Number(userAuth.user.id) === Number(item?.user._id) : false
+                }
               />
             </li>
           ))}

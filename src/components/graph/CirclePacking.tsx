@@ -49,9 +49,6 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
 
   // 이름 라벨 생성하는 함수
   const createLabel = (target: SVGType, data: CirclePackingDataNode[]) => {
-    if (data.length === 0) {
-      return;
-    }
     return target
       .append('g')
       .attr('class', 'labels')
@@ -66,8 +63,6 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
       .attr('font-family', 'Pretendard')
       .attr('font-weight', '700')
       .attr('font-size', (d, i) => {
-        console.dir(d);
-        console.log(i);
         return i === 0 ? '4rem' : '2rem';
       })
       .attr('fill', '#fff')
@@ -215,7 +210,7 @@ const CirclePacking = ({ data = [], width = 600, height = 600 }: CirclePackingPr
     });
   }, [data]);
 
-  return <div ref={canvasRef}>{/* <svg id="circle-packing" ref={svgRef}></svg> */}</div>;
+  return <div ref={canvasRef}></div>;
 };
 
 export default CirclePacking;

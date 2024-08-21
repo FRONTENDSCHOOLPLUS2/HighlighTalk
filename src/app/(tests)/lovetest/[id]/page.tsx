@@ -2,7 +2,7 @@
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
-export async function getData(id: string) {
+const getData = async (id: string) => {
   try {
     const response = await fetch(`${SERVER_URL}/posts/${id}`, {
       headers: {
@@ -21,7 +21,7 @@ export async function getData(id: string) {
     console.error('Error fetching data:', error);
     return null;
   }
-}
+};
 
 export default async function Page({ params }: { params: { id: string } }) {
   const item = await getData(params.id);
