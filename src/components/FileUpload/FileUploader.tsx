@@ -34,6 +34,8 @@ function FileUpLoader() {
 
   const router = useRouter();
 
+  console.log(pathname);
+
   // accessToken을 세션에서 가져오기
 
   // 모달을 여는 함수
@@ -98,6 +100,7 @@ function FileUpLoader() {
   const fetchData = async () => {
     if (csvData.length === 0) return;
     setIsLoading(true); // 로딩 시작
+
     try {
       // 첫 번째 POST 요청
       const response = await fetch('/api/generate', {
@@ -132,17 +135,6 @@ function FileUpLoader() {
         currentStep={currentStep}
         fileName={fileName}
       />
-
-      {/* 결과가 들어가면 됨 */}
-      {/* {currentStep === 3 && pathId && (
-        <div className="result-display">
-          {pathname === '/freetest' && <div>hello</div>}
-          {pathname === '/lovetest' && <div>준비중</div>}
-          <Button type="button" onClick={() => setCurrentStep(2)}>
-            이전 단계
-          </Button>
-        </div>
-      )} */}
 
       {isModalOpen && (
         <Modal

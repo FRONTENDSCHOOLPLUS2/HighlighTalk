@@ -1,0 +1,135 @@
+.post-cover {
+  width: 100%;
+
+  .title {
+    font-size: 5.2rem;
+    font-weight: 800;
+    margin-bottom: 6rem;
+  }
+
+  .types-cover {
+    margin-bottom: 1rem;
+
+    .types {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .type a {
+      display: block;
+      background-color: #f2f2f2;
+      color: #777777;
+      padding: 1.2rem 2.4rem;
+      border-radius: 10rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      @media (max-width: 640px) {
+        background-color: #000;
+        color: white;
+        padding: 1rem;
+        font-size: 0.5rem;
+      }
+
+      &:focus {
+        background-color: #000;
+        color: #fff;
+        outline: none;
+      }
+    }
+  }
+
+  .section-table {
+    .custom-table {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+
+      .col-10 {
+        width: 10%;
+      }
+      .col-60 {
+        width: 60%;
+      }
+      .col-30 {
+        width: 30%;
+      }
+
+      .col-0 {
+        width: 0;
+
+        @media (min-width: 640px) {
+          &:nth-child(4) {
+            width: 10%;
+          }
+          &:nth-child(5) {
+            width: 10%;
+          }
+          &:nth-child(6) {
+            width: 25%;
+          }
+        }
+      }
+
+      .table-header {
+        border-bottom: 1px solid #4a5568;
+
+        .table-cell {
+          padding: 2rem;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+
+        .hidden-sm {
+          display: none;
+
+          @media (min-width: 640px) {
+            display: table-cell;
+          }
+        }
+      }
+    }
+
+    .table-divider {
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1rem;
+    }
+  }
+
+  .table-row {
+    border-bottom: 1px solid #edf2f7;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #edf2f7;
+    }
+  }
+
+  .table-cell {
+    padding: 2rem;
+    text-align: center;
+    white-space: nowrap;
+
+    &.truncate {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &.indent-cell {
+      text-indent: 4rem;
+    }
+
+    &.hidden-sm {
+      display: none;
+
+      @media (min-width: 640px) {
+        display: table-cell;
+      }
+    }
+  }
+
+  .link {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+}
