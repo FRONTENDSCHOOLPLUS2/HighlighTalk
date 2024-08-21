@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <article className="result">
+    <article className="analysis-result">
       <Script
         id="kakao-script"
         src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
