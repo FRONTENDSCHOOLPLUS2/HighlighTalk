@@ -35,7 +35,10 @@ export async function POST(req: NextRequest) {
           'client-id': `${CLIENT_ID}`,
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ extra: parsedContent }),
+        body: JSON.stringify({
+          extra: parsedContent,
+          title: `${parsedContent.result?.peoples[0]}님 외 ${parsedContent.result?.peoples?.length - 1}명의 대화`,
+        }),
       });
 
       const secondData = await secondResponse.json();
