@@ -4,6 +4,10 @@ import { auth } from '@/auth';
 import UserProfile from './UserProfile/UserProfile';
 import { poppinsFont } from '@/utils/font';
 import NavBar from './NavBar/NavBar';
+import { IconHamburger } from '@public/image';
+import { useSession } from 'next-auth/react';
+import { useState } from 'react';
+import SideBar from './SideBar/SideBar';
 
 async function Header() {
   const session = await auth();
@@ -16,11 +20,10 @@ async function Header() {
             highlightalk
           </Link>
         </h1>
-
-        {/* 네비게이션 메뉴 */}
         <NavBar />
         <UserProfile userSession={session} />
       </div>
+      <SideBar />
     </header>
   );
 }
