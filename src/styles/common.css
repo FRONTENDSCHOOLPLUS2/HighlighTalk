@@ -4,7 +4,6 @@
   margin: 0 auto;
   min-height: 100svh;
   box-sizing: border-box;
-  /* background-color: red; */
 }
 .containerLayout > div:not(.map) {
   padding-bottom: 10rem;

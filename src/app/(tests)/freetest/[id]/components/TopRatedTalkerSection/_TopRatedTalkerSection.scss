@@ -2,6 +2,8 @@
 @import '@/styles/mixins/flex.scss';
 
 .top-rated-talker {
+  position: relative;
+  z-index: 20;
   @include flexColumn;
   justify-content: center;
 
@@ -11,20 +13,19 @@
   }
 
   &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     content: '';
-    margin-bottom: -7rem;
-    height: 8rem;
-    width: 100%;
     display: block;
-    background-image: url('/image/wave.svg');
-    background-color: $color-yellow-1;
-    background-size: 16rem;
-    background-repeat: repeat-x;
-    background-position: top left;
+    position: absolute;
+    z-index: -1;
+    width: 200vw;
+    height: 100%;
+
+    // NOTE - left 0일때 왼쪽공간 남는 현상 있는데 -10% 으로 처리중
+    background-color: #fffaed;
+    top: 0;
+    left: -10%;
+
+    margin: 0 calc(var(--layout-padding) * -2);
   }
 
   .graph {
