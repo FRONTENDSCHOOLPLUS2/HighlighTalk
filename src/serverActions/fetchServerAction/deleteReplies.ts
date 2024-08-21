@@ -1,6 +1,7 @@
 'use server';
 
 import { auth } from '@/auth';
+import { revalidateTag } from 'next/cache';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -8,7 +9,8 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 export async function deleteReplies(id: string, replyId: string) {
   const session = await auth();
   const accessToken = session?.accessToken;
-  const url = `${SERVER}/posts/${id}/${replyId}`;
+  const url = `${SERVER}/posts/${id}/replies/${replyId}`;
+
   console.log('url url ru', url);
 
   try {
@@ -39,5 +41,7 @@ export async function deleteReplies(id: string, replyId: string) {
   } catch (error) {
     console.error('Fetch error:', error);
     return null;
+  } finally {
+    revalidateTag(`/posts/${id}`);
   }
 }

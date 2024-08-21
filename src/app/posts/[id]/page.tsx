@@ -4,7 +4,25 @@ import { getPostData } from '@/serverActions/fetchServerAction/getDataFetch';
 import Link from 'next/link';
 import { auth } from '@/auth';
 import CommentList from './CommentList';
-import PostInfo from './PostInfo';
+import DeletePost from './DeletePost';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { type: string; id: string };
+}): Promise<Metadata> {
+  const item = await getPostData(params.id);
+
+  return {
+    title: `${item?.title} - 게시물 상세보기`,
+    description: `작성자: ${item.user?.name} | ${item.content}`,
+    openGraph: {
+      title: item?.title,
+      description: item.content,
+    },
+  };
+}
 
 async function PostDetailPage({ params }: { params: { type: string; id: string } }) {
   const item = await getPostData(params.id);
@@ -34,7 +52,7 @@ async function PostDetailPage({ params }: { params: { type: string; id: string }
                   <Link href={`/posts/${params.id}/edit`} className="btn btn-edit">
                     수정
                   </Link>
-                  <PostInfo item={item} />
+                  <DeletePost item={item} />
                 </>
               )}
             </div>

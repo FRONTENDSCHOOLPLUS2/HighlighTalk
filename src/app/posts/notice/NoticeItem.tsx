@@ -6,7 +6,7 @@ export default function NoticeItem({ item }: { item: PostItem }) {
     <tr className="table-row">
       <td className="table-cell text-center id-cell">{item._id}</td>
       <td className="table-cell truncate indent-cell">
-        <Link href={`posts/${item._id}`}>{item.title}</Link>
+        <Link href={`/notice/${item._id}`}>{item.title}</Link>
       </td>
 
       <td className="table-cell text-center truncate">{item.user?.name}</td>

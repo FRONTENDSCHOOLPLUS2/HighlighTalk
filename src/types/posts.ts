@@ -7,6 +7,10 @@ export interface User {
 export interface Product {
   image: string | null;
 }
+export interface pagination {
+  page: number;
+  totalPages: number;
+}
 
 export interface PostItem {
   _id: number;
@@ -22,4 +26,16 @@ export interface PostItem {
   seller_id: number | null;
   repliesCount: number;
   product: Product;
+  pagination: pagination;
+}
+
+export interface Reply {
+  _id: string;
+  content: string;
+  user: {
+    _id: string;
+    name: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 }
