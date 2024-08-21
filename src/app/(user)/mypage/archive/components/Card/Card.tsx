@@ -15,7 +15,15 @@ interface CardPropType {
   peoples: string[];
 }
 
-function Card({ type, _id, title, username, createdAt, isMine, peoples }: CardPropType) {
+function Card({
+  type = '',
+  _id = 0,
+  title = '제목 없는 분석',
+  username = '',
+  createdAt,
+  isMine = false,
+  peoples = [],
+}: CardPropType) {
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
