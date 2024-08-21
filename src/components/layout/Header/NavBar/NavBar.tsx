@@ -11,7 +11,7 @@ const navItems = [
   { path: '/posts', label: 'posts' },
 ];
 
-function NavBar() {
+function NavBar({ onInteraction }: { onInteraction: () => void }) {
   const pathname = usePathname();
   const indexInit = navItems.findIndex((item) => item.path === pathname);
   const [activeIndex, setActiveIndex] = useState(indexInit);
@@ -20,16 +20,19 @@ function NavBar() {
     setActiveIndex(navItems.findIndex((item) => item.path === pathname));
   }, [pathname]);
 
+  const handleLinkClick = (index: number) => {
+    setActiveIndex(index);
+    if (onInteraction) onInteraction();
+  };
+
   return (
     <nav className="header-nav">
       <ul>
         {navItems.map((item, index) => (
-          <li
-            key={item.path}
-            className={pathname === item.path ? 'active' : ''}
-            onClick={() => setActiveIndex(index)}
-          >
-            <Link href={item.path}>{item.label}</Link>
+          <li key={item.path} className={pathname === item.path ? 'active' : ''}>
+            <Link href={item.path} onClick={() => handleLinkClick(index)}>
+              {item.label}
+            </Link>
           </li>
         ))}
         <div
