@@ -1,27 +1,31 @@
-import { getNoticeData } from '@/serverActions/fetchServerAction/getNoticeData';
-import Link from 'next/link';
 import React from 'react';
-import NoticeItem from './NoticeItem';
+import './_post.scss';
+import Link from 'next/link';
+import SearchKeyWords from './SearchKeyWords';
+import Pagination from './Pagination';
 import { PostItem } from '@/types/posts';
 
-export default async function page() {
-  const data = await getNoticeData();
-  const list = data.map((item: PostItem) => <NoticeItem key={item._id} item={item} />);
-
+function PostContainer({ list, data }: { list: string; data: PostItem }) {
   return (
     <main className="post-cover">
-      <div className="title">공지사항</div>
+      <div className="title">게시판</div>
       <div className="types-cover">
         <ul className="types">
           <li className="type">
-            <Link href="">전체</Link>
+            <Link href="/posts">전체</Link>
           </li>
           <li className="type">
-            <Link href="/notice">공지사항</Link>
+            <Link href="/posts/notice">공지사항</Link>
           </li>
           <li className="type">
-            <Link href="/posts">자유게시판</Link>
+            <Link href="">자유게시판</Link>
           </li>
+          <li className="type">
+            <Link href="/posts/new">새 글쓰기</Link>
+          </li>
+          <div className="type">
+            <SearchKeyWords />
+          </div>
         </ul>
       </div>
       <section className="section-table">
@@ -48,6 +52,9 @@ export default async function page() {
         </table>
         <hr className="table-divider" />
       </section>
+      <Pagination {...data.pagination!} />
     </main>
   );
 }
+
+export default PostContainer;
