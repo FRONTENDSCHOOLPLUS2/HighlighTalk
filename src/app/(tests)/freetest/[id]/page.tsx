@@ -40,7 +40,7 @@ interface FreeTestResultData {
   };
 }
 
-export async function getData(id: string): Promise<FreeTestResultData | null> {
+const getData = async (id: string): Promise<FreeTestResultData | null> => {
   try {
     const response = await fetch(`${SERVER_URL}/posts/${id}`, {
       headers: {
@@ -59,7 +59,7 @@ export async function getData(id: string): Promise<FreeTestResultData | null> {
     console.error('Error fetching data:', error);
     return null;
   }
-}
+};
 
 export default async function Page({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
