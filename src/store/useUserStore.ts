@@ -16,10 +16,13 @@ const initUserData = {
   loginType: '',
   accessToken: '',
   refreshToken: '',
+  coin: 0,
 };
 
 export const useUserStore = create<UserStore>((set) => ({
-  user: { ...initUserData },
+  user: {
+    ...initUserData,
+  },
   isLoggedIn: false,
   setUser: (user: User) =>
     set({
