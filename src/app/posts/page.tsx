@@ -1,5 +1,5 @@
-import { fetchPosts } from '@/serverActions/fetchServerAction/getDataFetch';
 import './_post.scss';
+import { fetchPosts } from '@/serverActions/fetchServerAction/getDataFetch';
 import PostListItem from './PostListItem';
 import PostContainer from './PostContainer';
 import { Metadata } from 'next';
@@ -15,7 +15,7 @@ type Params = {
   searchParams: { page: string; keyword: string };
 };
 
-export async function PostPage({ params, searchParams }: Params) {
+async function PostPage({ params, searchParams }: Params) {
   const data = await fetchPosts('comm', searchParams.page, searchParams.keyword);
   console.log('ž312312312312312312312312312312312,', data);
   const list = data?.item?.length
