@@ -17,8 +17,8 @@ interface Word extends d3Cloud.Word {
 }
 
 function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
-  const MIN_FONT_SCALE_PX = 16;
-  const MAX_FONT_SCALE_PX = 100;
+  const MIN_FONT_SCALE_PX = width < 600 ? 12 : 16;
+  const MAX_FONT_SCALE_PX = width < 600 ? 60 : 80;
 
   const canvasRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement | null>(null); // SVG 요소를 재사용하기 위한 ref
@@ -32,13 +32,13 @@ function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
     // 폰트 스케일 설정 함수
     const fontScale = d3
       .scaleLinear()
-      .domain([1, sortedData[0]?.value || 10])
+      .domain([1, sortedData[0]?.value || sortedData.length])
       .range([MIN_FONT_SCALE_PX, MAX_FONT_SCALE_PX]);
 
     // 글씨 색상 설정 함수
     const colorScale = d3
       .scaleLinear<string>()
-      .domain([1, sortedData.length])
+      .domain([1, sortedData[0]?.value || sortedData.length])
       .range(['#ddd', '#333']);
 
     if (!svgRef.current) {
@@ -49,6 +49,8 @@ function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
         .attr('width', width)
         .attr('height', height)
         .node() as SVGSVGElement;
+    } else {
+      d3.select(svgRef.current).attr('width', width).attr('height', height);
     }
 
     const g = d3
