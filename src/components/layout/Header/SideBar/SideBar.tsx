@@ -1,20 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import UserProfile from '../UserProfile/UserProfile';
-import { auth } from '@/auth';
 import NavBar from '../NavBar/NavBar';
-import './_SideBar.scss';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import IconHamburger from '@public/image/icon_hamburger.svg';
 import { IconCross } from '@public/image';
+import './_SideBar.scss';
+import UserProfile from '../UserProfile/UserProfile';
 
 function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+  const closeSidebar = () => {
+    setIsOpen(false);
   };
 
   const session = useSession();
@@ -38,8 +39,8 @@ function SideBar() {
           <IconCross />
         </button>
 
-        <UserProfile userSession={session.data} />
-        <NavBar />
+        <UserProfile userSession={session.data} onInteraction={closeSidebar} />
+        <NavBar onInteraction={closeSidebar} />
       </div>
     </div>
   );
