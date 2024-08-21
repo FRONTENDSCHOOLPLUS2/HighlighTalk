@@ -34,12 +34,16 @@ const PG = ['kakaopay', 'tosspayments'];
 const MID = process.env.NEXT_PUBLIC_PORTONE_MERCHANT_ID;
 const STORE_CODE = process.env.NEXT_PUBLIC_PORTONE_SHOP_ID ?? '';
 
+//FIXME - 임시로 난수 생성중
+const randomNumber = Math.random();
+const randomOrderNum = randomNumber.toFixed(5);
+
 const dummyPayData: UserPayDataType = {
   username: '김설하',
   name: '결제 이름임',
   email: 'tmuchtalker@gmail.com',
   amount: 500, //500원 결제 넣어봄
-  order_uid: 'or3der_3no_11413', //상점에서 생성한 고유 주문번호
+  order_uid: `or3der_3no_${randomOrderNum}`, //상점에서 생성한 고유 주문번
 };
 
 function CoinCharge({ updateSession, userData }: CoinChargePropType) {
@@ -52,7 +56,7 @@ function CoinCharge({ updateSession, userData }: CoinChargePropType) {
     const data: RequestPayParams = {
       pg: 'kakaopay',
       pay_method: 'card', //생략 가능
-      merchant_uid: 'order412_3no_00301', // 상점에서 관리하는 주문 번호
+      merchant_uid: userPayData.order_uid,
       name: '주문명:결제테스트',
       amount: 1000,
       buyer_email: userPayData.email,
@@ -97,7 +101,6 @@ function CoinCharge({ updateSession, userData }: CoinChargePropType) {
 
       // 100원 = 1코인으로 환산, 유저 코인 데이터 업데이트하기 🅾️
       const calculatedCoins = response.paid_amount! / 10;
-
       const updatedUserCoin = calculatedCoins + userCoin;
 
       // 세션의 coin 정보 업데이트 🅾️ / coin 정보 업데이트 DB에 보내기
