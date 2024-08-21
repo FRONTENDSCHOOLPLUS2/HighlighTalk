@@ -65,9 +65,9 @@ async function ArchivePage() {
             <li className="item-data">
               <Card
                 {...item}
-                username={item.user.name}
-                peoples={item.extra.result?.peoples}
-                isMine={Number(userAuth.user.id) === Number(item.user._id)}
+                username={item?.user?.name}
+                peoples={item?.extra?.result?.peoples}
+                isMine={Number(userAuth.user.id) === Number(item?.user._id)}
               />
             </li>
           ))}
