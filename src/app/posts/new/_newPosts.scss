@@ -1,0 +1,62 @@
+.write-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .write-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      .form-label {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .form-input,
+      .form-textarea {
+        padding: 1rem;
+        font-size: 1.6rem;
+        border: 1px solid #ccc;
+        border-radius: 0.4rem;
+        resize: none;
+      }
+
+      .form-input {
+        height: 3.6rem;
+      }
+
+      .form-textarea {
+        height: 10rem;
+      }
+    }
+
+    .submit-btn {
+      padding: 1rem 2rem;
+      font-size: 1.6rem;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}

@@ -21,19 +21,24 @@ function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
 
   useEffect(() => {
     const checkSession = async () => {
-      const session = await getSession();
-
-      if (session === null) {
-        openModal();
-      } else {
-        setCurrentSession(session);
-        setSessionChecked(true);
+      try {
+        const session = await getSession();
+        if (session === null) {
+          openModal();
+        } else {
+          setCurrentSession(session);
+          setSessionChecked(true);
+        }
+      } catch (error) {
+        console.error('Error fetching session:', error);
       }
     };
+
     checkSession();
   }, []);
 
   const handleGoLoginButton = () => {
+    closeModal();
     router.push('/login');
   };
 

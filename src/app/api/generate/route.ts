@@ -27,6 +27,16 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Invalid JSON format' }, { status: 400 });
       }
 
+      // const path = req.nextUrl.pathname; // 요청의 경로
+      // console.log('pathtl', path);
+      let dynamicType = 'freetest'; // 기본값 설정
+
+      // if (path.includes('/freetest')) {
+      //   dynamicType = 'freetest';
+      // } else if (path.includes('/lovetest')) {
+      //   dynamicType = 'lovetest';
+      // }
+
       // 파싱된 객체를 서버에 다시 전송
       const secondResponse = await fetch(`${SERVER_URL}/posts`, {
         method: 'POST',
@@ -38,6 +48,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           extra: parsedContent,
           title: `${parsedContent.result?.peoples[0]}님 외 ${parsedContent.result?.peoples?.length - 1}명의 대화`,
+          type: dynamicType 
         }),
       });
 

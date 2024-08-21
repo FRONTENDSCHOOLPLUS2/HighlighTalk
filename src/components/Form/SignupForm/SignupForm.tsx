@@ -5,6 +5,7 @@ import { SignupFormType } from '@/types';
 import './_SignupForm.scss';
 import { signup } from '@/serverActions/userActions';
 import Button from '@/components/Button/Button';
+import { useRouter } from 'next/navigation';
 
 function SignupForm() {
   const {
@@ -13,7 +14,7 @@ function SignupForm() {
     formState: { errors },
     handleSubmit,
   } = useForm<SignupFormType>();
-
+  const router = useRouter();
   const password = watch('password');
 
   // TODO - 타입 가드 떡칠 상태, 더 나은 방법 고민하기
@@ -44,6 +45,8 @@ function SignupForm() {
     } catch (error) {
       console.error('Error:', error);
     }
+
+    router.push('/');
   };
 
   return (
