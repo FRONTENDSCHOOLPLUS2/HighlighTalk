@@ -37,7 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             // 유저 정보와 토큰 NextAuth 세션에 저장
             return {
-              id: user.id,
+              id: user._id,
               name: user.name,
               email: user.email,
               type: user.type,
