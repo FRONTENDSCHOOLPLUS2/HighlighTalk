@@ -1,0 +1,160 @@
+.file-uploader-container {
+  width: 100%;
+}
+.divide-section {
+  display: flex;
+  gap: 2rem;
+
+  button {
+    padding: 0.8rem 3rem;
+    border-radius: 0.8rem;
+    background-color: var(--color-blue);
+    color: #0084af;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: background-color 0.3s ease;
+    text-align: center;
+
+    &.graybtn {
+      padding: 0.8rem 3rem;
+      border-radius: 0.8rem;
+      background-color: #e4e4e4;
+      color: #afafaf;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 2rem;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+  }
+  .description-area {
+    width: 50%;
+    max-width: 50%;
+    padding: 3rem;
+    background-color: var(--color-yellow-1);
+    border-radius: 2rem;
+
+    .des-heading {
+      font-size: 2.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      .des_head_img {
+        width: 60px;
+        height: 60px;
+        background-repeat: no-repeat;
+        background-image: url('/image/icon_yellow_s.svg');
+      }
+      h1 {
+        color: var(--color-brown);
+      }
+    }
+    .des-btns {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+
+      button {
+        font-size: 1.6rem;
+        font-weight: 800;
+        background-color: var(--color-white);
+        color: var(--color-yellow-3);
+        &:focus {
+          background-color: var(--color-yellow-3);
+          color: var(--color-white);
+        }
+      }
+    }
+    .des-main {
+      .des-main-img {
+        // img
+        height: 200px;
+        background-color: #fff;
+        margin-top: 2rem;
+      }
+      p {
+        margin-top: 1.2rem;
+        font-size: 1.8rem;
+        color: var(--color-gray-3);
+      }
+    }
+  }
+  .upload-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    max-width: 50%;
+    border: 0.3rem dashed var(--color-skyblue-1);
+    border-radius: 2rem;
+    height: 50rem;
+
+    &:hover {
+      border-color: var(--color-skyblue-2); // 호버 시 테두리 색상 변경
+      background-color: #e6fafc; // 호버 시 배경 색상 변경 (예시)
+      transition: 0.3s ease-in-out;
+    }
+    &.success {
+      border: 0.3rem dashed var(--color-green);
+    }
+    .upload-area-section {
+      padding: 5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+
+      .label-btn-cover {
+        margin-top: 0.3rem;
+        button {
+          font-size: 2rem;
+          text-align: center;
+        }
+      }
+
+      .speechs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        .speech-bubble {
+          position: relative;
+          background: #f8f8f8;
+          border-radius: 2rem;
+          padding: 1.3rem;
+
+          text-align: center;
+          font-size: 1.2rem;
+          color: #666;
+          box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .speech-icon {
+          width: 60px;
+          height: 60px;
+          background-repeat: no-repeat;
+          background-image: url('/image/icon_blue_s.svg');
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .divide-section {
+    display: flex;
+    flex-direction: column;
+    .description-area {
+      width: 100%;
+      max-width: 100%;
+    }
+    .upload-area {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

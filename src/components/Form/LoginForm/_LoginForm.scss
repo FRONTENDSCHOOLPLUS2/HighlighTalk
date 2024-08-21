@@ -1,0 +1,111 @@
+@use '@/styles/mixins/flex' as flex;
+@import '@/styles/variable.scss';
+
+.login-container {
+  .login-form-container {
+    background-color: white;
+    z-index: 20;
+    min-width: 55rem;
+    padding: 6rem;
+    border: 1px solid $color-gray-1;
+    border-radius: 2rem;
+
+    .input-group {
+      @include flex.flexColumn;
+      position: relative;
+
+      &:not(:first-child) {
+        margin: 3.4rem 0;
+      }
+
+      label {
+        position: absolute;
+        top: 0.8rem;
+        left: 2rem;
+        font-size: 1.2rem;
+        color: #8b8b8b;
+      }
+
+      input {
+        padding: {
+          left: 2rem;
+          right: 1.4rem;
+          top: 2.6rem;
+          bottom: 1rem;
+        }
+        font: {
+          size: 1.4rem;
+          weight: normal;
+        }
+        outline: none;
+        border: 1px solid $color-gray-1;
+        border-radius: 0.6rem;
+      }
+
+      .error-message {
+        position: absolute;
+        bottom: -2.4rem;
+        left: 0.4rem;
+        font-size: 1.4rem;
+        color: $color-error;
+      }
+    }
+    .login-buttons {
+      @include flex.flexColumn;
+      gap: 2rem;
+      margin-bottom: 3rem;
+
+      button {
+        width: 100%;
+        height: 4.5rem;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+
+    .social-login {
+      @include flex.flexColumn;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+
+      p {
+        text-align: center;
+        color: #868686;
+      }
+
+      .hr::after {
+        content: '';
+        display: inline-block;
+        height: 1px;
+        width: 100%;
+        background-color: $color-gray-1;
+      }
+
+      .icons {
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
+      }
+    }
+  }
+  .modal-contents {
+    font-size: 1.2rem;
+    color: $color-gray-4;
+
+    strong {
+      font-weight: 700;
+      color: $color-error;
+      margin-bottom: 1rem;
+    }
+
+    b {
+      font-weight: 700;
+    }
+
+    ul {
+      @include flex.flexColumn;
+      gap: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@import '@/styles/variable';
+@import '@/styles/mixins/flex.scss';
+
+.result {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden auto;
+
+  & > :first-child {
+    padding-top: 11rem;
+  }
+
+  & > section {
+    position: relative;
+    padding: 3rem 12rem;
+    scroll-margin: 6rem;
+    scroll-snap-align: start;
+    min-height: 90svh;
+  }
+
+  .heading-2 {
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 3.8rem;
+    color: $color-gray-5;
+  }
+  .heading-3 {
+    margin: 2rem 0 1.6rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    color: $color-gray-5;
+  }
+  .heading-desc {
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: auto;
+    color: $color-gray-3;
+  }
+}

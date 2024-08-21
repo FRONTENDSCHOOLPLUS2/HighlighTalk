@@ -1,0 +1,46 @@
+.containerLayout {
+  max-width: var(--layout-pc);
+  padding: 60px var(--layout-padding) 0 var(--layout-padding); /* 기본 padding-top을 60px로 설정 */
+  margin: 0 auto;
+  height: 100svh;
+  box-sizing: border-box;
+  /* background-color: red; */
+}
+.containerLayout > div:not(.map) {
+  padding-bottom: 10rem;
+}
+
+.hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+}
+
+.errorMsg {
+  color: var(--color-error);
+  margin-top: 0.6rem;
+}
+
+.mo {
+  display: block;
+}
+
+.pc {
+  display: none;
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .containerLayout {
+    padding: 0 var(--layout-padding) 12rem var(--layout-padding);
+  }
+}
+
+/* PC */
+@media (min-width: 768px) {
+  .containerLayout {
+    padding: 18rem var(--layout-padding) 0 var(--layout-padding);
+  }
+}

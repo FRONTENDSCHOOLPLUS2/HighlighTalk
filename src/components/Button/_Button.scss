@@ -1,0 +1,152 @@
+@import '@/styles/variable';
+
+@mixin button-color($bg-color, $text-color) {
+  background: $bg-color;
+  color: $text-color;
+
+  &:hover {
+    background: lighten($bg-color, 10%);
+  }
+
+  &:active {
+    background: darken($bg-color, 10%);
+  }
+
+  &.disabled {
+    color: $color-gray-3;
+    background-color: $color-gray-1;
+    font-weight: 500;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-type($bg-color, $text-color, $border-color: transparent) {
+  background-color: $bg-color;
+  color: $text-color;
+  box-shadow: 0 0 0 1px transparent inset;
+
+  &.type-outlined {
+    background-color: $color-white;
+    box-shadow: 0 0 0 1px $border-color inset;
+    color: $text-color;
+  }
+
+  &.type-text {
+    background-color: transparent;
+    color: $text-color;
+
+    &.disabled {
+      color: $color-gray-2;
+      background-color: transparent;
+    }
+  }
+}
+
+.button {
+  box-sizing: border-box;
+  padding: 0.8rem 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all ease 0.2s;
+
+  .icon-img {
+    margin-right: 0.7rem;
+  }
+
+  &.size-sm {
+    padding: 0.6rem 1rem;
+    width: fit-content;
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    .icon-img {
+      margin-right: 0.6rem;
+    }
+  }
+
+  &.size-md {
+    width: fit-content;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  &.size-full {
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  &.theme-primary {
+    @include button-color($color-yellow-3, $color-black);
+    &.type-default {
+      @include button-color($color-yellow-3, $color-black);
+    }
+    &.type-tonal {
+      @include button-color($color-yellow-2, $color-black);
+    }
+    @include button-type($color-yellow-3, $color-black, $color-yellow-3);
+
+    &.type-outlined {
+      background-color: $color-white;
+      box-shadow: 0 0 0 1px $color-yellow-2 inset;
+      color: $color-yellow-3; // outlined 상태에서 텍스트 색상 수정
+    }
+
+    &.type-text {
+      background-color: transparent;
+      color: $color-yellow-3; // type-text 상태에서 텍스트 색상 수정
+    }
+  }
+
+  &.theme-secondary {
+    @include button-color($color-skyblue-2, $color-white);
+    &.type-default {
+      @include button-color($color-skyblue-2, $color-white);
+    }
+    &.type-tonal {
+      @include button-color($color-skyblue-1, $color-skyblue-2);
+    }
+    @include button-type($color-skyblue-2, $color-white, $color-skyblue-2);
+
+    &.type-outlined {
+      background-color: $color-white;
+      box-shadow: 0 0 0 1px $color-skyblue-2 inset;
+      color: $color-skyblue-2; // outlined 상태에서 텍스트 색상 수정
+    }
+
+    &.type-text {
+      background-color: transparent;
+      color: $color-skyblue-2; // type-text 상태에서 텍스트 색상 수정
+    }
+  }
+
+  &.theme-black {
+    @include button-color($color-black, $color-white);
+    &.type-default {
+      @include button-color($color-black, $color-white);
+    }
+    &.type-tonal {
+      @include button-color($color-gray-1, $color-black);
+    }
+    @include button-type($color-black, $color-white, $color-black);
+
+    &.type-outlined {
+      background-color: $color-white;
+      box-shadow: 0 0 0 1px $color-black inset;
+      color: $color-black; // outlined 상태에서 텍스트 색상 수정
+    }
+
+    &.type-text {
+      background-color: transparent;
+      color: $color-black; // type-text 상태에서 텍스트 색상 수정
+    }
+  }
+
+  &.rounded {
+    border-radius: 100px;
+  }
+}

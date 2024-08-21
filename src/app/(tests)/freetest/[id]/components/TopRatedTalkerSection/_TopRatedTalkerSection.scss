@@ -1,0 +1,75 @@
+@import '@/styles/variable';
+@import '@/styles/mixins/flex.scss';
+
+.top-rated-talker {
+  @include flexColumn;
+  justify-content: center;
+
+  background-color: #fffaed;
+  h3.heading-3 {
+    margin-top: 8rem;
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    margin-bottom: -7rem;
+    height: 8rem;
+    width: 100%;
+    display: block;
+    background-image: url('/image/wave.svg');
+    background-color: $color-yellow-1;
+    background-size: 16rem;
+    background-repeat: repeat-x;
+    background-position: top left;
+  }
+
+  .graph {
+    flex: 1;
+    @include flexCenter;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .rank-list {
+    max-width: 40rem;
+    flex: 1;
+    .rank-item {
+      @include flexCenter;
+      padding: 0.6rem 2rem;
+      border-radius: 1.4rem;
+      color: $color-gray-5;
+      font-weight: 600;
+      font-size: 2rem;
+
+      &:first-of-type {
+        transform: scale(1);
+        background-color: $color-yellow-2;
+      }
+      &:not(:first-of-type) {
+        transform: scale(0.9);
+        margin-top: 0.3rem;
+      }
+
+      & > span {
+        min-width: fit-content;
+      }
+
+      .rank {
+        margin-right: 1rem;
+      }
+      .name {
+        flex: 1;
+      }
+      .count {
+        margin-right: 1.6rem;
+        font-size: 1.6rem;
+        font-weight: 500;
+        opacity: 0.7;
+      }
+    }
+  }
+}

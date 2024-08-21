@@ -1,0 +1,19 @@
+meta {
+  name: 게시물 등록(태그 추가)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/posts
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "type": "noticie",
+      "title": "이젠 끝이에요!",
+      "content": " 코인 그냥 드림123."
+  }
+}

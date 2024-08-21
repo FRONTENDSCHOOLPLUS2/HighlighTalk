@@ -1,0 +1,36 @@
+@use '@/styles/mixins/flex' as flex;
+@import '@/styles/variable';
+
+.heading {
+  margin-bottom: 6rem;
+  font-size: 5.2rem;
+  line-height: 6.8rem;
+  font-weight: 800;
+}
+
+.list-data {
+  width: 100%;
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem 2.4rem;
+
+  .item-data {
+    position: relative;
+  }
+}
+
+@media (max-width: 1020px) {
+  .list-data {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .heading {
+    margin-top: 6rem;
+  }
+  .list-data {
+    grid-template-columns: 100%;
+  }
+}
