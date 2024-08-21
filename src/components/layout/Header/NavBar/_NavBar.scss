@@ -1,55 +1,55 @@
 @import '@/styles/variable.scss';
 
-.header-nav {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
+// .header-nav {
+//   position: absolute;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   overflow: hidden;
 
-  ul {
-    position: relative;
-    display: flex;
-    list-style: none;
-    font-size: 1.6rem;
-  }
+//   ul {
+//     position: relative;
+//     display: flex;
+//     list-style: none;
+//     font-size: 1.6rem;
+//   }
 
-  li {
-    width: 100%;
-    z-index: 20;
-    margin: 0 auto;
-    text-align: center;
-  }
+//   li {
+//     width: 100%;
+//     z-index: 20;
+//     margin: 0 auto;
+//     text-align: center;
+//   }
 
-  a {
-    display: block;
-    width: 10rem;
-    height: 100%;
-    padding: 1rem 0;
-    text-decoration: none;
-    color: #000;
-  }
+//   a {
+//     display: block;
+//     width: 10rem;
+//     height: 100%;
+//     padding: 1rem 0;
+//     text-decoration: none;
+//     color: #000;
+//   }
 
-  .active-box {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: lighten($color-gray-2, 20%);
-    border-radius: 10rem;
-    z-index: 10;
-    transition: all 0.3s ease;
-  }
+//   .active-box {
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     left: 0;
+//     width: 0;
+//     height: 100%;
+//     background-color: lighten($color-gray-2, 20%);
+//     border-radius: 10rem;
+//     z-index: 10;
+//     transition: all 0.3s ease;
+//   }
 
-  li.active ~ .active-box {
-    width: calc(100% + 4rem);
-    transform: translateX(calc(var(--index) * 100%));
-  }
+//   li.active ~ .active-box {
+//     width: calc(100% + 4rem);
+//     transform: translateX(calc(var(--index) * 100%));
+//   }
 
-  @media (min-width: 768px) and (max-width: 1023px) {
-    a {
-      font-size: 1.4rem;
-    }
-  }
-}
+//   @media (min-width: 768px) and (max-width: 1023px) {
+//     .header-nav {
+//       background-color: tomato;
+//     }
+//   }
+// }
