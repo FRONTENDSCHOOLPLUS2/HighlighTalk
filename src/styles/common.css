@@ -2,7 +2,7 @@
   max-width: var(--layout-pc);
   padding: 60px var(--layout-padding) 0 var(--layout-padding); /* 기본 padding-top을 60px로 설정 */
   margin: 0 auto;
-  height: 100svh;
+  min-height: 100svh;
   box-sizing: border-box;
   /* background-color: red; */
 }
@@ -41,6 +41,6 @@
 /* PC */
 @media (min-width: 768px) {
   .containerLayout {
-    padding: 18rem var(--layout-padding) 0 var(--layout-padding);
+    padding: 18rem var(--layout-padding) 15rem var(--layout-padding);
   }
 }

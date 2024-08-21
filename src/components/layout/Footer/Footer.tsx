@@ -2,25 +2,36 @@
 import Link from 'next/link';
 import './_Footer.scss';
 import { IconGithub, IconInsta, IconMail } from '@public/image';
+import { poppinsFont } from '@/utils/font';
 
 export default function Footer() {
   return (
     <footer className="footer-container">
-      <h2>Highlightalk</h2>
-      <div className="footer-details">
-        <p>Project Highlightalk | TmuchTalker</p>
-        <dl>
-          <dt>Contact</dt>
-          <dd>Nope... Mail Plz.</dd>
-
-          <dt>Email</dt>
-          <dd>tmuchtalker@gmail.com</dd>
-
-          <dt>Phone</dt>
-          <dd>111-1234-1234</dd>
-        </dl>
-        <address></address>
-        <small>ⓒ TmuchTalker All Rights Reserved.</small>
+      <div className="contact-contents">
+        <div className="head">
+          <h2 className={`${poppinsFont.className}`}>highlightalk</h2>
+          <p className="">Project highlightalk | TmuchTalker</p>
+        </div>
+        <div className="footer-details">
+          <dl className="info">
+            <div className="info-content">
+              <dt>Contact</dt>
+              <dd>Nope... Mail Plz.</dd>
+            </div>
+            <div className="info-content">
+              <dt>Email</dt>
+              <dd>tmuchtalker@gmail.com</dd>
+            </div>
+            <div className="info-content">
+              <dt>Phone</dt>
+              <dd>111-1234-1234</dd>
+            </div>
+          </dl>
+          {/* <address></address> */}
+        </div>
+        <small>
+          <b>ⓒ TmuchTalker</b> All Rights Reserved.
+        </small>
       </div>
 
       <nav className="social-links">
@@ -30,7 +41,7 @@ export default function Footer() {
         <Link href="mailto:tmuchtalker@gmail.com" target="_blank">
           <IconMail />
         </Link>
-        <Link href="https://github.com/FRONTENDSCHOOLPLUS2/HighlighTalk" target="_blank">
+        <Link href="https://github.com/FRONTENDSCHOOLPLUS2/HighlighTalk/tree/main" target="_blank">
           <IconGithub />
         </Link>
       </nav>
