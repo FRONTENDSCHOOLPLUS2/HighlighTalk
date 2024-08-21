@@ -36,7 +36,10 @@ function WordCloud({ data = [], width = 600, height = 300 }: WordCloudProps) {
       .range([MIN_FONT_SCALE_PX, MAX_FONT_SCALE_PX]);
 
     // 글씨 색상 설정 함수
-    const colorScale = d3.scaleLinear().domain([1, sortedData.length]).range(['#ddd', '#333']);
+    const colorScale = d3
+      .scaleLinear<string>()
+      .domain([1, sortedData.length])
+      .range(['#ddd', '#333']);
 
     if (!svgRef.current) {
       // SVG가 없을 때만 새로 생성
