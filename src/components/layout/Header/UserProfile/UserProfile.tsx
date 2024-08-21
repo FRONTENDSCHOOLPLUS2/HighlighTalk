@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Session } from 'next-auth';
-import './_UserProfile.scss';
+// import './_UserProfile.scss';
 
 import { IconProfile } from '@public/image';
 
@@ -14,8 +14,6 @@ function UserProfile({ userSession }: UserProfilePropType) {
   const router = useRouter();
   // NOTE - 세션 정보 브라우저 조회용으로 작성
   console.log('UserProfile_🪪 session', userSession);
-
-  console.log('UserProfile / session', userSession);
 
   const userName = userSession?.user?.name;
 
