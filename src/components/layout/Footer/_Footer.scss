@@ -1,0 +1,65 @@
+@use '@/styles/mixins/flex' as flex;
+@import '@/styles/variable.scss';
+
+.footer-container {
+  position: relative;
+  transform: translateY(0%);
+  left: 0;
+  right: 0;
+
+  height: 20rem;
+
+  padding: 3.2rem var(--layout-padding) 3.2rem var(--layout-padding);
+  background-color: #303237;
+  color: $color-gray-3;
+
+  display: flex;
+  justify-content: space-between;
+
+  .contact-contents {
+    @include flex.flexColumn;
+    gap: 1rem;
+
+    small {
+      color: $color-gray-2;
+
+      b {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: $color-gray-2;
+
+    h2 {
+      font-size: 1.6rem;
+      color: $color-gray-1;
+    }
+  }
+
+  .footer-details {
+    .info {
+      @include flex.flexColumn;
+      margin-top: 1rem;
+
+      .info-content {
+        display: flex;
+        gap: 1rem;
+
+        dt::after {
+          content: '|';
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+  }
+}

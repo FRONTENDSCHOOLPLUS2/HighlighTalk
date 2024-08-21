@@ -8,6 +8,7 @@ import '@/styles/_variable.scss';
 import '@/styles/common.css';
 import '@/styles/responsible.css';
 import Header from '@/components/layout/Header/Header';
+import Footer from '@/components/layout/Footer/Footer';
 import Providers from './providers';
 import ClientUserUpdater from '@/components/ClientUserUpdater/ClientUserUpdater';
 
@@ -34,10 +35,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={notoSans.className}>
         <Providers>
-          <main className="containerLayout">
-            <Header />
-            {children}
-          </main>
+          <Header />
+          <main className="containerLayout">{children}</main>
+          <Footer />
           <ClientUserUpdater />
         </Providers>
         <Script src="https://cdn.iamport.kr/v1/iamport.js"></Script>
