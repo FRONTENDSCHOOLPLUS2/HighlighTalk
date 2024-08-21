@@ -1,0 +1,8 @@
+.list-categories {
+  display: flex;
+  gap: 12px;
+
+  li {
+    min-width: fit-content;
+  }
+}
