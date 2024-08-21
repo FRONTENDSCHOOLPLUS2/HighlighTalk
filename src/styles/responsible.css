@@ -51,20 +51,11 @@
   /* NOTE -모바일 환경 - 하단 NavBar로 들어감,
   현재는 임시 설정 */
   .header {
-    position: fixed;
-    padding: 0;
-    font-size: 1.2rem;
-    width: 100%;
-    z-index: 1000;
   }
 }
 
 /* PC 환경 */
 @media (min-width: 768px) {
   .header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
   }
 }
