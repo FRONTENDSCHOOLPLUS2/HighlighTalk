@@ -118,6 +118,10 @@
     }
   }
 
+  .sidebar-container {
+    display: none;
+  }
+
   .hamburger-menu-btn {
     display: none;
   }
@@ -154,46 +158,19 @@
     .sidebar-container {
       display: block;
     }
-
-    .header-nav {
-      // width: 45rem;
-      // height: 100vh;
-
-      // position: absolute; // 원래 상태로 되돌리기
-      // right: 0;
-      // top: 0;
-      // z-index: 10;
-
-      // transform: none; // transform 초기화
-      // overflow: visible; // overflow 초기화
-      // background-color: honeydew;
-
-      // ul {
-      //   @include flex.flexColumn;
-      //   background-color: bisque;
-      // }
-
-      // .hamburger-menu {
-      //   display: block;
-      //   width: 5rem;
-      //   right: 0;
-      // }
-
-      // .user-profile-container {
-      //   display: block;
-      // }
-
-      // // 옆에 숨겨뒀다가 꺼냄
-      // &.open {
-      //   .header-nav {
-      //   }
-      // }
-    }
   }
 
   /* 모바일 */
   @media (max-width: 767px) {
+    .hamburger-menu-btn {
+      display: block;
+    }
+
     .HeaderLayout {
+      .sidebar-container {
+        display: block;
+      }
+
       .header-nav {
         display: none;
       }
@@ -201,33 +178,18 @@
       .user-profile-container {
         display: none;
       }
+    }
 
-      .nav-container > .header-nav:first-child {
-        /* 첫 번째 .header-nav 요소에 스타일 적용 */
-        background-color: yellow;
-      }
+    .active-box {
+      display: none;
+    }
 
-      .hamburger-menu {
-        display: block;
-      }
+    .profile-box {
+      display: none;
+    }
 
-      .active-box {
-        display: none;
-      }
-
-      &.open {
-        ul {
-          background-color: cadetblue;
-          display: block;
-          position: absolute;
-          top: 4.8rem;
-          right: 0;
-        }
-
-        li {
-          background-color: hotpink;
-        }
-      }
+    .sidebar-container {
+      display: block;
     }
   }
 }
