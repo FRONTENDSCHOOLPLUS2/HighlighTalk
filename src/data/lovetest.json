@@ -1,0 +1,69 @@
+{
+  "_id": 11,
+  "extra": {
+    "result": {
+      "relationshipAnalysis": {
+        "summary": "이소정과 윤우중은 서로의 일상과 관심사에 대해 활발하게 소통하며, 서로의 고민을 나누고 지원하는 관계입니다. 이소정은 윤우중에게 여러 가지 제안과 격려를 하며, 윤우중은 이소정의 의견을 존중하고 함께 고민하는 모습을 보입니다. 두 사람은 서로의 스터디와 취업 준비에 대해 이야기하며, 함께 공부하고 싶어하는 의사를 표현합니다. 이들은 서로의 존재를 소중히 여기고 있으며, 자주 연락을 주고받는 모습에서 친밀감을 느낄 수 있습니다. 또한, 서로의 재정적인 거래를 통해 신뢰를 쌓고 있습니다. 이들의 대화는 유머와 친근함이 가득하며, 서로의 일상에 관심을 가지고 있다는 점에서 긍정적인 관계로 보입니다.",
+        "analysis": [
+          {
+            "names": "이소정, 윤우중",
+            "compatibilityScore": 85,
+            "reason": "서로의 일상과 고민을 공유하며, 서로를 지지하는 모습이 보이기 때문에 높은 궁합 점수를 부여했습니다.",
+            "relationshipProbability": {
+              "becomeCouple": 70,
+              "marriageProbability": 50
+            },
+            "etc": [
+              "title: '서로를 지지하는 파트너'",
+              "서로의 일상에 관심을 가지며, 함께 시간을 보내고 싶어하는 모습이 인상적입니다."
+            ],
+            "betterLover": {
+              "이소정": 60,
+              "윤우중": 40
+            },
+            "personalFactors": {
+              "money": 70,
+              "health": 80,
+              "love": 90,
+              "daily": 85
+            }
+          }
+        ]
+      },
+      "interestedAbout": [
+        {
+          "person": "이소정",
+          "interests": {
+            "happy": 80,
+            "unrest": 20,
+            "trust": 90,
+            "love": 85,
+            "stress": 30,
+            "interested": 75
+          }
+        },
+        {
+          "person": "윤우중",
+          "interests": {
+            "happy": 75,
+            "unrest": 25,
+            "trust": 85,
+            "love": 80,
+            "stress": 35,
+            "interested": 70
+          }
+        }
+      ]
+    }
+  },
+  "views": 2,
+  "user": {
+    "_id": 5,
+    "name": "우중",
+    "image": null
+  },
+  "type": "post",
+  "createdAt": "2024.08.22 12:16:46",
+  "updatedAt": "2024.08.22 12:16:46",
+  "seller_id": null
+}

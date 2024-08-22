@@ -1,0 +1,84 @@
+{
+  "ok": 1,
+  "item": {
+    "_id": 22,
+    "extra": {
+      "result": {
+        "topic": {
+          "summary": [
+            {
+              "title": "면접 준비와 스트레스",
+              "content": "여다희가 면접 준비에 대한 스트레스를 이야기하며, 친구들에게 조언을 구하고 있다."
+            },
+            {
+              "title": "고등어조림과 식사 계획",
+              "content": "여다희가 면접 후 고등어조림을 먹으러 가기로 계획하고, 친구들이 응원해준다."
+            },
+            {
+              "title": "연락과 관계에 대한 고민",
+              "content": "여다희가 전썸남과의 연락 문제에 대해 이야기하며, 친구들이 조언을 해준다."
+            }
+          ]
+        },
+        "mbti": {
+          "analysis": [
+            {
+              "names": "여다희",
+              "value": "ENFP",
+              "reason": "여다희는 감정 표현이 풍부하고, 친구들과의 소통을 중요시하는 모습을 보인다.",
+              "ability": [{ "energy": 8, "social": 9, "intelligence": 7 }],
+              "etc": ["열정적인 친구", "사교적인 성격"]
+            },
+            {
+              "names": "배지",
+              "value": "ESFJ",
+              "reason": "배지는 친구들을 잘 챙기고, 긍정적인 에너지를 주는 모습이 보인다.",
+              "ability": [{ "energy": 7, "social": 8, "intelligence": 6 }],
+              "etc": ["사교적인 리더", "친절한 성격"]
+            },
+            {
+              "names": "정감자",
+              "value": "INFP",
+              "reason": "정감자는 감정적으로 깊이 있는 대화를 나누며, 친구들의 고민에 공감하는 모습을 보인다.",
+              "ability": [{ "energy": 6, "social": 7, "intelligence": 8 }],
+              "etc": ["사색가", "감성적인 친구"]
+            },
+            {
+              "names": "박수",
+              "value": "ENTP",
+              "reason": "박수는 유머러스하고, 친구들과의 대화에서 창의적인 아이디어를 제시하는 모습을 보인다.",
+              "ability": [{ "energy": 9, "social": 8, "intelligence": 9 }],
+              "etc": ["창의적인 발명가", "재치 있는 친구"]
+            }
+          ]
+        },
+        "talkCount": { "counts": { "여다희": 45, "배지": 38, "정감자": 30, "박수": 25 } },
+        "mostWords": {
+          "topWords": {
+            "면접": 15,
+            "고등어조림": 10,
+            "스트레스": 8,
+            "연락": 7,
+            "친구": 12,
+            "사진": 9,
+            "맛집": 6,
+            "고민": 11,
+            "응원": 5,
+            "사랑": 4
+          }
+        },
+        "peoples": ["여다희", "배지", "정감자", "박수"],
+        "talkbangEmotion": { "기쁨": 20, "슬픔": 5, "불안": 15, "놀람": 3, "분노": 2 }
+      }
+    },
+    "title": "여다희님 외 3명의 대화",
+    "type": "lovetest",
+    "views": 1,
+    "user": { "_id": 1, "name": "티머치토커", "image": "/files/08-highlightalk/highlightalk.png" },
+    "createdAt": "2024.08.22 15:07:16",
+    "updatedAt": "2024.08.22 15:07:16",
+    "seller_id": null,
+    "product": { "name": [], "mainImages": [] },
+    "bookmarks": 0
+  }
+}
