@@ -74,15 +74,15 @@ function UploadArea({
         <div className="divide-section">
           <DescriptionArea />
           <div
-            className="upload-area"
+            className={error ? 'upload-area error' : 'upload-area success'}
             onClick={openFileDialog} // 여기에만 onClick 핸들러를 설정
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <div className="upload-area-section">
+            <div className={'upload-area-section'}>
               <div className="speechs">
-                <div className="speech-icon"></div>
-                <div className="speech-bubble">
+                <div className={error ? 'speech-iconError' : 'speech-icon'}></div>
+                <div className={'speech-bubble'}>
                   {error ? error : '클릭 또는 파일을 끌어당겨 넣을 수 있어요!'}
                 </div>
                 <button type="button">파일 올리기</button>

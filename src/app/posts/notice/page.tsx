@@ -3,6 +3,12 @@ import Link from 'next/link';
 import React from 'react';
 import NoticeItem from './NoticeItem';
 import { PostItem } from '@/types/posts';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '하이라이톡 | 공지사항',
+  description: '하이라이톡 공지사항에서 업데이트 되는 내용을 확인 하세요.',
+};
 
 export default async function page() {
   const data = await getNoticeData();
