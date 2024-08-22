@@ -15,7 +15,7 @@ function CategoryList() {
   return (
     <ul className="list-categories">
       {categories.map((name, index) => (
-        <li>
+        <li key={name}>
           <Button
             theme="black"
             styleType={index === focusedIndex ? 'default' : 'tonal'}
