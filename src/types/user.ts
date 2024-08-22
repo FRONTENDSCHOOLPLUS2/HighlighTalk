@@ -36,3 +36,17 @@ export interface SignupFormType extends Pick<UserType, 'type' | 'name' | 'email'
   passwordConfirm: string;
   extra: { coin: number };
 }
+
+// 기본 응답
+export interface CoreRes {
+  ok: 0 | 1;
+}
+
+// 성공 기본 응답
+export interface CoreSuccessRes extends CoreRes {
+  ok: 1;
+}
+
+export interface RefreshTokenRes extends CoreSuccessRes {
+  accessToken: string;
+}

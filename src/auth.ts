@@ -4,8 +4,10 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import KakaoProvider from 'next-auth/providers/kakao';
 import GoogleProvider from 'next-auth/providers/google';
-import { OAuthUser, SignupResponsType } from './types';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { OAuthUser, RefreshTokenRes, SignupResponsType } from './types';
 import { loginOAuth, signupWithOAuth } from './serverActions/userActions';
+import { fetchAccessToken } from './utils/fetchToken';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -70,7 +72,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET ?? '',
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET,
 
   // NOTE - 세션 전략으로 JWT, 최대 수명 24시간
   session: {
@@ -136,9 +138,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     //JWT 토큰에 사용자 정보를 저장 user 객체가 있을 경우 토큰에 정보를 추가
-    async jwt({ token, user }) {
-      // console.log('🪪 JWT.user', user);
-
+    async jwt({ token, user, session, trigger }) {
       if (user) {
         token.id = user.id;
         token.type = user.type;
@@ -146,6 +146,46 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
       }
+
+      // JWT 자체의 만료 시간 추출
+      const decodedToken = jwt.decode(token.accessToken) as JwtPayload | null;
+      const accessTokenExpires = decodedToken?.exp ? decodedToken?.exp * 1000 : 0; // 밀리초 단위로 변환
+
+      // 토큰 만료 확인
+      const shouldRefreshToken = Date.now() > accessTokenExpires;
+      if (shouldRefreshToken) {
+        try {
+          console.log('토큰 만료됨.', Date.now() + ' ➡️ ' + accessTokenExpires);
+          const res = await fetchAccessToken(token.refreshToken);
+          if (res.ok) {
+            const resJson: RefreshTokenRes = await res.json();
+            return {
+              ...token,
+              accessToken: resJson.accessToken,
+            };
+          } else {
+            if (res.status === 401) {
+              console.log('리프레시 토큰 인증 실패. 로그인 페이지로 이동', await res.json());
+            }
+          }
+        } catch (error) {
+          if (error instanceof Error) {
+            console.error(error);
+            return {
+              ...token,
+              error: error.message,
+            };
+          }
+        }
+      } else {
+        // NOTE - 토큰 만료 시간 로깅 필요하다면 주석 해제해서 사용
+        // console.log(`토큰 ${accessTokenExpires - Date.now()} ms 남음`);
+      }
+      // 세션 업데이트
+      if (trigger === 'update' && session) {
+        token.name = session.name;
+      }
+
       return token;
     },
 
