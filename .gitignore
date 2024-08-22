@@ -24,18 +24,14 @@ yarn-debug.log*
 yarn-error.log*
 
 
-<<<<<<< HEAD
 
 # local env files
 
 # environment varables
-=======
-# local env files
->>>>>>> 3a5cd76 (Feat : gpt api 연동 및 구현 가능성 테스트)
 .env
 .env*.local
 
-/bacend_API/
+/backend_API/
 
 # vercel
 .vercel

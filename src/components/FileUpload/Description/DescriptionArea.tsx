@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 
 function DescriptionArea() {
@@ -16,8 +15,9 @@ function DescriptionArea() {
       <div className="des-main">
         <div className="des-main-img"></div>
         <p>
-          법관은 탄핵 또는 금고 이상의 형의 선고에 의하지 아니하고는 파면되지 아니하며, 징계처분에
-          의하지 아니하고는 정직·감봉 기타 불리한 처분을 받지 아니한다
+          내보내기 방법 PC 대화 내용을 확인하고 싶은 카카오톡 채팅방에 입장하세요. [채팅방 우측 상단
+          메뉴 {'>'} 채팅방 설정 {'>'} 저장공간 관리 {'>'} 대화내용 저장]에서 대화내용을
+          저장해주세요.
         </p>
       </div>
     </div>

@@ -25,25 +25,11 @@ function MainSlide() {
         }}
       >
         <SwiperSlide>
-          <Image
-            width={0}
-            height={0}
-            sizes="100vw"
-            src="/image/mainslide1.svg"
-            alt="img"
-            priority
-          />
+          <Image width={0} height={0} sizes="100%" src="/image/mainslide1.svg" alt="img" priority />
         </SwiperSlide>
 
         <SwiperSlide>
-          <Image
-            width={0}
-            height={0}
-            sizes="100vw"
-            src="/image/mainslide2.svg"
-            alt="img"
-            priority
-          />
+          <Image width={0} height={0} sizes="100%" src="/image/mainslide2.svg" alt="img" priority />
         </SwiperSlide>
       </Swiper>
     </div>
