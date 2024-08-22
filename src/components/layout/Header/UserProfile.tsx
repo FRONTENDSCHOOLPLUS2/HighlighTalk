@@ -2,13 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import { Session } from 'next-auth';
-// import './_UserProfile.scss';
-
 import { IconProfile } from '@public/image';
 
 interface UserProfilePropType {
   userSession: Session | null;
-  onInteraction: () => void;
+  onInteraction?: () => void;
 }
 
 function UserProfile({ userSession, onInteraction }: UserProfilePropType) {

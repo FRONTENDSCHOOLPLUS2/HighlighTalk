@@ -79,10 +79,10 @@
 
         li {
           padding: 1rem;
-          transition: color 0.3s ease; /* 부드러운 글자색 변경을 위한 트랜지션 */
+          transition: color 0.3s ease;
 
           &:hover {
-            color: $color-blue-2; /* 주요 색상으로 글자색 변경 */
+            color: $color-blue-2;
           }
         }
       }

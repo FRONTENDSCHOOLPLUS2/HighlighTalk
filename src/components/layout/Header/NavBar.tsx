@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const navItems = [
   { path: '/', label: 'home' },
@@ -11,7 +11,7 @@ const navItems = [
   { path: '/posts', label: 'posts' },
 ];
 
-function NavBar({ onInteraction }: { onInteraction: () => void }) {
+function NavBar({ onInteraction }: { onInteraction?: () => void }) {
   const pathname = usePathname();
   const indexInit = navItems.findIndex((item) => item.path === pathname);
   const [activeIndex, setActiveIndex] = useState(indexInit);
