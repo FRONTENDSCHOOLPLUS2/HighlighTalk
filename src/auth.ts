@@ -72,7 +72,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET ?? '',
     }),
   ],
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 
   // NOTE - 세션 전략으로 JWT, 최대 수명 24시간
   session: {
