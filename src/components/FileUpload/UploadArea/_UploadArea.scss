@@ -70,8 +70,9 @@
     }
     .des-main {
       .des-main-img {
-        // img
-        height: 200px;
+        background-image: url('/image/mainslide1.svg');
+        background-position: center;
+        height: 20rem;
         background-color: #fff;
         margin-top: 2rem;
       }
@@ -99,6 +100,10 @@
     }
     &.success {
       border: 0.3rem dashed var(--color-green);
+    }
+
+    &.error {
+      border: 0.2rem dashed red;
     }
     .upload-area-section {
       padding: 5rem;
@@ -133,11 +138,28 @@
           color: #666;
           box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.1);
         }
+        .speech-bubleE {
+          position: relative;
+          background: #f8f8f8;
+          border-radius: 2rem;
+          padding: 1.3rem;
+
+          text-align: center;
+          font-size: 1.2rem;
+          color: #666;
+          box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.1);
+        }
         .speech-icon {
           width: 60px;
           height: 60px;
           background-repeat: no-repeat;
           background-image: url('/image/icon_blue_s.svg');
+        }
+        .speech-iconError {
+          width: 60px;
+          height: 60px;
+          background-repeat: no-repeat;
+          background-image: url('/image/icon_yellow_s.svg');
         }
       }
     }

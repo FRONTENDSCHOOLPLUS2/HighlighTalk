@@ -4,7 +4,7 @@ import MainThemes from './MainThemes';
 function MainThemeItems() {
   const data = [
     {
-      title: '테스트 A',
+      title: '내가 해리포터 세상에 존재 한다면?',
       content: '밌삼요 이대문을열어라 열두시가되면 문이닫힌다 땡땡땡학교종이땡땡땨ㅐㅇ',
       coin: 100,
     },

@@ -18,7 +18,7 @@ function MainPage() {
         <MainItems />
       </div>
       <MainNotice />
-      <MainThemeItems />
+      {/* <MainThemeItems /> */}
     </main>
   );
 }

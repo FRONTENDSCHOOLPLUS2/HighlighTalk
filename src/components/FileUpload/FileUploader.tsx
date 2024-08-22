@@ -16,10 +16,6 @@ interface CSVRow {
   [key: string]: string;
 }
 
-interface FetchDataResponse {
-  choices: { message: { content: string } }[];
-}
-
 function FileUpLoader() {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [csvData, setCsvData] = useState<CSVRow[]>([]);

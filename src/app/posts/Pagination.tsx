@@ -2,12 +2,12 @@
 import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
 
-interface PaginationProps {
+interface PaginationPropType {
   page: number;
   totalPages: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ page, totalPages }) => {
+const Pagination: React.FC<PaginationPropType> = ({ page, totalPages }) => {
   const params = useParams();
   const searchParams = useSearchParams();
   const pageList = [];
