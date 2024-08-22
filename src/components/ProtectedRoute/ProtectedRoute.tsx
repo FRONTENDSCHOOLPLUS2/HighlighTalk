@@ -15,18 +15,22 @@ interface ProtectedRoutePropType {
 function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
   const { isOpen, openModal, closeModal } = useModalStore();
   const [sessionChecked, setSessionChecked] = useState(false);
+  const [currentSession, setCurrentSession] = useState<Session | null>(null);
 
   const router = useRouter();
 
   useEffect(() => {
     const checkSession = async () => {
-      const session = await getSession();
-
-      if (session === null) {
-        openModal();
-        setSessionChecked(false);
-      } else {
-        setSessionChecked(true);
+      try {
+        const session = await getSession();
+        if (session === null) {
+          openModal();
+        } else {
+          setCurrentSession(session);
+          setSessionChecked(true);
+        }
+      } catch (error) {
+        console.error('Error fetching session:', error);
       }
     };
 
@@ -45,7 +49,7 @@ function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
 
   return (
     <>
-      {sessionChecked && (
+      {isOpen && (
         <Modal
           isOpen={isOpen}
           onClose={handleCloseModal}
@@ -57,7 +61,7 @@ function ProtectedRoute({ setCurrentStep, children }: ProtectedRoutePropType) {
           ]}
         ></Modal>
       )}
-      {children}
+      {sessionChecked && children} {/* 인증된 경우에만 자식 컴포넌트 렌더링 */}
     </>
   );
 }
