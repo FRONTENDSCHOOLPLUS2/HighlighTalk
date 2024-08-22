@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar';
 import { useSession } from 'next-auth/react';
 import IconHamburger from '@public/image/icon_hamburger.svg';
 import { IconCross } from '@public/image';
 import './_SideBar.scss';
-import UserProfile from '../UserProfile/UserProfile';
+import UserProfile from '../UserProfile';
 
 function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,15 +19,6 @@ function SideBar() {
   };
 
   const session = useSession();
-  // Fetch user session asynchronously
-  // const [session, setSession] = useState(null);
-  // useState(() => {
-  //   const fetchSession = async () => {
-  //     const result = await auth();
-  //     setSession(result);
-  //   };
-  //   fetchSession();
-  // }, []);
 
   return (
     <div className="sidebar-container">
