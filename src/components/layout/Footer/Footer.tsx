@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="contact-contents">
         <div className="head">
           <h2 className={`${poppinsFont.className}`}>highlightalk</h2>
-          <p className="">Project highlightalk | TmuchTalker</p>
+          <p className="title">Project highlightalk | TmuchTalker</p>
         </div>
         <div className="footer-details">
           <dl className="info">
@@ -29,7 +29,7 @@ export default function Footer() {
           </dl>
           {/* <address></address> */}
         </div>
-        <small>
+        <small className="copyright">
           <b>ⓒ TmuchTalker</b> All Rights Reserved.
         </small>
       </div>

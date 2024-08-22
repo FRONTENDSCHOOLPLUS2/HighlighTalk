@@ -7,7 +7,7 @@
   left: 0;
   right: 0;
 
-  height: 20rem;
+  min-height: 20rem;
 
   padding: 3.2rem var(--layout-padding) 3.2rem var(--layout-padding);
   background-color: #303237;
@@ -20,8 +20,9 @@
     @include flex.flexColumn;
     gap: 1rem;
 
-    small {
+    .copyright {
       color: $color-gray-2;
+      word-break: keep-all;
 
       b {
         font-weight: 700;
@@ -38,6 +39,10 @@
     h2 {
       font-size: 1.6rem;
       color: $color-gray-1;
+    }
+
+    .title {
+      word-break: keep-all;
     }
   }
 
