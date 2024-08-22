@@ -12,7 +12,6 @@ interface CardPropType {
   username: string;
   createdAt: string;
   isMine: boolean;
-  peoples: string[];
 }
 
 function Card({
@@ -22,7 +21,6 @@ function Card({
   username = '',
   createdAt,
   isMine = false,
-  peoples = [],
 }: CardPropType) {
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
