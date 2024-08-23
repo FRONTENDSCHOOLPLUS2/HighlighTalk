@@ -4,8 +4,8 @@ import './_CoinTabs.scss';
 import Button from '@/components/Button/Button';
 import CoinCharge from './CoinCharge';
 import CoinUsageHistory from './CoinUsageHistory';
-import { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { SessionProvider, useSession } from '@/app/providers';
 
 const TABS = {
   CHARGE: 'charge',
@@ -13,17 +13,23 @@ const TABS = {
 };
 
 function CoinTabs() {
-  const { data, update } = useSession();
-  const userCoin = data?.coin || 0;
+  // FIXME - 서버액션으로 받아오기
+
   const [activeTab, setActiveTab] = useState(TABS.CHARGE);
+
+  const session = useSession();
+
+  useEffect(() => {
+    console.log('세-숀', session);
+  }, []);
 
   const renderTabContent = () => {
     switch (activeTab) {
       case TABS.HISTORY:
-        return <CoinUsageHistory userSession={data} />;
+      // return <CoinUsageHistory session={session} />;
       case TABS.CHARGE:
       default:
-        return <CoinCharge updateSession={update} userSession={data} />;
+      // return <CoinCharge session={session} />;
     }
   };
 
@@ -33,7 +39,8 @@ function CoinTabs() {
         <h2>유저 코인 보유 정보</h2>
         <div className="left-content">
           <span className="coin">보유 코인</span>
-          <b>{userCoin}</b>
+          {/* <b>{data?.coin}</b> */}
+          <b>{session?.user?.coin}</b>
           <span>개</span>
         </div>
         <div className="right-content">
@@ -57,7 +64,7 @@ function CoinTabs() {
             충전/사용내역
           </button>
         </div>
-        <section className="tab-contents">{renderTabContent()}</section>
+        {/* <section className="tab-contents">{renderTabContent()}</section> */}
       </div>
     </>
   );
