@@ -3,7 +3,7 @@ import MainNotice from '@/components/MainNotice/MainNotice';
 import MainSlide from '@/components/MainSlide/MainSlide';
 import MainItems from '@/components/MainItems/MainItems';
 import MainSeverNotice from '@/components/MainNotice/MainSeverNotice';
-import MainCommPreview from '@/components/ MainCommPreviews/ MainCommPreview';
+import MainCommPreview from '@/components/ MainCommPreviews/MainCommPreview';
 
 export const metadata = {
   title: '하이라이톡 | 메인페이지', // 페이지 타이틀

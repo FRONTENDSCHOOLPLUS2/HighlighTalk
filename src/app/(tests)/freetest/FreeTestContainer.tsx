@@ -6,7 +6,6 @@ import FileUpLoader from '@/components/FileUpload/FileUploader';
 import Button from '@/components/Button/Button';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 
-// REVIEW - next step 버튼만 제어중인데 미들웨어에서 추가 처리 핋요할까?
 function FreeTestContainer() {
   const [currentStep, setCurrentStep] = useState(1);
 
