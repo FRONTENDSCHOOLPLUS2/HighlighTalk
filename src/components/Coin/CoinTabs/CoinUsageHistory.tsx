@@ -1,15 +1,14 @@
 'use client';
-import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { OrderDataType } from './CoinCharge';
+import { Session } from 'next-auth';
 
 // TODO - order 컬렉션 불러오기
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
-function CoinUsageHistory() {
-  const session = useSession();
+function CoinUsageHistory({ userSession }: { userSession: Session | null }) {
   const [orders, setOrders] = useState<OrderDataType[]>([]);
 
   useEffect(() => {
@@ -18,12 +17,11 @@ function CoinUsageHistory() {
         const response = await fetch(`${API_SERVER}/orders/`, {
           headers: {
             'client-id': `${CLIENT_ID}`,
-            Authorization: `Bearer ${session.data?.accessToken}`,
+            Authorization: `Bearer ${userSession?.accessToken}`,
           },
         });
         const result = await response.json();
         const resultItem = result.item;
-        console.log(resultItem, '<- result Item ');
 
         let orderItem: OrderDataType[] = [];
         resultItem.map((v: any) => orderItem.push(v.order_info));
