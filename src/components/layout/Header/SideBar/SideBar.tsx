@@ -2,14 +2,16 @@
 
 import { useState } from 'react';
 import NavBar from '../NavBar';
-import { useSession } from 'next-auth/react';
+
 import IconHamburger from '@public/image/icon_hamburger.svg';
 import { IconCross } from '@public/image';
 import './_SideBar.scss';
 import UserProfile from '../UserProfile';
+import { useSession } from '@/app/providers';
 
 function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const session = useSession();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -17,8 +19,6 @@ function SideBar() {
   const closeSidebar = () => {
     setIsOpen(false);
   };
-
-  const session = useSession();
 
   return (
     <div className="sidebar-container">
@@ -30,7 +30,7 @@ function SideBar() {
           <IconCross />
         </button>
 
-        <UserProfile userSession={session.data} onInteraction={closeSidebar} />
+        <UserProfile userSession={session} onInteraction={closeSidebar} />
         <NavBar onInteraction={closeSidebar} />
       </div>
     </div>
