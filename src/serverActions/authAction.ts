@@ -1,6 +1,6 @@
 'use server';
 
-import { signIn, signOut } from '@/auth';
+import { auth, signIn, signOut } from '@/auth';
 import { LoginFormType } from '@/types';
 
 import { redirect } from 'next/navigation';
@@ -27,3 +27,5 @@ export const signInWithSocial = async (provider: string) => {
 export const signOutWithForm = async (formData: FormData) => {
   await signOut({ redirectTo: '/' });
 };
+
+export { auth as getSession };
