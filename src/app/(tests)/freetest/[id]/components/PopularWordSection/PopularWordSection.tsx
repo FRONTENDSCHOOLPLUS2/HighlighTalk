@@ -3,6 +3,7 @@
 import WordCloud from '@/components/graph/WordCloud';
 import './_PopularWordSection.scss';
 import { useEffect, useRef, useState } from 'react';
+import TitleBox from '@/app/(tests)/components/AnalysisItem/TitleBox';
 
 interface PopularWordSectionPropType {
   data: { [key: string]: number };
@@ -41,8 +42,7 @@ function PopularWordSection({ data }: PopularWordSectionPropType) {
 
   return (
     <section className="most-popular-word" ref={sectionRef}>
-      <h3 className="heading-3">가장 많이 나온 단어</h3>
-      <p className="heading-desc">우리 대화방에서 가장 많이 사용한 단어에요</p>
+      <TitleBox title="가장 많이 나온 단어" desc="우리 대화방에서 가장 많이 사용한 단어에요" />
       {data ? (
         <div className="graph">
           <WordCloud data={parsedData} width={graphSize.width} height={graphSize.height} />

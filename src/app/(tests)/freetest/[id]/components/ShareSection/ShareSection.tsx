@@ -5,6 +5,7 @@ import Button from '@/components/Button/Button';
 import Modal from '@/components/Modal/Modal';
 import { useState } from 'react';
 import KakaoShareButton from '../KakaoShareButton/KakaoShareButton';
+import TitleBox from '@/app/(tests)/components/AnalysisItem/TitleBox';
 
 declare global {
   interface Window {
@@ -38,8 +39,7 @@ function ShareSection() {
 
   return (
     <section className="share">
-      <h2 className="heading-2">결과 공유하기</h2>
-      <p className="heading-desc">대화방 참여자들에게 분석 내용을 공유해 보세요!</p>
+      <TitleBox title={'결과 공유하기'} desc={'대화방 참여자들에게 분석 내용을 공유해 보세요!'} />
       <div className="cont-btn">
         <Button styleType="tonal" size="md" rounded onClick={handleButtonPress}>
           공유하기
