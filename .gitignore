@@ -32,6 +32,7 @@ yarn-error.log*
 .env*.local
 
 /backend_API/
+.bru
 
 # vercel
 .vercel

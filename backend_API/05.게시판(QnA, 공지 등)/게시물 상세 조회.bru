@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{url}}/posts/
+  url: {{url}}/posts?type=notice
   body: none
   auth: none
+}
+
+query {
+  type: notice
 }

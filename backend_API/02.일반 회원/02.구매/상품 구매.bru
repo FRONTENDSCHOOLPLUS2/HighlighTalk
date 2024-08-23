@@ -12,19 +12,23 @@ post {
 
 body:json {
   {
-      "products": [
-          {
-              "_id": 3,
-              "quantity": 1
-          },
-          {
-              "_id": 4,
-              "quantity": 2
-          }
-      ],
-      "address": {
-          "name": "학교",
-          "value": "서울시 강남구 역삼동 234"
+    "products": [
+      {
+        "_id": 1,
+        "quantity": 1
       }
+    ],
+    "address": {
+      "name": "학교",
+      "value": "서울시 강남구 역삼동 234"
+    },
+    "extra": {
+      "order_type": "pay",
+      "amount": 8000,
+      "payment_method": "", 
+      "balance_before": 18000,
+      "balance_after": 10000
+    }
   }
+  
 }

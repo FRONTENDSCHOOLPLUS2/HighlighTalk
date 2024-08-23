@@ -10,7 +10,7 @@ function MainItems() {
             <div className="free_item_des des">
               <h1>우리 톡방 분석 서비스</h1>
               <div className="des-p">
-                <p>AI가 우리 톡방 내용을 읽고 분석결과를 보여줍니다</p>
+                <p>AI가 우리 톡방 내용을 읽고 분석결과를 보여줍니다 AI가 우리 톡방 내용을 읽고</p>
               </div>
               <div className="free_tag">FREE</div>
             </div>

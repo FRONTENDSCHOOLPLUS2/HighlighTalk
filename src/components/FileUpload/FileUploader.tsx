@@ -136,12 +136,9 @@ function FileUpLoader() {
         <Modal
           isOpen={isModalOpen}
           onClose={closeModal}
-          content="확인을 누른 후 분석을 시작해요"
+          content="감사합니다! 이제 분석을 시작 할 수 있어요!"
           title="파일 업로드 성공"
-          buttons={[
-            { label: '닫기', onClick: closeModal, theme: 'primary' },
-            // { label: '확인', onClick: openModal, theme: 'primary' },
-          ]}
+          buttons={[{ label: '닫기', onClick: closeModal, theme: 'secondary' }]}
         />
       )}
       {isLoading && <LoadingSpinner />}
