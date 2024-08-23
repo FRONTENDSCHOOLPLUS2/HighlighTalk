@@ -1,6 +1,6 @@
 'use client';
 
-import { useUserStore } from '@/store/useUserStore';
+import { useSession } from '@/app/providers';
 import './_KakaoShareButton.scss';
 
 declare global {
@@ -10,7 +10,8 @@ declare global {
 }
 
 function KakaoShareButton() {
-  const user = useUserStore((state) => state.user);
+  const session = useSession();
+  const name = session?.user?.name;
 
   const handleKakaoShare = () => {
     const { Kakao } = window;
@@ -20,7 +21,7 @@ function KakaoShareButton() {
       Kakao.Share.sendCustom({
         templateId: Number(process.env.NEXT_PUBLIC_KAKAO_SHARE_TEMPLATE_ID),
         templateArgs: {
-          user_name: user.name || '나',
+          user_name: name || '나',
           path: path,
         },
       });
