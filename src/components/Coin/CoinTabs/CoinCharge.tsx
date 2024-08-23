@@ -7,6 +7,7 @@ import { UpdateSession } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { updateCoinData } from '@/serverActions/coinAction';
 import { useCoinActions } from '@/hooks/useCoinAction';
+import { createOrderData } from '@/serverActions/orderAction';
 
 interface CoinChargePropType {
   updateSession: UpdateSession;
@@ -20,7 +21,7 @@ interface UserPayDataType {
   order_uid: string; //상점에서 생성한 고유 주문번호
 }
 
-interface OrderDataType {
+export interface OrderDataType {
   order_type: 'charge' | 'purchase';
   amount: number | undefined;
   payment_method: string | undefined;
@@ -103,12 +104,7 @@ function CoinCharge({ updateSession, userData }: CoinChargePropType) {
       const calculatedCoins = response.paid_amount! / 10;
       const updatedUserCoin = calculatedCoins + userCoin;
 
-      // 세션의 coin 정보 업데이트 🅾️ / coin 정보 업데이트 DB에 보내기
-
-      updateSession({ coin: userCoin + calculatedCoins });
-      await updateCoinData('1', updatedUserCoin);
-
-      // TODO 결제 내역 데이터 생성 / DB에 보내기
+      // TODO 결제 내역 데이터 생성 🅾️ DB에 보내기 >>
 
       const orderData: OrderDataType = {
         order_type: 'charge',
@@ -119,6 +115,13 @@ function CoinCharge({ updateSession, userData }: CoinChargePropType) {
           balance_after: userCoin + calculatedCoins,
         },
       };
+
+      // 세션의 coin 정보 업데이트 🅾️ / coin 정보 업데이트 DB에 보내기
+
+      updateSession({ coin: userCoin + calculatedCoins });
+      await updateCoinData('1', updatedUserCoin);
+
+      await createOrderData('charge', orderData);
     } else {
       alert(`결제 실패 ${error_msg}`);
     }
@@ -128,9 +131,22 @@ function CoinCharge({ updateSession, userData }: CoinChargePropType) {
 
   const handleTestBtnClick = async () => {
     try {
-      await updateCoin('1', 20000);
+      // console.log('코인 업데이트');
+      // updateCoin('1', 20000);
+
+      const dummyData: OrderDataType = {
+        order_type: 'charge',
+        amount: 3214,
+        payment_method: '테스트중임',
+        extra: {
+          balance_before: 1,
+          balance_after: 2,
+        },
+      };
+
+      createOrderData('charge', dummyData);
     } catch (error) {
-      console.error('DB_ 코인 정보 업데이트 실패', error);
+      console.error('DB_ 정보 업데이트 실패', error);
     }
 
     // TODO - 하나의 함수로 묶어서 데이터 무결성 유지하기
@@ -148,7 +164,7 @@ function CoinCharge({ updateSession, userData }: CoinChargePropType) {
         <div className="package-list">
           <div className="contents">
             <Button onClick={() => handlePayment()}>500원</Button>
-            <button onClick={() => handleTestBtnClick()}>테스트버튼입니다 코인갱신</button>
+            <button onClick={() => handleTestBtnClick()}>주문 데이터</button>
           </div>
         </div>
       </section>
