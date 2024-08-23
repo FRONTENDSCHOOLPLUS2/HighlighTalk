@@ -1,7 +1,7 @@
 import React from 'react';
 import { fetchPosts } from '@/serverActions/fetchServerAction/getDataFetch';
 import { User } from '@/types/posts';
-import MainCommPreviewItem from './ MainCommPreviewItem';
+import MainCommPreviewItem from './MainCommPreviewItem';
 import './_mainCommPreview.scss';
 import Link from 'next/link';
 
