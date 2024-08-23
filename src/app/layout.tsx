@@ -9,8 +9,7 @@ import '@/styles/common.css';
 import '@/styles/responsible.css';
 import Header from '@/components/layout/Header/Header';
 import Footer from '@/components/layout/Footer/Footer';
-import Providers from './providers';
-import ClientUserUpdater from '@/components/ClientUserUpdater/ClientUserUpdater';
+import { SessionProvider } from './providers';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -34,12 +33,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSans.className}>
-        <Providers>
+        <SessionProvider>
           <Header />
           <main className="containerLayout">{children}</main>
           <Footer />
-          <ClientUserUpdater />
-        </Providers>
+        </SessionProvider>
         <Script src="https://cdn.iamport.kr/v1/iamport.js"></Script>
       </body>
     </html>

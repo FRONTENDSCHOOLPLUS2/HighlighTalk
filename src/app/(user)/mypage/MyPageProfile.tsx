@@ -2,7 +2,6 @@
 
 import Button from '@/components/Button/Button';
 import Modal from '@/components/Modal/Modal';
-import { signOutWithForm } from '@/serverActions/authAction';
 import { useModalStore } from '@/store/ModalStore';
 import { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
@@ -15,13 +14,9 @@ interface MyPageProfilePropType {
 function MyPageProfile({ userInfo }: MyPageProfilePropType) {
   const { isOpen, openModal, closeModal } = useModalStore();
 
-  const handleLogoutButton = (formData: FormData) => {
-    openModal();
-  };
-
-  // TODO - merge하고 로그아웃 후에 접근 가능한지 확인해보기
   const handleSignOut = async () => {
     try {
+      // NOTE - .env의 NEXTAUTH_URL 옵션 참고하여 Redirect됨
       await signOut({ callbackUrl: '/' });
     } catch (error) {
       console.error('Sign out error:', error);
