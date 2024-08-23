@@ -12,8 +12,8 @@ interface ScoreSectionPropType {
 function ScoreSection({ names, score, reason }: ScoreSectionPropType) {
   const MAX_SCORE = 100;
   const LINE_WIDTH = 20;
-  const WIDTH = 200 + LINE_WIDTH;
-  const HEIGHT = 200 + LINE_WIDTH;
+  const WIDTH = 250 + LINE_WIDTH;
+  const HEIGHT = 250 + LINE_WIDTH;
   const r = (Math.min(WIDTH, HEIGHT) - LINE_WIDTH) / 2;
   const circleLength = 2 * Math.PI * r;
   const strokeDasharray = `${(score / MAX_SCORE) * circleLength} ${circleLength}`;

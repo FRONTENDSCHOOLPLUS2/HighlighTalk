@@ -2,6 +2,7 @@ import Script from 'next/script';
 import ScoreSection from './components/ScoreSection/ScoreSection';
 import './_LoveTestResultPage.scss';
 import SummarySection from './components/SummarySection/SummarySection';
+import RelationSection from './components/RelationSection/RelationSection';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
@@ -57,6 +58,7 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
           '서로의 일상에 관심을 가지고, 서로를 걱정하며, 유머를 주고받는 모습이 나타나 서로의 궁합이 좋다고 생각한다.'
         }
       />
+      <RelationSection couple={70} marriage={50} />
     </article>
   );
 }

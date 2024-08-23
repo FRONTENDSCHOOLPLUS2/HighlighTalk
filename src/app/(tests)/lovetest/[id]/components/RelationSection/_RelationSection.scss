@@ -1,0 +1,58 @@
+@import '@/styles/variable';
+
+.summary {
+  .text {
+    position: relative;
+    margin-top: 4rem;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    padding: 3rem 4rem 5rem;
+    background-color: rgba($color-white, 0.4);
+    box-shadow: 0 5px 3rem 0 rgba($color-magenta, 0.6);
+    border-radius: 3rem;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    &:hover {
+      background-color: rgba($color-white, 0.6);
+      transform: scale(1.03);
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      content: ' ';
+      display: block;
+      width: 8rem;
+      height: 8rem;
+      background-image: url('/image/character_4.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: all 0.3s ease-in-out;
+    }
+    &::before {
+      transform: translate(-50%, 50%);
+    }
+    &::after {
+      transform: translate(50%, 50%);
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      font-weight: 500;
+      color: $color-gray-5;
+
+      &:first-child {
+        font-size: 2rem;
+        line-height: 3.2rem;
+        font-weight: 700;
+        color: darken($color-magenta, 10%);
+      }
+    }
+  }
+}

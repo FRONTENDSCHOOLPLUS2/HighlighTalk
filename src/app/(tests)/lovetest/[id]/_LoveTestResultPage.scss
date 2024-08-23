@@ -11,7 +11,8 @@
     position: absolute;
     width: 200vw;
     height: 100vh;
-    background-color: #f9e5f9;
+    background: rgb(255, 194, 244);
+    background: linear-gradient(22deg, rgba(255, 194, 244, 1) 0%, rgba(255, 240, 242, 1) 73%);
     top: 0;
     left: 0;
     margin: 0 calc(var(--layout-padding) * -2);
