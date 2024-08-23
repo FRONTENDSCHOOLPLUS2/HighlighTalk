@@ -7,40 +7,12 @@ import TopRatedTalkerSection from './components/TopRatedTalkerSection/TopRatedTa
 import ShareSection from './components/ShareSection/ShareSection';
 import Script from 'next/script';
 import './_FreeTestResultPage.scss';
+import { FreeTestData } from '@/types/test';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
 
-type EmotionType = '기쁨' | '슬픔' | '불안' | '놀람' | '분노';
-
-interface FreeTestResultData {
-  topic: { summary: { title: string; content: string }[] };
-  mbti: {
-    analysis: {
-      names: string;
-      value: string;
-      reason: string;
-      ability: { energy: number; social: number; intelligence: number }[];
-      etc: string[];
-    }[];
-  };
-  talkCount: {
-    counts: {
-      [key: string]: number;
-    };
-  };
-  mostWords: {
-    topWords: {
-      [key: string]: number;
-    };
-  };
-  peoples: string[];
-  talkbangEmotion: {
-    [key in EmotionType]: number;
-  };
-}
-
-const getData = async (id: string): Promise<FreeTestResultData | null> => {
+const getData = async (id: string): Promise<FreeTestData | null> => {
   try {
     const response = await fetch(`${SERVER_URL}/posts/${id}`, {
       headers: {
