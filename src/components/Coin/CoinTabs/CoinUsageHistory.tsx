@@ -1,7 +1,7 @@
 'use client';
-import Button from '@/components/Button/Button';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { OrderDataType } from './CoinCharge';
 
 // TODO - order 컬렉션 불러오기
 
@@ -10,10 +10,10 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 function CoinUsageHistory() {
   const session = useSession();
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<OrderDataType[]>([]);
 
   useEffect(() => {
-    const getOrderList = async () => {
+    const fetchOrderData = async () => {
       try {
         const response = await fetch(`${API_SERVER}/orders/`, {
           headers: {
@@ -21,12 +21,16 @@ function CoinUsageHistory() {
             Authorization: `Bearer ${session.data?.accessToken}`,
           },
         });
-
         const result = await response.json();
-        console.log(result, '결과조회');
+        const resultItem = result.item;
+        console.log(resultItem, '<- result Item ');
 
-        if (response.ok) {
-          setOrders(result.item);
+        let orderItem: OrderDataType[] = [];
+        resultItem.map((v: any) => orderItem.push(v.order_info));
+
+        console.log(orderItem, 'orderItem');
+        if (result.ok) {
+          setOrders(orderItem);
         } else {
           console.log(result.message);
         }
@@ -34,11 +38,22 @@ function CoinUsageHistory() {
         console.error(error);
       }
     };
-
-    getOrderList();
+    fetchOrderData();
   }, [CLIENT_ID]);
 
-  return <div>{/* // TODO - 결제내역 결과 뿌리기  */}</div>;
+  return (
+    <div>
+      {orders &&
+        orders.map((order, index) => (
+          <div key={index}>
+            <h3>Order_type: {order.order_type}</h3>
+            <p>결제수단: {order.payment_method} </p>
+            <p>전: {order.extra.balance_before} </p>
+            <p>후: {order.extra.balance_after} </p>
+          </div>
+        ))}
+    </div>
+  );
 }
 
 export default CoinUsageHistory;
