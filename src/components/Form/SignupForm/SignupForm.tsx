@@ -46,7 +46,7 @@ function SignupForm() {
       console.error('Error:', error);
     }
 
-    router.push('/');
+    router.push('/login');
   };
 
   return (
