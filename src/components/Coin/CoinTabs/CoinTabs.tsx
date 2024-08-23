@@ -20,10 +20,10 @@ function CoinTabs() {
   const renderTabContent = () => {
     switch (activeTab) {
       case TABS.HISTORY:
-        return <CoinUsageHistory />;
+        return <CoinUsageHistory userSession={data} />;
       case TABS.CHARGE:
       default:
-        return <CoinCharge updateSession={update} userData={data} />;
+        return <CoinCharge updateSession={update} userSession={data} />;
     }
   };
 

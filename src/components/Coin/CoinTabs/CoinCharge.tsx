@@ -6,12 +6,11 @@ import { RequestPayParams, RequestPayResponse } from '@/types/portone';
 import { UpdateSession } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { updateCoinData } from '@/serverActions/coinAction';
-import { useCoinActions } from '@/hooks/useCoinAction';
 import { createOrderData } from '@/serverActions/orderAction';
 
 interface CoinChargePropType {
   updateSession: UpdateSession;
-  userData: Session | null;
+  userSession: Session | null;
 }
 interface UserPayDataType {
   username: string; //유저명
@@ -47,9 +46,9 @@ const dummyPayData: UserPayDataType = {
   order_uid: `or3der_3no_${randomOrderNum}`, //상점에서 생성한 고유 주문번
 };
 
-function CoinCharge({ updateSession, userData }: CoinChargePropType) {
-  const { updateCoin } = useCoinActions();
-  const userCoin = userData?.coin || 0;
+function CoinCharge({ updateSession, userSession }: CoinChargePropType) {
+  // const { updateCoin } = useCoinActions();
+  const userCoin = userSession?.coin || 0;
 
   // NOTE - 유저의 기본 정보를 통해 Option 생성
 
@@ -116,11 +115,8 @@ function CoinCharge({ updateSession, userData }: CoinChargePropType) {
         },
       };
 
-      // 세션의 coin 정보 업데이트 🅾️ / coin 정보 업데이트 DB에 보내기
-
       updateSession({ coin: userCoin + calculatedCoins });
       await updateCoinData('1', updatedUserCoin);
-
       await createOrderData('charge', orderData);
     } else {
       alert(`결제 실패 ${error_msg}`);
