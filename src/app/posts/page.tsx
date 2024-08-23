@@ -17,7 +17,6 @@ type Params = {
 
 async function PostPage({ params, searchParams }: Params) {
   const data = await fetchPosts('comm', searchParams.page, searchParams.keyword);
-  console.log('ž312312312312312312312312312312312,', data);
   const list = data?.item?.length
     ? data.item.map((item: PostItem) => <PostListItem key={item._id} item={item} />)
     : null;

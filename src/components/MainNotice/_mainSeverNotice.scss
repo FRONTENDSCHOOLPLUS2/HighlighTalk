@@ -1,0 +1,59 @@
+.notice-board {
+  width: 100%;
+  margin-top: 5rem;
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .notice-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .notice-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 0.1rem solid #e0e0e0;
+
+    .tag {
+      display: inline-block;
+      background-color: var(--color-skyblue-2);
+      color: var(--color-white);
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 0.3rem 1rem;
+      border-radius: 1rem;
+      margin-right: 2rem;
+    }
+
+    .notice-text {
+      flex-grow: 1;
+      color: #555555;
+      font-size: 1.5rem;
+      white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
+      overflow: hidden; /* 넘친 텍스트를 숨김 */
+      text-overflow: ellipsis;
+    }
+
+    .date {
+      color: #b0b0b0;
+      font-size: 1.2rem;
+      white-space: nowrap;
+    }
+  }
+
+  .more-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: #b0b0b0;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,37 +1,16 @@
-'use client';
-
-import { useState } from 'react';
+import { Metadata } from 'next';
+import LoveTestContainer from './\bLoveTestContainer';
 import './_loveTestPage.scss';
-import FileUpLoader from '@/components/FileUpload/FileUploader';
-import Button from '@/components/Button/Button';
 
+// 서버컴포넌트로 분리
+
+export const metadata: Metadata = {
+  title: '하이라이톡 | 연애 테스트',
+  description: 'Chat GPT API 기반 대화내용 분석 서비스',
+  keywords: 'highlightalk',
+};
 function TestPage() {
-  const [currentStep, setCurrentStep] = useState(1);
-  return (
-    <div className="test-page-container">
-      {currentStep === 1 && (
-        <>
-          <div className="test-page-container">
-            <h1>썸남,썸녀,연애 이대로 괜찮을까?</h1>
-            <section className="test-page-content">
-              <p>내 썸남,남친 처럼 이뤄지고 싶은 사람의 톡을 ~</p>
-            </section>
-            <div className="test-page-action">
-              <Button type="button" onClick={() => setCurrentStep(2)}>
-                테스트 시작하기
-              </Button>
-            </div>
-          </div>
-        </>
-      )}
-      {/* 테스트 시작하면 나오는 화면 */}
-      {currentStep === 2 && (
-        <>
-          <FileUpLoader />
-        </>
-      )}
-    </div>
-  );
+  return <LoveTestContainer />;
 }
 
 export default TestPage;

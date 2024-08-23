@@ -5,14 +5,11 @@ meta {
 }
 
 get {
-  url: {{url}}/posts?type=qna&custom={"product_id":1}
+  url: {{url}}/posts
   body: none
   auth: none
 }
 
 query {
-  type: qna
-  custom: {"product_id":1}
   ~type: notice
-  ~type: 원하는값
 }

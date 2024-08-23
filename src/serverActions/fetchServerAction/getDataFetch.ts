@@ -69,7 +69,7 @@ export async function fetchPosts(type: string | undefined, page?: string, keywor
     },
     next: {
       tags,
-      revalidate: 1,
+      revalidate: 10,
     },
   });
   const resJson = await res.json();
