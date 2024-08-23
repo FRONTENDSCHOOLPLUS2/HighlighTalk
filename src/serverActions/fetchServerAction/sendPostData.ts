@@ -36,7 +36,6 @@ export async function sendPostData(postData: PostData) {
 
     const resJson = await res.json();
 
-    revalidateTag('/posts');
     if (resJson && resJson.item) {
       return resJson.item;
     } else {

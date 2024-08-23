@@ -27,7 +27,6 @@ export async function generateMetadata({
 async function PostDetailPage({ params }: { params: { type: string; id: string } }) {
   const item = await getPostData(params.id);
   const session = await auth();
-
   const isAuthor = session?.user?.id === item?.user._id + '';
 
   return (

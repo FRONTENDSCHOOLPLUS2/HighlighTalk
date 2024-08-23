@@ -9,7 +9,7 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 export async function getNoticeData() {
   const session = await auth();
   const accessToken = session?.accessToken;
-  let url = `${SERVER}/posts?type=notcie`;
+  let url = `${SERVER}/posts?type=notice`;
 
   try {
     const res = await fetch(url, {
@@ -20,8 +20,6 @@ export async function getNoticeData() {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-
-    console.log('res', res);
 
     if (!res.ok) {
       console.error(`Error: ${res.status} ${res.statusText}`);
