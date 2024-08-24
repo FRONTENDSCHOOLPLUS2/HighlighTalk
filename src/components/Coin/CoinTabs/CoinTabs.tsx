@@ -3,7 +3,7 @@
 import './_CoinTabs.scss';
 import Button from '@/components/Button/Button';
 import CoinCharge from './CoinCharge';
-import CoinUsageHistory from './CoinUsageHistory';
+import CoinUsageHistory from './CoinUsageHistory/CoinUsageHistory';
 import { useEffect, useState } from 'react';
 import { SessionProvider, useSession } from '@/app/providers';
 import { Coin } from '@public/image';
@@ -27,7 +27,7 @@ function CoinTabs() {
   const renderTabContent = () => {
     switch (activeTab) {
       case TABS.HISTORY:
-        return <CoinUsageHistory session={session} />;
+        return <CoinUsageHistory />;
       case TABS.CHARGE:
       default:
         return <CoinCharge />;
