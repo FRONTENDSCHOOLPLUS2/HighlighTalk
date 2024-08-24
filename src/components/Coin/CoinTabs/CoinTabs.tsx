@@ -6,6 +6,7 @@ import CoinCharge from './CoinCharge';
 import CoinUsageHistory from './CoinUsageHistory';
 import { useEffect, useState } from 'react';
 import { SessionProvider, useSession } from '@/app/providers';
+import { Coin } from '@public/image';
 
 const TABS = {
   CHARGE: 'charge',
@@ -26,10 +27,10 @@ function CoinTabs() {
   const renderTabContent = () => {
     switch (activeTab) {
       case TABS.HISTORY:
-      // return <CoinUsageHistory session={session} />;
+        return <CoinUsageHistory session={session} />;
       case TABS.CHARGE:
       default:
-      // return <CoinCharge session={session} />;
+        return <CoinCharge />;
     }
   };
 
@@ -38,8 +39,9 @@ function CoinTabs() {
       <article className="user-coin-container">
         <h2>유저 코인 보유 정보</h2>
         <div className="left-content">
+          <Coin />
           <span className="coin">보유 코인</span>
-          {/* <b>{data?.coin}</b> */}
+
           <b>{session?.user?.coin}</b>
           <span>개</span>
         </div>
@@ -64,7 +66,7 @@ function CoinTabs() {
             충전/사용내역
           </button>
         </div>
-        {/* <section className="tab-contents">{renderTabContent()}</section> */}
+        <section className="tab-contents">{renderTabContent()}</section>
       </div>
     </>
   );

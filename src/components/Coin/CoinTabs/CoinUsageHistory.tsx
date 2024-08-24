@@ -1,46 +1,40 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { OrderDataType } from './CoinCharge';
-import { Session } from 'next-auth';
+
+import { fetchOrderData } from '@/serverActions/orderAction';
+import { OrderDataType } from '@/types/order';
 
 // TODO - order 컬렉션 불러오기
 
-const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-
-function CoinUsageHistory({ userSession }: { userSession: Session | null }) {
+function CoinUsageHistory() {
   const [orders, setOrders] = useState<OrderDataType[]>([]);
 
   useEffect(() => {
-    const fetchOrderData = async () => {
+    async function fetchData() {
       try {
-        const response = await fetch(`${API_SERVER}/orders/`, {
-          headers: {
-            'client-id': `${CLIENT_ID}`,
-            Authorization: `Bearer ${userSession?.accessToken}`,
-          },
-        });
-        const result = await response.json();
-        const resultItem = result.item;
+        const data = await fetchOrderData();
+        console.log('fetchOrderData', data);
 
-        let orderItem: OrderDataType[] = [];
-        resultItem.map((v: any) => orderItem.push(v.order_info));
+        const orderArr: OrderDataType[] = [];
+        data.item.map((v) =>
+          orderArr.push({
+            ...v.order_info,
+            createdAt: v.createdAt,
+          })
+        );
 
-        console.log(orderItem, 'orderItem');
-        if (result.ok) {
-          setOrders(orderItem);
-        } else {
-          console.log(result.message);
-        }
+        setOrders(orderArr);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching order data:', error);
       }
-    };
-    fetchOrderData();
-  }, [CLIENT_ID]);
+    }
+
+    fetchData(); // 데이터 가져오기 함수 호출
+  }, []);
 
   return (
     <div>
+      <div>g하이</div>
       {orders &&
         orders.map((order, index) => (
           <div key={index}>
@@ -48,6 +42,7 @@ function CoinUsageHistory({ userSession }: { userSession: Session | null }) {
             <p>결제수단: {order.payment_method} </p>
             <p>전: {order.extra.balance_before} </p>
             <p>후: {order.extra.balance_after} </p>
+            <p>거래일: {order.createdAt}</p>
           </div>
         ))}
     </div>
