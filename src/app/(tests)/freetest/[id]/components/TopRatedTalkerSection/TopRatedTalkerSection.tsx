@@ -1,5 +1,6 @@
 import CirclePacking from '@/components/graph/CirclePacking';
 import './_TopRatedTalkerSection.scss';
+import TitleBox from '@/app/(tests)/components/AnalysisItem/TitleBox';
 
 interface TopRatedTalkerSectionPropType {
   data: {
@@ -23,8 +24,7 @@ function TopRatedTalkerSection({ data }: TopRatedTalkerSectionPropType) {
 
   return (
     <section className="top-rated-talker">
-      <h3 className="heading-3">가장 많이 말한 사람</h3>
-      <p className="heading-desc">채팅방 대화 지분 1위</p>
+      <TitleBox title="가장 많이 말한 사람" desc="채팅방 대화 지분 1위" />
       <div className="graph">
         <CirclePacking width={400} height={500} data={parsedData} />
         <ul className="rank-list">

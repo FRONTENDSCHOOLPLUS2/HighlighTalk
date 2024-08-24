@@ -37,6 +37,8 @@
   }
 
   .bubble-list {
+    margin: 6rem 0;
+
     @include flexColumn;
     flex: 1;
     gap: 0.5rem;

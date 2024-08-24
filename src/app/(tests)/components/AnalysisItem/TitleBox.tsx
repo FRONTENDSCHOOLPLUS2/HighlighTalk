@@ -1,3 +1,5 @@
+import './_TitleBox.scss';
+
 interface TitleBoxPropType {
   title: string;
   desc: string;
