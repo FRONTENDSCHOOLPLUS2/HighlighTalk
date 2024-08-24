@@ -57,8 +57,9 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
         reason={
           '서로의 일상에 관심을 가지고, 서로를 걱정하며, 유머를 주고받는 모습이 나타나 서로의 궁합이 좋다고 생각한다.'
         }
+        couple={70}
+        marriage={50}
       />
-      <RelationSection couple={70} marriage={50} />
     </article>
   );
 }
