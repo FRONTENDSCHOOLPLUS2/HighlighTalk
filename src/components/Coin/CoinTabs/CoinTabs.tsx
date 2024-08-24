@@ -1,12 +1,12 @@
 'use client';
 
-import './_CoinTabs.scss';
+import { useEffect, useState } from 'react';
+import { useSession } from '@/app/providers';
 import Button from '@/components/Button/Button';
 import CoinCharge from './CoinCharge';
 import CoinUsageHistory from './CoinUsageHistory/CoinUsageHistory';
-import { useEffect, useState } from 'react';
-import { SessionProvider, useSession } from '@/app/providers';
 import { Coin } from '@public/image';
+import './_CoinTabs.scss';
 
 const TABS = {
   CHARGE: 'charge',
@@ -14,10 +14,7 @@ const TABS = {
 };
 
 function CoinTabs() {
-  // FIXME - 서버액션으로 받아오기
-
   const [activeTab, setActiveTab] = useState(TABS.CHARGE);
-
   const session = useSession();
 
   useEffect(() => {
