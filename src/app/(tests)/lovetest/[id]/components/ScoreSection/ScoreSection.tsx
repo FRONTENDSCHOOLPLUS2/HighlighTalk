@@ -78,17 +78,17 @@ function ScoreSection({ names, score, reason, couple = 0, marriage = 0 }: ScoreS
           <ul className="list">
             <li className="couple-item">
               <p className="title">연인이 될 확률</p>
-              <p className="cont-wave">
+              <div className="cont-wave">
                 <div className="wave" style={{ top: `${100 - couple - 5}%` }}></div>
                 <span className="percentage">{couple}%</span>
-              </p>
+              </div>
             </li>
             <li className="marriage-item">
               <p className="title">결혼 할 확률</p>
-              <p className="cont-wave">
+              <div className="cont-wave">
                 <div className="wave" style={{ top: `${100 - marriage - 5}%` }}></div>
                 <span className="percentage">{marriage}%</span>
-              </p>
+              </div>
             </li>
           </ul>
         </div>
