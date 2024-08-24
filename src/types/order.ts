@@ -23,7 +23,7 @@ interface PaginationType {
 }
 
 interface OrderInfoType {
-  order_type: 'charge' | 'purchase';
+  order_type: 'charge' | 'pay';
   amount: number | undefined;
   payment_method: string | undefined;
   extra: {
@@ -48,4 +48,5 @@ export interface OrderResponseData {
 
 export interface OrderDataType extends OrderInfoType {
   createdAt: string;
+  content?: string; // 연애 테스트 등 어떤 상품 결제인지 등 추가정보 제공
 }

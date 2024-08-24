@@ -1,13 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
-
 import { fetchOrderData } from '@/serverActions/orderAction';
 import { OrderDataType } from '@/types/order';
+import './_CoinUsageHistory.scss';
+import Button from '@/components/Button/Button';
+import TransactionItem from './TransactionItem';
 
 // TODO - order 컬렉션 불러오기
 
 function CoinUsageHistory() {
   const [orders, setOrders] = useState<OrderDataType[]>([]);
+  const [activeMenu, setActiveMenu] = useState('all');
 
   useEffect(() => {
     async function fetchData() {
@@ -33,18 +36,23 @@ function CoinUsageHistory() {
   }, []);
 
   return (
-    <div>
-      <div>g하이</div>
-      {orders &&
-        orders.map((order, index) => (
-          <div key={index}>
-            <h3>Order_type: {order.order_type}</h3>
-            <p>결제수단: {order.payment_method} </p>
-            <p>전: {order.extra.balance_before} </p>
-            <p>후: {order.extra.balance_after} </p>
-            <p>거래일: {order.createdAt}</p>
-          </div>
-        ))}
+    <div className="coin-history-container">
+      <ul className="transaction-filter">
+        <li>
+          <button className={`all active`}>전체</button>
+        </li>
+        <li>
+          <button className={`charge`}>충전</button>
+        </li>
+        <li>
+          <button className={`use`}>사용</button>
+        </li>
+      </ul>
+
+      <ul className="transactions-list">
+        {orders &&
+          orders.map((order, index) => <TransactionItem order={order} key={index} index={index} />)}
+      </ul>
     </div>
   );
 }

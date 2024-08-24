@@ -27,8 +27,8 @@ export async function fetchOrderData(): Promise<OrderResponseData> {
 
 // TODO - 결제 내역 생성
 // DB 활용하면서 static한 부분은 안에 작성, 동적인 부분만 받아오도록
-export async function createOrderData(orderType: string, orderData: any) {
-  const orderTypeNum = orderType === 'pay' ? 1 : 2;
+export async function createOrderData(orderType: 'pay' | 'charge', orderData: any) {
+  const orderTypeNum = orderType === 'charge' ? 1 : 2;
 
   const bodyData = {
     products: [

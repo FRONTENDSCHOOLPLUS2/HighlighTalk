@@ -1,0 +1,92 @@
+@use '@/styles/mixins/flex' as flex;
+@use '@/styles/mixins/util' as util;
+@import '@/styles/variable';
+
+.coin-history-container {
+  .transaction-filter {
+    display: flex;
+    gap: 0.5rem;
+
+    li {
+      button {
+        box-sizing: border-box;
+        padding: 0.8rem 2.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+        border-radius: 1rem;
+        cursor: pointer;
+        transition: all ease 0.2s;
+        background-color: $color-pink-2;
+        // background-color: $color-gray-4;
+        color: white;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 1.4rem;
+
+        &:active {
+          background: darken($color-pink-2, 10%);
+        }
+      }
+    }
+  }
+
+  .transactions-list {
+    @include flex.flexColumn;
+    gap: 1.4rem;
+    margin-top: 2rem;
+    color: $color-black;
+
+    .transaction-item {
+      border: 1px solid $color-gray-1;
+      border-radius: 2rem;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+
+      .left-contents {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+
+        .descrpition {
+          display: flex;
+          align-items: center;
+
+          .title {
+            font-size: 1.6rem;
+            font-weight: 700;
+          }
+
+          .subtitle {
+            color: $color-gray-3;
+            &::before {
+              content: '|';
+              margin: 0.2rem 0.4rem 0 0.4rem;
+            }
+          }
+        }
+        .date {
+          font-size: 1.2rem;
+        }
+      }
+
+      .right-contents {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+
+        .pay {
+          color: $color-error;
+        }
+        b {
+          color: $color-blue-2;
+          font-size: 1.8rem;
+          letter-spacing: 0.6px;
+        }
+      }
+    }
+  }
+}
