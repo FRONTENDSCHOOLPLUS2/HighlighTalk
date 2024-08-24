@@ -7,4 +7,20 @@ import IconHamburger from './icon_hamburger.svg';
 import IconCross from './icon_cross.svg';
 import Coin from './coin.svg';
 
-export { IconProfile, IconEdit, IconGithub, IconInsta, IconMail, IconHamburger, IconCross, Coin };
+import CharacterBlue from './character_9.svg';
+import CharacterRed from './character_10.svg';
+import CharacterGray from './character_11.svg';
+
+export {
+  IconProfile,
+  IconEdit,
+  IconGithub,
+  IconInsta,
+  IconMail,
+  IconHamburger,
+  IconCross,
+  Coin,
+  CharacterBlue,
+  CharacterRed,
+  CharacterGray,
+};
