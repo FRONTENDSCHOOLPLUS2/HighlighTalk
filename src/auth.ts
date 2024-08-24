@@ -12,7 +12,13 @@ import { fetchAccessToken } from './utils/fetchToken';
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const {
+  handlers,
+  signIn,
+  signOut,
+  auth,
+  unstable_update: update,
+} = NextAuth({
   providers: [
     CredentialsProvider({
       async authorize(credentials): Promise<User | null> {
@@ -183,7 +189,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       // 세션 업데이트
       if (trigger === 'update' && session) {
-        token.name = session.name;
+        Object.assign(token, session.user);
+        token.coin = session.user.coin; // 코인 수정 시 반영
       }
 
       return token;

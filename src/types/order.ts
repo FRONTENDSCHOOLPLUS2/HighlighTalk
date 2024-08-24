@@ -22,9 +22,10 @@ interface PaginationType {
   totalPages: number;
 }
 
-interface OrderInfoType {
+export interface OrderInfoType {
   order_type: 'charge' | 'pay';
   amount: number | undefined;
+  coin_amount: number;
   payment_method: string | undefined;
   extra: {
     balance_before: number;

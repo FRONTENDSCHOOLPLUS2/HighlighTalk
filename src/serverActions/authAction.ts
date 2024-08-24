@@ -1,6 +1,6 @@
 'use server';
 
-import { auth, signIn, signOut } from '@/auth';
+import { auth, signIn, signOut, update } from '@/auth';
 import { LoginFormType } from '@/types';
 
 import { redirect } from 'next/navigation';
@@ -28,4 +28,4 @@ export const signOutWithForm = async (formData: FormData) => {
   await signOut({ redirectTo: '/' });
 };
 
-export { auth as getSession };
+export { auth as getSession, update as updateSession };
