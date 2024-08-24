@@ -1,6 +1,7 @@
 'use server';
 
-import { auth } from '@/auth';
+import { auth, update } from '@/auth';
+import { redirect } from 'next/navigation';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -24,7 +25,10 @@ export async function updateCoinData(id: string, newCoin: number) {
     body: JSON.stringify(bodyData),
   });
 
-  const data = await res.json();
-  console.log('updateCoinData', data);
-  return data;
+  await update({
+    user: {
+      coin: newCoin,
+    },
+  });
+  // redirect('/charge'); // FIXME - charge 페이지 그대로면 새로고침 필요함 (PortOne redirect로 활용해서 다시 해보기 )
 }

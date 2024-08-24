@@ -1,5 +1,5 @@
 import './_CoinCharge.scss';
-import CoinPackage from './CoinPackage';
+import CoinPackage from './CoinPackage/CoinPackage';
 
 // const PG = ['kakaopay', 'tosspayments'];
 // const MID = process.env.NEXT_PUBLIC_PORTONE_MERCHANT_ID;
