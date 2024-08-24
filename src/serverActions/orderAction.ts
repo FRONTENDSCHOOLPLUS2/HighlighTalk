@@ -1,12 +1,14 @@
 'use server';
 
 import { auth } from '@/auth';
+import { OrderResponseData } from '@/types/order';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 // TODO - 결제 내역 읽어오기 extra 객체 안에 있음
-export async function fetchOrderData() {
+// return Data any 잡기
+export async function fetchOrderData(): Promise<OrderResponseData> {
   const session = await auth();
 
   const res = await fetch(`${API_SERVER}/orders/`, {
