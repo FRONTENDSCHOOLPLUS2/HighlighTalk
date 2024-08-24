@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { fetchOrderData } from '@/serverActions/orderAction';
 import { OrderDataType } from '@/types/order';
 import './_CoinUsageHistory.scss';
-import Button from '@/components/Button/Button';
 import TransactionItem from './TransactionItem';
 
 // TODO - order 컬렉션 불러오기

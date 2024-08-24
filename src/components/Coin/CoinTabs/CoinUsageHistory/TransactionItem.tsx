@@ -21,7 +21,7 @@ function ChargeItem({ order }: { order: OrderDataType }) {
         </div>
       </div>
       <div className="right-contents">
-        <b>+{order.amount}</b>
+        <b>+{order.coin_amount}</b>
         <p>적립</p>
         {/* <p>전: {order.extra.balance_before} </p>
         <p>후: {order.extra.balance_after} </p> */}
@@ -47,7 +47,7 @@ function PayItem({ order }: { order: OrderDataType }) {
           </div>
         </div>
         <div className="right-contents ">
-          <b className="pay">-{order.amount}</b>
+          <b className="pay">-{order.coin_amount}</b>
           <p>사용</p>
           {/* <p>전: {order.extra.balance_before} </p>
         <p>후: {order.extra.balance_after} </p> */}

@@ -3,10 +3,27 @@
 @import '@/styles/variable.scss';
 
 .coin-charge-container {
+  position: relative;
   h3 {
     display: flex;
     font-weight: 700;
     padding-top: 1.8rem;
+    word-break: keep-all;
+    min-width: 6.8rem;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 7.5rem;
+    height: 7.5rem;
+    background-image: url('/image/character_3.svg');
+    background-position: right left;
+    // background-position: 25% 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
   }
 
   .description {
@@ -27,11 +44,41 @@
   }
   .package-list {
     padding: 1.8rem;
+    width: 100%;
 
     .contents {
-      width: 100%;
-      // height: 35rem; //임시
-      // background-color: yellowgreen;
+      @include flex.flexColumn;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      max-height: 24rem;
+
+      li {
+        display: flex;
+        max-width: 28rem;
+        justify-content: space-between;
+
+        .left-content {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          b {
+            margin: 0 0.2rem;
+          }
+        }
+      }
+    }
+
+    // 모바일
+    @media (max-width: 767px) {
+      .contents {
+        flex-wrap: no-wrap;
+        max-height: 100%;
+
+        li {
+          min-width: 55%;
+        }
+      }
     }
   }
 }
