@@ -2,7 +2,6 @@ import Script from 'next/script';
 import ScoreSection from './components/ScoreSection/ScoreSection';
 import './_LoveTestResultPage.scss';
 import SummarySection from './components/SummarySection/SummarySection';
-import RelationSection from './components/RelationSection/RelationSection';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
