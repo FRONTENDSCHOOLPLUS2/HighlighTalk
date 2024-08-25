@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useSession } from '@/app/providers';
 import Button from '@/components/Button/Button';
-import CoinCharge from './CoinCharge';
 import CoinUsageHistory from './CoinUsageHistory/CoinUsageHistory';
+import CoinCharge from './CoinCharge/CoinCharge';
 import { Coin } from '@public/image';
 import './_CoinTabs.scss';
 
@@ -16,10 +16,6 @@ const TABS = {
 function CoinTabs() {
   const [activeTab, setActiveTab] = useState(TABS.CHARGE);
   const session = useSession();
-
-  useEffect(() => {
-    console.log('세-숀', session);
-  }, []);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -38,7 +34,6 @@ function CoinTabs() {
         <div className="left-content">
           <Coin />
           <span className="coin">보유 코인</span>
-
           <b>{session?.user?.coin}</b>
           <span>개</span>
         </div>
