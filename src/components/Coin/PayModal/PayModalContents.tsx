@@ -18,7 +18,7 @@ function PayModalContents({
           <strong>{`${selectedAmount.toLocaleString()}`}</strong>원 결제
         </p>
         <p>
-          <strong>{selectedAmount / 10}</strong>&nbsp;코인이 충전됩니다.
+          <strong>{selectedAmount / 100}</strong>&nbsp;코인이 충전됩니다.
         </p>
         <p>결제 수단을 선택해주세요.</p>
       </div>

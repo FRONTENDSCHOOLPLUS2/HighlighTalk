@@ -1,5 +1,5 @@
+import CoinPackage from '../CoinPackage/CoinPackage';
 import './_CoinCharge.scss';
-import CoinPackage from './CoinPackage/CoinPackage';
 
 function CoinCharge() {
   return (
