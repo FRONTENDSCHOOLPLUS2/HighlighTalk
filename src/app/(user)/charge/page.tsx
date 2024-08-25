@@ -3,7 +3,7 @@ import './_ChargePage.scss';
 import CoinTabs from '@/components/Coin/CoinTabs/CoinTabs';
 
 export const metadata = {
-  title: '하이라이톡 | 코인 충전 페이지',
+  title: '하이라이톡 | 코인 충전',
   description: '하이라이톡 에서 AI기반 톡방 분석 서비스를 받아 보세요',
   keywords: 'highlightalk',
 };
