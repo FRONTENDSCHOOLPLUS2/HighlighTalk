@@ -30,5 +30,4 @@ export async function updateCoinData(id: string, newCoin: number) {
       coin: newCoin,
     },
   });
-  // redirect('/charge'); // FIXME - charge 페이지 그대로면 새로고침 필요함 (PortOne redirect로 활용해서 다시 해보기 )
 }

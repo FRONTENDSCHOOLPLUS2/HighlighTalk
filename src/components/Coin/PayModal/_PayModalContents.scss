@@ -1,0 +1,29 @@
+@use '@/styles/mixins/flex' as flex;
+@use '@/styles/mixins/util' as util;
+@import '@/styles/variable.scss';
+
+.paymodal-container {
+  .amount {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  strong {
+    letter-spacing: 0.1rem;
+    color: $color-green;
+  }
+  .options {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+
+    label {
+      margin-left: 0.4rem;
+
+      input {
+        vertical-align: text-top;
+      }
+    }
+  }
+}
