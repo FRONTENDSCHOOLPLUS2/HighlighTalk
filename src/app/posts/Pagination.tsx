@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 interface PaginationPropType {
   page: number;
@@ -8,7 +8,6 @@ interface PaginationPropType {
 }
 
 const Pagination: React.FC<PaginationPropType> = ({ page, totalPages }) => {
-  const params = useParams();
   const searchParams = useSearchParams();
   const pageList = [];
 

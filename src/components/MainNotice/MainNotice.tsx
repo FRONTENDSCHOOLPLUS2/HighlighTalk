@@ -46,8 +46,8 @@ function MainNotice() {
           </SwiperSlide>
           <SwiperSlide className="glass-effect-card">
             <h1>대화 내용이 노출 되지 않나요?</h1>
-            <p>톡방 내용이 외부로 노출 되는 일은 없습니다❗️.</p>
-            <p>대화 내용은 분석 이 후 재사용 없이 제거됩니다.</p>
+            <p>톡방 내용이 외부로 노출 되는 일은 없습니다❗️</p>
+            <p>대화 내용은 분석 이 후 노출 없이 제거됩니다.</p>
             <div className="bubble">
               <Image src="/image/notice-icon/notice2.svg" width={50} height={50} alt="not" />
             </div>

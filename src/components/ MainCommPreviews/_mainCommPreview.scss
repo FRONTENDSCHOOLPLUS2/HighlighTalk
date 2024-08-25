@@ -91,27 +91,105 @@
         }
       }
     }
-    // .coin {
-    //   position: absolute;
-    //   bottom: 2rem;
-    //   left: 2rem;
-    //   width: 9rem;
-    //   height: 4rem;
-    //   display: flex;
-    //   gap: 1rem;
-    //   justify-content: center;
-    //   align-items: center;
-    //   background-color: #fe8f96;
-    //   border-radius: 2rem;
-    //   color: #fff;
-    //   font-weight: 600;
+  }
+}
 
-    //   .coin-img {
-    //     width: 2.7rem;
-    //     height: 2.5rem;
-    //     background-repeat: no-repeat;
-    //     background-image: url('/image/coin.svg');
-    //   }
-    // }
+// 반응
+@media (max-width: 768px) {
+  .mainComm {
+    .pre-title {
+      margin-bottom: 3rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      gap: 1rem;
+      .title-tag {
+        display: inline-block;
+        background-color: var(--color-error);
+        color: var(--color-yellow-1);
+        font-size: 1.2rem;
+        padding: 0.3rem 1rem;
+        border-radius: 1rem;
+      }
+    }
+  }
+
+  .mainCommPre-cover {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+
+    .card {
+      background-color: #ffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 3rem;
+      padding: 2rem;
+      width: 33%;
+      height: 21rem;
+      position: relative;
+      white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
+      overflow: hidden; /* 넘친 텍스트를 숨김 */
+      text-overflow: ellipsis;
+      transition: all 0.5s ease;
+
+      &:hover {
+        transform: translateY(-4px) scale(1.02);
+        border: 0.1rem solid var(--color-skyblue-2);
+      }
+      h1 {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+        font-weight: bold;
+        line-height: 1.2;
+        white-space: wrap; /* 텍스트가 한 줄로 유지되도록 설정 */
+      }
+
+      .card-content {
+        margin-top: 1.2rem;
+        text-wrap: wrap;
+      }
+
+      p {
+        font-size: 1.4rem;
+        color: #666;
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+
+      .card-footer {
+        display: flex;
+        gap: 2rem;
+        // box-shadow: inset 0px 0px 10px blue;
+        position: absolute;
+        bottom: 10%;
+
+        .footer-content {
+          display: flex;
+          .p-3 {
+            display: none;
+          }
+        }
+
+        .icon-img {
+          margin-right: 0.4rem;
+          width: 2rem;
+          height: 2rem;
+          background-size: cover;
+
+          &.n1 {
+            background-image: url('/image/icon_eye.svg');
+          }
+          &.n2 {
+            background-image: url('/image/icon_chat.svg');
+          }
+          &.n3 {
+            display: none;
+            background-image: url('/image/icon_pen.svg');
+          }
+        }
+      }
+    }
   }
 }
