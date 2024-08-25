@@ -109,6 +109,7 @@ function FileUpLoader() {
           message: sendMessage,
         }),
       });
+
       const data = await response.json();
       console.log('xxxxx', data);
       router.push(`${fullURL}/${pathname}/${data?.secondData?.item._id}`);
