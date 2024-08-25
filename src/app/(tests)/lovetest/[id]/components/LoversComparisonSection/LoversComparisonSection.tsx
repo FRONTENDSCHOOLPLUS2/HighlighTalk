@@ -20,7 +20,8 @@ function LoversComparisonSection({ names, betterLover }: LoversComparisonSection
         style={{
           background: `linear-gradient(
         80deg,
-        #a8edea ${amountA / 2}%,
+        #a8edea ${0}%,
+        #d6b0f4 ${amountA}%,
         #fed6e3 ${100 - amountB / 2}%
       )`,
         }}
