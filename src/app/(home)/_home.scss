@@ -70,12 +70,11 @@
           justify-content: flex-start;
           align-items: flex-start;
           padding: 2rem;
-
-          width: 80%;
+          width: 100%;
 
           p {
             margin-top: 2rem;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
           }
 
           .free_tag,
@@ -89,6 +88,7 @@
             cursor: pointer;
             width: fit-content;
             font-weight: 600;
+            margin-top: auto; /* 이 부분을 추가합니다 */
           }
 
           .free_tag {
@@ -203,6 +203,150 @@
 
 // 반응형 분기
 
+@media (min-width: 1025px) and (max-width: 1250px) {
+  .MainPage {
+    .main_service {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      box-sizing: border-box;
+
+      .main_slide {
+        grid-row: 1 / span 2;
+        overflow: hidden;
+        border-radius: 1rem;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .main_items {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        &.n1 {
+          grid-row: 1;
+        }
+
+        &.n2 {
+          grid-row: 2;
+        }
+
+        a {
+          text-decoration: none;
+          font-size: 2.2rem;
+          display: block;
+          height: 100%;
+          color: #252525;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+          font-weight: 600;
+        }
+
+        p {
+          font-size: 1.6rem;
+          color: #828282;
+        }
+
+        .item {
+          border-radius: 2rem;
+          height: 100%;
+          display: flex;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+          transition: all 0.5s ease;
+
+          &:hover {
+            transform: translateY(-4px) scale(1.02);
+            border: 0.1rem solid var(--color-skyblue-2);
+          }
+
+          .des {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 2rem;
+
+            width: 80%;
+
+            p {
+              margin-top: 2rem;
+              margin-bottom: 5rem;
+            }
+
+            .free_tag,
+            .payed_tag {
+              padding: 0.8rem 1.6rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 1.6rem;
+              border-radius: 2rem;
+              cursor: pointer;
+              width: fit-content;
+              font-weight: 600;
+            }
+
+            .free_tag {
+              background: #d0f4ff;
+              color: #4997f2;
+            }
+
+            .payed_tag {
+              background: #ffefcb;
+              color: #ffb200;
+              display: flex;
+              gap: 0.5rem;
+
+              .payed_tagImage {
+                width: 2.7rem;
+                height: 2.5rem;
+                background-image: url('/image/coin.svg');
+                background-repeat: no-repeat;
+              }
+            }
+          }
+
+          .free_items_img,
+          .second {
+            width: 50%;
+            border-radius: 2rem;
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 90%;
+              right: -4.7rem;
+              transform: translateY(-60%);
+              width: 140px;
+              height: 100px;
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
+          }
+
+          .free_items_img::before {
+            background-image: url('/image/icon_blue.svg');
+          }
+
+          .second::before {
+            background-image: url('/image/character_3_left.svg');
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .MainPage {
     margin-top: 10rem;
@@ -243,7 +387,7 @@
             &::before {
               content: '';
               position: absolute;
-              right: -4.4rem;
+              right: -4.7rem;
               transform: translateY(-90%);
               width: 140px;
               height: 100px;
@@ -276,6 +420,114 @@
         width: 44rem;
         padding: 2rem;
         background: rgba(255, 255, 255, 0.1);
+        border-radius: 3rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+
+        h1 {
+          font-size: 1.8rem;
+          color: #252525;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 1.6rem;
+          color: #828282;
+          margin: 0;
+        }
+
+        .bubble {
+          position: absolute;
+          top: -30px;
+          width: 4rem;
+          height: 4rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          color: #333;
+        }
+      }
+    }
+  }
+}
+
+// mobile
+@media (max-width: 480px) {
+  .MainPage {
+    margin-top: 10rem;
+    .main_service {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .main_slide {
+        width: 100%;
+        height: auto;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .main_items {
+        order: 1;
+        width: 100%;
+        gap: 1.5rem;
+
+        .item {
+          flex-direction: column;
+          height: auto;
+
+          .des {
+            width: 100%;
+            padding: 2rem;
+          }
+
+          .free_items_img {
+            width: 100%;
+            margin-top: 1rem;
+
+            &::before {
+              content: '';
+              position: absolute;
+              right: -4.7rem;
+              transform: translateY(-90%);
+              width: 140px;
+              height: 100px;
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+      }
+    }
+
+    .main-notice {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 12rem;
+
+      .main-notice-bg {
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url('/image/main-slide-bg.svg');
+        backdrop-filter: blur(10px);
+      }
+
+      .glass-effect-card {
+        margin-top: 4rem;
+        width: 44rem;
+        padding: 2rem;
         border-radius: 3rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         display: flex;

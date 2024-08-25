@@ -1,31 +1,141 @@
-.test-page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: inset 0px 0px 20px greenyellow;
-}
+// 모바일 일 때 마진 탑 줘야할 듯
 
-.test-page-header h1 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  text-align: center;
-}
+// love TEST --------------------------------------------------------------
+.loveTestContainer {
+  .test-page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background: linear-gradient(
+    //   90deg,
+    //   rgba(131, 58, 180, 1) 0%,
+    //   rgba(253, 29, 29, 1) 50%,
+    //   rgba(252, 176, 69, 1) 100%
+    // );
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    width: 100%;
+    height: 100%;
+    border-radius: 1.6rem;
 
-.test-page-content {
-  text-align: center;
-  margin-bottom: 3rem;
-}
+    .page-header {
+      // h1
+      margin-top: 8rem;
+      color: #fff;
+      font-size: 5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
 
-.start-test-button {
-  padding: 1rem 2rem;
-  font-size: 1em;
-  color: white;
-  background-color: var(--color-skyblue-2);
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    .test-page-content {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 3rem;
 
-.start-test-button:hover {
-  background-color: #0056b3;
+      .page-headerSub {
+        // h2
+        color: #fff;
+        font-size: 3rem;
+        font-weight: 800;
+
+        span {
+          color: rgb(209, 64, 64);
+        }
+      }
+      .sub-p {
+        // p tag
+        color: #fff;
+        margin-top: 4.4rem;
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+      .test-page-action {
+        //btn cover
+        margin-top: 4rem;
+        // box-shadow: inset 0px 0px 20px green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+
+        .btn {
+          //btn
+          width: 14rem;
+          height: 5rem;
+          border-radius: 27.5rem;
+          font-size: 2rem;
+          font-weight: 800;
+          cursor: pointer;
+
+          &.n1 {
+            background-color: #fff;
+            color: #ff9a9e;
+            transition: 0.3s all ease-out;
+            &:hover {
+              transform: translateY(-4px) scale(1.02);
+            }
+          }
+          &.n2 {
+            background-color: #d33c3c;
+            color: #fff;
+            transition: 0.3s all ease-out;
+            &:hover {
+              transform: translateY(-4px) scale(1.02);
+            }
+          }
+        }
+      }
+      .page-mokup {
+        top: 40px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 6rem;
+        // box-shadow: inset 0px 0px 20px red;
+        width: 100%;
+        height: 50rem;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url('/image/intro_bg1.svg');
+      }
+    }
+  }
+
+  // 온보딩 설명
+  .freetest-description {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20rem;
+    // box-shadow: inset 0px 0px 20px greenyellow;
+
+    // des
+    .des-header {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .header-title {
+        color: #774fd5;
+        font-size: 3rem;
+        font-weight: 700;
+      }
+      .header-sub {
+        margin-top: 2.8rem;
+        font-size: 1.8rem;
+        color: #717171;
+        font-weight: 600;
+      }
+    }
+    .des-image {
+      margin-top: 8rem;
+      width: 100%;
+      height: 54rem;
+      background-image: url('/image/intro_bg2.png');
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
 }

@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
-import './_TestPage.scss';
 import FreeTestContainer from './FreeTestContainer';
-import { PostItem } from '@/types';
 
 // 서버컴포넌트로 분리
 

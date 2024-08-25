@@ -31,7 +31,7 @@ function MainCommPreviewItem({ data }: MainThemesProps) {
           </div>
           <div className="footer-content">
             <div className="icon-img n3"></div>
-            <p>{data.createdAt.split(' ')[0]}</p>
+            <p className="p-3">{data.createdAt.split(' ')[0]}</p>
           </div>
         </div>
       </Link>
