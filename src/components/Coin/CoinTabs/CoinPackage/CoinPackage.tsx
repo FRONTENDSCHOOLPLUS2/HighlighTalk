@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import { Session } from 'next-auth';
 import { RequestPayParams, RequestPayResponse } from '@/types/portone';
 import { updateCoinData } from '@/serverActions/coinAction';
 import { createOrderData } from '@/serverActions/orderAction';
 import { useSession } from '@/app/providers';
-import { OrderDataType, OrderInfoType, UserPayDataType } from '@/types/order';
+import { OrderInfoType, UserPayDataType } from '@/types/order';
 import { Coin } from '@public/image';
 import Button from '@/components/Button/Button';
+import { useModalStore } from '@/store/ModalStore';
+import PayModal from '../../PayModal/PayModal';
+import PayModalContents from '../../PayModal/PayModalContents';
 
 const STORE_CODE = process.env.NEXT_PUBLIC_PORTONE_SHOP_ID ?? '';
 
@@ -21,13 +25,13 @@ const COIN_PACKAGE = [
 
 function CoinPackage() {
   const session = useSession();
-  const userCoin = session?.user?.coin!;
-
-  console.log('유저코인 이거임', userCoin);
+  const [selectedAmount, setSelectedAmount] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState('kakaopay');
+  const { isOpen, openModal, closeModal } = useModalStore();
 
   const generatePayDataOption = (userPayData: UserPayDataType) => {
     const data: RequestPayParams = {
-      pg: 'kakaopay',
+      pg: paymentMethod,
       pay_method: 'card', //생략 가능
       merchant_uid: userPayData.order_uid,
       name: '하이라이톡 | 코인 충전하기',
@@ -36,26 +40,12 @@ function CoinPackage() {
       buyer_name: userPayData.username,
       buyer_tel: '010-1234-5678',
     };
-
-    // 옵션2) 이니시스
-    // {
-    //   pg: `html5_inicis.INIpayTest`,
-    //   pay_method: 'card',
-    //   merchant_uid: userPayData.order_uid,
-    //   name: userPayData.name,
-    //   amount: userPayData.amount,
-    //   buyer_email: 'test@portone.io',
-    //   buyer_name: userPayData.username,
-    //   buyer_tel: '010-1234-5678', //필수 파라미터 입니다.
-    //   m_redirect_url: '{모바일에서 결제 완료 후 리디렉션 될 URL}',
-    //   escrow: true,
-    //   bypass: {
-    //     acceptmethod: 'noeasypay',
-    //     P_RESERVED: 'noeasypay=Y',
-    //   },
-    // };
-
     return data;
+  };
+
+  // 결제 수단 변경 함수
+  const handlePaymentMethodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPaymentMethod(event.target.value);
   };
 
   const handlePayment = (session: Session | null, amount: number) => {
@@ -68,7 +58,7 @@ function CoinPackage() {
 
     const UserPayData: UserPayDataType = {
       username: session.user?.name!,
-      name: '결제 이름임', // ????
+      name: '하이라이톡 | 코인 충전',
       email: session.user?.email!,
       amount: amount, // 결제금액
       order_uid: `ht_order_no_${randomOrderNum}`,
@@ -79,9 +69,10 @@ function CoinPackage() {
     if (typeof window !== 'undefined') {
       const { IMP } = window;
       IMP?.init(STORE_CODE);
-      IMP?.request_pay(generatePayDataOption(UserPayData), (response) =>
-        callback(response, userCoin)
-      );
+
+      const payDataOption = generatePayDataOption(UserPayData);
+
+      IMP?.request_pay(payDataOption, (response) => callback(response, userCoin));
     }
   };
 
@@ -92,14 +83,14 @@ function CoinPackage() {
       alert('결제 성공');
       console.log(success);
 
-      // 10원 = 1코인으로 환산
+      // REVIEW - 10원 = 1코인으로 환산 (개발 단에서 변동 가능)
       const calculatedCoins = response.paid_amount! / 10;
       const updatedUserCoin = userCoin + calculatedCoins;
 
       const orderData: OrderInfoType = {
         order_type: 'charge',
-        amount: response.paid_amount, // 실제 결제 금액
-        coin_amount: calculatedCoins, // 충전된 코인
+        amount: response.paid_amount,
+        coin_amount: calculatedCoins,
         payment_method: response.pg_provider,
         extra: {
           balance_before: userCoin,
@@ -110,31 +101,64 @@ function CoinPackage() {
       const userId = session?.user?.id!;
       await updateCoinData(userId, updatedUserCoin);
       await createOrderData('charge', orderData);
+
+      closeModal();
+      window.location.reload();
     } else {
       alert(`결제 실패 ${error_msg}`);
     }
   };
 
   return (
-    <ul className="contents">
-      {COIN_PACKAGE.map((item, index) => (
-        <li key={index}>
-          <div className="left-content">
-            <Coin />
-            <p>
-              코인<b>{item.coin}</b>개
-            </p>
+    <>
+      <ul className="contents">
+        {COIN_PACKAGE.map((item, index) => (
+          <li key={index}>
+            <div className="left-content">
+              <Coin />
+              <p>
+                코인<b>{item.coin}</b>개
+              </p>
+            </div>
+            <Button
+              theme="primary"
+              styleType="tonal"
+              onClick={() => {
+                setSelectedAmount(item.amount);
+                openModal();
+              }}
+            >
+              {item.amount.toLocaleString()}&nbsp;원
+            </Button>
+          </li>
+        ))}
+      </ul>
+      {isOpen && (
+        <PayModal
+          isOpen={isOpen}
+          onClose={closeModal}
+          title={`${selectedAmount}원 결제 결제 수단을 선택해주세요`}
+          session={session}
+          amount={selectedAmount}
+          content=""
+          footer="결제 전 이용약관을 확인해주세요."
+        >
+          <PayModalContents
+            selectedAmount={selectedAmount}
+            paymentMethod={paymentMethod}
+            handlePaymentMethodChange={handlePaymentMethodChange}
+          />
+          <div className="modal-btns">
+            <Button onClick={() => handlePayment(session, selectedAmount)} theme="secondary">
+              결제하기
+            </Button>
+            <Button onClick={() => closeModal()} theme="black">
+              닫기
+            </Button>
           </div>
-          <Button
-            theme="primary"
-            styleType="tonal"
-            onClick={() => handlePayment(session, item.amount)}
-          >
-            {item.amount.toLocaleString()}&nbsp;원
-          </Button>
-        </li>
-      ))}
-    </ul>
+        </PayModal>
+      )}
+    </>
   );
 }
 export default CoinPackage;
