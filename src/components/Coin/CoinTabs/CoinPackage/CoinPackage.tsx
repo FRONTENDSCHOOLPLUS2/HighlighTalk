@@ -8,19 +8,21 @@ import { OrderInfoType, UserPayDataType } from '@/types/order';
 import { Coin } from '@public/image';
 import Button from '@/components/Button/Button';
 import { useModalStore } from '@/store/ModalStore';
-import PayModal from '../../PayModal/PayModal';
-import PayModalContents from '../../PayModal/PayModalContents';
+import PayModal from '@/components/Coin/PayModal/PayModal';
+import PayModalContents from '@/components/Coin/PayModal/PayModalContents';
 
 const STORE_CODE = process.env.NEXT_PUBLIC_PORTONE_SHOP_ID ?? '';
 
+// NOTE - 100원에 1코인으로 환산
+
 const COIN_PACKAGE = [
-  { coin: 10, amount: 100 },
-  { coin: 100, amount: 1000 },
-  { coin: 200, amount: 2000 },
-  { coin: 300, amount: 3000 },
-  { coin: 500, amount: 5000 },
-  { coin: 1000, amount: 10000 },
-  { coin: 2000, amount: 20000 },
+  { coin: 1, amount: 100 },
+  { coin: 10, amount: 1000 },
+  { coin: 20, amount: 2000 },
+  { coin: 30, amount: 3000 },
+  { coin: 50, amount: 5000 },
+  { coin: 100, amount: 10000 },
+  { coin: 200, amount: 20000 },
 ];
 
 function CoinPackage() {
@@ -77,14 +79,13 @@ function CoinPackage() {
   };
 
   const callback = async (response: RequestPayResponse, userCoin: number) => {
-    console.log('💸 결제 RESPONSE >>> ', response);
+    // console.log('💸 결제 RESPONSE >>> ', response);
     const { success, error_msg } = response;
     if (success) {
       alert('결제 성공');
       console.log(success);
 
-      // REVIEW - 10원 = 1코인으로 환산 (개발 단에서 변동 가능)
-      const calculatedCoins = response.paid_amount! / 10;
+      const calculatedCoins = response.paid_amount! / 100;
       const updatedUserCoin = userCoin + calculatedCoins;
 
       const orderData: OrderInfoType = {
@@ -120,16 +121,20 @@ function CoinPackage() {
                 코인<b>{item.coin}</b>개
               </p>
             </div>
-            <Button
-              theme="primary"
-              styleType="tonal"
-              onClick={() => {
-                setSelectedAmount(item.amount);
-                openModal();
-              }}
-            >
-              {item.amount.toLocaleString()}&nbsp;원
-            </Button>
+            <div className="charge-button">
+              <Button
+                theme="primary"
+                styleType="tonal"
+                size="full"
+                onClick={() => {
+                  setSelectedAmount(item.amount);
+                  openModal();
+                }}
+                style={{ fontWeight: 600, fontSize: '1.4rem' }}
+              >
+                {item.amount.toLocaleString()}&nbsp;원
+              </Button>
+            </div>
           </li>
         ))}
       </ul>

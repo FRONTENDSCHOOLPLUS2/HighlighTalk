@@ -8,6 +8,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { OAuthUser, RefreshTokenRes, SignupResponsType } from './types';
 import { loginOAuth, signupWithOAuth } from './serverActions/userActions';
 import { fetchAccessToken } from './utils/fetchToken';
+import { cookies } from 'next/headers';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -104,19 +105,23 @@ export const {
           // DB에서 id를 조회해서 있으면 로그인 처리를 없으면 자동 회원 가입 후 로그인 처리
           let userInfo: SignupResponsType | null = null;
           try {
-            // 자동 회원 가입 + 코인 0 init
+            // 자동 회원 가입 + 코인 100 init
             const newUser: OAuthUser = {
               type: 'user',
               loginType: account.provider,
               name: user.name!,
               email: user.email!,
               image: user.image!,
-              extra: { ...profile, providerAccountId: account.providerAccountId, coin: 0 },
+              extra: { ...profile, providerAccountId: account.providerAccountId, coin: 100 },
             };
 
             // 이미 가입된 회원이면 회원가입이 되지 않고 에러를 응답하므로 무시하면 됨
             const result = await signupWithOAuth(newUser);
-            console.log('회원 가입', result);
+
+            // 새로 회원가입 진행할 경우 cookie setting (모달 띄우기)
+            if (result.ok) {
+              cookies().set('isNewUser', 'true');
+            }
 
             // 자동 로그인
             const resData = await loginOAuth(account.providerAccountId);

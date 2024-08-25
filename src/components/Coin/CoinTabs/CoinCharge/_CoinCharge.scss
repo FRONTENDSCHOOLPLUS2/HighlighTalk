@@ -64,9 +64,15 @@
           align-items: center;
           gap: 1rem;
 
+          font-size: 1.4rem;
+          font-weight: 500;
           b {
             margin: 0 0.2rem;
           }
+        }
+
+        .charge-button {
+          width: 9rem;
         }
       }
     }

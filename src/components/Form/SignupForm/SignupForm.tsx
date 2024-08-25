@@ -6,6 +6,8 @@ import './_SignupForm.scss';
 import { signup } from '@/serverActions/userActions';
 import Button from '@/components/Button/Button';
 import { useRouter } from 'next/navigation';
+import { signInWithCredentials } from '@/serverActions/authAction';
+import { useModalStore } from '@/store/ModalStore';
 
 function SignupForm() {
   const {
@@ -16,6 +18,7 @@ function SignupForm() {
   } = useForm<SignupFormType>();
   const router = useRouter();
   const password = watch('password');
+  const { openModal } = useModalStore();
 
   // TODO - 타입 가드 떡칠 상태, 더 나은 방법 고민하기
   const nameErrorMessage: string | undefined =
@@ -41,12 +44,21 @@ function SignupForm() {
   const createUser = async (formData: SignupFormType) => {
     formData.type = 'user';
     try {
-      const resData = await signup(formData);
+      signup(formData);
+
+      // NOTE 회원가입 성공 시 자동 로그인, 축하 모달 열기
+      const loginData = {
+        redirect: false,
+        email: formData.email,
+        password: formData.password,
+      };
+
+      signInWithCredentials(loginData);
+
+      openModal();
     } catch (error) {
       console.error('Error:', error);
     }
-
-    router.push('/login');
   };
 
   return (
