@@ -5,7 +5,6 @@ import './_TestPage.scss';
 import FileUpLoader from '@/components/FileUpload/FileUploader';
 import Button from '@/components/Button/Button';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
-import { PostItem } from '@/types';
 
 function FreeTestContainer({ totalCount }: { totalCount: number }) {
   const [currentStep, setCurrentStep] = useState(1);

@@ -70,7 +70,6 @@ function MbtiSection({ data = [] }: MbtiSectionPropType) {
                 </div>
                 <div className="card-img">
                   <Image
-                    priority
                     src={getImageSrc(item.value)} // MBTI 값에 따른 이미지 경로
                     width={200}
                     height={200}
