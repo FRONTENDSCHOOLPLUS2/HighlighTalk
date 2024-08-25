@@ -13,8 +13,9 @@ function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
   const router = useRouter();
   const userName = userSession?.user?.name;
   const handleProfileClick = () => {
-    router.push(`/mypage`);
-    if (onInteraction) onInteraction();
+    onInteraction?.();
+    const targetRoute = userSession?.user ? '/mypage' : '/login';
+    router.push(targetRoute);
   };
 
   return (
@@ -33,7 +34,7 @@ function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
           </>
         ) : (
           <>
-            <div onClick={() => router.push('/login')} className="profile-button">
+            <div onClick={() => handleProfileClick()} className="profile-button">
               <p>로그인 후 이용해주세요</p>
               <IconProfile />
             </div>
