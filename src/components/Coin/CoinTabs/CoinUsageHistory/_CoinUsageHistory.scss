@@ -18,7 +18,7 @@
         border-radius: 1rem;
         cursor: pointer;
         transition: all ease 0.2s;
-        background-color: $color-pink-2;
+        background-color: $color-pink-1;
         // background-color: $color-gray-4;
         color: white;
         border-radius: 100px;
@@ -26,7 +26,10 @@
         font-size: 1.4rem;
 
         &:active {
-          background: darken($color-pink-2, 10%);
+          background: darken($color-pink-1, 10%);
+        }
+        &.active {
+          background: darken($color-pink-1, 10%);
         }
       }
     }
