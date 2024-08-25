@@ -3,6 +3,7 @@ import ScoreSection from './components/ScoreSection/ScoreSection';
 import './_LoveTestResultPage.scss';
 import SummarySection from './components/SummarySection/SummarySection';
 import LoversComparisonSection from './components/LoversComparisonSection/LoversComparisonSection';
+import TopicsSection from './components/TopicsSection/TopicsSection';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
@@ -37,7 +38,7 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <article className="analysis-result">
+    <article className="analysis-result love">
       <Script
         id="kakao-script"
         src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
@@ -63,8 +64,16 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
       <LoversComparisonSection
         names={'여다희, 김지후'}
         betterLover={{
-          여다희: 30,
-          김지후: 70,
+          여다희: 10,
+          김지후: 90,
+        }}
+      />
+      <TopicsSection
+        personalFactors={{
+          money: 30,
+          health: 80,
+          love: 90,
+          daily: 75,
         }}
       />
     </article>
