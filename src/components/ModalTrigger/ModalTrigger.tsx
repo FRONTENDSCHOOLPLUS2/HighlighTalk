@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
+import './_ModalTrigger.scss';
 
 // NOTE - 회원가입 축하 코인 지급 안내 모달
 function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
@@ -26,10 +27,10 @@ function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
 
   const handleCloseModal = () => {
     if (isNewUser) {
-      deleteCookie(isNewUser); // Delete the cookie
-      setCookieDeleted(true); // Update state to reflect the deletion
+      deleteCookie(isNewUser);
+      setCookieDeleted(true);
     }
-    closeModal(); // Close the modal
+    closeModal();
   };
 
   const handleGoTestButton = () => {
@@ -48,26 +49,16 @@ function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
           onClose={handleCloseModal}
           title="🎉 회원가입을 축하합니다!"
           content="가입 축하 100 코인이 지급되었어요."
-          buttons={[
-            {
-              label: '지금 바로 분석하러 가기',
-              onClick: () => handleGoTestButton(),
-              theme: 'secondary',
-            },
-            {
-              label: `닫기`,
-              onClick: () => handleCloseModal(),
-              theme: 'black',
-              // styleType: 'tonal',
-            },
-          ]}
+          buttons={[]}
         >
-          {/* <Button onClick={() => router.push('/freetest')} theme="secondary">
-            지금 바로 분석하러 가기
-          </Button>
-          <Button onClick={() => handleCloseModal()} theme="secondary" styleType="outlined">
-            닫기
-          </Button> */}
+          <div className="modal-content-buttons">
+            <Button onClick={() => handleCloseModal()} theme="secondary" styleType="outlined">
+              닫기
+            </Button>
+            <Button onClick={() => router.push('/freetest')} theme="secondary">
+              지금 바로 분석하러 가기
+            </Button>
+          </div>
         </Modal>
       )}
     </>
