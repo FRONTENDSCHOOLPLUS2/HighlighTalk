@@ -1,4 +1,4 @@
-import './_ChargeModalContents.scss';
+import './_PayModalContents.scss';
 
 interface ChargeModalContentsPropType {
   selectedAmount: number;

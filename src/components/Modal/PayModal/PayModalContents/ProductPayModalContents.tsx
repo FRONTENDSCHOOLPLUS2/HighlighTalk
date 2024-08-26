@@ -1,7 +1,7 @@
 import Button from '@/components/Button/Button';
-import './_ProductPayModalContents.scss';
-import './_ChargeModalContents.scss';
-import { use, useEffect, useState } from 'react';
+import './_PayModalContents.scss';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ProductPayModalContentsPropType {
   test: any;
@@ -17,13 +17,20 @@ function ProductPayModalContents({
   closeModal,
   handlePayButton,
 }: ProductPayModalContentsPropType) {
+  const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const canPay = coin !== undefined && coin > test.price;
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
   };
 
-  // 코인 부족할 경우 렌더링할 내용
+  const handleGoChargeButton = async () => {
+    closeModal();
+    router.push('/freetest');
+  };
+
+  // NOTE - 코인 부족할 경우 렌더링할 내용
   const NoCoin = () => (
     <>
       <p className="amount">앗, 코인이 부족해요.</p>
@@ -37,7 +44,7 @@ function ProductPayModalContents({
         <Button onClick={() => closeModal()} theme="secondary" styleType="outlined">
           닫기
         </Button>
-        <Button onClick={() => console.log('클릭')} theme="secondary">
+        <Button onClick={() => handleGoChargeButton()} theme="secondary">
           코인 충전하러 가기
         </Button>
       </div>
@@ -63,7 +70,7 @@ function ProductPayModalContents({
             <Button onClick={() => closeModal()} theme="secondary" styleType="outlined">
               닫기
             </Button>
-            <Button onClick={() => console.log('클릭')} theme="secondary" disabled={!isChecked}>
+            <Button onClick={() => handlePayButton()} theme="secondary" disabled={!isChecked}>
               결제하기
             </Button>
           </div>
