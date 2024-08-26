@@ -5,7 +5,7 @@
 .paymodal-container {
   @include flex.flexColumn;
   gap: 0.8rem;
-  justify-items: center;
+  align-items: center;
   .amount {
     font-size: 1.8rem;
     font-weight: 700;
@@ -15,6 +15,7 @@
   strong {
     letter-spacing: 0.1rem;
     color: $color-green;
+    font-weight: 700;
   }
   .options {
     display: flex;
@@ -39,11 +40,9 @@
   }
 
   // NOTE - UX에 맞게 커스텀해 적용중
-  .modal-btns {
+  .modal-content-buttons {
     display: flex;
-    gap: 1rem;
-
-    button {
-    }
+    gap: 0.8rem;
+    margin-top: 1rem;
   }
 }
