@@ -8,8 +8,8 @@ import { OrderInfoType, UserPayDataType } from '@/types/order';
 import { Coin } from '@public/image';
 import Button from '@/components/Button/Button';
 import { useModalStore } from '@/store/ModalStore';
-import PayModal from '@/components/Coin/PayModal/PayModal';
-import PayModalContents from '@/components/Coin/PayModal/PayModalContents';
+import PayModal from '@/components/Modal/PayModal/PayModal';
+import ChargeModalContents from '@/components/Modal/PayModal/PayModalContents/ChargeModalContents';
 
 const STORE_CODE = process.env.NEXT_PUBLIC_PORTONE_SHOP_ID ?? '';
 
@@ -158,7 +158,7 @@ function CoinPackage() {
           content=""
           footer="결제 전 이용약관을 확인해주세요."
         >
-          <PayModalContents
+          <ChargeModalContents
             selectedAmount={selectedAmount}
             paymentMethod={paymentMethod}
             handlePaymentMethodChange={handlePaymentMethodChange}
