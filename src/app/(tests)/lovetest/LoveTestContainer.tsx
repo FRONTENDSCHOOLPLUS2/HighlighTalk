@@ -7,27 +7,28 @@ import { shareURL } from '@/utils/shareURL';
 import { useSession } from '@/app/providers';
 import { useModalStore } from '@/store/ModalStore';
 import PayModal from '@/components/Modal/PayModal/PayModal';
-import Button from '@/components/Button/Button';
-import './_loveTestPage.scss';
 import { TEST_PRODUCT } from '@/data/TEST_PRODUCT';
 import ProductPayModalContents from '@/components/Modal/PayModal/PayModalContents/ProductPayModalContents';
+import { updateCoinData } from '@/serverActions/coinAction';
+import './_loveTestPage.scss';
 
 function LoveTestContainer({ totalCount }: { totalCount: number }) {
   const session = useSession();
   const [currentStep, setCurrentStep] = useState(1);
   const { isOpen, openModal, closeModal } = useModalStore();
+  const TEST_INFO = TEST_PRODUCT.lovetest;
+
+  const userCoin = session?.user?.coin || 0;
+  const userId = session?.user?.id!;
 
   const handleStartBtnClick = () => {
     openModal();
-    // setCurrentStep(2);
   };
 
-  const handleModal = () => {
-    console.log('handleModal~~');
-  };
-
-  const handlePayButton = () => {
-    console.log('handlePayButton');
+  const handlePayButton = async () => {
+    await updateCoinData(userId, userCoin - TEST_INFO.price);
+    closeModal();
+    setCurrentStep(2);
   };
 
   return (
