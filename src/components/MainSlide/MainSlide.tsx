@@ -25,11 +25,26 @@ function MainSlide() {
         }}
       >
         <SwiperSlide>
-          <Image width={0} height={0} sizes="100%" src="/image/mainslide1.svg" alt="img" priority />
+          <Image
+            width={0}
+            height={0}
+            sizes="100%"
+            src="/image/mainslide1.svg"
+            alt="img"
+            loading="lazy"
+          />
         </SwiperSlide>
 
         <SwiperSlide>
-          <Image width={0} height={0} sizes="100%" src="/image/mainslide2.svg" alt="img" priority />
+          <Image
+            width={0}
+            height={0}
+            sizes="100%"
+            src="/image/mainslide2.svg"
+            alt="img"
+            loading="lazy"
+            // 최적화를 위해 레이지 로딩
+          />
         </SwiperSlide>
       </Swiper>
     </div>

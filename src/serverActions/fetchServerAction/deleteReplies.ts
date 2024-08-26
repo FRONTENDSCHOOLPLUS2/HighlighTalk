@@ -11,8 +11,6 @@ export async function deleteReplies(id: string, replyId: string) {
   const accessToken = session?.accessToken;
   const url = `${SERVER}/posts/${id}/replies/${replyId}`;
 
-  console.log('url url ru', url);
-
   try {
     const res = await fetch(url, {
       method: 'DELETE',

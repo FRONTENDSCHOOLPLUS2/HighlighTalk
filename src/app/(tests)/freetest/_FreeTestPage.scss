@@ -189,3 +189,197 @@
     }
   }
 }
+
+// 반응형
+
+@media (max-width: 768px) {
+  .test-page-container {
+    width: 100%;
+    margin-top: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(150deg, #e1bee7, #d1c4e9, #c5cae9, #bbdefb, #b3e5fc);
+    // background: linear-gradient(150deg, #ffffff 100%, #e6a7d2 0%, #9298ec 100%);
+    width: 100%;
+    height: 100%;
+    border-radius: 1.6rem;
+
+    .page-header {
+      // h1
+      margin-top: 8rem;
+      color: #7349d5;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .test-page-content {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 3rem;
+
+      .page-headerSub {
+        // h2
+        color: #7349d5;
+        font-size: 3rem;
+        font-weight: 800;
+
+        span {
+          color: #7349d5;
+        }
+      }
+      .sub-p {
+        // p tag
+        color: #717171;
+        margin-top: 4.4rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+      .test-page-action {
+        //btn cover
+        margin-top: 4rem;
+        // box-shadow: inset 0px 0px 20px green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+
+        .btn {
+          //btn
+          width: 14rem;
+          height: 5rem;
+          border-radius: 27.5rem;
+          font-size: 2rem;
+          font-weight: 800;
+          cursor: pointer;
+
+          &.n1 {
+            background-color: #fff;
+            color: #774fd5;
+            transition: 0.3s all ease-out;
+            &:hover {
+              transform: translateY(-4px) scale(1.02);
+            }
+          }
+          &.n2 {
+            background-color: #754cd5;
+            color: #fff;
+            transition: 0.3s all ease-out;
+            &:hover {
+              transform: translateY(-4px) scale(1.02);
+            }
+          }
+        }
+      }
+      .page-mokup {
+        top: 40px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 6rem;
+        // box-shadow: inset 0px 0px 20px red;
+        width: 100%;
+        height: 50rem;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url('/image/intro_bg1.svg');
+      }
+    }
+  }
+
+  // 온보딩 설명
+  .freetest-description {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20rem;
+    // box-shadow: inset 0px 0px 20px greenyellow;
+
+    // des
+    .des-header {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .header-title {
+        color: #774fd5;
+        font-size: 3rem;
+        font-weight: 700;
+      }
+      .header-sub {
+        margin-top: 2.8rem;
+        font-size: 1.8rem;
+        color: #717171;
+        font-weight: 600;
+      }
+    }
+    .des-image {
+      margin-top: 8rem;
+      width: 100%;
+      height: 54rem;
+      background-image: url('/image/intro_bg2.png');
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .freetest-card {
+    margin-top: 16rem;
+    width: 100%;
+    height: 1000px;
+    // box-shadow: inset 0px 0px 20px orange;
+
+    .card-title {
+      font-size: 3.2rem;
+      color: #3e3e3e;
+      font-weight: 700;
+      margin-bottom: 5.4rem;
+      text-align: center;
+    }
+
+    .card-content {
+      border-radius: 4rem;
+      background-color: #fbfbfd;
+
+      border: 0.1rem solid #000;
+
+      .card-wrapper {
+        display: flex;
+        margin-top: 10rem;
+        width: 100%;
+        height: 100%;
+        .contents {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          h1 {
+            color: #3e3e3e;
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 4rem;
+          }
+          p {
+            text-overflow: ellipsis;
+            font-size: 1.6rem;
+            color: #717171;
+            font-weight: 500;
+          }
+        }
+
+        .contents-img {
+          width: 100%;
+          background-image: url('/image/intro_card1.svg');
+
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+}

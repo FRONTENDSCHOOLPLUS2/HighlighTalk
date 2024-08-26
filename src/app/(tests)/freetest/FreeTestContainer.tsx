@@ -8,7 +8,7 @@ import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 function FreeTestContainer({ totalCount }: { totalCount: number }) {
   const [currentStep, setCurrentStep] = useState(1);
 
-  // 공유
+  // 공유 함수 예외처리
   const handleShareURL = () => {
     const text = `[ 하이라이톡 - 우리는 어떻게 대화하고 있을까? ]\n🤖하이라이톡 에서 테스트 해보세요!\n\nURL - ${location.href}`;
 

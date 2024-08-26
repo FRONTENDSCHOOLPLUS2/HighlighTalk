@@ -1,7 +1,6 @@
 'use server';
 
 import { auth } from '@/auth';
-import { PostItem } from '@/types/posts';
 import { revalidateTag } from 'next/cache';
 
 const LIMIT = process.env.NEXT_PUBLIC_LIMIT;
@@ -69,7 +68,7 @@ export async function fetchPosts(type: string | undefined, page?: string, keywor
     },
     next: {
       tags,
-      revalidate: 10,
+      revalidate: 50,
     },
   });
   const resJson = await res.json();
