@@ -54,7 +54,7 @@ function NewPosts() {
             type="text"
             id="title"
             className="form-input"
-            placeholder="제목을 입력하세요"
+            placeholder="제목을 입력해 주세요 (100자 이하)"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -66,7 +66,7 @@ function NewPosts() {
           <textarea
             id="content"
             className="form-textarea"
-            placeholder="내용을 입력하세요"
+            placeholder="내용을 입력해 주세요"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
@@ -76,6 +76,13 @@ function NewPosts() {
           <button type="submit" className="submit-btn" disabled={isSubmitting}>
             {isSubmitting ? '제출 중...' : '작성하기'}
           </button>
+        </div>
+        {/* 주의사항 섹션 추가 */}
+        <div className="note">
+          <div className="note-title">주의사항</div>
+          <div className="note-item">- 제목과 내용은 필수 입력 항목입니다.</div>
+          <div className="note-item">- 작성된 글은 공개됩니다.</div>
+          <div className="note-item">- 부적절한 내용은 삭제될 수 있습니다.</div>
         </div>
       </form>
     </div>
