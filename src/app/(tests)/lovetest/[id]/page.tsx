@@ -1,6 +1,8 @@
 import Script from 'next/script';
-import ScoreSection from './components/ScoreSection/ScoreSection';
 import './_LoveTestResultPage.scss';
+import { LoveTestData } from '@/types/test';
+
+import ScoreSection from './components/ScoreSection/ScoreSection';
 import SummarySection from './components/SummarySection/SummarySection';
 import LoversComparisonSection from './components/LoversComparisonSection/LoversComparisonSection';
 import TopicsSection from './components/TopicsSection/TopicsSection';
@@ -25,7 +27,7 @@ const getData = async (id: string) => {
     }
 
     const data = await response.json();
-    return data;
+    return data.item.extra.result as LoveTestData;
   } catch (error) {
     console.error('Error fetching data:', error);
     return null;
@@ -34,11 +36,17 @@ const getData = async (id: string) => {
 
 async function LoveTestResultPage({ params }: { params: { id: string } }) {
   const item = await getData(params.id);
-  console.log('item', item);
 
-  if (!item) {
-    return <div>page를 찾을 수 없습니다.</div>;
+  if (item === null) {
+    throw new Error('잘못된 접근입니다.');
   }
+
+  const summary = item?.relationshipAnalysis?.summary || '';
+  const analysis = item?.relationshipAnalysis?.analysis[0];
+  const interestData = item?.interestedAbout;
+  const names = analysis?.names || '';
+
+  console.log(interestData);
 
   return (
     <article className="analysis-result love">
@@ -49,76 +57,22 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
         crossOrigin="anonymous"
         strategy="afterInteractive"
       ></Script>
-      <SummarySection
-        names={'여다희, 김지후'}
-        summary={
-          '여다희와 김지후는 서로의 일상과 관심사에 대해 활발하게 소통하며, 서로의 의견을 존중하는 관계를 형성하고 있다. 두 사람은 함께 식사 계획을 세우고, 서로의 취미와 관심사에 대해 이야기하며 친밀감을 쌓아가고 있다. 특히, 여다희는 김지후에게 자신의 고민을 털어놓고, 김지후는 여다희의 이야기에 귀 기울이며 조언을 아끼지 않는다. 이들은 서로의 건강과 안부를 챙기며, 서로의 삶에 긍정적인 영향을 미치고 있다. 또한, 두 사람은 함께 시간을 보내고 싶어하는 의사를 자주 표현하며, 이는 그들의 관계가 더욱 깊어질 가능성을 시사한다. 서로의 일에 대한 이해와 지지를 바탕으로, 이들은 앞으로도 좋은 관계를 유지할 것으로 보인다.'
-        }
-      />
-      <ScoreSection
-        names={'여다희, 김지후'}
-        score={85}
-        reason={
-          '서로의 일상과 관심사에 대해 활발하게 소통하며, 서로의 의견을 존중하는 관계를 형성하고 있다.'
-        }
-        couple={70}
-        marriage={50}
-      />
-      <LoversComparisonSection
-        names={'여다희, 김지후'}
-        betterLover={{
-          여다희: 10,
-          김지후: 90,
-        }}
-      />
-      <TopicsSection
-        personalFactors={{
-          money: 30,
-          health: 80,
-          love: 90,
-          daily: 75,
-        }}
-      />
-      <PersonalInterestSection
-        interestedAbout={[
-          {
-            person: '여다희',
-            interests: {
-              happy: 80,
-              unrest: 20,
-              trust: 80,
-              love: 50,
-              stress: 30,
-              interested: 75,
-            },
-          },
-          {
-            person: '김지후',
-            interests: {
-              happy: 75,
-              unrest: 25,
-              trust: 60,
-              love: 80,
-              stress: 70,
-              interested: 70,
-            },
-          },
-        ]}
-      />
-      <PopularWordSection
-        data={{
-          코딩: 15,
-          식사: 12,
-          스터디: 10,
-          건강: 8,
-          여행: 7,
-          친구: 6,
-          일: 5,
-          취업: 4,
-          운동: 3,
-          기분: 2,
-        }}
-      />
+      {summary && <SummarySection names={names} summary={summary} />}
+      {analysis?.compatibilityScore && (
+        <ScoreSection
+          names={names}
+          score={analysis?.compatibilityScore}
+          reason={analysis?.reason}
+          couple={analysis?.relationshipProbability?.becomeCouple}
+          marriage={analysis?.relationshipProbability?.marriageProbability}
+        />
+      )}
+      {analysis?.betterLover && (
+        <LoversComparisonSection names={names} betterLover={analysis?.betterLover} />
+      )}
+      {analysis?.personalFactors && <TopicsSection personalFactors={analysis?.personalFactors} />}
+      {interestData && <PersonalInterestSection interestedAbout={interestData} />}
+      {analysis?.mostWords?.topWords && <PopularWordSection data={analysis?.mostWords?.topWords} />}
       <ShareSection />
     </article>
   );

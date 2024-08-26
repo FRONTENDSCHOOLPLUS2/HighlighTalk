@@ -19,9 +19,13 @@ export interface LoveTestData {
       personalFactors: {
         [key in ChatThemeType]: number;
       };
+      mostWords: {
+        topWords: {
+          [key: string]: number;
+        };
+      };
     }[];
   };
-
   interestedAbout: {
     person: string;
     interests: {
