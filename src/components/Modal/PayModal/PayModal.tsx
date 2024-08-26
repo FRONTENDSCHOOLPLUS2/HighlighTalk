@@ -27,8 +27,6 @@ function PayModal({
   onClose,
   content,
   title,
-  session,
-  amount,
   footer,
   children,
   className = '',

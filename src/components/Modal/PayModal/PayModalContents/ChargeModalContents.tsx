@@ -1,16 +1,17 @@
-import './_PayModalContents.scss';
+import './_ChargeModalContents.scss';
 
-interface PayModalContentsPropType {
+interface ChargeModalContentsPropType {
   selectedAmount: number;
   paymentMethod: any;
   handlePaymentMethodChange: any;
 }
 
-function PayModalContents({
+// NOTE - 코인 충전 > 결제 옵션 선택을 위해 열리는 모달입니다.
+function ChargeModalContents({
   selectedAmount,
   paymentMethod,
   handlePaymentMethodChange,
-}: PayModalContentsPropType) {
+}: ChargeModalContentsPropType) {
   return (
     <div className="paymodal-container">
       <div className="modal-description">
@@ -45,4 +46,4 @@ function PayModalContents({
     </div>
   );
 }
-export default PayModalContents;
+export default ChargeModalContents;

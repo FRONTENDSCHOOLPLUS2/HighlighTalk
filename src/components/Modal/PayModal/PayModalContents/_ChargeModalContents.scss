@@ -3,6 +3,9 @@
 @import '@/styles/variable.scss';
 
 .paymodal-container {
+  @include flex.flexColumn;
+  gap: 0.8rem;
+  justify-items: center;
   .amount {
     font-size: 1.8rem;
     font-weight: 700;
@@ -24,6 +27,23 @@
       input {
         vertical-align: text-top;
       }
+    }
+  }
+
+  .agreement {
+    font-size: 1.2rem;
+    color: $color-gray-3;
+
+    display: flex;
+    align-items: center;
+  }
+
+  // NOTE - UX에 맞게 커스텀해 적용중
+  .modal-btns {
+    display: flex;
+    gap: 1rem;
+
+    button {
     }
   }
 }
