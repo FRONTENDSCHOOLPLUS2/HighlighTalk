@@ -1,7 +1,7 @@
 import { createOrderData, fetchOrderData } from '@/serverActions/orderAction';
 
 export function useOrderActions() {
-  const createOrder = async (userId: string, transactionType: string) => {
+  const createOrder = async (userId: 'pay' | 'charge', transactionType: string) => {
     try {
       await createOrderData(userId, transactionType);
       return true;

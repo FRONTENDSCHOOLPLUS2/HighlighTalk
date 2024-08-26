@@ -86,7 +86,7 @@ function TopicsSection({ personalFactors }: TopicsSectionPropType) {
       .scaleBand()
       .range([0, WIDTH])
       .padding(1)
-      .domain(data.map((d) => d.value));
+      .domain(data.map((d) => String(d.value)));
 
     // define Y
     const y = d3.scaleLinear().range([HEIGHT, 0]);
@@ -103,7 +103,10 @@ function TopicsSection({ personalFactors }: TopicsSectionPropType) {
       .delay((d, i) => i * 500)
       .call(d3.axisBottom(x).tickFormat((d) => d));
 
-    const j = d3.select(svgRef.current).selectAll('.myLine').data(data);
+    const j = d3
+      .select(svgRef.current)
+      .selectAll<SVGLineElement, TopicParsedData>('.myLine')
+      .data(data);
 
     // update lines
     j.enter()
@@ -111,10 +114,10 @@ function TopicsSection({ personalFactors }: TopicsSectionPropType) {
       .attr('class', 'myLine')
       .merge(j)
       .attr('x1', (d) => {
-        return x(d.value)! + margin.left;
+        return x(String(d.value))! + margin.left;
       })
       .attr('x2', (d) => {
-        return x(d.value)! + margin.left;
+        return x(String(d.value))! + margin.left;
       })
       .attr('y1', y(0))
       .attr('y2', y(0))
@@ -127,7 +130,10 @@ function TopicsSection({ personalFactors }: TopicsSectionPropType) {
       .attr('stroke', (d) => colorFill(d.key));
 
     // variable u: map data to existing circle
-    const u = d3.select(svgRef.current).selectAll('circle').data(data);
+    const u = d3
+      .select(svgRef.current)
+      .selectAll<SVGGElement, TopicParsedData>('circle')
+      .data(data);
 
     // update groups
     const groups = u.enter().append('g').attr('class', 'myCircleGroup').merge(u);
@@ -136,7 +142,7 @@ function TopicsSection({ personalFactors }: TopicsSectionPropType) {
     groups
       .append('circle')
       .attr('class', 'myCircle')
-      .attr('cx', (d) => x(d.value)! + margin.left)
+      .attr('cx', (d) => x(String(d.value))! + margin.left)
       .attr('cy', (d) => y(d.value / 2) - 10)
       .attr('fill', (d) => colorFill(d.key))
       .transition()
@@ -149,7 +155,7 @@ function TopicsSection({ personalFactors }: TopicsSectionPropType) {
     groups
       .append('text')
       .attr('class', 'myCircleText')
-      .attr('x', (d) => x(d.value)! + margin.left)
+      .attr('x', (d) => x(String(d.value))! + margin.left)
       .attr('y', (d) => y(0))
       .style('font-size', 0)
       .style('font-weight', 700)
