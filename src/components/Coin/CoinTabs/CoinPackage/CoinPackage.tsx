@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Session } from 'next-auth';
 import { RequestPayParams, RequestPayResponse } from '@/types/portone';
 import { updateCoinData } from '@/serverActions/coinAction';
@@ -30,6 +30,13 @@ function CoinPackage() {
   const [selectedAmount, setSelectedAmount] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState('kakaopay');
   const { isOpen, openModal, closeModal } = useModalStore();
+
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(() => {
+    // 화면이 렌더링 된 후에 isRendered를 true로
+    setIsRendered(true);
+  }, []);
 
   const generatePayDataOption = (userPayData: UserPayDataType) => {
     const data: RequestPayParams = {
@@ -113,30 +120,34 @@ function CoinPackage() {
   return (
     <>
       <ul className="contents">
-        {COIN_PACKAGE.map((item, index) => (
-          <li key={index}>
-            <div className="left-content">
-              <Coin />
-              <p>
-                코인<b>{item.coin}</b>개
-              </p>
-            </div>
-            <div className="charge-button">
-              <Button
-                theme="primary"
-                styleType="tonal"
-                size="full"
-                onClick={() => {
-                  setSelectedAmount(item.amount);
-                  openModal();
-                }}
-                style={{ fontWeight: 600, fontSize: '1.4rem' }}
-              >
-                {item.amount.toLocaleString()}&nbsp;원
-              </Button>
-            </div>
-          </li>
-        ))}
+        {isRendered && (
+          <ul className="contents">
+            {COIN_PACKAGE.map((item, index) => (
+              <li key={index}>
+                <div className="left-content">
+                  <Coin />
+                  <p>
+                    코인<b>{item.coin}</b>개
+                  </p>
+                </div>
+                <div className="charge-button">
+                  <Button
+                    theme="primary"
+                    styleType="tonal"
+                    size="full"
+                    onClick={() => {
+                      setSelectedAmount(item.amount);
+                      openModal();
+                    }}
+                    style={{ fontWeight: 600, fontSize: '1.4rem' }}
+                  >
+                    {item.amount.toLocaleString()}&nbsp;원
+                  </Button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </ul>
       {isOpen && (
         <PayModal
