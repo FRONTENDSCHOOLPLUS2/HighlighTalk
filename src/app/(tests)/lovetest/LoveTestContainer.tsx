@@ -11,6 +11,8 @@ import { TEST_PRODUCT } from '@/data/TEST_PRODUCT';
 import ProductPayModalContents from '@/components/Modal/PayModal/PayModalContents/ProductPayModalContents';
 import { updateCoinData } from '@/serverActions/coinAction';
 import './_loveTestPage.scss';
+import { createOrderData, updateUserOrderList } from '@/serverActions/orderAction';
+import { OrderInfoType } from '@/types/order';
 
 function LoveTestContainer({ totalCount }: { totalCount: number }) {
   const session = useSession();
@@ -26,9 +28,27 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
   };
 
   const handlePayButton = async () => {
-    await updateCoinData(userId, userCoin - TEST_INFO.price);
-    closeModal();
-    setCurrentStep(2);
+    try {
+      await updateCoinData(userId, userCoin - TEST_INFO.price);
+      await updateUserOrderList(TEST_INFO.code);
+
+      const orderData: OrderInfoType = {
+        order_type: 'pay',
+        amount: 0, // 현금이 아님을 의미
+        coin_amount: TEST_INFO.price,
+        payment_method: TEST_INFO.title,
+        extra: {
+          balance_before: userCoin,
+          balance_after: userCoin - TEST_INFO.price,
+        },
+      };
+      await createOrderData('pay', orderData);
+
+      setCurrentStep(2);
+      closeModal();
+    } catch (error) {
+      console.error('Error updating data:', error);
+    }
   };
 
   return (

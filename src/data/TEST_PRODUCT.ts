@@ -1,9 +1,10 @@
 interface Product {
+  code: number;
   type: string;
   title: string;
   url: string;
   description: string;
-  price: string | number;
+  price: number;
 }
 
 interface TestProduct {
@@ -12,14 +13,16 @@ interface TestProduct {
 
 export const TEST_PRODUCT: TestProduct = {
   freetest: {
+    code: 0,
     type: 'freetest',
     title: '우리 단톡방 분석 서비스',
     url: '/freetest',
     description: 'GPT-4o-mini 모델을 사용하여\n사용자의 대화 내용을 분석 해주는 서비스입니다.',
-    price: 'FREE',
+    price: 0,
   },
 
   lovetest: {
+    code: 1,
     type: 'lovetest',
     title: '우리 연애 이대로 괜찮을까?',
     url: '/lovetest',

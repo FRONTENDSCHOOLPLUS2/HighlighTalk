@@ -56,6 +56,7 @@ export const {
               // image: user.image && SERVER + user.image,
               image: user.image || '',
               coin: WELCOME_COIN,
+              orderList: [],
               loginType: user.loginType,
               accessToken: user.token?.accessToken,
               refreshToken: user.token?.refreshToken,
@@ -121,6 +122,7 @@ export const {
                 ...profile,
                 providerAccountId: account.providerAccountId,
                 coin: WELCOME_COIN,
+                orderList: [],
               },
             };
 
@@ -151,6 +153,7 @@ export const {
           user.accessToken = userInfo?.token!.accessToken as string;
           user.refreshToken = userInfo?.token!.refreshToken as string;
           user.coin = userInfo?.extra!.coin;
+          user.orderList = userInfo?.extra!.orderList;
 
           break;
       }
@@ -164,6 +167,7 @@ export const {
 
         token.type = user.type;
         token.coin = user.coin;
+        token.orderList = user.orderList;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
       }
@@ -205,7 +209,8 @@ export const {
       // 세션 업데이트
       if (trigger === 'update' && session) {
         Object.assign(token, session.user);
-        token.coin = session.user.coin; // 코인 수정 시 반영
+        token.coin = session.user.coin;
+        token.orderList = session.user.orderList; // 코인, 주문내역 수정 시 반영
       }
 
       return token;
@@ -216,6 +221,7 @@ export const {
       session.user.id = token.id as string;
       session.user.type = token.type as string;
       session.user.coin = token.coin;
+      session.user.orderList = token.orderList;
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
       return session;
