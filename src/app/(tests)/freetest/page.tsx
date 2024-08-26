@@ -35,7 +35,7 @@ const getData = async () => {
 async function TestPage() {
   const data = await getData();
   const totalCount = data[0]?._id;
-  console.log(totalCount);
+  // console.log(totalCount);
   // 리랜더 되는 현상 제거
   return <>{totalCount ? <FreeTestContainer totalCount={totalCount} /> : null}</>;
 }

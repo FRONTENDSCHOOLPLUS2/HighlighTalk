@@ -32,8 +32,8 @@ async function MainCommPreview() {
         <Link href={`/posts`}>자유 게시판 &gt;</Link>
       </h1>
       <div className="mainCommPre-cover">
-        {topThreeItems.map((item, index) => {
-          return <MainCommPreviewItem key={index} data={item} />;
+        {topThreeItems.map((item, _) => {
+          return <MainCommPreviewItem key={item._id} data={item} />;
         })}
       </div>
     </div>
