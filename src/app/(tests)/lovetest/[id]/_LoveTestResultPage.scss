@@ -1,7 +1,7 @@
 @import '@/styles/variable';
 @import '@/styles/mixins/flex.scss';
 
-.analysis-result {
+.analysis-result.love {
   margin-top: calc(-10rem);
   // overflow: hidden auto;
 
@@ -11,7 +11,8 @@
     position: absolute;
     width: 200vw;
     height: 100vh;
-    background-color: #fff1d3;
+    background: rgb(255, 194, 244);
+    background: linear-gradient(22deg, rgba(255, 194, 244, 1) 0%, rgba(255, 240, 242, 1) 73%);
     top: 0;
     left: 0;
     margin: 0 calc(var(--layout-padding) * -2);
@@ -34,5 +35,18 @@
     font-size: 3rem;
     line-height: 3.8rem;
     color: $color-gray-5;
+  }
+  .heading-title {
+    margin: 2rem 0 1.6rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    color: $color-gray-5;
+  }
+  .heading-desc {
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: auto;
+    color: rgba($color-gray-5, 0.6);
   }
 }

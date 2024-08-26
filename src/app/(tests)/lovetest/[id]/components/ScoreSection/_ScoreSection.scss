@@ -1,0 +1,193 @@
+@import '@/styles/variable';
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  min-height: 90svh;
+
+  word-break: keep-all;
+
+  .container {
+    position: relative;
+    height: 100%;
+    flex: 1;
+    margin: auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+    gap: 3rem 4rem;
+
+    .score-graph {
+      margin: 1rem 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        .score-number {
+          transform: scale(1.2);
+          color: darken($color-pink-2, 10%);
+        }
+      }
+
+      .score-svg {
+        transform: rotate(-90deg);
+        filter: drop-shadow(0 0 10px rgba($color-pink-2, 0.6));
+
+        .score-bg {
+          stroke: rgba($color-pink-1, 0.3);
+          fill: $color-white;
+        }
+        .score-line {
+          stroke: $color-pink-2;
+          fill: none;
+        }
+      }
+
+      .score-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        color: $color-gray-3;
+      }
+      .score-box {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: 700;
+        font-size: 2rem;
+
+        color: $color-gray-5;
+
+        .score-number {
+          margin-bottom: 3px;
+          font-size: 2.6rem;
+          color: $color-pink-2;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+    .score-title {
+      margin: 1.5rem 0 2rem;
+      font-size: 1.8rem;
+      color: $color-gray-3;
+      text-shadow: 0 5px 10px rgba($color-gray-2, 0.6);
+      text-align: center;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .reason {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2rem;
+      flex: 1 47rem;
+      padding: 3.2rem 4rem;
+
+      backdrop-filter: blur(10px);
+      background-color: rgba($color-white, 0.6);
+      box-shadow: 0px 7px 15px 5px rgba($color-pink-1, 0.6);
+
+      color: $color-gray-5;
+      font-size: 1.6rem;
+      font-weight: 500;
+
+      border-radius: 4rem;
+
+      .reason-label {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+    }
+  }
+  .list {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem 1rem;
+
+    li {
+      flex: 1 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.6rem;
+      filter: drop-shadow(0 5px 5px rgba($color-pink-2, 0.6));
+
+      .title {
+        font-size: 1.6rem;
+        font-weight: 700;
+
+        color: $color-pink-2;
+      }
+      .cont-wave {
+        position: relative;
+        background-color: lighten($color-pink-1, 10%);
+        // box-shadow: 0 5px 10px rgba(darken($color-pink-2, 80%), 0.6);
+        width: 130px;
+        height: 130px;
+        // border-radius: 100%;
+        overflow: hidden;
+        mask-image: url('/image/heart-shape.svg');
+        mask-size: contain;
+
+        .wave {
+          position: absolute;
+          width: 250px;
+          height: 250px;
+          border-radius: 42%;
+          background-color: rgba($color-pink-2, 1);
+          box-shadow: 0 0 15px $color-pink-2;
+          animation: rotate 10s infinite linear;
+          &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 5%;
+            width: 230px;
+            height: 230px;
+            border-radius: 40%;
+            background-color: rgba($color-white, 0.2);
+            animation: rotate 60s 1s infinite ease-in-out;
+          }
+        }
+
+        .percentage {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: rgba($color-white, 1);
+          text-shadow: 0 5px 10px rgba(darken($color-pink-2, 20%), 0.2);
+          font-weight: 700;
+          font-size: 3.2rem;
+        }
+      }
+    }
+  }
+}

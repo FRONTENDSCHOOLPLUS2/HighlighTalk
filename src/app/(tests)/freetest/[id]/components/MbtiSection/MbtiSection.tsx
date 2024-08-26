@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { getImageSrc } from '@/utils/getImageSrc';
+import TitleBox from '@/app/(tests)/components/AnalysisItem/TitleBox';
 
 interface Ability {
   energy: number;
@@ -30,9 +31,7 @@ function MbtiSection({ data = [] }: MbtiSectionPropType) {
 
   return (
     <section className="mbti">
-      <h3 className="heading-3">MBTI</h3>
-      <p className="heading-desc">우리 대화방 참여자들의 MBTI 예측</p>
-
+      <TitleBox title="MBTI" desc="우리 대화방 참여자들의 MBTI 예측" />
       <div className="Mbti-cover">
         <Swiper
           effect={'coverflow'}

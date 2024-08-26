@@ -1,3 +1,4 @@
+import TitleBox from '@/app/(tests)/components/AnalysisItem/TitleBox';
 import './_ThemeSection.scss';
 
 interface ThemeSectionPropType {
@@ -18,8 +19,7 @@ function ThemeSection({ data }: ThemeSectionPropType) {
 
   return (
     <section className="theme">
-      <h2 className="heading-2">대화 분석 결과</h2>
-      <h3 className="heading-3">대화 주제 TOP3</h3>
+      <TitleBox title="대화 분석 결과" desc="대화 주제 TOP3" />
       <ul className="bubble-list">
         {data &&
           getSlicedData(data).map(({ title, content }, i) => (

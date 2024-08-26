@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import LoveTestContainer from './LoveTestContainer';
+import './_loveTestPage.scss';
 
 // 서버컴포넌트로 분리
 

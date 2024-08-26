@@ -1,0 +1,15 @@
+@import '@/styles/variable';
+
+.heading-title {
+  margin: 2rem 0 1.6rem;
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 3.4rem;
+  color: $color-gray-5;
+}
+.heading-desc {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: auto;
+  color: rgba($color-gray-5, 0.6);
+}
