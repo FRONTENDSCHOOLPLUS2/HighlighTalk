@@ -24,14 +24,14 @@ export interface LoveTestData {
           [key: string]: number;
         };
       };
+      interestedAbout: {
+        person: string;
+        interests: {
+          [key in LoveEmotionType]: number;
+        };
+      }[];
     }[];
   };
-  interestedAbout: {
-    person: string;
-    interests: {
-      [key in LoveEmotionType]: number;
-    };
-  }[];
 }
 
 type EmotionType = '기쁨' | '슬픔' | '불안' | '놀람' | '분노';

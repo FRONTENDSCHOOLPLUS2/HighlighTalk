@@ -27,7 +27,12 @@ const getData = async (id: string) => {
     }
 
     const data = await response.json();
-    return data.item.extra.result as LoveTestData;
+    // NOTE post type "lovetest"로 들어가게 개발되엇을 경우 주석 해제
+    // if (data.item.type !== 'lovetest') {
+    //   throw new Error('Error 404: 잘못된 접근입니다.');
+    // }
+    console.log(data.item);
+    return data.item.extra as LoveTestData;
   } catch (error) {
     console.error('Error fetching data:', error);
     return null;
@@ -37,13 +42,13 @@ const getData = async (id: string) => {
 async function LoveTestResultPage({ params }: { params: { id: string } }) {
   const item = await getData(params.id);
 
-  if (item === null) {
+  if (item === null || item === undefined) {
     throw new Error('잘못된 접근입니다.');
   }
 
   const summary = item?.relationshipAnalysis?.summary || '';
   const analysis = item?.relationshipAnalysis?.analysis[0];
-  const interestData = item?.interestedAbout;
+  const interestData = analysis?.interestedAbout;
   const names = analysis?.names || '';
 
   console.log(interestData);
