@@ -16,7 +16,7 @@ export async function signup(data: SignupFormType) {
     email: data.email,
     password: data.password,
     image: randomImage,
-    extra: { coin: 0 },
+    extra: { coin: 0, orderList: [] },
   };
 
   const res = await fetch(`${API_SERVER}/users`, {

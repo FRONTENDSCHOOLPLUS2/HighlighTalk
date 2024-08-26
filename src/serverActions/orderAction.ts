@@ -1,11 +1,44 @@
 'use server';
 
-import { auth } from '@/auth';
+import { auth, update } from '@/auth';
 import { OrderInfoType, OrderResponseData } from '@/types/order';
 
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
+// FIXME - extra 데이터는 함께 업데이트되어야 하는데, orderAction과 coinAction이 기능이 중복되는 부분이 있어 개선 필요
+
+// NOTE - 유료 결제시 유저의 결제내역 리스트와 코인을 업데이트하는 액션
+export async function updateUserOrderList(newOrderId: number) {
+  const session = await auth();
+  const userOrderList = session?.user?.orderList || [];
+
+  const updatedOrderList = [...userOrderList, newOrderId];
+
+  const bodyData = {
+    extra: {
+      coin: session?.user?.coin,
+      orderList: updatedOrderList,
+    },
+  };
+
+  const res = await fetch(`${API_SERVER}/users/${session?.user?.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'client-id': `${CLIENT_ID}`,
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+    body: JSON.stringify(bodyData),
+  });
+
+  await update({
+    user: {
+      coin: session?.user?.coin,
+      orderList: updatedOrderList,
+    },
+  });
+}
 // TODO - 결제 내역 읽어오기 extra 객체 안에 있음
 // return Data any 잡기
 export async function fetchOrderData(): Promise<OrderResponseData> {
