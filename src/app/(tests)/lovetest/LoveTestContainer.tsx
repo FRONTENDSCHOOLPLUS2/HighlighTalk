@@ -86,7 +86,7 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
         <PayModal
           isOpen={isOpen}
           onClose={closeModal}
-          title={`결제를 진행해 주세요.`}
+          title={`결제를 진행합니다.`}
           amount={100}
           session={session}
           content=""
