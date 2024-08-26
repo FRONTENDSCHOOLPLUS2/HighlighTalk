@@ -4,8 +4,9 @@ import MainSlide from '@/components/MainSlide/MainSlide';
 import MainItems from '@/components/MainItems/MainItems';
 import MainSeverNotice from '@/components/MainNotice/MainSeverNotice';
 import MainCommPreview from '@/components/MainCommPreviews/MainCommPreview';
-import ModalTrigger from '@/components/ModalTrigger/ModalTrigger';
+
 import { cookies } from 'next/headers';
+import WelcomeCoinModal from '@/components/Modal/WelcomeCoinModal/WelcomeCoinModal';
 
 export const metadata = {
   title: '하이라이톡 | 메인페이지',
@@ -25,7 +26,7 @@ function MainPage() {
       <MainNotice />
       <MainCommPreview />
       <MainSeverNotice />
-      <ModalTrigger isNewUser={isNewUser?.name} />
+      <WelcomeCoinModal isNewUser={isNewUser?.name} />
     </main>
   );
 }
