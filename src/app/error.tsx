@@ -1,12 +1,9 @@
 'use client';
 import { poppinsFont } from '@/utils/font';
 import '../styles/error.scss';
-import Link from 'next/link';
 import Button from '@/components/Button/Button';
-import { useRouter } from 'next/navigation';
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
-  const router = useRouter();
   return (
     <div className={`${poppinsFont.className}`}>
       <div className="notFound-wrapper">
@@ -18,10 +15,10 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
           <Button
             theme="secondary"
             onClick={() => {
-              router.push('/');
+              reset();
             }}
           >
-            ⚙️ 홈으로 돌아가기
+            다시 시도하기
           </Button>
         </div>
         <div className="notFound-image"></div>
