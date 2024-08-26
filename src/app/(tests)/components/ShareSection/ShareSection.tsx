@@ -6,6 +6,7 @@ import Modal from '@/components/Modal/Modal';
 import TitleBox from '@/app/(tests)/components/AnalysisItem/TitleBox';
 import { useModalStore } from '@/store/ModalStore';
 import KakaoShareButton from '../KakaoShareButton/KakaoShareButton';
+import { shareURL } from '@/utils/shareURL';
 
 declare global {
   interface Window {
@@ -15,15 +16,6 @@ declare global {
 
 function ShareSection() {
   const { isOpen: isModalOpen, openModal, closeModal } = useModalStore();
-
-  // 클립보드 복사 함수
-  const handleCopyURL = () => {
-    const text = `[ 하이라이톡 - 우리는 어떻게 대화하고 있을까? ]\n🤖AI 분석 결과가 도착했어요!\n\nURL - ${location.href}`;
-
-    navigator.clipboard.writeText(text).then(() => {
-      alert('클립보드에 URL이 복사되었어요!');
-    });
-  };
 
   // 공유하기 모달 여는 버튼
   const handleButtonPress = () => {
@@ -47,7 +39,12 @@ function ShareSection() {
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal} content="친구들에게 결과를 공유해보세요!">
           <div className="list-btn">
-            <button className="button-share" onClick={handleCopyURL}>
+            <button
+              className="button-share"
+              onClick={() => {
+                shareURL('🤖AI 분석 결과가 도착했어요!');
+              }}
+            >
               URL로 공유하기
             </button>
             <KakaoShareButton />
