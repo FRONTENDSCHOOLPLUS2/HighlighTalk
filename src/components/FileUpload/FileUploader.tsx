@@ -66,7 +66,7 @@ function FileUpLoader() {
       header: true,
       skipEmptyLines: true,
       complete: (result: ParseResult<CSVRow>) => {
-        console.log('Parsed CSV data:', result.data);
+        // console.log('Parsed CSV data:', result.data);
         setCsvData(result.data);
         setIsModalOpen(true);
         setCurrentStep(2); // 파일 업로드 후 다음 단계로 이동
@@ -81,9 +81,9 @@ function FileUpLoader() {
     const processCSVData = () => {
       const copyData = removeDateTimeAndUserKey(JSON.stringify(csvData));
       const result = validateAndTrimData(copyData);
-      console.log('resres', result.data);
+      // console.log('resres', result.data);
       const data = JSON.stringify(result.data);
-      console.log('Data', data);
+      // console.log('Data', data);
       setSendMessage(data);
     };
     processCSVData();
@@ -111,7 +111,7 @@ function FileUpLoader() {
       });
 
       const data = await response.json();
-      console.log('xxxxx', data);
+      // console.log('xxxxx', data);
       router.push(`${fullURL}/${pathname}/${data?.secondData?.item._id}`);
     } catch (error) {
       console.error('Error fetching data:', error);

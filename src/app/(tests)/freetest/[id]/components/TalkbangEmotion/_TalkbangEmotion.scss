@@ -1,0 +1,20 @@
+.TalkbangContainer {
+  text-align: center;
+  h1 {
+    font-size: 2.4rem;
+    color: #333333;
+    font-weight: 600;
+  }
+  .TalkbangEmotionCover {
+    box-shadow: inset 0px 0px 20pxo orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .TalkbangEmotion {
+      width: 60%;
+      margin-top: 5rem;
+      height: 50%;
+    }
+  }
+}
