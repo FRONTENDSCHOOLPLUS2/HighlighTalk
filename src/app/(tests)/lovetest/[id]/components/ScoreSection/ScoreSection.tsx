@@ -11,7 +11,13 @@ interface ScoreSectionPropType {
   marriage: number;
 }
 
-function ScoreSection({ names, score, reason, couple = 0, marriage = 0 }: ScoreSectionPropType) {
+function ScoreSection({
+  names = '',
+  score = 0,
+  reason = '',
+  couple = 0,
+  marriage = 0,
+}: ScoreSectionPropType) {
   const breakPointAndTextMap = new Map([
     [10, '평생에 한 번도 찾아오기 힘든 사랑'],
     [9, '하늘이 이어준 반 쪽'],
