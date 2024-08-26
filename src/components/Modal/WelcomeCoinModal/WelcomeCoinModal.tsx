@@ -1,17 +1,17 @@
 'use client';
 
 import { useModalStore } from '@/store/ModalStore';
-import Modal from '../Modal/Modal';
+import Modal from '../Modal';
 import { useRouter } from 'next/navigation';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
-import Button from '../Button/Button';
-import './_ModalTrigger.scss';
+import Button from '../../Button/Button';
+import './_WelcomeCoinModal.scss';
 import { OrderInfoType } from '@/types/order';
 import { createOrderData } from '@/serverActions/orderAction';
 
 // NOTE - 회원가입 축하 코인 지급 안내 모달
-function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
+function WelcomeCoinModal({ isNewUser }: { isNewUser: string | undefined }) {
   const { isOpen, openModal, closeModal } = useModalStore();
   const [cookieDeleted, setCookieDeleted] = useState(false);
   const router = useRouter();
@@ -81,4 +81,4 @@ function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
     </>
   );
 }
-export default ModalTrigger;
+export default WelcomeCoinModal;
