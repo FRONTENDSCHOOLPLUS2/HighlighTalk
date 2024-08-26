@@ -153,6 +153,17 @@
         height: calc(50% - 1.5rem);
         border-radius: 2rem;
         border: 1px solid $color-gray-1;
+
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          // @include util.hoverEffect;
+
+          // transform: translateY(-4px) scale(1.02);
+          // border: 0.1rem solid var(--color-skyblue-2);
+
+          transform: translateY(-5px);
+          box-shadow: 0 5px 15px 0 rgba($color-yellow-3, 0.4);
+        }
       }
 
       a {
@@ -166,7 +177,6 @@
 
       b {
         font-size: 1.2rem;
-        font-weight: 600;
       }
     }
   }

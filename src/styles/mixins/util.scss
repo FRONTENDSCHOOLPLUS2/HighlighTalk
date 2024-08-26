@@ -1,4 +1,4 @@
-// NOTE - 화면에는 보이지 않지만 스크린 리더가 읽어야 하는 요소들을 위한 mixin입니다
+// NOTE - 화면에는 보이지 않지만 스크린 리더가 읽어야 하는 요소들을 위한 mixin입니다.
 
 @mixin sr-only {
   position: absolute;
@@ -10,4 +10,12 @@
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
   white-space: nowrap;
+}
+
+// NOTE - 자주 쓰이는 hover Effect 입니다.
+// :hover가 일어나는 요소에 transition: all 0.2s ease-in-out; 을 함께 써주세요.
+
+@mixin hoverEffect {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px 0 rgba($color-yellow-3, 0.4);
 }
