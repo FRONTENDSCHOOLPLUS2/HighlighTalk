@@ -6,6 +6,7 @@ import LoversComparisonSection from './components/LoversComparisonSection/Lovers
 import TopicsSection from './components/TopicsSection/TopicsSection';
 import PersonalInterestSection from './components/PersonalInterestSection/PersonalInterestSection';
 import ShareSection from '@/app/(tests)/components/ShareSection/ShareSection';
+import PopularWordSection from '../../freetest/[id]/components/PopularWordSection/PopularWordSection';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
@@ -103,6 +104,20 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
             },
           },
         ]}
+      />
+      <PopularWordSection
+        data={{
+          코딩: 15,
+          식사: 12,
+          스터디: 10,
+          건강: 8,
+          여행: 7,
+          친구: 6,
+          일: 5,
+          취업: 4,
+          운동: 3,
+          기분: 2,
+        }}
       />
       <ShareSection />
     </article>
