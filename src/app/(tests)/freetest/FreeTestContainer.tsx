@@ -99,16 +99,10 @@ function FreeTestContainer({ totalCount }: { totalCount: number }) {
 
           <section className="freetest-card">
             <h1 className="card-title">어떤 분석을 해주나요?</h1>
-            <div className="card-content">
-              <div className="card-wrapper">
-                <div className="contents">
-                  <h1>대화 내용 3가지 요약</h1>
-                  <p>대화의 중심을 뭐시기.. 해요</p>
-                  <p>어떻게 해서 무슨 기술을 통해 톡방 내용을 3가지로 요약</p>
-                </div>
-                <div className="contents-img"></div>
-              </div>
-            </div>
+            <div className="card-img n1"></div>
+            <div className="card-img n2"></div>
+            <div className="card-img n3"></div>
+            <div className="card-img n4"></div>
           </section>
         </>
       )}
