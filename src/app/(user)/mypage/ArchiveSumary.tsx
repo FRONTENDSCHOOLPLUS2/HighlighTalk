@@ -1,36 +1,6 @@
 import { auth } from '@/auth';
+import { TEST_PRODUCT } from '@/data/TEST_PRODUCT';
 import { getArchiveData } from '@/serverActions/archiveAction';
-
-interface Product {
-  type: string;
-  title: string;
-  url: string;
-  description: string;
-  price: string | number;
-}
-
-interface TestProduct {
-  [key: string]: Product;
-}
-
-// TODO - 상수 파일 분리
-const TEST_PRODUCT: TestProduct = {
-  freetest: {
-    type: 'freetest',
-    title: '우리 단톡방 분석 서비스',
-    url: '/freetest',
-    description: 'GPT-4o-mini 모델을 사용하여\n사용자의 대화 내용을 분석 해주는 서비스입니다.',
-    price: 'FREE',
-  },
-
-  lovetest: {
-    type: 'lovetest',
-    title: '우리 연애 이대로 괜찮을까?',
-    url: '/lovetest',
-    description: '썸,연애,결혼 상대방의 대화 방식에서\n우리의 관계를 알아보세요❤️',
-    price: 5,
-  },
-};
 
 async function ArchiveSumary() {
   const userAuth = await auth();
@@ -50,7 +20,7 @@ async function ArchiveSumary() {
   return (
     <div className="contents result">
       <ul className="result-box">
-        {filteredData.map((item, index) => {
+        {filteredData.map((item) => {
           const productInfo = TEST_PRODUCT[item.type];
           const title = productInfo ? productInfo.title : 'Unknown';
           return (
