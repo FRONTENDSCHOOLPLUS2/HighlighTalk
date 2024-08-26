@@ -21,7 +21,7 @@ function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
     router.push(targetRoute);
   };
 
-  console.log('유자세션', userSession);
+  // console.log('유자세션', userSession);
 
   return (
     <>
