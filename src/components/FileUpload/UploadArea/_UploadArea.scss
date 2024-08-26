@@ -167,6 +167,9 @@
 }
 
 @media (max-width: 1024px) {
+  .file-uploader-container {
+    margin-top: 10rem;
+  }
   .divide-section {
     display: flex;
     flex-direction: column;

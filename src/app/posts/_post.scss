@@ -22,7 +22,7 @@
 
         .search-input {
           flex: 1;
-          padding: 0.75rem;
+          padding: 1rem;
           font-size: 1rem;
           border-radius: 1rem;
           border: 1px solid #ccc;
@@ -36,7 +36,7 @@
         }
 
         .search-button {
-          padding: 0.75rem 1rem;
+          padding: 1rem 1rem;
           font-size: 1rem;
           font-weight: bold;
           color: #fff;
@@ -62,8 +62,7 @@
       text-decoration: none;
       transition: all 0.3s ease;
       @media (max-width: 640px) {
-        background-color: #000;
-        color: white;
+        color: black;
         padding: 1rem;
         font-size: 0.5rem;
       }
@@ -274,8 +273,7 @@
         text-decoration: none;
         transition: all 0.3s ease;
         @media (max-width: 640px) {
-          background-color: #000;
-          color: white;
+          color: #000;
           padding: 1rem;
           font-size: 0.5rem;
         }
