@@ -5,10 +5,10 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const navItems = [
-  { path: '/', label: 'home' },
-  { path: '/about', label: 'about' },
-  { path: '/contact', label: 'contact' },
-  { path: '/posts', label: 'posts' },
+  { path: '/', label: '메인' },
+  { path: '/posts', label: '게시판' },
+  { path: '/mypage/archive', label: '내 서랍' },
+  { path: '/charge', label: '코인' },
 ];
 
 function NavBar({ onInteraction }: { onInteraction?: () => void }) {
