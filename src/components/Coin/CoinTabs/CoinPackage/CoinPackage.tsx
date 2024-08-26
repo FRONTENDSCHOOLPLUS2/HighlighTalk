@@ -90,7 +90,6 @@ function CoinPackage() {
     const { success, error_msg } = response;
     if (success) {
       alert('결제 성공');
-      console.log(success);
 
       const calculatedCoins = response.paid_amount! / 100;
       const updatedUserCoin = userCoin + calculatedCoins;
