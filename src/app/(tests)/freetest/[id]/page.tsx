@@ -1,12 +1,12 @@
 'use server';
 
+import Script from 'next/script';
+import './_FreeTestResultPage.scss';
 import PopularWordSection from './components/PopularWordSection/PopularWordSection';
 import ThemeSection from './components/ThemeSection/ThemeSection';
 import MbtiSection from './components/MbtiSection/MbtiSection';
 import TopRatedTalkerSection from './components/TopRatedTalkerSection/TopRatedTalkerSection';
-import ShareSection from './components/ShareSection/ShareSection';
-import Script from 'next/script';
-import './_FreeTestResultPage.scss';
+import ShareSection from '@/app/(tests)/components/ShareSection/ShareSection';
 import { FreeTestData } from '@/types/test';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;

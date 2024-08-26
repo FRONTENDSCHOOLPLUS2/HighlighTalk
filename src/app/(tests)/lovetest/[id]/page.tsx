@@ -5,6 +5,7 @@ import SummarySection from './components/SummarySection/SummarySection';
 import LoversComparisonSection from './components/LoversComparisonSection/LoversComparisonSection';
 import TopicsSection from './components/TopicsSection/TopicsSection';
 import PersonalInterestSection from './components/PersonalInterestSection/PersonalInterestSection';
+import ShareSection from '@/app/(tests)/components/ShareSection/ShareSection';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
@@ -103,6 +104,7 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
           },
         ]}
       />
+      <ShareSection />
     </article>
   );
 }

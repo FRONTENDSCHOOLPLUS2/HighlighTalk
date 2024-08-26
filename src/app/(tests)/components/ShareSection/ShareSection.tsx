@@ -3,9 +3,9 @@
 import './_ShareSection.scss';
 import Button from '@/components/Button/Button';
 import Modal from '@/components/Modal/Modal';
-import { useState } from 'react';
-import KakaoShareButton from '../KakaoShareButton/KakaoShareButton';
 import TitleBox from '@/app/(tests)/components/AnalysisItem/TitleBox';
+import { useModalStore } from '@/store/ModalStore';
+import KakaoShareButton from '../KakaoShareButton/KakaoShareButton';
 
 declare global {
   interface Window {
@@ -14,13 +14,9 @@ declare global {
 }
 
 function ShareSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen: isModalOpen, openModal, closeModal } = useModalStore();
 
-  // 모달을 여는 함수
-  const openModal = () => setIsModalOpen(true);
-  // 모달을 닫는 함수
-  const closeModal = () => setIsModalOpen(false);
-
+  // 클립보드 복사 함수
   const handleCopyURL = () => {
     const text = `[ 하이라이톡 - 우리는 어떻게 대화하고 있을까? ]\n🤖AI 분석 결과가 도착했어요!\n\nURL - ${location.href}`;
 
@@ -28,9 +24,12 @@ function ShareSection() {
       alert('클립보드에 URL이 복사되었어요!');
     });
   };
+
+  // 공유하기 모달 여는 버튼
   const handleButtonPress = () => {
     openModal();
 
+    // 카카오 SDK Initailize
     const { Kakao } = window;
     if (!Kakao.isInitialized()) {
       Kakao.init(process.env.NEXT_PUBLIC_AUTH_KAKAO_ID);
