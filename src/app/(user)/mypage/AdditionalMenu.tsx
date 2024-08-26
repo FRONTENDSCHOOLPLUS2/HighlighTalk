@@ -23,9 +23,9 @@ function AdditionalMenu() {
         </Link>
       </li>
       <li className="">
-        <Link href="/posts/notice" className="notice">
-          <Image src="/image/clay/coffee.png" width={70} height={70} alt="buy me a coffee" />
-          <b>개발자 도와주기</b>
+        <Link href="#" className="no-hover">
+          <Image src="/image/character_11.svg" width={60} height={60} alt="buy me a coffee" />
+          {/* <b>준비중</b> */}
         </Link>
       </li>
     </ul>
