@@ -7,17 +7,30 @@ import { deleteCookie, getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import './_ModalTrigger.scss';
+import { OrderInfoType } from '@/types/order';
+import { createOrderData } from '@/serverActions/orderAction';
 
 // NOTE - 회원가입 축하 코인 지급 안내 모달
 function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
   const { isOpen, openModal, closeModal } = useModalStore();
   const [cookieDeleted, setCookieDeleted] = useState(false);
   const router = useRouter();
+  const WELCOME_COIN = 100;
 
   // console.log('useEffect 실행, isNewUser>', isNewUser);
 
+  const orderDataWithSignup: OrderInfoType = {
+    order_type: 'charge',
+    amount: 0,
+    coin_amount: WELCOME_COIN,
+    payment_method: '가입 축하 코인 🎉',
+    extra: {
+      balance_before: 0,
+      balance_after: WELCOME_COIN,
+    },
+  };
+
   useEffect(() => {
-    // Check if the cookie for the user is present
     const cookie = getCookie(isNewUser as string);
 
     if (isNewUser && cookie && !cookieDeleted) {
@@ -25,22 +38,26 @@ function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
     }
   }, [isNewUser, cookieDeleted, openModal]);
 
-  const handleCloseModal = () => {
+  // FIXME - 함수 내용이 중복되는 부분 코드 수정 필요
+  const handleCloseModal = async () => {
     if (isNewUser) {
       deleteCookie(isNewUser);
       setCookieDeleted(true);
     }
+    await createOrderData('charge', orderDataWithSignup);
     closeModal();
   };
 
-  const handleGoTestButton = () => {
+  const handleGoTestButton = async () => {
     if (isNewUser) {
       deleteCookie(isNewUser);
       setCookieDeleted(true);
     }
     closeModal();
+    await createOrderData('charge', orderDataWithSignup);
     router.push('/freetest');
   };
+
   return (
     <>
       {isOpen && (
