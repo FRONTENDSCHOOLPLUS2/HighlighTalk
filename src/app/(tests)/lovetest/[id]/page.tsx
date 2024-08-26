@@ -4,6 +4,7 @@ import './_LoveTestResultPage.scss';
 import SummarySection from './components/SummarySection/SummarySection';
 import LoversComparisonSection from './components/LoversComparisonSection/LoversComparisonSection';
 import TopicsSection from './components/TopicsSection/TopicsSection';
+import PersonalInterestSection from './components/PersonalInterestSection/PersonalInterestSection';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
@@ -75,6 +76,32 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
           love: 90,
           daily: 75,
         }}
+      />
+      <PersonalInterestSection
+        interestedAbout={[
+          {
+            person: '여다희',
+            interests: {
+              happy: 80,
+              unrest: 20,
+              trust: 80,
+              love: 50,
+              stress: 30,
+              interested: 75,
+            },
+          },
+          {
+            person: '김지후',
+            interests: {
+              happy: 75,
+              unrest: 25,
+              trust: 60,
+              love: 80,
+              stress: 70,
+              interested: 70,
+            },
+          },
+        ]}
       />
     </article>
   );
