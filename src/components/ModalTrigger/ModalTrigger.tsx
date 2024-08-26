@@ -36,12 +36,12 @@ function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
   const handleGoTestButton = () => {
     if (isNewUser) {
       deleteCookie(isNewUser);
+      setCookieDeleted(true);
     }
-    router.push('/freetest');
     closeModal();
+    router.push('/freetest');
   };
   return (
-    // FIXME - UX에 적합하게 수정 필요
     <>
       {isOpen && (
         <Modal
@@ -55,7 +55,7 @@ function ModalTrigger({ isNewUser }: { isNewUser: string | undefined }) {
             <Button onClick={() => handleCloseModal()} theme="secondary" styleType="outlined">
               닫기
             </Button>
-            <Button onClick={() => router.push('/freetest')} theme="secondary">
+            <Button onClick={() => handleGoTestButton()} theme="secondary">
               지금 바로 분석하러 가기
             </Button>
           </div>
