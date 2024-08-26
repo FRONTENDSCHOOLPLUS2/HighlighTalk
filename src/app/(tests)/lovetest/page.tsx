@@ -16,7 +16,7 @@ const SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER;
 // 횟수 조회 함수
 const getData = async () => {
   try {
-    const response = await fetch(`${SERVER_URL}/posts?type=lovetest`, {
+    const response = await fetch(`${SERVER_URL}/posts`, {
       headers: {
         'Content-Type': 'application/json',
         'client-id': `${CLIENT_ID}`,
@@ -37,7 +37,7 @@ const getData = async () => {
 async function TestPage() {
   const data = await getData();
   const totalCount = data[0]?._id;
-  console.log(totalCount);
+  // console.log('xXxxxx', totalCount);
   return <LoveTestContainer totalCount={totalCount} />;
 }
 
