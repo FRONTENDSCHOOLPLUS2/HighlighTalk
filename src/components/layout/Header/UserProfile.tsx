@@ -5,6 +5,8 @@ import { Session } from 'next-auth';
 import { IconProfile } from '@public/image';
 import Image from 'next/image';
 
+const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+
 interface UserProfilePropType {
   userSession: Session | null;
   onInteraction?: () => void;
@@ -34,7 +36,7 @@ function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
               </p>
               <div className="image-container">
                 <Image
-                  src={userSession.user?.image!}
+                  src={`${API_SERVER}${userSession?.user?.image}`}
                   width={50}
                   height={50}
                   alt="not"

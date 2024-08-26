@@ -7,6 +7,7 @@ import { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 
+const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 interface MyPageProfilePropType {
   userInfo: User | undefined;
 }
@@ -22,11 +23,18 @@ function MyPageProfile({ userInfo }: MyPageProfilePropType) {
     }
   };
 
+  console.log(userInfo, '유저인뽀');
+
   return (
     <div className="contents profile">
       <div className="profile-img">
         {userInfo?.image && (
-          <Image src={userInfo.image} alt="유저 프로필 이미지" width={100} height={100} />
+          <Image
+            src={`${API_SERVER}${userInfo?.image}`}
+            alt="유저 프로필 이미지"
+            width={100}
+            height={100}
+          />
         )}
         <button className="edit"></button>
       </div>
