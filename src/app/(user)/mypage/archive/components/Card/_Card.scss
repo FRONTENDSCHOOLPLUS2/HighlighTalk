@@ -6,6 +6,7 @@
   @include flex.flexColumn;
   gap: 1rem;
 
+  cursor: pointer;
   color: $color-black;
   background-color: $color-white;
   border-radius: 1rem;
@@ -33,10 +34,14 @@
     background-color: $color-yellow-1;
   }
 
-  .title {
-    font-size: 2.4rem;
+  .title,
+  .title-input {
+    box-sizing: border-box;
     font-weight: 700;
     line-height: 3.6rem;
+    font-size: 2.4rem;
+  }
+  .title {
     height: 7.2rem;
     overflow-y: hidden;
     text-overflow: ellipsis;
@@ -45,6 +50,36 @@
     -webkit-box-orient: vertical;
     word-break: keep-all;
     overflow-wrap: anywhere;
+  }
+  .title-form {
+    position: relative;
+
+    .title-input {
+      height: 3.6rem;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid $color-gray-2;
+      background-color: lighten($color-gray-1, 10%);
+      overflow-y: scroll;
+      cursor: text;
+
+      &:focus {
+        border: 1px solid $color-yellow-3;
+        background-color: lighten($color-yellow-1, 5%);
+      }
+    }
+
+    .title-input-bottom {
+      margin: 1rem 0 -1rem;
+      display: flex;
+      justify-content: space-between;
+
+      & > button {
+        flex: 0 fit-content;
+      }
+    }
   }
 
   .bottom-info {

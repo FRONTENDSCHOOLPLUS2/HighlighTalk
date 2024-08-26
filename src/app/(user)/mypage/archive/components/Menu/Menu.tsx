@@ -5,10 +5,10 @@ import './_Menu.scss';
 
 interface MenuPropType {
   _id: number;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  enterEditMode: () => void;
 }
 
-function Menu({ _id, setIsEditing }: MenuPropType) {
+function Menu({ _id, enterEditMode }: MenuPropType) {
   const [isOptionsVisible, setIsOptionsVisible] = useState<boolean>(false);
 
   return (
@@ -28,18 +28,13 @@ function Menu({ _id, setIsEditing }: MenuPropType) {
       >
         메뉴
       </button>
-      <div
-        className={`menu-options ${isOptionsVisible ? 'visible' : ''}`}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
+      <div className={`menu-options ${isOptionsVisible ? 'visible' : ''}`}>
         <ul className="option-list">
           <li
             onClick={(e) => {
               e.stopPropagation();
               setIsOptionsVisible((prev) => !prev);
-              setIsEditing(true);
+              enterEditMode();
             }}
           >
             이름 변경
