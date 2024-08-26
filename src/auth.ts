@@ -13,6 +13,9 @@ import { cookies } from 'next/headers';
 const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
+// 가입 축하 코인
+const WELCOME_COIN = 100;
+
 export const {
   handlers,
   signIn,
@@ -50,7 +53,9 @@ export const {
               name: user.name,
               email: user.email,
               type: user.type,
-              coin: user.extra.coin,
+              // image: user.image && SERVER + user.image,
+              image: user.image || '',
+              coin: WELCOME_COIN,
               loginType: user.loginType,
               accessToken: user.token?.accessToken,
               refreshToken: user.token?.refreshToken,
@@ -105,14 +110,18 @@ export const {
           // DB에서 id를 조회해서 있으면 로그인 처리를 없으면 자동 회원 가입 후 로그인 처리
           let userInfo: SignupResponsType | null = null;
           try {
-            // 자동 회원 가입 + 코인 100 init
+            // 자동 회원 가입 + 가입 축하 코인 init
             const newUser: OAuthUser = {
               type: 'user',
               loginType: account.provider,
               name: user.name!,
               email: user.email!,
-              image: user.image!,
-              extra: { ...profile, providerAccountId: account.providerAccountId, coin: 100 },
+              image: user.image || '',
+              extra: {
+                ...profile,
+                providerAccountId: account.providerAccountId,
+                coin: WELCOME_COIN,
+              },
             };
 
             // 이미 가입된 회원이면 회원가입이 되지 않고 에러를 응답하므로 무시하면 됨
@@ -152,6 +161,7 @@ export const {
     async jwt({ token, user, session, trigger }) {
       if (user) {
         token.id = user.id;
+
         token.type = user.type;
         token.coin = user.coin;
         token.accessToken = user.accessToken;
