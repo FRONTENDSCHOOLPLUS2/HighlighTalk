@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { Session } from 'next-auth';
 import { IconProfile } from '@public/image';
+import Image from 'next/image';
 
 interface UserProfilePropType {
   userSession: Session | null;
@@ -18,6 +19,8 @@ function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
     router.push(targetRoute);
   };
 
+  console.log('유자세션', userSession);
+
   return (
     <>
       <div className="user-profile-container">
@@ -29,7 +32,15 @@ function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
                 <strong className="user-name">{userName}</strong>
                 <span>님!</span>
               </p>
-              <IconProfile />
+              <div className="image-container">
+                <Image
+                  src={userSession.user?.image!}
+                  width={50}
+                  height={50}
+                  alt="not"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </>
         ) : (

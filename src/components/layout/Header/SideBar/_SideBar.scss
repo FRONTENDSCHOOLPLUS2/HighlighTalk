@@ -58,6 +58,18 @@
         gap: 1.6rem;
         cursor: pointer;
 
+        .image-container {
+          img {
+            width: 6.5rem;
+            height: 6.5rem;
+            padding: 0.2rem;
+            border-radius: 50%;
+
+            // 배경색 + 캐릭터 랜덤발급 어떤지
+            border: 1px solid $color-gray-1;
+          }
+        }
+
         .user-name {
           display: inline-block;
           text-align: center;
