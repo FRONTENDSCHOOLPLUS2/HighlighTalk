@@ -63,18 +63,19 @@ function FileUpLoader() {
   };
   // csv파일을 읽어 파싱하는 함수
   const parseCSV = (file: File) => {
+    setIsLoading(true); // 파일 파싱을 시작할 때 로딩 상태 설정
     Papa.parse<CSVRow>(file, {
       header: true,
       skipEmptyLines: true,
       complete: (result: ParseResult<CSVRow>) => {
-        // console.log('Parsed CSV data:', result.data);
         setCsvData(result.data);
+        setIsLoading(false); // 파일 파싱이 완료되면 로딩 상태 해제
         setIsModalOpen(true);
-        setCurrentStep(2); // 파일 업로드 후 다음 단계로 이동
-        setIsLoading(false);
+        setCurrentStep(2);
       },
       error: (error) => {
         console.error('Error parsing CSV:', error);
+        setIsLoading(false); // 에러가 발생해도 로딩 상태 해제
       },
     });
   };
