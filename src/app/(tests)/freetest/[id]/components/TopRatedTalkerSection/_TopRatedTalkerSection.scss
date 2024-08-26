@@ -23,7 +23,7 @@
     // NOTE - left 0일때 왼쪽공간 남는 현상 있는데 -10% 으로 처리중
     background-color: #fffaed;
     top: 0;
-    left: -10%;
+    left: -20%;
 
     margin: 0 calc(var(--layout-padding) * -2);
   }
