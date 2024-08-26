@@ -8,6 +8,7 @@ import './_LoginForm.scss';
 import Button from '@/components/Button/Button';
 import Modal from '@/components/Modal/Modal';
 import { useModalStore } from '@/store/ModalStore';
+import { IconGitHub, IconGoogle, IconKakaoText } from '@public/image';
 
 const TEST_PASSWORD = process.env.NEXT_PUBLIC_TEST_ACCOUNT_PASSWORD;
 
@@ -108,15 +109,20 @@ function LoginForm() {
             <span className="error-message">{passwordErrorMessage}</span>
           </div>
           <div className="login-buttons">
-            <Button type="submit" theme="black" size="full" styleType="default">
+            <Button type="submit" theme="secondary" size="full" styleType="default">
               로그인
             </Button>
             <Link href="/signup">
-              <Button type="submit" theme="black" size="full" styleType="outlined">
+              <Button type="submit" theme="secondary" size="full" styleType="outlined">
                 회원가입
               </Button>
             </Link>
-            <Button theme="black" size="full" onClick={handleTestAccountLogin} styleType="tonal">
+            <Button
+              theme="secondary"
+              size="full"
+              onClick={handleTestAccountLogin}
+              styleType="tonal"
+            >
               테스트 계정으로 로그인하기
             </Button>
           </div>
@@ -125,13 +131,21 @@ function LoginForm() {
           <p>소셜로그인으로 간편하게 이용해보세요!</p>
           <span className="hr"></span>
           <div className="icons">
-            {/* TODO - icon으로 추후 변경 */}
-            <button onClick={() => handleSocialLogin('google')}>구글</button>
-            <button type="button" onClick={() => handleSocialLogin('github')}>
-              깃헙
+            <button
+              type="button"
+              onClick={() => handleSocialLogin('kakao')}
+              className="kakao-btn"
+            ></button>
+            <button onClick={() => handleSocialLogin('google')} className="google-btn">
+              {/* <span>구글</span> */}
             </button>
-            <button type="button" onClick={() => handleSocialLogin('kakao')}>
-              카카오
+
+            <button
+              type="button"
+              onClick={() => handleSocialLogin('github')}
+              className="github-btn"
+            >
+              {/* <span>구글</span> */}
             </button>
           </div>
         </div>

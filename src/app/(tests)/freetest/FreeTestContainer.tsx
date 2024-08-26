@@ -58,12 +58,15 @@ function FreeTestContainer({ totalCount }: { totalCount: number }) {
 
       {currentStep === 2 && (
         <>
+          {/* 현재 로그인 안 한  사용자만 잡는중  */}
           <ProtectedRoute setCurrentStep={setCurrentStep}>
             {/* 인증된 사용자만 이 부분이 렌더링됨 */}
             <FileUpLoader />
           </ProtectedRoute>
         </>
       )}
+
+      {/* <PayModal /> */}
     </div>
   );
 }
