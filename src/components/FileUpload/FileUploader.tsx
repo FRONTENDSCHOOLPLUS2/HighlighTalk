@@ -30,7 +30,7 @@ function FileUpLoader() {
 
   const router = useRouter();
 
-  console.log(pathname);
+  // console.log(pathname);
 
   // accessToken을 세션에서 가져오기
 
@@ -57,10 +57,11 @@ function FileUpLoader() {
     const file = e.target.files?.[0];
     if (file) {
       setFileName(file.name);
+      setIsLoading(true);
       parseCSV(file);
     }
   };
-
+  // csv파일을 읽어 파싱하는 함수
   const parseCSV = (file: File) => {
     Papa.parse<CSVRow>(file, {
       header: true,
@@ -70,6 +71,7 @@ function FileUpLoader() {
         setCsvData(result.data);
         setIsModalOpen(true);
         setCurrentStep(2); // 파일 업로드 후 다음 단계로 이동
+        setIsLoading(false);
       },
       error: (error) => {
         console.error('Error parsing CSV:', error);
@@ -89,9 +91,9 @@ function FileUpLoader() {
     processCSVData();
   }, [csvData]);
 
-  useEffect(() => {
-    console.log('sendMessage', sendMessage);
-  }, [sendMessage]);
+  // useEffect(() => {
+  //   console.log('sendMessage', sendMessage);
+  // }, [sendMessage]);
 
   const fetchData = async () => {
     if (csvData.length === 0) return;
@@ -122,6 +124,7 @@ function FileUpLoader() {
 
   return (
     <div className="file-uploader-container">
+      {isLoading && <LoadingSpinner />}
       {/* currentStep 1과 2는 안에서 처리함 */}
       <UploadArea
         handleFileChange={handleFileChange}
@@ -141,7 +144,6 @@ function FileUpLoader() {
           buttons={[{ label: '닫기', onClick: closeModal, theme: 'secondary' }]}
         />
       )}
-      {isLoading && <LoadingSpinner />}
     </div>
   );
 }
