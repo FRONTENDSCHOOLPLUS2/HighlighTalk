@@ -6,7 +6,6 @@ import { useModalStore } from '@/store/ModalStore';
 import { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 interface MyPageProfilePropType {
   userInfo: User | undefined;
@@ -35,7 +34,6 @@ function MyPageProfile({ userInfo }: MyPageProfilePropType) {
         <strong className="username">{userInfo?.name}</strong>&nbsp;님
       </span>
       <p>{userInfo?.email}</p>
-      {/* TODO - 버튼 좀만 더 수정해보기 */}
       <Button
         type="button"
         theme="secondary"

@@ -2,20 +2,24 @@
 
 // NOTE - 회원가입 Action
 import { OAuthUser, SignupFormType } from '@/types';
+import randomProfile from '@/utils/randomProfile';
 
-const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 export async function signup(data: SignupFormType) {
+  const randomImage = randomProfile();
+
   const userData = {
     type: data.type || 'user',
     name: data.name,
     email: data.email,
     password: data.password,
+    image: randomImage,
     extra: { coin: 0 },
   };
 
-  const res = await fetch(`${SERVER}/users`, {
+  const res = await fetch(`${API_SERVER}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -30,7 +34,7 @@ export async function signup(data: SignupFormType) {
 }
 
 export async function signupWithOAuth(user: OAuthUser) {
-  const res = await fetch(`${SERVER}/users/signup/oauth`, {
+  const res = await fetch(`${API_SERVER}/users/signup/oauth`, {
     method: 'POST',
     headers: {
       'client-id': `${CLIENT_ID}`,
@@ -43,7 +47,7 @@ export async function signupWithOAuth(user: OAuthUser) {
 }
 
 export async function loginOAuth(providerAccountId: string) {
-  const res = await fetch(`${SERVER}/users/login/with`, {
+  const res = await fetch(`${API_SERVER}/users/login/with`, {
     method: 'POST',
     headers: {
       'client-id': `${CLIENT_ID}`,
