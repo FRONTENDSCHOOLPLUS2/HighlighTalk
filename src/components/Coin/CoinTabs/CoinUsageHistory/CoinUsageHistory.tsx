@@ -5,6 +5,7 @@ import { OrderDataType } from '@/types/order';
 import { LoadingSpinner } from '@/components/Spinner/Spinner';
 import NoHistoryFound from './NoHistoryFound';
 import './_CoinUsageHistory.scss';
+import Pagination from './Pagination';
 
 const TransactionItem = lazy(() => import('./TransactionItem'));
 
@@ -12,12 +13,15 @@ function CoinUsageHistory() {
   const [orders, setOrders] = useState<OrderDataType[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeMenu, setActiveMenu] = useState('all');
+  const [pagination, setPagination] = useState({});
 
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await fetchOrderData();
         console.log('fetchOrderData', data);
+
+        setPagination(data.pagination);
 
         const orderArr: OrderDataType[] = data.item.map((v) => ({
           ...v.order_info,
@@ -33,6 +37,11 @@ function CoinUsageHistory() {
     }
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log('pagination', pagination);
+    console.log('...', { ...pagination });
   }, []);
 
   if (loading) {
@@ -82,6 +91,7 @@ function CoinUsageHistory() {
         ) : (
           <NoHistoryFound />
         )}
+        {/* <Pagination {...pagination} /> */}
       </ul>
     </div>
   );
