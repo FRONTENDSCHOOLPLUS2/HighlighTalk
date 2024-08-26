@@ -18,7 +18,7 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
               <h1 className="page-header">사랑하는 사람과 나의 톡방 AI 분석</h1>
               <section className="test-page-content">
                 <h2 className="page-headerSub">
-                  지금 까지 <span className="page-title-count">❤️{totalCount + 500}❤️</span>번의
+                  지금 까지 <span className="page-title-count">❤️{totalCount + 120}❤️</span>번의
                   테스트가 진행 됐어요!
                 </h2>
                 <p className="sub-p">하이라이톡에서 대화내용을 업로드 해 AI분석을 시작 하세요!</p>
@@ -39,11 +39,14 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
 
             <section className="freetest-description">
               <div className="des-header">
-                <h1 className="header-title">대화 내용 뿐만 아니라</h1>
-                <h1 className="header-title">나와 대화하는 친구들의 성향까지</h1>
-                <p className="header-sub">함께 대화한 친구들의 MBTI를 예측 해 볼 수 있어요</p>
+                <h1 className="header-title">많이 표현한 감정을 토대로</h1>
+                <h1 className="header-title">좋아하는 사람과의 관계를 예측하고</h1>
+                <p className="header-sub">
+                  다양한 그래프로 사랑하는 사람의 감정을 파악 할 수 있어요
+                </p>
               </div>
-              <div className="des-image"></div>
+              <div className="des-image n1"></div>
+              <div className="des-image n2"></div>
             </section>
           </>
         )}
