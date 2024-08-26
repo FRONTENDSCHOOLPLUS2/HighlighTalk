@@ -6,8 +6,11 @@
   align-items: center;
   position: relative;
 
+  // FIXME - 백그라운드와 캐릭터 svg 색깔 조절
+
   .background {
-    background-color: $color-yellow-1;
+    // background-color: $color-yellow-1;
+    background-color: lighten($color-blue-1, 10%);
     background-image: url('/image/character_6.svg');
     background-size: 330px;
     // background-position: right bottom;
