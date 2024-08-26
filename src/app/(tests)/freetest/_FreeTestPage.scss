@@ -136,8 +136,6 @@
 .freetest-card {
   margin-top: 16rem;
   width: 100%;
-  height: 1000px;
-  // box-shadow: inset 0px 0px 20px orange;
 
   .card-title {
     font-size: 3.2rem;
@@ -146,46 +144,31 @@
     margin-bottom: 5.4rem;
     text-align: center;
   }
+  .card-img {
+    width: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 
-  .card-content {
-    border-radius: 4rem;
-    background-color: #fbfbfd;
-
-    border: 0.1rem solid #000;
-
-    .card-wrapper {
-      display: flex;
-      margin-top: 10rem;
+    &.n1 {
       width: 100%;
-      height: 100%;
-      .contents {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        h1 {
-          color: #3e3e3e;
-          font-size: 3.2rem;
-          font-weight: 800;
-          margin-bottom: 4rem;
-        }
-        p {
-          text-overflow: ellipsis;
-          font-size: 1.6rem;
-          color: #717171;
-          font-weight: 500;
-        }
-      }
-
-      .contents-img {
-        width: 100%;
-        background-image: url('/image/intro_card1.svg');
-
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
+      height: 500px;
+      background-image: url('/image/intro_bg3.svg');
+    }
+    &.n2 {
+      width: 100%;
+      height: 500px;
+      background-image: url('/image/intro_bg4.svg');
+    }
+    &.n3 {
+      width: 100%;
+      height: 500px;
+      background-image: url('/image/intro_bg5.svg');
+    }
+    &.n4 {
+      width: 100%;
+      height: 500px;
+      background-image: url('/image/intro_bg6.svg');
     }
   }
 }
