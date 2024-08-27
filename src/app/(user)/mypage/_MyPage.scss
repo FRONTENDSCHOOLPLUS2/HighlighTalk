@@ -87,6 +87,29 @@
         width: 100%;
         @include flex.flexColumn;
         gap: 1rem;
+
+        position: relative;
+
+        background-image: url('/image/character_5.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.8);
+          z-index: 1;
+        }
+
+        * {
+          position: relative;
+          z-index: 2;
+        }
       }
 
       li {
@@ -95,6 +118,7 @@
         padding: 1.6rem;
         border: 1px solid $color-gray-1;
         border-radius: 2rem 2rem 2rem 0;
+        cursor: pointer;
 
         @include flex.flexColumn;
         justify-content: space-between;
@@ -106,7 +130,20 @@
           .date {
             font-size: 1.4rem;
             color: $color-gray-3;
+            margin-bottom: 1rem;
           }
+        }
+        background-color: white;
+        opacity: 0.6;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          // @include util.hoverEffect;
+
+          // transform: translateY(-4px) scale(1.02);
+          // border: 0.1rem solid var(--color-skyblue-2);
+
+          transform: translateY(-5px);
+          box-shadow: 0 5px 15px 0 rgba($color-green, 0.4);
         }
       }
 
