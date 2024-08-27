@@ -1,7 +1,8 @@
 import { createOrderData, fetchOrderData } from '@/serverActions/orderAction';
+import { OrderInfoType } from '@/types/order';
 
 export function useOrderActions() {
-  const createOrder = async (userId: 'pay' | 'charge', transactionType: string) => {
+  const createOrder = async (userId: 'pay' | 'charge', transactionType: OrderInfoType) => {
     try {
       await createOrderData(userId, transactionType);
       return true;
