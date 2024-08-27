@@ -31,7 +31,7 @@ function Card({
     setError,
     setFocus,
     handleSubmit,
-  } = useForm();
+  } = useForm<{ title: string }>();
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
