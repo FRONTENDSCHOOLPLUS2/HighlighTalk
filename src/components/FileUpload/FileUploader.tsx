@@ -26,6 +26,8 @@ function FileUpLoader() {
   const [prompt, setPrompt] = useState<string>(process.env.NEXT_PUBLIC_AI_PROMPT || '');
   const pathname = usePathname();
 
+  const cleanPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
@@ -110,6 +112,7 @@ function FileUpLoader() {
         body: JSON.stringify({
           prompt,
           message: sendMessage,
+          pathname: cleanPathname,
         }),
       });
 

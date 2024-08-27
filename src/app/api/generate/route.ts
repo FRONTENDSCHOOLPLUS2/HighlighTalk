@@ -8,7 +8,7 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 export async function POST(req: NextRequest) {
   const session = await auth();
   const accessToken = session?.accessToken;
-  const { prompt, message } = await req.json();
+  const { prompt, message, pathname } = await req.json();
 
   try {
     const data = await FetchData(prompt, message);
@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           extra: parsedContent,
+          type: pathname,
         }),
       });
 
