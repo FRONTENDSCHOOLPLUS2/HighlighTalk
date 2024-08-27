@@ -70,11 +70,13 @@
     }
     .des-main {
       .des-main-img {
-        background-image: url('/image/mainslide1.svg');
-        background-position: center;
-        height: 20rem;
-        background-color: #fff;
-        margin-top: 2rem;
+        img {
+          // background-image: url('/image/mainslide1.svg');
+          background-position: center;
+          width: 100%;
+          height: 20rem;
+          margin-top: 2rem;
+        }
       }
       p {
         margin-top: 1.2rem;
