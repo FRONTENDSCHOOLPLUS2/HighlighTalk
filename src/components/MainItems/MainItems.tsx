@@ -12,7 +12,7 @@ function MainItems() {
               <div className="des-p">
                 <p>
                   GPT-4o-mini 모델을 사용하여 <br />
-                  사용자의 대화 내용을 분석 해주는 서비스 입니다.
+                  당신의 대화를 더 똑똑하게 해석해드립니다.
                 </p>
               </div>
               <div className="free_tag">FREE</div>
@@ -25,15 +25,14 @@ function MainItems() {
         <Link href="/lovetest">
           <div className="item pay_item">
             <div className="pay_item_des des">
-              <h1>우리 연애 이대로 괜찮을까?</h1>
+              <h1>우리는 얼마나 잘 어울릴까?</h1>
               <div className="des-p">
                 <p>
-                  썸,연애,결혼 상대방의 대화 방식에서 <br /> 우리의 관계를 알아보세요❤️
+                  대화 분석을 바탕으로 궁합 점수 <br /> 연인이 될 확률을 알려드립니다 ❤️
                 </p>
               </div>
               <div className="payed_tag">
-                <div className="payed_tagImage"></div>
-                100
+                <div className="payed_tagImage"></div>5
               </div>
             </div>
             <div className="free_items_img second"></div>
