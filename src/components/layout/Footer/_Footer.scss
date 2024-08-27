@@ -6,7 +6,6 @@
   transform: translateY(0%);
   left: 0;
   right: 0;
-
   min-height: 20rem;
 
   padding: 3.2rem var(--layout-padding) 3.2rem var(--layout-padding);
@@ -66,5 +65,38 @@
   .social-links {
     display: flex;
     align-items: center;
+  }
+
+  // 모바일 환경
+
+  /* PC 환경 */
+  @media (min-width: 768px) {
+    // .footer-container {
+    //   padding: 4rem;
+    // }
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    position: relative;
+
+    padding: 3rem;
+    font-size: 1.2rem;
+    max-height: 20rem;
+
+    .contact-contents {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      max-width: 22rem;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      margin-bottom: -1rem;
+    }
   }
 }

@@ -35,9 +35,9 @@ export default function Footer() {
       </div>
 
       <nav className="social-links">
-        <Link href="#">
+        {/* <Link href="#">
           <IconInsta />
-        </Link>
+        </Link> */}
         <Link href="mailto:tmuchtalker@gmail.com" target="_blank">
           <IconMail />
         </Link>
