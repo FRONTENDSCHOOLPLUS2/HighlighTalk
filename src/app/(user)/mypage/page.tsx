@@ -5,7 +5,7 @@ import Link from 'next/link';
 import MyPageProfile from './MyPageProfile';
 import AdditionalMenu from './AdditionalMenu';
 import CoinSummary from './UserCoinSection';
-import ArchiveSumary from './ArchiveSumary';
+import ArchiveSummary from './ArchiveSummary';
 
 export const metadata = {
   title: '하이라이톡 | 마이 페이지',
@@ -27,9 +27,9 @@ async function MyPage() {
       </section>
       <section className="mypage-section">
         <h2>
-          <Link href="#">내 분석 기록</Link>
+          <Link href="/mypage/archive">내 분석 기록</Link>
         </h2>
-        <ArchiveSumary />
+        <ArchiveSummary />
       </section>
       <section className="mypage-section">
         <h2> 내 코인 </h2>

@@ -1,16 +1,11 @@
 import { auth } from '@/auth';
 import { TEST_PRODUCT } from '@/data/TEST_PRODUCT';
 import { getArchiveData } from '@/serverActions/archiveAction';
-import NoDataNotification from './archive/components/NoDataNotification/NoDataNotification';
-import Button from '@/components/Button/Button';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { CharacterBlue, CharacterGray } from '@public/image';
 
-async function ArchiveSumary() {
+async function ArchiveSummary() {
   const userAuth = await auth();
   const fetchedData = userAuth ? await getArchiveData() : [];
-  // console.log('횟치 데이타 확인', fetchedData);
+  console.log('횟치 데이타 확인', fetchedData);
 
   const sortedData = fetchedData.sort((a, b) => {
     const dateA = new Date(a.createdAt.replace(/\./g, '-')).getTime();
@@ -42,7 +37,7 @@ async function ArchiveSumary() {
           })}
         </ul>
       ) : (
-        <div className="nodata-cont">
+        <div className="nodata-content">
           <h2>아직 분석 데이터가 없어요.</h2>
           <p>AI 분석을 받고 이 곳에서 최근 결과를 확인할 수 있어요.</p>
         </div>
@@ -50,4 +45,4 @@ async function ArchiveSumary() {
     </div>
   );
 }
-export default ArchiveSumary;
+export default ArchiveSummary;

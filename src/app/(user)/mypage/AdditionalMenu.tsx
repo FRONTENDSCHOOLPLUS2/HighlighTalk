@@ -11,7 +11,7 @@ function AdditionalMenu() {
         </Link>
       </li>
       <li className="">
-        <Link href="/posts/notice" className="notice">
+        <Link href="/posts" className="notice">
           <Image src="/image/clay/contract.png" width={70} height={70} alt="게시판 바로가기" />
           <b>게시판</b>
         </Link>
