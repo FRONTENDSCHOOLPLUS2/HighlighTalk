@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FileUpLoader from '@/components/FileUpload/FileUploader';
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 import { shareURL } from '@/utils/shareURL';
@@ -48,16 +48,10 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
         },
       };
 
-      // 주문 데이터 생성
       await createOrderData('pay', orderData);
-
-      // 모달 닫기
       closeModal();
 
-      // 일정 시간 후 단계 변경
-      setTimeout(() => {
-        setCurrentStep(2);
-      }, 100); // 100ms 지연
+      setCurrentStep((prev) => prev + 1);
     } catch (error) {
       console.error('Error updating data:', error);
     }
