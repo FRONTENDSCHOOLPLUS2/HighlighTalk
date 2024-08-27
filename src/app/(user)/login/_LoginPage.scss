@@ -36,3 +36,9 @@
     white-space: nowrap;
   }
 }
+
+@media (max-width: 480px) {
+  .login-page-container {
+    margin-top: 20rem;
+  }
+}

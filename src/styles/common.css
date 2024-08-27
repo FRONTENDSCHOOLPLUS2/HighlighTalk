@@ -35,6 +35,10 @@
   .containerLayout {
     padding: 0 var(--layout-padding) 12rem var(--layout-padding);
   }
+
+  body {
+    overflow-x: hidden;
+  }
 }
 
 /* PC */
