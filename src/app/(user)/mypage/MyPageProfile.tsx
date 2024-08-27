@@ -25,16 +25,14 @@ function MyPageProfile({ userInfo }: MyPageProfilePropType) {
 
   console.log(userInfo, '유저인뽀');
 
+  const isTestAccount = userInfo?.type === 'admin';
+  const profileSrc = isTestAccount ? `${API_SERVER}${userInfo?.image}` : `${userInfo?.image}`;
+
   return (
     <div className="contents profile">
       <div className="profile-img">
         {userInfo?.image && (
-          <Image
-            src={`${API_SERVER}${userInfo?.image}`}
-            alt="유저 프로필 이미지"
-            width={100}
-            height={100}
-          />
+          <Image src={profileSrc} alt="유저 프로필 이미지" width={100} height={100} />
         )}
         <button className="edit"></button>
       </div>

@@ -14,14 +14,16 @@ interface UserProfilePropType {
 
 function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
   const router = useRouter();
-  const userName = userSession?.user?.name;
+  const userInfo = userSession?.user;
+
   const handleProfileClick = () => {
     onInteraction?.();
     const targetRoute = userSession?.user ? '/mypage' : '/login';
     router.push(targetRoute);
   };
 
-  // console.log('유자세션', userSession);
+  const isTestAccount = userInfo?.type === 'admin';
+  const profileSrc = isTestAccount ? `${API_SERVER}${userInfo?.image}` : `${userInfo?.image}`;
 
   return (
     <>
@@ -31,17 +33,11 @@ function UserProfile({ userSession, onInteraction }: UserProfilePropType) {
             <div onClick={() => handleProfileClick()} className="profile-button">
               <p>
                 <span>안녕하세요,&nbsp;</span>
-                <strong className="user-name">{userName}</strong>
+                <strong className="user-name">{userInfo?.name}</strong>
                 <span>님!</span>
               </p>
               <div className="image-container">
-                <Image
-                  src={`${API_SERVER}${userSession?.user?.image}`}
-                  width={50}
-                  height={50}
-                  alt="not"
-                  loading="lazy"
-                />
+                <Image src={profileSrc} width={50} height={50} alt="not" loading="lazy" />
               </div>
             </div>
           </>
