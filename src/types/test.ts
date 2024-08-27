@@ -12,12 +12,14 @@ export interface LoveTestData {
         becomeCouple: number;
         marriageProbability: number;
       };
-      etc: string[];
-      betterLover: {
-        [key: string]: number;
-      };
-      personalFactors: {
-        [key in ChatThemeType]: number;
+      etc: {
+        title: string;
+        betterLover: {
+          [key: string]: number;
+        };
+        personalFactors: {
+          [key in ChatThemeType]: number;
+        };
       };
       mostWords: {
         topWords: {

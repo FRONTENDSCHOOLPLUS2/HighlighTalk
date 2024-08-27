@@ -72,10 +72,12 @@ async function LoveTestResultPage({ params }: { params: { id: string } }) {
           marriage={analysis?.relationshipProbability?.marriageProbability}
         />
       )}
-      {analysis?.betterLover && (
-        <LoversComparisonSection names={names} betterLover={analysis?.betterLover} />
+      {analysis?.etc.betterLover && (
+        <LoversComparisonSection names={names} betterLover={analysis?.etc.betterLover} />
       )}
-      {analysis?.personalFactors && <TopicsSection personalFactors={analysis?.personalFactors} />}
+      {analysis?.etc.personalFactors && (
+        <TopicsSection personalFactors={analysis?.etc.personalFactors} />
+      )}
       {interestData && <PersonalInterestSection interestedAbout={interestData} />}
       {analysis?.mostWords?.topWords && <PopularWordSection data={analysis?.mostWords?.topWords} />}
       <ShareSection />
