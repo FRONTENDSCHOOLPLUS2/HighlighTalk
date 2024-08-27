@@ -24,17 +24,14 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
   const userId = session?.user?.id!;
 
   const handleStartBtnClick = () => {
-    // TODO - 개발시에는 이 안의 내용 주석하고 작업하기 (결제내역 있으면 모달 스킵하는 내용)
     const hasPurchased = session?.user?.orderList?.includes(TEST_INFO.code);
     if (hasPurchased) {
       setCurrentStep(2);
     } else {
       openModal();
     }
-    openModal();
   };
 
-  // REVIEW - 이 부분 setCurrent가 의도대로 동작하지 않음
   const handlePayButton = async () => {
     try {
       await updateCoinData(userId, userCoin - TEST_INFO.price);
@@ -42,7 +39,7 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
 
       const orderData: OrderInfoType = {
         order_type: 'pay',
-        amount: 0, // 현금이 아님을 의미
+        amount: 0,
         coin_amount: TEST_INFO.price,
         payment_method: TEST_INFO.title,
         extra: {
@@ -50,13 +47,17 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
           balance_after: userCoin - TEST_INFO.price,
         },
       };
-      closeModal();
 
-      // 5. 주문 데이터 생성
+      // 주문 데이터 생성
       await createOrderData('pay', orderData);
 
-      // 6. 현재 단계 변경
-      setCurrentStep(2);
+      // 모달 닫기
+      closeModal();
+
+      // 일정 시간 후 단계 변경
+      setTimeout(() => {
+        setCurrentStep(2);
+      }, 100); // 100ms 지연
     } catch (error) {
       console.error('Error updating data:', error);
     }
@@ -83,7 +84,7 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
                     >
                       공유하기
                     </button>
-                    <button onClick={() => setCurrentStep(2)} className="btn n2">
+                    <button onClick={() => handleStartBtnClick()} className="btn n2">
                       시작하기
                     </button>
                   </div>
