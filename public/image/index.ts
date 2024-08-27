@@ -5,6 +5,7 @@ import IconInsta from './icon_insta.svg';
 import IconMail from './icon_mail.svg';
 import IconHamburger from './icon_hamburger.svg';
 import IconCross from './icon_cross.svg';
+import IconArrowRight from './icon_arrow_right.svg';
 import Coin from './coin.svg';
 
 import IconGitHub from './channel/icon_github.svg';
@@ -23,6 +24,7 @@ export {
   IconMail,
   IconHamburger,
   IconCross,
+  IconArrowRight,
   Coin,
   IconGitHub,
   IconGoogle,

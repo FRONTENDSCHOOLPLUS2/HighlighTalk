@@ -24,9 +24,17 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
   const userId = session?.user?.id!;
 
   const handleStartBtnClick = () => {
+    // TODO - 개발시에는 이 안의 내용 주석하고 작업하기 (결제내역 있으면 모달 스킵하는 내용)
+    const hasPurchased = session?.user?.orderList?.includes(TEST_INFO.code);
+    if (hasPurchased) {
+      setCurrentStep(2);
+    } else {
+      openModal();
+    }
     openModal();
   };
 
+  // REVIEW - 이 부분 setCurrent가 의도대로 동작하지 않음
   const handlePayButton = async () => {
     try {
       await updateCoinData(userId, userCoin - TEST_INFO.price);
@@ -42,10 +50,13 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
           balance_after: userCoin - TEST_INFO.price,
         },
       };
+      closeModal();
+
+      // 5. 주문 데이터 생성
       await createOrderData('pay', orderData);
 
+      // 6. 현재 단계 변경
       setCurrentStep(2);
-      closeModal();
     } catch (error) {
       console.error('Error updating data:', error);
     }
