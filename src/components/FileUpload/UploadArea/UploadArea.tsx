@@ -25,8 +25,9 @@ function UploadArea({
       fileInputRef.current.click();
     }
   };
+
   const validateFileType = (file: File) => {
-    const allowedExtensions = ['csv'];
+    const allowedExtensions = ['csv', 'txt']; // .txt 파일도 허용으로 변경
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
     return allowedExtensions.includes(fileExtension || '');
   };
@@ -59,7 +60,7 @@ function UploadArea({
         } as ChangeEvent<HTMLInputElement>;
         handleFileChange(changeEvent); // 실제 파일 처리 로직 호출
       } else {
-        setError('CSV 파일만 업로드 가능합니다.'); // 파일 형식이 올바르지 않으면 에러 메시지 설정
+        setError('CSV 또는 TXT 파일만 업로드 가능합니다.');
       }
       e.dataTransfer.clearData();
     }
@@ -83,7 +84,9 @@ function UploadArea({
               <div className="speechs">
                 <div className={error ? 'speech-iconError' : 'speech-icon'}></div>
                 <div className={'speech-bubble'}>
-                  {error ? error : '클릭 또는 파일을 끌어당겨 넣을 수 있어요!'}
+                  {error
+                    ? error
+                    : '클릭 또는 파일을 끌어당겨 넣을 수 있어요! (.csv, .txt 파일만 가능)'}
                 </div>
                 <button type="button">파일 올리기</button>
               </div>
