@@ -7,6 +7,7 @@ import validateAndTrimData from '@/utils/validateAndTrimData';
 import { usePathname, useRouter } from 'next/navigation';
 import Modal from '../Modal/Modal';
 import { LoadingSpinner } from '../Spinner/Spinner';
+import { useModalStore } from '@/store/ModalStore';
 
 const promptForFree: string = process.env.NEXT_PUBLIC_AI_PROMPT || '';
 const promptForLovers: string = process.env.NEXT_PUBLIC_AI_PROMPT_COUPLE || '';
@@ -27,19 +28,11 @@ function FileUpLoader() {
   const pathname = usePathname();
 
   const cleanPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen: isModalOpen, openModal, closeModal } = useModalStore();
 
   const router = useRouter();
 
-  // console.log(pathname);
-
-  // accessToken을 세션에서 가져오기
-
   // 모달을 여는 함수
-  const openModal = () => setIsModalOpen(true);
-  // 모달을 닫는 함수
-  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     // 패스네임에 따른 프롬프트 설정
@@ -63,6 +56,7 @@ function FileUpLoader() {
       parseCSV(file);
     }
   };
+
   // csv파일을 읽어 파싱하는 함수
   const parseCSV = (file: File) => {
     setIsLoading(true); // 파일 파싱을 시작할 때 로딩 상태 설정
@@ -72,7 +66,7 @@ function FileUpLoader() {
       complete: (result: ParseResult<CSVRow>) => {
         setCsvData(result.data);
         setIsLoading(false); // 파일 파싱이 완료되면 로딩 상태 해제
-        setIsModalOpen(true);
+        openModal();
         setCurrentStep(2);
       },
       error: (error) => {
@@ -94,10 +88,6 @@ function FileUpLoader() {
     processCSVData();
   }, [csvData]);
 
-  // useEffect(() => {
-  //   console.log('sendMessage', sendMessage);
-  // }, [sendMessage]);
-
   const fetchData = async () => {
     if (csvData.length === 0) return;
     setIsLoading(true); // 로딩 시작
@@ -117,7 +107,6 @@ function FileUpLoader() {
       });
 
       const data = await response.json();
-      // console.log('xxxxx', data);
       router.push(`${fullURL}/${pathname}/${data?.secondData?.item._id}`);
     } catch (error) {
       console.error('Error fetching data:', error);
