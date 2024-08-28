@@ -5,9 +5,9 @@ function DescriptionArea() {
   const [selectedPlatform, setSelectedPlatform] = useState<'PC' | 'IOS' | 'Android'>('PC');
 
   const platformImages: { [key in 'PC' | 'IOS' | 'Android']: string } = {
-    PC: '/image/pc_image.png',
-    IOS: '/image/pc_image.png',
-    Android: '/image/pc_image.png',
+    PC: '/image/how_to_pc.png',
+    IOS: '/image/how_to_ios.png',
+    Android: '/image/how_to_ios.png', //Android 버전 추가 필요
   };
 
   const platformTexts: { [key in 'PC' | 'IOS' | 'Android']: string } = {

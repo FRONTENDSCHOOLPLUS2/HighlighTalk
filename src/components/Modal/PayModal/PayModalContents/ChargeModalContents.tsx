@@ -2,8 +2,8 @@ import './_PayModalContents.scss';
 
 interface ChargeModalContentsPropType {
   selectedAmount: number;
-  paymentMethod: any;
-  handlePaymentMethodChange: any;
+  paymentMethod: string;
+  handlePaymentMethodChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 // NOTE - 코인 충전 > 결제 옵션 선택을 위해 열리는 모달입니다.

@@ -245,8 +245,8 @@ export default removeDateTimeAndUserKey;
 전체적으로 사용하던 토큰의 수가 같은 톡방의 경우 19,000토큰에서 5,700토큰으로
 
 감소 비율 = (
-19,000/
-13,300
+
+19,000 - 13,000
 ​
 ) × 100 ≈ 약 70%를 감소 시켰고 같은 대화방 내용을 더 많은 분량으로 분석할 수 있게 되어, 결과적으로 분석의 정확성을 높이고 더욱 효율적인 결과를 얻을 수 있었습니다.
 
@@ -263,7 +263,8 @@ AWS EC2를 통해, HTTP로 클라이언트 앱을 배포하였습니다. 그러�
 
 이후 Route53을 통해 www.highlightalk.site에 대한 호스팅 영역 레코드를 생성해줌으로써 인증서가 유효한 URL로 사용자가 접근 가능하도록 조치하였습니다.
 
-### 5-4. 1차 이 후 프롬프팅 데이터 생성 후 결과를 서버에 저장해야 하는 이슈
+
+### 5-4. 프롬프팅 데이터 생성 후 결과를 서버에 저장해야 하는 이슈
 
 문제 : 대화 내용이 민감한 정보를 포함할 수 있기 때문에, 이를 클라이언트에서 안전하게 전송하고 저장하는 과정에서 보안적인 이슈가 발생 했습니다.
 
@@ -293,9 +294,10 @@ AWS EC2를 통해, HTTP로 클라이언트 앱을 배포하였습니다. 그러�
 
 - PR 후 적극적인 코드리뷰
 
-<img src="https://private-user-images.githubusercontent.com/34205465/361799558-20677450-dc1e-414f-a24d-6e77fe163699.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjQ3NjEzODMsIm5iZiI6MTcyNDc2MTA4MywicGF0aCI6Ii8zNDIwNTQ2NS8zNjE3OTk1NTgtMjA2Nzc0NTAtZGMxZS00MTRmLWEyNGQtNmU3N2ZlMTYzNjk5LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA4MjclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwODI3VDEyMTgwM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWYzMDVhZjNiYjgxOWRjYzg0ZTIzYzhmMDZmNTM1MTFlNTRmZDdlNDZmMWMyM2FlNjYyZmFhMzczNDFlZGFkY2QmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.BpgrlpmXpnNiID-yMGUnzbTVSFvNxF1CvXsLBXq6tGM"/>
+  - 코드리뷰 예시1  https://github.com/FRONTENDSCHOOLPLUS2/HighlighTalk/pull/95  
+  - 코드리뷰 예시2  https://github.com/FRONTENDSCHOOLPLUS2/HighlighTalk/pull/111  
+  - 코드리뷰 예시3  https://github.com/FRONTENDSCHOOLPLUS2/HighlighTalk/pull/66  
 
-<img src="https://private-user-images.githubusercontent.com/34205465/361800991-f5b2c8eb-98f0-4f48-840f-2d2282ec5641.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjQ3NjE4MDQsIm5iZiI6MTcyNDc2MTUwNCwicGF0aCI6Ii8zNDIwNTQ2NS8zNjE4MDA5OTEtZjViMmM4ZWItOThmMC00ZjQ4LTg0MGYtMmQyMjgyZWM1NjQxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA4MjclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwODI3VDEyMjUwNFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTYwMWY2OGRjZjhhNTYyNmUwZDgwYzlhNjdhOTExNjA1ZWRhYzI5ODZjZTI5OGE2MDllNzY4MWZhOTI2MTEwMDUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0._PEBoyGekT6_Auq7OIIgR3EMzHVCLQ0f_hPMfKV9unI" />
 
 - 실무와 유사한 개발 환경 조성을 위해 많은 시도
 

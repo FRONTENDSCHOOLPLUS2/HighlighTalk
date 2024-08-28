@@ -13,15 +13,20 @@ import { updateCoinData } from '@/serverActions/coinAction';
 import './_loveTestPage.scss';
 import { createOrderData, updateUserOrderList } from '@/serverActions/orderAction';
 import { OrderInfoType } from '@/types/order';
+import Modal from '@/components/Modal/Modal';
+import GuestPayModalContents from '@/components/Modal/PayModal/PayModalContents/GuestPayModalContents';
+import { useRouter } from 'next/navigation';
 
 function LoveTestContainer({ totalCount }: { totalCount: number }) {
   const session = useSession();
   const [currentStep, setCurrentStep] = useState(1);
   const { isOpen, openModal, closeModal } = useModalStore();
-  const TEST_INFO = TEST_PRODUCT.lovetest;
+  const [isGuestModalOpen, setGuestModalOpen] = useState(false);
 
+  const TEST_INFO = TEST_PRODUCT.lovetest;
   const userCoin = session?.user?.coin || 0;
   const userId = session?.user?.id!;
+  const router = useRouter();
 
   const handleStartBtnClick = () => {
     const hasPurchased = session?.user?.orderList?.includes(TEST_INFO.code);
@@ -48,19 +53,22 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
         },
       };
 
-      // 주문 데이터 생성
       await createOrderData('pay', orderData);
-
-      // 모달 닫기
       closeModal();
 
-      // 일정 시간 후 단계 변경
-      setTimeout(() => {
-        setCurrentStep(2);
-      }, 100); // 100ms 지연
+      setCurrentStep((prev) => prev + 1);
     } catch (error) {
       console.error('Error updating data:', error);
     }
+  };
+
+  const handleCloseGuestModal = () => {
+    setGuestModalOpen(false);
+  };
+
+  const handleGoLoginButton = () => {
+    closeModal();
+    router.push('/login');
   };
 
   return (
@@ -115,11 +123,11 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
           </>
         )}
       </div>
-      {isOpen && (
+      {isOpen && session?.user && (
         <PayModal
           isOpen={isOpen}
           onClose={closeModal}
-          title={`결제를 진행합니다.`}
+          title="결제를 진행합니다."
           amount={100}
           session={session}
           content=""
@@ -131,6 +139,22 @@ function LoveTestContainer({ totalCount }: { totalCount: number }) {
             handlePayButton={handlePayButton}
           />
         </PayModal>
+      )}
+
+      {isGuestModalOpen && (
+        <Modal
+          isOpen={isGuestModalOpen}
+          onClose={handleCloseGuestModal}
+          title="회원 전용 콘텐츠입니다."
+          content="로그인 후 이용해주세요!"
+          buttons={[]}
+        >
+          <GuestPayModalContents
+            isOpen={isOpen}
+            handleCloseModal={handleCloseGuestModal}
+            handleGoLoginButton={handleGoLoginButton}
+          />
+        </Modal>
       )}
     </>
   );
