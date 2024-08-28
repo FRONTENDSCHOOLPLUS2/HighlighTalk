@@ -1,6 +1,7 @@
 import React, { ChangeEvent, DragEvent, RefObject, useState } from 'react';
 import './_UploadArea.scss';
 import DescriptionArea from '../Description/DescriptionArea';
+import { getFileExtenstion } from '@/utils/file';
 
 interface UploadAreaProps {
   handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -25,20 +26,26 @@ function UploadArea({
       fileInputRef.current.click();
     }
   };
+
   const validateFileType = (file: File) => {
-    const allowedExtensions = ['csv'];
-    const fileExtension = file.name.split('.').pop()?.toLowerCase();
-    return allowedExtensions.includes(fileExtension || '');
+    const allowedExtensions = ['csv', 'txt'];
+    const fileExtension = getFileExtenstion(file);
+
+    if (fileExtension ? allowedExtensions.includes(fileExtension) : false) {
+      setError(null); // 파일 형식이 올바르면 에러 초기화
+      return true;
+    } else {
+      setError('.csv, .txt 파일만 업로드 가능합니다.'); // 파일 형식이 올바르지 않으면 에러 메시지 설정
+      return false;
+    }
   };
 
   const handleFileChangeWrapper = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (validateFileType(file)) {
-        setError(null); // 파일 형식이 올바르면 에러 초기화
         handleFileChange(e); // 실제 파일 처리 로직 호출
       } else {
-        setError('CSV 파일만 업로드 가능합니다.'); // 파일 형식이 올바르지 않으면 에러 메시지 설정
         if (fileInputRef.current) {
           fileInputRef.current.value = ''; // 파일 입력 초기화
         }
@@ -51,15 +58,12 @@ function UploadArea({
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0];
       if (validateFileType(file)) {
-        setError(null); // 파일 형식이 올바르면 에러 초기화
         const changeEvent = {
           target: {
             files: e.dataTransfer.files,
           },
         } as ChangeEvent<HTMLInputElement>;
         handleFileChange(changeEvent); // 실제 파일 처리 로직 호출
-      } else {
-        setError('CSV 파일만 업로드 가능합니다.'); // 파일 형식이 올바르지 않으면 에러 메시지 설정
       }
       e.dataTransfer.clearData();
     }
@@ -83,7 +87,7 @@ function UploadArea({
               <div className="speechs">
                 <div className={error ? 'speech-iconError' : 'speech-icon'}></div>
                 <div className={'speech-bubble'}>
-                  {error ? error : '클릭 또는 파일을 끌어당겨 넣을 수 있어요!'}
+                  {error || '클릭 또는 파일을 끌어당겨 넣을 수 있어요!'}
                 </div>
                 <button type="button">파일 올리기</button>
               </div>
